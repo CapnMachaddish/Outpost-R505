@@ -35,7 +35,7 @@
 		else
 			use_power = ACTIVE_POWER_USE
 			set_light(BR, PO, CO)
-			playsound(src.loc, 'modular_skyrat/modules/aesthetics/lights/sound/light_on.ogg', 65, 1)
+			playsound(src.loc, 'modular_R505/sound/machines/lightsOn.ogg', 65, 1)
 
 /obj/machinery/light/Initialize(mapload = TRUE)
 	. = ..()

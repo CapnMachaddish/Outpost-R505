@@ -24,6 +24,7 @@
 	var/rods = 2
 	var/cable = 1
 	var/list/debris = list()
+	var/door_sound = 'sound/machines/windowdoor.ogg'
 
 /obj/machinery/door/window/Initialize(mapload, set_dir)
 	. = ..()
@@ -151,7 +152,8 @@
 	if(!operating) //in case of emag
 		operating = TRUE
 	do_animate("opening")
-	playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	//playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE) old
+	playsound(src, door_sound, 70, FALSE) //R505 modularization change
 	icon_state ="[base_state]open"
 	sleep(10)
 	density = FALSE
@@ -173,7 +175,8 @@
 			return 0
 	operating = TRUE
 	do_animate("closing")
-	playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	//playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE) old
+	playsound(src, door_sound, 70, FALSE) //R505 modularization change
 	icon_state = base_state
 
 	density = TRUE
