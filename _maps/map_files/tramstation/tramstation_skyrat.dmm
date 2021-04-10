@@ -6890,6 +6890,11 @@
 /obj/machinery/atmospherics/pipe/multiz/layer2,
 /obj/machinery/atmospherics/pipe/multiz/layer4,
 /obj/item/radio/intercom/directional/north,
+/obj/machinery/atmospherics/pipe/multiz/supply/visible/layer4,
+/obj/machinery/atmospherics/pipe/multiz/scrubbers/visible/layer2,
+/obj/item/melee/hammer,
+/obj/item/melee/hammer,
+/obj/item/melee/hammer,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/security/armory)
 "aoD" = (
