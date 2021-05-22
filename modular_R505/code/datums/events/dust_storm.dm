@@ -11,14 +11,14 @@ GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5
 	if(!zlevel)
 		zlevel = pick(SSmapping.levels_by_trait(ZTRAIT_STATION))
 	if(zlevel < 1 || zlevel > world.maxz || !isnum(zlevel))
-		del(src)
-		CRASH("Unhandled z-level of [zlevel]")
+		throw EXCEPTION("Unhandled z-level of [zlevel]")
+		qdel(src)
 		return
 
 	if(GLOB.dust_storms_active["[zlevel]"])
 		if(IsAdminAdvancedProcCall())
 			if(alert(usr, "There is already a dust storm active on this z-level. Proceed?", "Uh oh!", "Yes", "No") != "Yes")
-				del(src)
+				qdel(src)
 				return
 		else
 			WARNING("Summoned a dust storm on z-level [zlevel] when there's already a dust storm active")

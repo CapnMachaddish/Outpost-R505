@@ -30,5 +30,5 @@
 	. = ..()
 	if(!.)
 		return
-	spawn_type = new(number_to_spawn=-1,number_in_group=25,sleep_before_group=10 SECONDS)
+	spawn_type = new spawn_type(number_to_spawn=-1,number_in_group=25,sleep_before_group=10 SECONDS)
 	return spawn_type
