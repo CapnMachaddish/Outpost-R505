@@ -94,7 +94,7 @@ GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 	anchored = TRUE
 	gender = NEUTER
 	var/hits = 4
-	var/hitpwr = 2 //Level of ex_act to be called on hit.
+	var/hitpwr = EXPLODE_HEAVY //Level of ex_act to be called on hit.
 	var/dest
 	pass_flags = PASSTABLE
 	var/heavy = FALSE
@@ -232,12 +232,15 @@ GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 	pass_flags = PASSTABLE | PASSGRILLE
 	gender = PLURAL
 	hits = 1
-	hitpwr = 3
+	hitpwr = EXPLODE_LIGHT
 	meteorsound = 'sound/weapons/gun/smg/shot.ogg'
 	meteordrop = list(/obj/item/stack/ore/glass)
 	threat = 1
 
-/obj/effect/meteor/dust/weak/Move()	//R505 edit: weak as hell debris because this gets spawned constantly
+/obj/effect/meteor/dust/weak	//R505 edit: weak as hell debris because this gets spawned constantly
+	hitpwr = EXPLODE_NONE
+
+/obj/effect/meteor/dust/weak/Move()
 	. = ..()
 	if(!isspaceturf(loc) && !QDELING(src))
 		make_debris()
@@ -357,7 +360,7 @@ GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 30
-	hitpwr = 1
+	hitpwr = EXPLODE_DEVASTATE
 	heavy = TRUE
 	meteorsound = 'sound/effects/bamf.ogg'
 	meteordrop = list(/obj/item/stack/ore/plasma)
