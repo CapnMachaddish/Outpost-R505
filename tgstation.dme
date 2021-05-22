@@ -3513,6 +3513,9 @@
 #include "modular_R505\_HELPERS\lists\mapping.dm"
 #include "modular_R505\code\datums\events\dust_storm.dm"
 #include "modular_R505\code\datums\events\roundstart_events.dm"
+#include "modular_R505\code\doors\airlock.dm"
+#include "modular_R505\code\doors\blastdoor.dm"
+#include "modular_R505\code\doors\windowdoor.dm"
 #include "modular_skyrat\master_files\code\_globalvars\configuration.dm"
 #include "modular_skyrat\master_files\code\_globalvars\maint_loot_common.dm"
 #include "modular_skyrat\master_files\code\_globalvars\maint_loot_oddity.dm"
@@ -4117,8 +4120,4 @@
 #include "modular_skyrat\modules\verbs\code\modules\mob\say.dm"
 #include "modular_skyrat\modules\verbs\code\modules\mob\subtle.dm"
 #include "modular_skyrat\modules\xenomorph\code\xenomorph_balance.dm"
-//OUTPOST R505 FILES
-#include "modular_R505\code\doors\airlock.dm"
-#include "modular_R505\code\doors\blastdoor.dm"
-#include "modular_R505\code\doors\windowdoor.dm"
 // END_INCLUDE
