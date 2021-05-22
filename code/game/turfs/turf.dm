@@ -153,7 +153,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	flags_1 &= ~INITIALIZED_1
 	requires_activation = FALSE
 	if(is_transition_turf())
-		GLOB.turf_transition_points["[z]"] -= src
+		add_space_transition(src)
 	..()
 	
 	vis_contents.Cut()

@@ -45,9 +45,6 @@ GLOBAL_LIST_EMPTY(sortedAreas)
 /// An association from typepath to area instance. Only includes areas with `unique` set.
 GLOBAL_LIST_EMPTY_TYPED(areas_by_type, /area)
 
-///R505 Edit - Space transition point turfs
-GLOBAL_LIST_EMPTY(turf_transition_points)
-
 GLOBAL_LIST_EMPTY(all_abstract_markers)
 
 /// Global list of megafauna spawns on cave gen

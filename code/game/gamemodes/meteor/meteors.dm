@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	for(var/i = 0; i < number; i++)
 		spawn_meteor(meteortypes)
 
-/proc/spawn_meteor(list/meteortypes, zlevel)
+/proc/spawn_meteor(list/meteortypes, zlevel, notify_ghosts=FALSE)
 //Todo: pick start from GLOB.turf_transition_points and then proceed with a random direction
 	var/turf/pickedstart
 	var/turf/pickedgoal
@@ -41,7 +41,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 		if(max_i<=0)
 			return
 	var/Me = pickweight(meteortypes)
-	var/obj/effect/meteor/M = new Me(pickedstart, pickedgoal)
+	var/obj/effect/meteor/M = new Me(pickedstart, pickedgoal, notify_ghosts)
 	M.dest = pickedgoal
 
 /proc/spaceDebrisStartLoc(startSide, Z)
@@ -126,11 +126,16 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	walk(src,0) //this cancels the walk_towards() proc
 	return ..()
 
-/obj/effect/meteor/Initialize(mapload, target)
+/obj/effect/meteor/Initialize(mapload, target, alert_ghosts=TRUE)
+#ifdef TESTING
+	testing("Meteor spawned ([x], [y], [z])")
+	alert_ghosts = TRUE
+#endif
 	. = ..()
 	z_original = z
 	GLOB.meteor_list += src
-	SSaugury.register_doom(src, threat)
+	if(alert_ghosts)
+		SSaugury.register_doom(src, threat)
 	SpinAnimation()
 	timerid = QDEL_IN(src, lifetime)
 	chase_target(target)
@@ -230,6 +235,17 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	meteorsound = 'sound/weapons/gun/smg/shot.ogg'
 	meteordrop = list(/obj/item/stack/ore/glass)
 	threat = 1
+
+/obj/effect/meteor/dust/Move()	//R505 edit: weak as hell debris because this is a 
+	. = ..()
+	if(!isspaceturf(loc) && !QDELING(src))
+		make_debris()
+		qdel(src)
+		return
+
+	var/obj/structure/lattice/lattice = locate(/obj/structure/lattice) in get_turf(loc)
+	if(lattice && prob(50))
+		get_hit()
 
 //Medium-sized
 /obj/effect/meteor/medium

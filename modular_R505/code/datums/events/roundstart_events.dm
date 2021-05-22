@@ -29,5 +29,4 @@
 	weight = 1
 
 /datum/roundstart_event/dust_storm/start()
-	spawn_type = new spawn_type(number_to_spawn=-1,number_in_group=25,sleep_before_group=10 SECONDS)
-	
+	spawn_type = new /datum/dust_storm(number_to_spawn=-1,number_in_group=4,distribution_speed=rand(25,45),sleep_before_group=15 SECONDS)
