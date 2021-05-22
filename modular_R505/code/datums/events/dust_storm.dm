@@ -39,7 +39,6 @@ GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5
 		iteration++
 		
 		if(spawned_in_group > group_num && group_num > 0)
-			group++
 			spawned_in_group = 0
 			sleep(group_speed)
 		

@@ -1,6 +1,7 @@
 //Unlike regular events, these spawn immediately when the round gets started
 /datum/roundstart_event
-	var/spawn_type
+	var/name as text
+	var/datum/spawn_type
 	var/new_type = TRUE
 	var/list/whitelisted_maps = list()
 	var/list/blacklisted_maps = list()
@@ -9,7 +10,7 @@
 
 /datum/roundstart_event/New(map, mode)
 	if(spawn_type && new_type)
-		spawn_type = new
+		spawn_type = new()
 	if(whitelisted_maps.len && !(whitelisted_maps.Find(map)))
 		return
 	if(blacklisted_maps.len && (blacklisted_maps.Find(map)))
