@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;game_mode - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/game_mode.html#var">Var Details</a> - <a href="datum/game_mode.html#proc">Proc Details</a></header>
+<main>
+<h1>game_mode <aside>/<a href="datum.html">datum</a>/<a href="datum/game_mode.html">game_mode</a></aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L15">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 15"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/game_mode.html#var/allow_persistence_save">allow_persistence_save</a></th><td>Does this gamemode allow the collection of persistance features? (Scars, etc.)</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/announce_span">announce_span</a></th><td>The gamemode's name will be in this span during announcement.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/announce_text">announce_text</a></th><td>Used to describe a gamemode when it's announced. Not seen during secret or dynamic.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/antag_candidates">antag_candidates</a></th><td>List of possible starting antags goes here</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/antag_flag">antag_flag</a></th><td>Preferences flag such as BE_WIZARD that need to be turned on for players to be antag</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/config_tag">config_tag</a></th><td>In determining gamemode weights, what is this gamemode called?</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/continuous_sanity_checked">continuous_sanity_checked</a></th><td>Catches some cases where config options could be used to suggest that modes without antagonists should end when all antagonists die</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/current_players">current_players</a></th><td>Associative list of current players, in order: living players, living antagonists, dead players and observers.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/enemy_minimum_age">enemy_minimum_age</a></th><td>How many days of playtime must players have been playing before they can play this antagonist at roundstart.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/false_report_weight">false_report_weight</a></th><td>How often will this show up incorrectly in a centcom report?</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/gamemode_ready">gamemode_ready</a></th><td>Is the gamemode all set up and ready to start checking for ending conditions.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/living_antag_player">living_antag_player</a></th><td>A reference to a gamemode's sole important antagonist if one exists.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/maximum_players">maximum_players</a></th><td>-1 is no maximum, positive numbers limit the selection of a mode on overstaffed stations</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/name">name</a></th><td>Self explanitory, name of the game mode.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/nuke_off_station">nuke_off_station</a></th><td>Used for tracking where the nuke hit. Changes cinematic if the nuke is deployed off station zlevel.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/probability">probability</a></th><td>Typically overwritten in config, what are the odds of this gamemode being selected?</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/protected_jobs">protected_jobs</a></th><td>Jobs that can't be traitors to protect round flow, like security traitors.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/recommended_enemies">recommended_enemies</a></th><td>A game mode's suggested count for how many antagonists should be created. If the number of available players with the game mode enabled is not larger than this count, then people without it enabled may be drafted into the role. If there's not enough players to draft after that, the gamemode defaults to something else.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/replacementmode">replacementmode</a></th><td>Matters more outside of dynamic, if a gamemode is converted mid-round due to a mulligan or due to admin action, the new mode is stored here.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/report_type">report_type</a></th><td>Gamemodes with the same report type will not show up in the command report together.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/required_enemies">required_enemies</a></th><td>Minimum number of antagonists that the gamemode will roll on selection.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/required_jobs">required_jobs</a></th><td>Jobs that MUST be rolled in order for the gamemode to be selected. Eg. list(list(cap=1),list(hos=1,sec=2)) translates to one captain OR one hos and two security.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/required_players">required_players</a></th><td>Number of players required to play this gamemode.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/reroll_friendly">reroll_friendly</a></th><td>Can this game mode be re-rolled? If so, puts it up for a mulligan if the round ends early.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/restricted_jobs">restricted_jobs</a></th><td>Jobs that a gamemode cannot be, for sanity. Eg: A blood cultist AI or chaplain.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/round_converted">round_converted</a></th><td>0: round not converted, 1: round going to convert, 2: round converted</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/round_ends_with_antag_death">round_ends_with_antag_death</a></th><td>flags the &quot;one verse the station&quot; antags as such. The classic example is non-dynamic wizard.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/setup_error">setup_error</a></th><td>What reason do we have for not setting up the game mode.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/station_goals">station_goals</a></th><td>List of available station goals for the crew to be working on, built into the round-type.</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/station_was_nuked">station_was_nuked</a></th><td>See nuclearbomb.dm and malfunction.dm, does this gamemode end with a nuke endscreen?</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/votable">votable</a></th><td>Can this map be voted for in config?</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/waittime_h">waittime_h</a></th><td>What is the higher bound of when the roundstart annoucement is sent out?</td></tr>
+            <tr><th><a href="datum/game_mode.html#var/waittime_l">waittime_l</a></th><td>What is the lower bound of when the roundstart annoucement is sent out?</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/admin_panel">admin_panel</a></th><td>Mode specific admin panel.</td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/can_start">can_start</a></th><td>Checks to see if the game can be setup and ran with the current number of players or whatnot.</td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/convert_roundtype">convert_roundtype</a></th><td>Allows rounds to basically be &quot;rerolled&quot; should the initial premise fall through. Also known as mulligan antags.</td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/make_antag_chance">make_antag_chance</a></th><td>Handles late-join antag assignments</td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/post_setup">post_setup</a></th><td>Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things</td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/pre_setup">pre_setup</a></th><td>Attempts to select players for special roles the mode might have.</td></tr>
+            <tr><th><a href="datum/game_mode.html#proc/process">process</a></th><td>Called by the gameSSticker</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/allow_persistence_save"><aside class="declaration">var </aside>allow_persistence_save
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L77">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 77"/></a></h3>
+        <p>Does this gamemode allow the collection of persistance features? (Scars, etc.)</p><h3 id="var/announce_span"><aside class="declaration">var </aside>announce_span
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 66"/></a></h3>
+        <p>The gamemode's name will be in this span during announcement.</p><h3 id="var/announce_text"><aside class="declaration">var </aside>announce_text
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 68"/></a></h3>
+        <p>Used to describe a gamemode when it's announced. Not seen during secret or dynamic.</p><h3 id="var/antag_candidates"><aside class="declaration">var </aside>antag_candidates
+            <aside>&ndash; /list/datum/mind</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L35">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 35"/></a></h3>
+        <p>List of possible starting antags goes here</p><h3 id="var/antag_flag"><aside class="declaration">var </aside>antag_flag
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L51">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 51"/></a></h3>
+        <p>Preferences flag such as BE_WIZARD that need to be turned on for players to be antag</p><h3 id="var/config_tag"><aside class="declaration">var </aside>config_tag
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 19"/></a></h3>
+        <p>In determining gamemode weights, what is this gamemode called?</p><h3 id="var/continuous_sanity_checked"><aside class="declaration">var </aside>continuous_sanity_checked
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L61">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 61"/></a></h3>
+        <p>Catches some cases where config options could be used to suggest that modes without antagonists should end when all antagonists die</p><h3 id="var/current_players"><aside class="declaration">var </aside>current_players
+            <aside>&ndash; /list/list</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 84"/></a></h3>
+        <p>Associative list of current players, in order: living players, living antagonists, dead players and observers.</p><h3 id="var/enemy_minimum_age"><aside class="declaration">var </aside>enemy_minimum_age
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L63">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 63"/></a></h3>
+        <p>How many days of playtime must players have been playing before they can play this antagonist at roundstart.</p><h3 id="var/false_report_weight"><aside class="declaration">var </aside>false_report_weight
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L25">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 25"/></a></h3>
+        <p>How often will this show up incorrectly in a centcom report?</p><h3 id="var/gamemode_ready"><aside class="declaration">var </aside>gamemode_ready
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L79">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 79"/></a></h3>
+        <p>Is the gamemode all set up and ready to start checking for ending conditions.</p><h3 id="var/living_antag_player"><aside class="declaration">var </aside>living_antag_player
+            <aside>&ndash; /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a></aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L53">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 53"/></a></h3>
+        <p>A reference to a gamemode's sole important antagonist if one exists.</p><h3 id="var/maximum_players"><aside class="declaration">var </aside>maximum_players
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L45">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 45"/></a></h3>
+        <p>-1 is no maximum, positive numbers limit the selection of a mode on overstaffed stations</p><h3 id="var/name"><aside class="declaration">var </aside>name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L17">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 17"/></a></h3>
+        <p>Self explanitory, name of the game mode.</p><h3 id="var/nuke_off_station"><aside class="declaration">var </aside>nuke_off_station
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L31">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 31"/></a></h3>
+        <p>Used for tracking where the nuke hit. Changes cinematic if the nuke is deployed off station zlevel.</p><h3 id="var/probability"><aside class="declaration">var </aside>probability
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L23">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 23"/></a></h3>
+        <p>Typically overwritten in config, what are the odds of this gamemode being selected?</p><h3 id="var/protected_jobs"><aside class="declaration">var </aside>protected_jobs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L39">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 39"/></a></h3>
+        <p>Jobs that can't be traitors to protect round flow, like security traitors.</p><h3 id="var/recommended_enemies"><aside class="declaration">var </aside>recommended_enemies
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L49">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 49"/></a></h3>
+        <p>A game mode's suggested count for how many antagonists should be created. If the number of available players with the game mode enabled is not larger than this count, then people without it enabled may be drafted into the role. If there's not enough players to draft after that, the gamemode defaults to something else.</p><h3 id="var/replacementmode"><aside class="declaration">var </aside>replacementmode
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/game_mode.html">game_mode</a></aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L55">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 55"/></a></h3>
+        <p>Matters more outside of dynamic, if a gamemode is converted mid-round due to a mulligan or due to admin action, the new mode is stored here.</p><h3 id="var/report_type"><aside class="declaration">var </aside>report_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L27">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 27"/></a></h3>
+        <p>Gamemodes with the same report type will not show up in the command report together.</p><h3 id="var/required_enemies"><aside class="declaration">var </aside>required_enemies
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L47">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 47"/></a></h3>
+        <p>Minimum number of antagonists that the gamemode will roll on selection.</p><h3 id="var/required_jobs"><aside class="declaration">var </aside>required_jobs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L41">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 41"/></a></h3>
+        <p>Jobs that MUST be rolled in order for the gamemode to be selected. Eg. list(list(cap=1),list(hos=1,sec=2)) translates to one captain OR one hos and two security.</p><h3 id="var/required_players"><aside class="declaration">var </aside>required_players
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L43">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 43"/></a></h3>
+        <p>Number of players required to play this gamemode.</p><h3 id="var/reroll_friendly"><aside class="declaration">var </aside>reroll_friendly
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 59"/></a></h3>
+        <p>Can this game mode be re-rolled? If so, puts it up for a mulligan if the round ends early.</p><h3 id="var/restricted_jobs"><aside class="declaration">var </aside>restricted_jobs
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L37">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 37"/></a></h3>
+        <p>Jobs that a gamemode cannot be, for sanity. Eg: A blood cultist AI or chaplain.</p><h3 id="var/round_converted"><aside class="declaration">var </aside>round_converted
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L57">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 57"/></a></h3>
+        <p>0: round not converted, 1: round going to convert, 2: round converted</p><h3 id="var/round_ends_with_antag_death"><aside class="declaration">var </aside>round_ends_with_antag_death
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L33">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 33"/></a></h3>
+        <p>flags the &quot;one verse the station&quot; antags as such. The classic example is non-dynamic wizard.</p><h3 id="var/setup_error"><aside class="declaration">var </aside>setup_error
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L81">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 81"/></a></h3>
+        <p>What reason do we have for not setting up the game mode.</p><h3 id="var/station_goals"><aside class="declaration">var </aside>station_goals
+            <aside>&ndash; /list/datum/station_goal</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L75">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 75"/></a></h3>
+        <p>List of available station goals for the crew to be working on, built into the round-type.</p><h3 id="var/station_was_nuked"><aside class="declaration">var </aside>station_was_nuked
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L29">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 29"/></a></h3>
+        <p>See nuclearbomb.dm and malfunction.dm, does this gamemode end with a nuke endscreen?</p><h3 id="var/votable"><aside class="declaration">var </aside>votable
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L21">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 21"/></a></h3>
+        <p>Can this map be voted for in config?</p><h3 id="var/waittime_h"><aside class="declaration">var </aside>waittime_h
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L73">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 73"/></a></h3>
+        <p>What is the higher bound of when the roundstart annoucement is sent out?</p><h3 id="var/waittime_l"><aside class="declaration">var </aside>waittime_l
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L71">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 71"/></a></h3>
+        <p>What is the lower bound of when the roundstart annoucement is sent out?</p><h2 id="proc">Proc Details</h2><h3 id="proc/admin_panel"><aside class="declaration">proc </aside>admin_panel<aside>() 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L655">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 655"/></a></aside>
+        </h3>
+        <p>Mode specific admin panel.</p><h3 id="proc/can_start"><aside class="declaration">proc </aside>can_start<aside>() 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L93">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 93"/></a></aside>
+        </h3>
+        <p>Checks to see if the game can be setup and ran with the current number of players or whatnot.</p><h3 id="proc/convert_roundtype"><aside class="declaration">proc </aside>convert_roundtype<aside>() 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L162">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 162"/></a></aside>
+        </h3>
+        <p>Allows rounds to basically be &quot;rerolled&quot; should the initial premise fall through. Also known as mulligan antags.</p><h3 id="proc/make_antag_chance"><aside class="declaration">proc </aside>make_antag_chance<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/character) 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L155">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 155"/></a></aside>
+        </h3>
+        <p>Handles late-join antag assignments</p><h3 id="proc/post_setup"><aside class="declaration">proc </aside>post_setup<aside>(report) 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L117">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 117"/></a></aside>
+        </h3>
+        <p>Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things</p><h3 id="proc/pre_setup"><aside class="declaration">proc </aside>pre_setup<aside>() 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L113">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 113"/></a></aside>
+        </h3>
+        <p>Attempts to select players for special roles the mode might have.</p><h3 id="proc/process"><aside class="parent"><a title="/datum" href="datum.html#proc/process">&uarr;</a></aside>process<aside>() 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/code/game/gamemodes/game_mode.dm#L241">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;gamemodes&#x2F;game_mode.dm 241"/></a></aside>
+        </h3>
+        <p>Called by the gameSSticker</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/CapnMachaddish/Outpost-R505/tree/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208">5d44a75</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

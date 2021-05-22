@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;item&#x2F;gun - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/item/gun.html#var">Var Details</a> - <a href="obj/item/gun.html#proc">Proc Details</a></header>
+<main>
+<h1>gun <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/gun.html">gun</a></aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L5">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 5"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/item/gun.html#var/fire_select">fire_select</a></th><td>Current fire selection, can choose between burst, single, and full auto.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/fire_select_modes">fire_select_modes</a></th><td>What modes does this weapon have? Put SELECT_FULLY_AUTOMATIC in here to enable fully automatic behaviours.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/has_gun_safety">has_gun_safety</a></th><td>Internal variable for keeping track whether the safety is on or off</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/projectile_damage_multiplier">projectile_damage_multiplier</a></th><td>Just 'slightly' snowflakey way to modify projectile damage for projectiles fired from this gun.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/selector_switch_icon">selector_switch_icon</a></th><td>if i`1t has an icon for a selector switch indicating current firemode.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/tsafety">tsafety</a></th><td>Whether the gun actually has a gun safety</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/item/gun.html#proc/clear_suppressor">clear_suppressor</a></th><td>Clears var and updates icon. In the case of ballistic weapons, also updates the gun's weight.</td></tr>
+            <tr><th><a href="obj/item/gun.html#proc/set_gun_light">set_gun_light</a></th><td>Swaps the gun's seclight, dropping the old seclight if it has not been qdel'd.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/fire_select"><aside class="declaration">var </aside>fire_select
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L87">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 87"/></a></h3>
+        <p>Current fire selection, can choose between burst, single, and full auto.</p><h3 id="var/fire_select_modes"><aside class="declaration">var </aside>fire_select_modes
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L90">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 90"/></a></h3>
+        <p>What modes does this weapon have? Put SELECT_FULLY_AUTOMATIC in here to enable fully automatic behaviours.</p><h3 id="var/has_gun_safety"><aside class="declaration">var </aside>has_gun_safety
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L82">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 82"/></a></h3>
+        <p>Internal variable for keeping track whether the safety is on or off</p><h3 id="var/projectile_damage_multiplier"><aside class="declaration">var </aside>projectile_damage_multiplier
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L48">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 48"/></a></h3>
+        <p>Just 'slightly' snowflakey way to modify projectile damage for projectiles fired from this gun.</p><h3 id="var/selector_switch_icon"><aside class="declaration">var </aside>selector_switch_icon
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L92">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 92"/></a></h3>
+        <p>if i`1t has an icon for a selector switch indicating current firemode.</p><h3 id="var/tsafety"><aside class="declaration">var </aside>tsafety
+            <aside>&ndash; /<a href="datum.html">datum</a>/action/item_action/toggle_safety</aside>
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L83">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 83"/></a></h3>
+        <p>Whether the gun actually has a gun safety</p><h2 id="proc">Proc Details</h2><h3 id="proc/clear_suppressor"><aside class="declaration">proc </aside>clear_suppressor<aside>() 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L174">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 174"/></a></aside>
+        </h3>
+        <p>Clears var and updates icon. In the case of ballistic weapons, also updates the gun's weight.</p><h3 id="proc/set_gun_light"><aside class="declaration">proc </aside>set_gun_light<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/flashlight/seclite/new_light) 
+        
+    
+            <a href="https://github.com/CapnMachaddish/Outpost-R505/blob/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208/modular_skyrat/master_files/code/modules/projectiles/guns/gun.dm#L644">
+        <img src="git.png" width="16" height="16" title="modular_skyrat&#x2F;master_files&#x2F;code&#x2F;modules&#x2F;projectiles&#x2F;guns&#x2F;gun.dm 644"/></a></aside>
+        </h3>
+        <p>Swaps the gun's seclight, dropping the old seclight if it has not been qdel'd.</p>
+<p>Returns the former gun_light that has now been replaced by this proc.
+Arguments:</p>
+<ul>
+<li>new_light - The new light to attach to the weapon. Can be null, which will mean the old light is removed with no replacement.</li>
+</ul></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/CapnMachaddish/Outpost-R505/tree/5d44a75d6f75ac0d8274e3c1f2d01781f5bc1208">5d44a75</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>
