@@ -1,5 +1,5 @@
 //This is the lowest supported version, anything below this is completely obsolete and the entire savefile will be wiped.
-#define SAVEFILE_VERSION_MIN 32
+#define SAVEFILE_VERSION_MIN 40
 
 //This is the current version, anything below this will attempt to update (if it's not obsolete)
 // You do not need to raise this if you are adding new values that have sane defaults.
@@ -39,56 +39,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 //if your savefile is 3 months out of date, then 'tough shit'.
 
 /datum/preferences/proc/update_preferences(current_version, savefile/S)
-	if(current_version < 33)
-		toggles |= SOUND_ENDOFROUND
-
-	if(current_version < 34)
-		auto_fit_viewport = TRUE
-
-	if(current_version < 35) //makes old keybinds compatible with #52040, sets the new default
-		var/newkey = FALSE
-		for(var/list/key in key_bindings)
-			for(var/bind in key)
-				if(bind == "quick_equipbelt")
-					key -= "quick_equipbelt"
-					key |= "quick_equip_belt"
-
-				if(bind == "bag_equip")
-					key -= "bag_equip"
-					key |= "quick_equip_bag"
-
-				if(bind == "quick_equip_suit_storage")
-					newkey = TRUE
-		if(!newkey && !key_bindings["ShiftQ"])
-			key_bindings["ShiftQ"] = list("quick_equip_suit_storage")
-
-	if(current_version < 36)
-		if(key_bindings["ShiftQ"] == "quick_equip_suit_storage")
-			key_bindings["ShiftQ"] = list("quick_equip_suit_storage")
-
-	if(current_version < 37)
-		if(clientfps == 0)
-			clientfps = -1
-
-	if (current_version < 38)
-		var/found_block_movement = FALSE
-
-		for (var/list/key in key_bindings)
-			for (var/bind in key)
-				if (bind == "block_movement")
-					found_block_movement = TRUE
-					break
-			if (found_block_movement)
-				break
-
-		if (!found_block_movement)
-			LAZYADD(key_bindings["Ctrl"], "block_movement")
-
-	if (current_version < 39)
-		LAZYADD(key_bindings["F"], "toggle_combat_mode")
-		LAZYADD(key_bindings["4"], "toggle_combat_mode")
-	if (current_version < 40)
-		LAZYADD(key_bindings["Space"], "hold_throw_mode")
+	//if(current_version < 41)
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	return
