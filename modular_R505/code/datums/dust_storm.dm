@@ -11,17 +11,18 @@ GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5
 	if(!zlevel)
 		zlevel = pick(SSmapping.levels_by_trait(ZTRAIT_STATION))
 	if(zlevel < 1 || zlevel > world.maxz || !isnum(zlevel))
-		CRASH("Unhandled z-level of [zlevel]")
 		del(src)
+		CRASH("Unhandled z-level of [zlevel]")
 		return
 
 	if(GLOB.dust_storms_active["[zlevel]"])
 		if(IsAdminAdvancedProcCall())
-			if(usr.alert("There is already a dust storm active on this z-level. Proceed?", "Uh oh!", "Yes", "No") != "Yes")
+			if(alert(usr, "There is already a dust storm active on this z-level. Proceed?", "Uh oh!", "Yes", "No") != "Yes")
 				del(src)
 				return
 		else
 			WARNING("Summoned a dust storm on z-level [zlevel] when there's already a dust storm active")
+	..()
 	z_level = zlevel
 	num_to_spawn = number_to_spawn
 	speed = distribution_speed
@@ -34,7 +35,6 @@ GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5
 	GLOB.dust_storms_active["[z_level]"]++
 	var/iteration = 0
 	var/spawned_in_group = 0
-	var/group = 0
 	while(!stop_process && iteration != num_to_spawn)
 		iteration++
 		
