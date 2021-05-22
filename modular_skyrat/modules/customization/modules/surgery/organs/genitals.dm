@@ -229,8 +229,8 @@
 	var/returned_string = "You see a [lowertext(genital_name)] of breasts."
 	var/size_description
 	var/translation = breasts_size_to_cup(genital_size)
-	switch(translation)
-		if("Flatchested")
+	switch (translation)
+		if(0)
 			size_description = " They are small and flat, however."
 		if("beyond measurement")
 			size_description = " Their size is enormous, you estimate they're around [genital_size] inches in diameter."
@@ -276,18 +276,10 @@
 	set_size(DNA.features["breasts_size"])
 
 /proc/breasts_size_to_cup(number)
-	if(number < 0)
-		number = 0
-	var/returned = GLOB.breasts_size_translation["[number]"]
-	if(!returned)
-		returned = "beyond measurement"
-	return returned
+	return number > 16 ? "beyond measurement" : number < 1 ? 0 : ascii2text(number + 63)
 
 /proc/breasts_cup_to_size(cup)
-	for(var/key in GLOB.breasts_size_translation)
-		if(GLOB.breasts_size_translation[key] == cup)
-			return text2num(key)
-	return 0
+	return lowertext(cup) == "flatchested" ? 0 : text2ascii(uppertext(cup)) - 63
 
 /proc/balls_size_to_description(number)
 	if(number < 0)
