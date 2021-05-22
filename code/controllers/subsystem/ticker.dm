@@ -354,6 +354,9 @@ SUBSYSTEM_DEF(ticker)
 			to_chat(iter_human, "<span class='notice'>You will gain [round(iter_human.hardcore_survival_score) * 2] hardcore random points if you greentext this round!</span>")
 		else
 			to_chat(iter_human, "<span class='notice'>You will gain [round(iter_human.hardcore_survival_score)] hardcore random points if you survive this round!</span>")
+	
+	//R505 edit: constant dust storms every round. Make it modular later on
+	new /datum/dust_storm (number_to_spawn=-1,number_in_group=25,sleep_before_group=10 SECONDS)
 
 //These callbacks will fire after roundstart key transfer
 /datum/controller/subsystem/ticker/proc/OnRoundstart(datum/callback/cb)

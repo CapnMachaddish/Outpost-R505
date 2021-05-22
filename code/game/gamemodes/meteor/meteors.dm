@@ -27,13 +27,14 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	for(var/i = 0; i < number; i++)
 		spawn_meteor(meteortypes)
 
-/proc/spawn_meteor(list/meteortypes)
+/proc/spawn_meteor(list/meteortypes, zlevel)
+//Todo: pick start from GLOB.turf_transition_points and then proceed with a random direction
 	var/turf/pickedstart
 	var/turf/pickedgoal
 	var/max_i = 10//number of tries to spawn meteor.
 	while(!isspaceturf(pickedstart))
 		var/startSide = pick(GLOB.cardinals)
-		var/startZ = pick(SSmapping.levels_by_trait(ZTRAIT_STATION))
+		var/startZ = zlevel || pick(SSmapping.levels_by_trait(ZTRAIT_STATION))
 		pickedstart = spaceDebrisStartLoc(startSide, startZ)
 		pickedgoal = spaceDebrisFinishLoc(startSide, startZ)
 		max_i--
@@ -59,7 +60,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 		if(WEST)
 			starty = rand((TRANSITIONEDGE + MAP_EDGE_PAD), world.maxy-(TRANSITIONEDGE + MAP_EDGE_PAD))
 			startx = (TRANSITIONEDGE + MAP_EDGE_PAD)
-	. = locate(startx, starty, Z)
+	return locate(startx, starty, Z)
 
 /proc/spaceDebrisFinishLoc(startSide, Z)
 	var/endy
@@ -77,7 +78,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 		if(WEST)
 			endy = rand((TRANSITIONEDGE + MAP_EDGE_PAD),world.maxy-(TRANSITIONEDGE + MAP_EDGE_PAD))
 			endx = world.maxx-(TRANSITIONEDGE + MAP_EDGE_PAD)
-	. = locate(endx, endy, Z)
+	return locate(endx, endy, Z)
 
 ///////////////////////
 //The meteor effect
@@ -90,6 +91,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	icon_state = "small"
 	density = TRUE
 	anchored = TRUE
+	gender = NEUTER
 	var/hits = 4
 	var/hitpwr = 2 //Level of ex_act to be called on hit.
 	var/dest
@@ -222,6 +224,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	name = "space dust"
 	icon_state = "dust"
 	pass_flags = PASSTABLE | PASSGRILLE
+	gender = PLURAL
 	hits = 1
 	hitpwr = 3
 	meteorsound = 'sound/weapons/gun/smg/shot.ogg'
