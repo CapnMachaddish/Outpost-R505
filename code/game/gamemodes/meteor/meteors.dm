@@ -16,7 +16,8 @@ GLOBAL_LIST_INIT(meteors_catastrophic, list(/obj/effect/meteor/medium=5, /obj/ef
 
 GLOBAL_LIST_INIT(meteorsB, list(/obj/effect/meteor/meaty=5, /obj/effect/meteor/meaty/xeno=1)) //for meaty ore event
 
-GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
+GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event -- which is no more
+GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 
 
 ///////////////////////////////
@@ -236,7 +237,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	meteordrop = list(/obj/item/stack/ore/glass)
 	threat = 1
 
-/obj/effect/meteor/dust/Move()	//R505 edit: weak as hell debris because this is a 
+/obj/effect/meteor/dust/weak/Move()	//R505 edit: weak as hell debris because this gets spawned constantly
 	. = ..()
 	if(!isspaceturf(loc) && !QDELING(src))
 		make_debris()
