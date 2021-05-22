@@ -239,7 +239,7 @@
 	returned_string += size_description
 	if(aroused == AROUSAL_FULL)
 		if(lactates)
-			returned_string += " The nipples seem hard, perky and are leaking milk."
+			returned_string += " The nipples seem hard, perky, and are leaking milk."
 		else
 			returned_string += " Their nipples look hard and perky."
 	return returned_string
