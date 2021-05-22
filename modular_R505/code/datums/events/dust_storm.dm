@@ -42,7 +42,7 @@ GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5
 			spawned_in_group = 0
 			sleep(group_speed)
 		
-		spawn_meteor(GLOB.meteorsD, z_level)
+		spawn_meteor(GLOB.meteorsD, z_level, FALSE)
 		spawned_in_group++
 		sleep(speed)
 	GLOB.dust_storms_active["[z_level]"]--

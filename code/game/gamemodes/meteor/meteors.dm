@@ -24,11 +24,11 @@ GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/spawn_meteors(number = 10, list/meteortypes)
+/proc/spawn_meteors(number = 10, list/meteortypes, notify_ghosts = TRUE)
 	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes)
+		spawn_meteor(meteortypes, notify_ghosts=notify_ghosts)
 
-/proc/spawn_meteor(list/meteortypes, zlevel, notify_ghosts=FALSE)
+/proc/spawn_meteor(list/meteortypes, zlevel, notify_ghosts=TRUE)
 //Todo: pick start from GLOB.turf_transition_points and then proceed with a random direction
 	var/turf/pickedstart
 	var/turf/pickedgoal
