@@ -87,32 +87,30 @@
 
 /obj/item/organ/genital/penis/update_genital_icon_state()
 	var/size_affix
-	var/measured_size = FLOOR(genital_size,1)
+	var/measured_size = round(genital_size)
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
 		if(1 to 7)
-			size_affix = "1"
+			size_affix = 1
 		if(8 to 15)
-			size_affix = "2"
+			size_affix = 2
 		if(16 to 24)
-			size_affix = "3"
+			size_affix = 3
+		if(25 to 38)
+			size_affix = 4
 		else
-			size_affix = "4"
+			size_affix = 5
+	size_affix = FLOOR(GLOB.penis_sprite_sizes[genital_type], size_affix)
 	var/passed_string = "penis_[genital_type]_[size_affix]"
-	if(uses_skintones)
-		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/penis/get_sprite_size_string()
 	if(aroused != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
-		var/poking_out = 0
-		if(aroused == AROUSAL_PARTIAL)
-			poking_out = 1
-		return "[lowertext(sheath)]_[poking_out]"
+		return "[lowertext(sheath)]_[aroused == AROUSAL_PARTIAL ? 1 : 0]"
 
 	var/size_affix
-	var/measured_size = FLOOR(genital_size,1)
+	var/measured_size = round(genital_size)
 	var/is_erect = 0
 	if(aroused == AROUSAL_FULL)
 		is_erect = 1
@@ -120,16 +118,17 @@
 		measured_size = 1
 	switch(measured_size)
 		if(1 to 7)
-			size_affix = "1"
+			size_affix = 1
 		if(8 to 15)
-			size_affix = "2"
+			size_affix = 2
 		if(16 to 24)
-			size_affix = "3"
+			size_affix = 3
+		if(25 to 38)
+			size_affix = 4
 		else
-			size_affix = "4"
+			size_affix = 5
+	size_affix = FLOOR(GLOB.penis_sprite_sizes[genital_type], size_affix)
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
-	if(uses_skintones)
-		passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
@@ -152,8 +151,6 @@
 /obj/item/organ/genital/testicles/update_genital_icon_state()
 	var/measured_size = clamp(genital_size, 1, 3)
 	var/passed_string = "testicles_[genital_type]_[measured_size]"
-	if(uses_skintones)
-		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/testicles/get_description_string(datum/sprite_accessory/genital/gas)
@@ -169,8 +166,6 @@
 	var/measured_size = FLOOR(genital_size,1)
 	measured_size = clamp(measured_size, 0, 5)
 	var/passed_string = "[genital_type]_[measured_size]"
-	//if(uses_skintones)
-	//	passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/vagina
@@ -185,7 +180,7 @@
 /obj/item/organ/genital/vagina/get_description_string(datum/sprite_accessory/genital/gas)
 	var/returned_string = "You see a [lowertext(genital_name)] vagina."
 	if(lowertext(genital_name) == "cloaca")
-		returned_string = "You see a cloaca." //i deserve a pipebomb for this
+		returned_string = "You see a cloaca."
 	switch(aroused)
 		if(AROUSAL_NONE)
 			returned_string += " It seems dry."
