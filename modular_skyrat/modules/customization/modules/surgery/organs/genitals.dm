@@ -91,9 +91,9 @@
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
-		if(1 to 10)
+		if(1 to 7)
 			size_affix = "1"
-		if(11 to 15)
+		if(8 to 15)
 			size_affix = "2"
 		if(16 to 24)
 			size_affix = "3"
@@ -119,9 +119,9 @@
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
-		if(1 to 10)
+		if(1 to 7)
 			size_affix = "1"
-		if(11 to 15)
+		if(8 to 15)
 			size_affix = "2"
 		if(16 to 24)
 			size_affix = "3"
@@ -135,9 +135,7 @@
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
 	..()
 	girth = DNA.features["penis_girth"]
-	var/datum/sprite_accessory/genital/penis/PS = GLOB.sprite_accessories[associated_key][DNA.mutant_bodyparts[associated_key][MUTANT_INDEX_NAME]]
-	if(PS.can_have_sheath)
-		sheath = DNA.features["penis_sheath"]
+	sheath = DNA.features["penis_sheath"]
 	set_size(DNA.features["penis_size"])
 
 /obj/item/organ/genital/testicles
@@ -159,18 +157,20 @@
 	icon_state = passed_string
 
 /obj/item/organ/genital/testicles/get_description_string(datum/sprite_accessory/genital/gas)
-	return "You see a pair of testicles, they look [lowertext(balls_size_to_description(genital_size))]."
+	return "You see a pair of testicles, their size is [lowertext(balls_size_to_description(genital_size))]."
 
 /obj/item/organ/genital/testicles/build_from_dna(datum/dna/DNA, associated_key)
 	..()
+	if(DNA.features["penis_sheath"] == SHEATH_NORMAL)
+		genital_type = "sheath"
 	set_size(DNA.features["balls_size"])
 
 /obj/item/organ/genital/testicles/get_sprite_size_string()
 	var/measured_size = FLOOR(genital_size,1)
-	measured_size = clamp(measured_size, 0, 3)
+	measured_size = clamp(measured_size, 0, 5)
 	var/passed_string = "[genital_type]_[measured_size]"
-	if(uses_skintones)
-		passed_string += "_s"
+	//if(uses_skintones)
+	//	passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/vagina

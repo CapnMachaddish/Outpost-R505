@@ -23,7 +23,9 @@ GLOBAL_LIST_INIT(breasts_size_translation, list("0" = "Flatchested",
 GLOBAL_LIST_INIT(balls_size_translation, list("0" = "Small",
 												"1" = "Average",
 												"2" = "Big",
-												"3" = "Enormous"
+												"3" = "Enormous",
+												"4" = "Gigantic",
+												"5" = "Ginormous"
 												))
 
 GLOBAL_LIST_INIT(marking_zone_to_bitflag, list(BODY_ZONE_HEAD = HEAD,
@@ -43,7 +45,7 @@ GLOBAL_LIST_INIT(marking_zones, list(BODY_ZONE_HEAD,BODY_ZONE_CHEST,BODY_ZONE_L_
 ///Those are the values available from prefs
 GLOBAL_LIST_INIT(preference_breast_sizes, list("Flatchested","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"))
 
-GLOBAL_LIST_INIT(preference_balls_sizes, list("Small","Average","Big","Enormous"))
+GLOBAL_LIST_INIT(preference_balls_sizes, list("Small","Average","Big","Enormous", "Gigantic"))
 
 GLOBAL_LIST_INIT(robotic_styles_list, list("None" = "None",
 										"Surplus" = 'icons/mob/augmentation/surplus_augments.dmi',
