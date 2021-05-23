@@ -101,7 +101,7 @@
 			size_affix = 4
 		else
 			size_affix = 5
-	size_affix = FLOOR(GLOB.penis_sprite_sizes[genital_type], size_affix)
+	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
 	var/passed_string = "penis_[genital_type]_[size_affix]"
 	icon_state = passed_string
 
@@ -127,7 +127,7 @@
 			size_affix = 4
 		else
 			size_affix = 5
-	size_affix = FLOOR(GLOB.penis_sprite_sizes[genital_type], size_affix)
+	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
 	return passed_string
 
@@ -149,7 +149,7 @@
 	aroused = AROUSAL_CANT
 
 /obj/item/organ/genital/testicles/update_genital_icon_state()
-	var/measured_size = clamp(genital_size, 1, 3)
+	var/measured_size = clamp(genital_size, 1, 5)
 	var/passed_string = "testicles_[genital_type]_[measured_size]"
 	icon_state = passed_string
 
@@ -163,7 +163,7 @@
 	set_size(DNA.features["balls_size"])
 
 /obj/item/organ/genital/testicles/get_sprite_size_string()
-	var/measured_size = FLOOR(genital_size,1)
+	var/measured_size = round(genital_size)
 	measured_size = clamp(measured_size, 0, 5)
 	var/passed_string = "[genital_type]_[measured_size]"
 	return passed_string
@@ -241,7 +241,7 @@
 
 /obj/item/organ/genital/breasts/update_genital_icon_state()
 	var/max_size = 5
-	var/current_size = FLOOR(genital_size, 1)
+	var/current_size = round(genital_size)
 	if(current_size < 0)
 		current_size = 0
 	else if (current_size > max_size)
@@ -255,7 +255,7 @@
 	var/max_size = 5
 	if(genital_type == "pair")
 		max_size = 16
-	var/current_size = FLOOR(genital_size, 1)
+	var/current_size = round(genital_size)
 	if(current_size < 0)
 		current_size = 0
 	else if (current_size > max_size)
