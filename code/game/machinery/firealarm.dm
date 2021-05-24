@@ -79,32 +79,32 @@
 	. += "fire_overlay"
 	if(is_station_level(z))
 		. += "fire_[GLOB.security_level]"
-		. += mutable_appearance(icon, "fire_[GLOB.security_level]", layer, plane)
-		. += mutable_appearance(icon, "fire_[GLOB.security_level]", layer, EMISSIVE_PLANE)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_[GLOB.security_level]", layer, plane, dir)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_[GLOB.security_level]", layer, EMISSIVE_PLANE, dir)
 	else
 		. += "fire_[SEC_LEVEL_GREEN]"
-		. += mutable_appearance(icon, "fire_[SEC_LEVEL_GREEN]", layer, plane)
-		. += mutable_appearance(icon, "fire_[SEC_LEVEL_GREEN]", layer, EMISSIVE_PLANE)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_[SEC_LEVEL_GREEN]", layer, plane, dir)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_[SEC_LEVEL_GREEN]", layer, EMISSIVE_PLANE, dir)
 
 	var/area/A = get_area(src)
 
 	if(!detecting || !A.fire)
 		. += "fire_off"
-		. += mutable_appearance(icon, "fire_off", layer, plane)
-		. += mutable_appearance(icon, "fire_off", layer, EMISSIVE_PLANE)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_off", layer, plane, dir)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_off", layer, EMISSIVE_PLANE, dir)
 	else if(obj_flags & EMAGGED)
 		. += "fire_emagged"
-		. += mutable_appearance(icon, "fire_emagged", layer, plane)
-		. += mutable_appearance(icon, "fire_emagged", layer, EMISSIVE_PLANE)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_emagged", layer, plane, dir)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_emagged", layer, EMISSIVE_PLANE, dir)
 	else
 		. += "fire_on"
-		. += mutable_appearance(icon, "fire_on", layer, plane)
-		. += mutable_appearance(icon, "fire_on", layer, EMISSIVE_PLANE)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_on", layer, plane, dir)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_on", layer, EMISSIVE_PLANE, dir)
 
 	if(!panel_open && detecting && triggered) //It just looks horrible with the panel open
 		. += "fire_detected"
-		. += mutable_appearance(icon, "fire_detected", layer, plane)
-		. += mutable_appearance(icon, "fire_detected", layer, EMISSIVE_PLANE) //Pain
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_detected", layer, plane, dir)
+		SSvis_overlays.add_vis_overlay(src, icon, "fire_detected", layer, EMISSIVE_PLANE, dir) //Pain
 
 /obj/machinery/firealarm/emp_act(severity)
 	. = ..()
