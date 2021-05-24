@@ -10,9 +10,8 @@
 	px_y = 0
 	stam_damage_coeff = 1
 	max_stamina_damage = 120
-	grind_results = null
-	wound_resistance = 10
 	var/obj/item/cavity_item
+	wound_resistance = 10
 
 /obj/item/bodypart/chest/can_dismember(obj/item/I)
 	if(owner.stat < HARD_CRIT || !get_organs())
