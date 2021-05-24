@@ -119,7 +119,7 @@
 	if(defer_change) // TODO: make the defer change var a var for any changeturf flag
 		flags = CHANGETURF_DEFER_CHANGE
 	var/turf/open/mined = ScrapeAway(null, flags)
-	addtimer(CALLBACK(src, .proc/AfterChange, flags, old_type), 1, TIMER_UNIQUE)
+	addtimer(CALLBACK(src, .proc/AfterChange, old_type), 1, TIMER_UNIQUE)
 	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE) //beautiful destruction
 	mined.update_visuals()
 
@@ -598,12 +598,11 @@
 			G.icon_state = "Gibtonite ore 2"
 
 	var/flags = NONE
-	var/old_type = type
-	if(defer_change) // TODO: make the defer change var a var for any changeturf flag
+	if(defer_change)
 		flags = CHANGETURF_DEFER_CHANGE
-	var/turf/open/mined = ScrapeAway(null, flags)
-	addtimer(CALLBACK(src, .proc/AfterChange, flags, old_type), 1, TIMER_UNIQUE)
-	mined.update_visuals()
+	ScrapeAway(null, flags)
+	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
+
 
 /turf/closed/mineral/gibtonite/volcanic
 	environment_type = "basalt"
@@ -659,13 +658,11 @@
 	drop_ores()
 	H.client.give_award(/datum/award/achievement/skill/legendary_miner, H)
 	var/flags = NONE
-	var/old_type = type
 	if(defer_change) // TODO: make the defer change var a var for any changeturf flag
 		flags = CHANGETURF_DEFER_CHANGE
-	var/turf/open/mined = ScrapeAway(null, flags)
-	addtimer(CALLBACK(src, .proc/AfterChange, flags, old_type), 1, TIMER_UNIQUE)
+	ScrapeAway(flags=flags)
+	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
 	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE) //beautiful destruction
-	mined.update_visuals()
 	H.mind?.adjust_experience(/datum/skill/mining, 100) //yay!
 
 /turf/closed/mineral/strong/proc/drop_ores()
