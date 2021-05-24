@@ -14643,8 +14643,6 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 10
 	},
-/obj/structure/extinguisher_cabinet/directional/south,
-/obj/structure/closet/secure_closet/chemical,
 /turf/open/floor/iron/white,
 /area/medical/pharmacy)
 "aEg" = (
@@ -16258,6 +16256,7 @@
 /turf/open/floor/iron,
 /area/hallway/primary/tram/right)
 "aHt" = (
+/obj/structure/closet/secure_closet/chemical,
 /obj/effect/turf_decal/trimline/yellow/filled/line,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4{
 	dir = 5
@@ -16266,7 +16265,7 @@
 	dir = 5
 	},
 /obj/structure/cable,
-/obj/machinery/chem_mass_spec,
+/obj/structure/extinguisher_cabinet/directional/south,
 /turf/open/floor/iron/white,
 /area/medical/pharmacy)
 "aHu" = (
