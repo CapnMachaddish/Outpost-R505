@@ -190,11 +190,10 @@
 		if("add")
 			if(is_express)
 				return
-			var/id = params["id"]
-			id = text2path(id) || id
+			var/id = text2path(params["id"])
 			var/datum/supply_pack/pack = SSshuttle.supply_packs[id]
 			if(!istype(pack))
-				CRASH("Unknown supply pack id given by order console ui. ID: [params["id"]]")
+				return
 			if((pack.hidden && !(obj_flags & EMAGGED)) || (pack.contraband && !contraband) || pack.DropPodOnly)
 				return
 
