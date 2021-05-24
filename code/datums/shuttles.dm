@@ -108,7 +108,6 @@
 
 /datum/map_template/shuttle/emergency
 	port_id = "emergency"
-	suffix = "skyrat" //SKYRAT EDIT CHANGE
 	name = "Base Shuttle Template (Emergency)"
 
 /datum/map_template/shuttle/cargo
@@ -116,11 +115,9 @@
 	name = "Base Shuttle Template (Cargo)"
 	can_be_bought = FALSE
 
-/* //SKYRAT EDIT REMOVAL - MOVED TO MODULAR
 /datum/map_template/shuttle/ferry
 	port_id = "ferry"
 	name = "Base Shuttle Template (Ferry)"
-*/
 
 /datum/map_template/shuttle/whiteship
 	port_id = "whiteship"
@@ -646,11 +643,9 @@
 	suffix = "small"
 	name = "auxilliary base (Small)"
 
-/* SKYRAT EDIT REMOVAL
 /datum/map_template/shuttle/escape_pod/default
 	suffix = "default"
 	name = "escape pod (Default)"
-*/
 
 /datum/map_template/shuttle/escape_pod/large
 	suffix = "large"
