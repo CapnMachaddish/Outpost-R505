@@ -76,11 +76,10 @@
 /turf/open/floor/iron/dark,
 /area/ctf)
 "bO" = (
-/obj/effect/turf_decal/siding/wood/corner,
 /obj/structure/chair/stool/bar{
-	item_chair = null;
 	resistance_flags = 64
 	},
+/obj/effect/turf_decal/siding/wood/corner,
 /turf/open/floor/wood,
 /area/ctf)
 "bR" = (
@@ -253,7 +252,6 @@
 /area/ctf)
 "fJ" = (
 /obj/structure/chair/stool/bar{
-	item_chair = null;
 	resistance_flags = 64
 	},
 /turf/open/floor/wood,
@@ -580,7 +578,6 @@
 	},
 /obj/effect/turf_decal/tile/bar,
 /obj/structure/chair/stool/bar{
-	item_chair = null;
 	resistance_flags = 64
 	},
 /turf/open/floor/iron,
@@ -923,7 +920,6 @@
 "rT" = (
 /obj/structure/chair{
 	dir = 4;
-	item_chair = null;
 	resistance_flags = 64
 	},
 /turf/open/floor/plating/grass,
@@ -1450,7 +1446,6 @@
 "BL" = (
 /obj/structure/chair{
 	dir = 8;
-	item_chair = null;
 	resistance_flags = 64
 	},
 /turf/open/floor/plating/grass,
