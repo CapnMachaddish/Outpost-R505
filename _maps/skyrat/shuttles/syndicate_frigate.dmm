@@ -369,7 +369,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/syndicate/frigate)
 "Wp" = (
-/obj/machinery/computer/shuttle/syndicate_frigate,
+/obj/structure/frame/computer{
+	anchored = 1
+	},
 /turf/open/floor/iron/dark,
 /area/shuttle/syndicate/frigate)
 "WO" = (

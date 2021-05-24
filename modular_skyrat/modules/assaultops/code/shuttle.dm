@@ -49,7 +49,7 @@
 	name = "syndicate frigate helm"
 	desc = "The terminal used to control the syndicate frigate."
 	shuttleId = "syndicate_frigate"
-	possible_destinations = "syndicate_frigate_away;syndicate_frigate_dock;rockplanet_lz1"
+	possible_destinations = "syndicate_frigate_away;syndicate_frigate_dock;whiteship_lavaland"
 	circuit = /obj/item/circuitboard/computer/syndicate_shuttle
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
