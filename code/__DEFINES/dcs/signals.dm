@@ -493,7 +493,9 @@
 #define COMSIG_MOVABLE_CHANGE_DUCT_LAYER "movable_change_duct_layer"
 
 // /mob signals
-
+///from base of mob/clickon(): (atom/A, params)
+#define COMSIG_CLICKON "any_clickon"
+	#define COMSIG_CANCEL_CLICKON 1
 ///from base of /mob/Login(): ()
 #define COMSIG_MOB_LOGIN "mob_login"
 ///from base of /mob/Logout(): ()

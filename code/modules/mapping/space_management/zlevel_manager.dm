@@ -29,6 +29,8 @@
 	if(overmap_obj)
 		overmap_obj.related_levels += S
 		S.related_overmap_object = overmap_obj
+		if(istype(overmap_obj, /datum/overmap_object/shuttle)) //TODO: better method
+			S.is_overmap_controllable = TRUE
 	z_list += S
 	adding_new_zlevel = FALSE
 	return S
