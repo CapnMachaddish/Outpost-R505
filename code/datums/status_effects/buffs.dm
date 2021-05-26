@@ -202,7 +202,15 @@
 	id = "Exercised"
 	duration = 1200
 	alert_type = null
-	processing_speed = STATUS_EFFECT_NORMAL_PROCESS
+
+/datum/status_effect/exercised/on_creation(mob/living/new_owner, ...)
+	. = ..()
+	STOP_PROCESSING(SSfastprocess, src)
+	START_PROCESSING(SSprocessing, src) //this lasts 20 minutes, so SSfastprocess isn't needed.
+
+/datum/status_effect/exercised/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSprocessing, src)
 
 //Hippocratic Oath: Applied when the Rod of Asclepius is activated.
 /datum/status_effect/hippocratic_oath
