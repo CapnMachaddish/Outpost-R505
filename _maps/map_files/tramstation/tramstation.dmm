@@ -33961,6 +33961,7 @@
 /area/hallway/primary/tram/center)
 "gWm" = (
 /obj/machinery/portable_atmospherics/canister/air,
+/obj/effect/landmark/event_spawn,
 /turf/open/floor/engine/air,
 /area/engineering/atmos)
 "gXl" = (
@@ -59360,6 +59361,10 @@
 	},
 /turf/open/floor/iron/white,
 /area/science/research)
+"swR" = (
+/obj/effect/landmark/xeno_spawn,
+/turf/open/floor/engine/air,
+/area/engineering/atmos)
 "swZ" = (
 /obj/machinery/disposal/bin{
 	pixel_x = -2;
@@ -108161,7 +108166,7 @@ mgz
 jPQ
 xIt
 moi
-che
+swR
 che
 iCR
 ajc
