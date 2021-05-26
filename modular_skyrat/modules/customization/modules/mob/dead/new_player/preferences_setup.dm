@@ -105,7 +105,6 @@
 	//We reset the quirk-based stuff
 	augments = list()
 	all_quirks = list()
-	pref_scream = new /datum/scream_type/human
 
 /datum/preferences/proc/reset_colors()
 	for(var/key in mutant_bodyparts)
