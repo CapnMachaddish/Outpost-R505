@@ -58,6 +58,8 @@
 	icon_state = "synthliz_barless_tertunder"
 
 //Protogen snoot
+//REMOVED - We have a better one now
+/*
 /datum/sprite_accessory/snouts/synthliz/protogen
 	color_src = USE_MATRIXED_COLORS
 	name = "Protogen"
@@ -67,7 +69,7 @@
 	color_src = USE_MATRIXED_COLORS
 	name = "Protogen - With Bolt"
 	icon_state = "protogen_withbolt"
-
+*/
 
 //Synth tails
 /datum/sprite_accessory/tails/synthliz
@@ -127,6 +129,8 @@
 	name = "Synthetic Lizard - Horns Light"
 	icon_state = "synth_hornslight"
 
+//REMOVED - we have a better one now
+/*
 /datum/sprite_accessory/antenna/synthliz/cobrahood
 	name = "Synthetic Lizard - Cobra Hood"
 	icon_state = "cobrahood"
@@ -136,6 +140,7 @@
 	name = "Synthetic Lizard - Cobra Hood (Ears)"
 	icon_state = "cobraears"
 	color_src = USE_MATRIXED_COLORS
+*/
 
 //Synth Taurs (Ported from Virgo)
 /datum/sprite_accessory/taur/synthliz
