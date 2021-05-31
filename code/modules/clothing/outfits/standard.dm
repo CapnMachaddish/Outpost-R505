@@ -46,8 +46,8 @@
 	)
 	skillchips = list(
 		/obj/item/skillchip/job/engineer,\
-		/obj/item/skillchip/disk_verifier,\
-		/obj/item/skillchip/quickercarry
+		/obj/item/skillchip/disk_verifier
+		///obj/item/skillchip/quickercarry //uncommented for now for compile error reasons
 	)
 	belt = /obj/item/pda/centcom
 	ears = /obj/item/radio/headset/headset_cent/alt/commander
