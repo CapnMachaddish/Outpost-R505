@@ -69,10 +69,10 @@
 /datum/sprite_accessory/genital/penis/human
 	icon_state = "human"
 	name = "Human"
-	color_src = USE_ONE_COLOR
+	//color_src = USE_ONE_COLOR
 	default_color = DEFAULT_SKIN_OR_PRIMARY
-	uses_skintones = TRUE
-	can_have_sheath = FALSE
+	//uses_skintones = TRUE
+	//can_have_sheath = FALSE
 
 /datum/sprite_accessory/genital/penis/knotted
 	icon_state = "knotted"
@@ -101,6 +101,10 @@
 /datum/sprite_accessory/genital/penis/hemiknot
 	icon_state = "hemiknot"
 	name = "Knotted Hemi"
+
+/datum/sprite_accessory/genital/penis/thick
+	icon_state = "thick"
+	name = "Thick"
 
 /datum/sprite_accessory/genital/testicles
 	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/genitals/testicles_onmob.dmi'

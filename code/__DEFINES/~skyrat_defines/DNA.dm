@@ -59,13 +59,13 @@
 #define PREVIEW_PREF_NAKED "Naked"
 
 #define BODY_SIZE_NORMAL 1.00
-#define BODY_SIZE_MAX 1.5
+#define BODY_SIZE_MAX 2.0
 #define BODY_SIZE_MIN 0.8
 
 //In inches
-#define PENIS_MAX_GIRTH 15
+#define PENIS_MAX_GIRTH 22
 #define PENIS_MIN_LENGTH 1
-#define PENIS_MAX_LENGTH 20
+#define PENIS_MAX_LENGTH 36
 
 #define SHEATH_NONE	"None"
 #define SHEATH_NORMAL "Sheath"

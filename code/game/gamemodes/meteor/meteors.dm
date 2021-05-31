@@ -16,31 +16,33 @@ GLOBAL_LIST_INIT(meteors_catastrophic, list(/obj/effect/meteor/medium=5, /obj/ef
 
 GLOBAL_LIST_INIT(meteorsB, list(/obj/effect/meteor/meaty=5, /obj/effect/meteor/meaty/xeno=1)) //for meaty ore event
 
-GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
+GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event -- which is no more
+GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 
 
 ///////////////////////////////
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/spawn_meteors(number = 10, list/meteortypes)
+/proc/spawn_meteors(number = 10, list/meteortypes, notify_ghosts = TRUE)
 	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes)
+		spawn_meteor(meteortypes, notify_ghosts=notify_ghosts)
 
-/proc/spawn_meteor(list/meteortypes)
+/proc/spawn_meteor(list/meteortypes, zlevel, notify_ghosts=TRUE)
+//Todo: pick start from GLOB.turf_transition_points and then proceed with a random direction
 	var/turf/pickedstart
 	var/turf/pickedgoal
 	var/max_i = 10//number of tries to spawn meteor.
 	while(!isspaceturf(pickedstart))
 		var/startSide = pick(GLOB.cardinals)
-		var/startZ = pick(SSmapping.levels_by_trait(ZTRAIT_STATION))
+		var/startZ = zlevel || pick(SSmapping.levels_by_trait(ZTRAIT_STATION))
 		pickedstart = spaceDebrisStartLoc(startSide, startZ)
 		pickedgoal = spaceDebrisFinishLoc(startSide, startZ)
 		max_i--
 		if(max_i<=0)
 			return
 	var/Me = pickweight(meteortypes)
-	var/obj/effect/meteor/M = new Me(pickedstart, pickedgoal)
+	var/obj/effect/meteor/M = new Me(pickedstart, pickedgoal, notify_ghosts)
 	M.dest = pickedgoal
 
 /proc/spaceDebrisStartLoc(startSide, Z)
@@ -59,7 +61,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 		if(WEST)
 			starty = rand((TRANSITIONEDGE + MAP_EDGE_PAD), world.maxy-(TRANSITIONEDGE + MAP_EDGE_PAD))
 			startx = (TRANSITIONEDGE + MAP_EDGE_PAD)
-	. = locate(startx, starty, Z)
+	return locate(startx, starty, Z)
 
 /proc/spaceDebrisFinishLoc(startSide, Z)
 	var/endy
@@ -77,7 +79,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 		if(WEST)
 			endy = rand((TRANSITIONEDGE + MAP_EDGE_PAD),world.maxy-(TRANSITIONEDGE + MAP_EDGE_PAD))
 			endx = world.maxx-(TRANSITIONEDGE + MAP_EDGE_PAD)
-	. = locate(endx, endy, Z)
+	return locate(endx, endy, Z)
 
 ///////////////////////
 //The meteor effect
@@ -90,8 +92,9 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	icon_state = "small"
 	density = TRUE
 	anchored = TRUE
+	gender = NEUTER
 	var/hits = 4
-	var/hitpwr = 2 //Level of ex_act to be called on hit.
+	var/hitpwr = EXPLODE_HEAVY //Level of ex_act to be called on hit.
 	var/dest
 	pass_flags = PASSTABLE
 	var/heavy = FALSE
@@ -124,11 +127,16 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	walk(src,0) //this cancels the walk_towards() proc
 	return ..()
 
-/obj/effect/meteor/Initialize(mapload, target)
+/obj/effect/meteor/Initialize(mapload, target, alert_ghosts=TRUE)
+#ifdef TESTING
+	testing("Meteor spawned ([x], [y], [z])")
+	alert_ghosts = TRUE
+#endif
 	. = ..()
 	z_original = z
 	GLOB.meteor_list += src
-	SSaugury.register_doom(src, threat)
+	if(alert_ghosts)
+		SSaugury.register_doom(src, threat)
 	SpinAnimation()
 	timerid = QDEL_IN(src, lifetime)
 	chase_target(target)
@@ -222,11 +230,26 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	name = "space dust"
 	icon_state = "dust"
 	pass_flags = PASSTABLE | PASSGRILLE
+	gender = PLURAL
 	hits = 1
-	hitpwr = 3
+	hitpwr = EXPLODE_LIGHT
 	meteorsound = 'sound/weapons/gun/smg/shot.ogg'
 	meteordrop = list(/obj/item/stack/ore/glass)
 	threat = 1
+
+/obj/effect/meteor/dust/weak	//R505 edit: weak as hell debris because this gets spawned constantly
+	hitpwr = EXPLODE_NONE
+
+/obj/effect/meteor/dust/weak/Move()
+	. = ..()
+	if(!isspaceturf(loc) && !QDELING(src))
+		make_debris()
+		qdel(src)
+		return
+
+	var/obj/structure/lattice/lattice = locate(/obj/structure/lattice) in get_turf(loc)
+	if(lattice && prob(50))
+		get_hit()
 
 //Medium-sized
 /obj/effect/meteor/medium
@@ -337,7 +360,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 30
-	hitpwr = 1
+	hitpwr = EXPLODE_DEVASTATE
 	heavy = TRUE
 	meteorsound = 'sound/effects/bamf.ogg'
 	meteordrop = list(/obj/item/stack/ore/plasma)

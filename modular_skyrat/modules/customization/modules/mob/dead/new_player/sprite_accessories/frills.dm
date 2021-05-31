@@ -29,6 +29,8 @@
 	icon_state = "big"
 	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/frills.dmi'
 
+//REMOVED - We have a better one now
+/*
 /datum/sprite_accessory/frills/cobrahood
 	name = "Cobra Hood"
 	icon_state = "cobrahood"
@@ -40,3 +42,4 @@
 	icon_state = "cobraears"
 	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/frills.dmi'
 	color_src = USE_MATRIXED_COLORS
+*/

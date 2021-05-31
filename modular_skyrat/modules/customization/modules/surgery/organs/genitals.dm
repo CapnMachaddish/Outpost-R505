@@ -87,57 +87,54 @@
 
 /obj/item/organ/genital/penis/update_genital_icon_state()
 	var/size_affix
-	var/measured_size = FLOOR(genital_size,1)
+	var/measured_size = round(genital_size)
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
-		if(1 to 10)
-			size_affix = "1"
-		if(11 to 15)
-			size_affix = "2"
+		if(1 to 7)
+			size_affix = 1
+		if(8 to 15)
+			size_affix = 2
 		if(16 to 24)
-			size_affix = "3"
+			size_affix = 3
+		if(25 to 38)
+			size_affix = 4
 		else
-			size_affix = "4"
+			size_affix = 5
+	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
 	var/passed_string = "penis_[genital_type]_[size_affix]"
-	if(uses_skintones)
-		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/penis/get_sprite_size_string()
 	if(aroused != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
-		var/poking_out = 0
-		if(aroused == AROUSAL_PARTIAL)
-			poking_out = 1
-		return "[lowertext(sheath)]_[poking_out]"
+		return "[lowertext(sheath)]_[aroused == AROUSAL_PARTIAL ? 1 : 0]"
 
 	var/size_affix
-	var/measured_size = FLOOR(genital_size,1)
+	var/measured_size = round(genital_size)
 	var/is_erect = 0
 	if(aroused == AROUSAL_FULL)
 		is_erect = 1
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
-		if(1 to 10)
-			size_affix = "1"
-		if(11 to 15)
-			size_affix = "2"
+		if(1 to 7)
+			size_affix = 1
+		if(8 to 15)
+			size_affix = 2
 		if(16 to 24)
-			size_affix = "3"
+			size_affix = 3
+		if(25 to 38)
+			size_affix = 4
 		else
-			size_affix = "4"
+			size_affix = 5
+	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
-	if(uses_skintones)
-		passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
 	..()
 	girth = DNA.features["penis_girth"]
-	var/datum/sprite_accessory/genital/penis/PS = GLOB.sprite_accessories[associated_key][DNA.mutant_bodyparts[associated_key][MUTANT_INDEX_NAME]]
-	if(PS.can_have_sheath)
-		sheath = DNA.features["penis_sheath"]
+	sheath = DNA.features["penis_sheath"]
 	set_size(DNA.features["penis_size"])
 
 /obj/item/organ/genital/testicles
@@ -152,25 +149,23 @@
 	aroused = AROUSAL_CANT
 
 /obj/item/organ/genital/testicles/update_genital_icon_state()
-	var/measured_size = clamp(genital_size, 1, 3)
+	var/measured_size = clamp(genital_size, 1, 5)
 	var/passed_string = "testicles_[genital_type]_[measured_size]"
-	if(uses_skintones)
-		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/testicles/get_description_string(datum/sprite_accessory/genital/gas)
-	return "You see a pair of testicles, they look [lowertext(balls_size_to_description(genital_size))]."
+	return "You see a pair of testicles, their size is [lowertext(balls_size_to_description(genital_size))]."
 
 /obj/item/organ/genital/testicles/build_from_dna(datum/dna/DNA, associated_key)
 	..()
+	if(DNA.features["penis_sheath"] == SHEATH_NORMAL)
+		genital_type = "sheath"
 	set_size(DNA.features["balls_size"])
 
 /obj/item/organ/genital/testicles/get_sprite_size_string()
-	var/measured_size = FLOOR(genital_size,1)
-	measured_size = clamp(measured_size, 0, 3)
+	var/measured_size = round(genital_size)
+	measured_size = clamp(measured_size, 0, 5)
 	var/passed_string = "[genital_type]_[measured_size]"
-	if(uses_skintones)
-		passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/vagina
@@ -185,7 +180,7 @@
 /obj/item/organ/genital/vagina/get_description_string(datum/sprite_accessory/genital/gas)
 	var/returned_string = "You see a [lowertext(genital_name)] vagina."
 	if(lowertext(genital_name) == "cloaca")
-		returned_string = "You see a cloaca." //i deserve a pipebomb for this
+		returned_string = "You see a cloaca."
 	switch(aroused)
 		if(AROUSAL_NONE)
 			returned_string += " It seems dry."
@@ -229,8 +224,8 @@
 	var/returned_string = "You see a [lowertext(genital_name)] of breasts."
 	var/size_description
 	var/translation = breasts_size_to_cup(genital_size)
-	switch(translation)
-		if("Flatchested")
+	switch (translation)
+		if(0)
 			size_description = " They are small and flat, however."
 		if("beyond measurement")
 			size_description = " Their size is enormous, you estimate they're around [genital_size] inches in diameter."
@@ -239,14 +234,14 @@
 	returned_string += size_description
 	if(aroused == AROUSAL_FULL)
 		if(lactates)
-			returned_string += " The nipples seem hard, perky and are leaking milk."
+			returned_string += " The nipples seem hard, perky, and are leaking milk."
 		else
 			returned_string += " Their nipples look hard and perky."
 	return returned_string
 
 /obj/item/organ/genital/breasts/update_genital_icon_state()
 	var/max_size = 5
-	var/current_size = FLOOR(genital_size, 1)
+	var/current_size = round(genital_size)
 	if(current_size < 0)
 		current_size = 0
 	else if (current_size > max_size)
@@ -260,7 +255,7 @@
 	var/max_size = 5
 	if(genital_type == "pair")
 		max_size = 16
-	var/current_size = FLOOR(genital_size, 1)
+	var/current_size = round(genital_size)
 	if(current_size < 0)
 		current_size = 0
 	else if (current_size > max_size)
@@ -276,18 +271,10 @@
 	set_size(DNA.features["breasts_size"])
 
 /proc/breasts_size_to_cup(number)
-	if(number < 0)
-		number = 0
-	var/returned = GLOB.breasts_size_translation["[number]"]
-	if(!returned)
-		returned = "beyond measurement"
-	return returned
+	return number > 16 ? "beyond measurement" : number < 1 ? 0 : ascii2text(number + 63)
 
 /proc/breasts_cup_to_size(cup)
-	for(var/key in GLOB.breasts_size_translation)
-		if(GLOB.breasts_size_translation[key] == cup)
-			return text2num(key)
-	return 0
+	return lowertext(cup) == "flatchested" ? 0 : text2ascii(uppertext(cup)) - 63
 
 /proc/balls_size_to_description(number)
 	if(number < 0)

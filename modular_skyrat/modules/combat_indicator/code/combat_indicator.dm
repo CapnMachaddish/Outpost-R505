@@ -49,7 +49,7 @@ GLOBAL_VAR_INIT(combat_indicator_overlay, GenerateCombatOverlay())
 #undef COMBAT_NOTICE_COOLDOWN
 
 /datum/keybinding/living/combat_indicator
-	hotkey_keys = list("C")
+	hotkey_keys = list("C", "4")
 	name = "combat_indicator"
 	full_name = "Combat Indicator"
 	description = "Indicates that you're escalating to mechanics. YOU NEED TO USE THIS"

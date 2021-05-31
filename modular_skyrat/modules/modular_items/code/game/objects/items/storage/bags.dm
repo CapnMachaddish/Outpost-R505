@@ -15,7 +15,7 @@
 	STR.max_combined_w_class = 30
 	STR.max_items = 3
 	STR.display_numerical_stacking = FALSE
-	STR.can_hold = typecacheof(list(/obj/item/ammo_box/magazine, /obj/item/ammo_casing))
+	STR.can_hold = typecacheof(list(/obj/item/ammo_box/magazine, /obj/item/ammo_casing, /obj/item/ammo_box/revolver))
 
 /obj/item/storage/bag/material
 	name = "material pouch"
@@ -35,3 +35,8 @@
 	STR.max_items = 2
 	STR.display_numerical_stacking = TRUE
 	STR.can_hold = typecacheof(list(/obj/item/rcd_ammo, /obj/item/stack/sheet))
+
+/obj/item/storage/bag/trash
+	slot_flags = ITEM_SLOT_BELT //QoL by Gandalf
+	worn_icon_state = "trashbag"
+	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/belt.dmi'
