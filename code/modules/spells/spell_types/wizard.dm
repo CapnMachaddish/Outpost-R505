@@ -164,6 +164,11 @@
 	clothes_req = FALSE
 	say_destination = FALSE // Santa moves in mysterious ways
 
+/obj/effect/proc_holder/spell/targeted/area_teleport/teleport/centcom
+	invocation = "none"
+	clothes_req = FALSE
+	say_destination = FALSE
+
 /obj/effect/proc_holder/spell/aoe_turf/timestop
 	name = "Stop Time"
 	desc = "This spell stops time for everyone except for you, allowing you to move freely while your enemies and even projectiles are frozen."

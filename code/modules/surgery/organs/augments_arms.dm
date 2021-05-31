@@ -213,6 +213,16 @@
 		return 1
 	return 0
 
+/obj/item/organ/cyberimp/arm/toolset/empproof
+	name = "integrated toolset implant"
+	desc = "A stripped-down version of the engineering cyborg toolset, designed to be installed on subject's arm. Contain advanced versions of every tool."
+	contents = newlist(/obj/item/screwdriver/cyborg, /obj/item/wrench/cyborg, /obj/item/weldingtool/largetank/cyborg,
+		/obj/item/crowbar/cyborg, /obj/item/wirecutters/cyborg, /obj/item/multitool/cyborg)
+	organ_flags = EMP_PROTECT_SELF
+
+/obj/item/organ/cyberimp/arm/toolset/empproof/l
+	zone = BODY_ZONE_L_ARM
+
 /obj/item/organ/cyberimp/arm/esword
 	name = "arm-mounted energy blade"
 	desc = "An illegal and highly dangerous cybernetic implant that can project a deadly blade of concentrated energy."
@@ -264,3 +274,15 @@
 	name = "surgical toolset implant"
 	desc = "A set of surgical tools hidden behind a concealed panel on the user's arm."
 	contents = newlist(/obj/item/retractor/augment, /obj/item/hemostat/augment, /obj/item/cautery/augment, /obj/item/surgicaldrill/augment, /obj/item/scalpel/augment, /obj/item/circular_saw/augment, /obj/item/surgical_drapes)
+
+/obj/item/organ/cyberimp/arm/combat/centcom
+	name = "combat cybernetics implant"
+	desc = "A powerful cybernetic implant that contains combat modules built into the user's arm."
+	contents = newlist(/obj/item/gun/energy/pulse/pistol/m1911, /obj/item/door_remote/omni, /obj/item/reagent_containers/hypospray/combat/nanites, /obj/item/implanter/mindshield, /obj/item/melee/transforming/energy/blade/hardlight, /obj/item/gun/medbeam, /obj/item/borg/stun, /obj/item/assembly/flash/armimplant)
+	organ_flags = EMP_PROTECT_SELF
+
+/obj/item/organ/cyberimp/arm/combat/centcom/Initialize()
+	. = ..()
+	if(locate(/obj/item/assembly/flash/armimplant) in items_list)
+		var/obj/item/assembly/flash/armimplant/F = locate(/obj/item/assembly/flash/armimplant) in items_list
+		F.I = src

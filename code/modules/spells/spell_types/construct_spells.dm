@@ -116,8 +116,6 @@
 	action_icon_state = "cultforcewall"
 	action_background_icon_state = "bg_demon"
 
-
-
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift
 	name = "Phase Shift"
 	desc = "This spell allows you to pass through walls."
@@ -146,6 +144,24 @@
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift/mystic
 	jaunt_in_type = /obj/effect/temp_visual/dir_setting/wraith/mystic
 	jaunt_out_type = /obj/effect/temp_visual/dir_setting/wraith/out/mystic
+
+/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift/adminbus
+	name = "Phase Shift"
+	desc = "This spell allows you to pass through walls."
+
+	school = "transmutation"
+	charge_max = 15 SECONDS
+	clothes_req = FALSE
+	invocation = "none"
+	invocation_type = "none"
+	jaunt_duration = 5 SECONDS
+	action_icon = 'icons/mob/actions/actions_cult.dmi'
+	action_icon_state = "phaseshift"
+	action_background_icon_state = "bg_demon"
+	jaunt_in_time = 0.6 SECONDS
+	jaunt_out_time = 0.6 SECONDS
+	jaunt_in_type = /obj/effect/temp_visual/dir_setting/cult/phase
+	jaunt_out_type = /obj/effect/temp_visual/dir_setting/cult/phase/out
 
 /obj/effect/proc_holder/spell/targeted/projectile/magic_missile/lesser
 	name = "Lesser Magic Missile"
