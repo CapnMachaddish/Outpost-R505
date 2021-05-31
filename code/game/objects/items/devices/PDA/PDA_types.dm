@@ -229,3 +229,9 @@
 	name = "geneticist PDA"
 	default_cartridge = /obj/item/cartridge/medical
 	icon_state = "pda-genetics"
+
+/obj/item/pda/centcom
+	default_cartridge = /obj/item/cartridge/captain
+	icon_state = "pda-syndi"
+	name = "military PDA"
+	hidden = 1

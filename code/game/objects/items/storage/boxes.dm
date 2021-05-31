@@ -1387,3 +1387,18 @@
 		/obj/item/slimecross/stabilized/rainbow=1,\
 		)
 	generate_items_inside(items_inside,src)
+
+/obj/item/storage/box/debugtools/alt
+	name = "box of centcom tools"
+	icon_state = "syndiebox"
+
+/obj/item/storage/box/debugtools/alt/PopulateContents()
+	var/static/items_inside = list(
+		/obj/item/uplink/debug=1,\
+		/obj/item/uplink/nuclear/debug=1,\
+		/obj/item/autosurgeon/organ/syndicate/breathtubecc=1,\
+		/obj/item/autosurgeon/organ/syndicate/combattoolscc=1,\
+		/obj/item/autosurgeon/organ/syndicate/constructiontoolscc=1,\
+		/obj/item/implanter/krav_maga=1
+		)
+	generate_items_inside(items_inside,src)

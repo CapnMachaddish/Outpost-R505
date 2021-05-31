@@ -29,6 +29,47 @@
 	R.freqlock = TRUE
 	..()
 
+/datum/outfit/centcom/intel_commander
+	name = "Inteligence Command Officer"
+	id = /obj/item/card/id/advanced/centcom
+	id_trim = /datum/id_trim/centcom/specops_officer/lead
+	implants = list(
+		/obj/item/implant/dust
+	)
+	uniform = /obj/item/clothing/under/syndicate
+	suit = /obj/item/clothing/suit/space/officer
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/storage/box/debugtools/alt,\
+		/obj/item/book/granter/spell/ccphaseshift,\
+		/obj/item/book/granter/spell/ccteleport
+	)
+	skillchips = list(
+		/obj/item/skillchip/job/engineer,\
+		/obj/item/skillchip/disk_verifier,\
+		/obj/item/skillchip/quickercarry
+	)
+	belt = /obj/item/pda/centcom
+	ears = /obj/item/radio/headset/headset_cent/alt/commander
+	glasses = /obj/item/clothing/glasses/debug/eyepatch
+	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
+	head = /obj/item/clothing/head/helmet/space/beret
+	shoes = /obj/item/clothing/shoes/combat/swat
+	r_pocket = /obj/item/tank/internals/emergency_oxygen/double/pluox
+
+/datum/outfit/centcom/intel_commander/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	if(visualsOnly)
+		return
+
+	var/obj/item/card/id/W = H.wear_id
+	W.registered_name = H.real_name
+	W.update_label()
+	W.update_icon()
+
+	var/obj/item/radio/headset/R = H.ears
+	R.set_frequency(FREQ_COMMON)
+	..()
+
 /datum/outfit/space
 	name = "Standard Space Gear"
 
