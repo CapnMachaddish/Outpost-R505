@@ -14,7 +14,7 @@
 /obj/item/antag_spawner/impostors/attack_self(mob/user)
 	if(!(check_usability(user)))
 		return
-	for(var/datum/mind/M as anything in get_antag_minds(/datum/antagonist/wizard))
+	for(var/datum/mind/M in SSticker.mode.wizards)
 		if(!ishuman(M.current))
 			continue
 		var/mob/living/carbon/human/W = M.current
@@ -42,6 +42,7 @@
 		master.wiz_team.add_member(imposter)
 		I.mind.add_antag_datum(imposter)
 		//Remove if possible
+		SSticker.mode.apprentices += I.mind
 		I.mind.special_role = "imposter"
 		//
 		qdel(src)
@@ -51,6 +52,7 @@
 
 /datum/antagonist/wizard/apprentice/imposter/spawnersr/on_gain()
 	. = ..()
+	register()
 	equip_wizard()
 
 /datum/antagonist/wizard/apprentice/imposter/spawnersr/equip_wizard()

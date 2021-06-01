@@ -325,6 +325,10 @@
 /datum/mind/proc/remove_traitor()
 	remove_antag_datum(/datum/antagonist/traitor)
 
+/datum/mind/proc/remove_brother()
+	if(src in SSticker.mode.brothers)
+		remove_antag_datum(/datum/antagonist/brother)
+
 /datum/mind/proc/remove_nukeop()
 	var/datum/antagonist/nukeop/nuke = has_antag_datum(/datum/antagonist/nukeop,TRUE)
 	if(nuke)
@@ -334,6 +338,12 @@
 /datum/mind/proc/remove_wizard()
 	remove_antag_datum(/datum/antagonist/wizard)
 	special_role = null
+
+/datum/mind/proc/remove_cultist()
+	if(src in SSticker.mode.cult)
+		SSticker.mode.remove_cultist(src, 0, 0)
+	special_role = null
+	remove_antag_equip()
 
 /datum/mind/proc/remove_rev()
 	var/datum/antagonist/rev/rev = has_antag_datum(/datum/antagonist/rev)
@@ -348,6 +358,14 @@
 		var/datum/component/uplink/O = I.GetComponent(/datum/component/uplink) //Todo make this reset signal
 		if(O)
 			O.unlock_code = null
+
+/datum/mind/proc/remove_all_antag() //For the Lazy amongst us.
+	remove_changeling()
+	remove_traitor()
+	remove_nukeop()
+	remove_wizard()
+	remove_cultist()
+	remove_rev()
 
 /datum/mind/proc/equip_traitor(employer = "The Syndicate", silent = FALSE, datum/antagonist/uplink_owner)
 	if(!current)
@@ -425,14 +443,14 @@
 //Link a new mobs mind to the creator of said mob. They will join any team they are currently on, and will only switch teams when their creator does.
 
 /datum/mind/proc/enslave_mind_to_creator(mob/living/creator)
-	if(IS_CULTIST(creator))
-		add_antag_datum(/datum/antagonist/cult)
+	if(iscultist(creator))
+		SSticker.mode.add_cultist(src)
 
-	else if(IS_REVOLUTIONARY(creator))
+	else if(is_revolutionary(creator))
 		var/datum/antagonist/rev/converter = creator.mind.has_antag_datum(/datum/antagonist/rev,TRUE)
 		converter.add_revolutionary(src,FALSE)
 
-	else if(IS_NUKE_OP(creator))
+	else if(is_nuclear_operative(creator))
 		var/datum/antagonist/nukeop/converter = creator.mind.has_antag_datum(/datum/antagonist/nukeop,TRUE)
 		var/datum/antagonist/nukeop/N = new()
 		N.send_to_spawnpoint = FALSE
@@ -705,6 +723,14 @@
 		special_role = ROLE_WIZARD
 		assigned_role = ROLE_WIZARD
 		add_antag_datum(/datum/antagonist/wizard)
+
+
+/datum/mind/proc/make_Cultist()
+	if(!has_antag_datum(/datum/antagonist/cult,TRUE))
+		SSticker.mode.add_cultist(src,FALSE,equip=TRUE)
+		special_role = ROLE_CULTIST
+		to_chat(current, "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar'Sie, The Geometer of Blood. You now see how flimsy your world is, you see that it should be open to the knowledge of Nar'Sie.</b></i></font>")
+		to_chat(current, "<font color=\"purple\"><b><i>Assist your new brethren in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>")
 
 /datum/mind/proc/make_Rev()
 	var/datum/antagonist/rev/head/head = new()

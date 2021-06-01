@@ -17,7 +17,7 @@
 	var/telecrystals
 	var/selected_cat
 	var/owner = null
-	var/uplink_flag
+	var/datum/game_mode/gamemode
 	var/datum/uplink_purchase_log/purchase_log
 	var/list/uplink_items
 	var/hidden_crystals = 0
@@ -29,7 +29,7 @@
 
 	var/list/previous_attempts
 
-/datum/component/uplink/Initialize(_owner, _lockable = TRUE, _enabled = FALSE, uplink_flag = UPLINK_TRAITORS, starting_tc = TELECRYSTALS_DEFAULT)
+/datum/component/uplink/Initialize(_owner, _lockable = TRUE, _enabled = FALSE, datum/game_mode/_gamemode, starting_tc = TELECRYSTALS_DEFAULT)
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 
@@ -49,6 +49,8 @@
 	else if(istype(parent, /obj/item/pen))
 		RegisterSignal(parent, COMSIG_PEN_ROTATED, .proc/pen_rotation)
 
+	update_items()
+
 	if(_owner)
 		owner = _owner
 		LAZYINITLIST(GLOB.uplink_purchase_logs_by_key)
@@ -58,8 +60,7 @@
 			purchase_log = new(owner, src)
 	lockable = _lockable
 	active = _enabled
-	src.uplink_flag = uplink_flag
-	update_items()
+	gamemode = _gamemode
 	telecrystals = starting_tc
 	if(!lockable)
 		active = TRUE
@@ -70,18 +71,20 @@
 /datum/component/uplink/InheritComponent(datum/component/uplink/U)
 	lockable |= U.lockable
 	active |= U.active
-	uplink_flag |= U.uplink_flag
+	if(!gamemode)
+		gamemode = U.gamemode
 	telecrystals += U.telecrystals
 	if(purchase_log && U.purchase_log)
 		purchase_log.MergeWithAndDel(U.purchase_log)
 
 /datum/component/uplink/Destroy()
+	gamemode = null
 	purchase_log = null
 	return ..()
 
 /datum/component/uplink/proc/update_items()
 	var/updated_items
-	updated_items = get_uplink_items(uplink_flag, TRUE, allow_restricted)
+	updated_items = get_uplink_items(gamemode, TRUE, allow_restricted)
 	update_sales(updated_items)
 	uplink_items = updated_items
 
@@ -100,6 +103,10 @@
 	telecrystals += amt
 	TC.use(amt)
 	log_uplink("[key_name(user)] loaded [amt] telecrystals into [parent]'s uplink")
+
+/datum/component/uplink/proc/set_gamemode(_gamemode)
+	gamemode = _gamemode
+	update_items()
 
 /datum/component/uplink/proc/OnAttackBy(datum/source, obj/item/I, mob/user)
 	SIGNAL_HANDLER

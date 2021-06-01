@@ -30,5 +30,5 @@
 
 	var/newmob = user.humanize()
 
-	changeling.transform(newmob, chosen_prof)
+	changeling_transform(newmob, chosen_prof)
 	return TRUE

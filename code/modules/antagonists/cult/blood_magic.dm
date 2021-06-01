@@ -17,7 +17,7 @@
 	..()
 
 /datum/action/innate/cult/blood_magic/IsAvailable()
-	if(!IS_CULTIST(owner))
+	if(!iscultist(owner))
 		return FALSE
 	return ..()
 
@@ -115,7 +115,7 @@
 	..()
 
 /datum/action/innate/cult/blood_spell/IsAvailable()
-	if(!IS_CULTIST(owner) || owner.incapacitated()  || !charges)
+	if(!iscultist(owner) || owner.incapacitated()  || !charges)
 		return FALSE
 	return ..()
 
@@ -251,15 +251,14 @@
 /obj/effect/proc_holder/horror/InterceptClickOn(mob/living/caller, params, atom/target)
 	if(..())
 		return
-	if(ranged_ability_user.incapacitated() || !IS_CULTIST(caller))
+	if(ranged_ability_user.incapacitated() || !iscultist(caller))
 		remove_ranged_ability()
 		return
 	var/turf/T = get_turf(ranged_ability_user)
 	if(!isturf(T))
 		return FALSE
 	if(target in view(7, get_turf(ranged_ability_user)))
-		var/mob/living/carbon/human/human_target = target
-		if(!istype(human_target) || IS_CULTIST(human_target))
+		if(!ishuman(target) || iscultist(target))
 			return
 		var/mob/living/carbon/human/H = target
 		H.hallucination = max(H.hallucination, 120)
@@ -382,7 +381,7 @@
 	afterattack(user, user, TRUE)
 
 /obj/item/melee/blood_magic/attack(mob/living/M, mob/living/carbon/user)
-	if(!iscarbon(user) || !IS_CULTIST(user))
+	if(!iscarbon(user) || !iscultist(user))
 		uses = 0
 		qdel(src)
 		return
@@ -417,9 +416,9 @@
 	if(!isliving(target) || !proximity)
 		return
 	var/mob/living/L = target
-	if(IS_CULTIST(L))
+	if(iscultist(target))
 		return
-	if(IS_CULTIST(user))
+	if(iscultist(user))
 		user.visible_message("<span class='warning'>[user] holds up [user.p_their()] hand, which explodes in a flash of red light!</span>", \
 							"<span class='cultitalic'>You attempt to stun [L] with the spell!</span>")
 
@@ -465,11 +464,10 @@
 	invocation = "Sas'so c'arta forbici!"
 
 /obj/item/melee/blood_magic/teleport/afterattack(atom/target, mob/living/carbon/user, proximity)
-	var/mob/mob_target = target
-	if(istype(mob_target) && !IS_CULTIST(mob_target) || !proximity)
+	if(!iscultist(target) || !proximity)
 		to_chat(user, "<span class='warning'>You can only teleport adjacent cultists with this spell!</span>")
 		return
-	if(IS_CULTIST(user))
+	if(iscultist(user))
 		var/list/potential_runes = list()
 		var/list/teleportnames = list()
 		for(var/R in GLOB.teleport_runes)
@@ -512,7 +510,7 @@
 	color = "#000000" // black
 
 /obj/item/melee/blood_magic/shackles/afterattack(atom/target, mob/living/carbon/user, proximity)
-	if(IS_CULTIST(user) && iscarbon(target) && proximity)
+	if(iscultist(user) && iscarbon(target) && proximity)
 		var/mob/living/carbon/C = target
 		if(C.canBeHandcuffed())
 			CuffAttack(C, user)
@@ -572,7 +570,7 @@
 	Airlocks into brittle runed airlocks after a delay (harm intent)"}
 
 /obj/item/melee/blood_magic/construction/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	if(proximity_flag && IS_CULTIST(user))
+	if(proximity_flag && iscultist(user))
 		if(channeling)
 			to_chat(user, "<span class='cultitalic'>You are already invoking twisted construction!</span>")
 			return
@@ -676,8 +674,7 @@
 	color = "#33cc33" // green
 
 /obj/item/melee/blood_magic/armor/afterattack(atom/target, mob/living/carbon/user, proximity)
-	var/mob/living/carbon/carbon_target = target
-	if(istype(carbon_target) && IS_CULTIST(carbon_target) && proximity)
+	if(iscarbon(target) && iscultist(target) && proximity)
 		uses--
 		var/mob/living/carbon/C = target
 		C.visible_message("<span class='warning'>Otherworldly armor suddenly appears on [C]!</span>")
@@ -707,7 +704,7 @@
 			if(NOBLOOD in H.dna.species.species_traits)
 				to_chat(user,"<span class='warning'>Blood rites do not work on species with no blood!</span>")
 				return
-			if(IS_CULTIST(H))
+			if(iscultist(H))
 				if(H.stat == DEAD)
 					to_chat(user,"<span class='warning'>Only a revive rune can bring back the dead!</span>")
 					return
@@ -805,7 +802,7 @@
 			uses += max(1, round(temp))
 
 /obj/item/melee/blood_magic/manipulator/attack_self(mob/living/user)
-	if(IS_CULTIST(user))
+	if(iscultist(user))
 		var/static/list/spells = list(
 			"Bloody Halberd (150)" = image(icon = 'icons/obj/items_and_weapons.dmi', icon_state = "occultpoleaxe0"),
 			"Blood Bolt Barrage (300)" = image(icon = 'icons/obj/guns/ballistic.dmi', icon_state = "arcane_barrage"),

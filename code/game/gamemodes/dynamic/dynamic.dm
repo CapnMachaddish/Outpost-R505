@@ -403,8 +403,7 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
 			roundstart_pop_ready++
-			if(player.client.prefs.be_antag) //SKYRAT EDIT CHANGE
-				candidates.Add(player)
+			candidates.Add(player)
 	log_game("DYNAMIC: Listing [roundstart_rules.len] round start rulesets, and [candidates.len] players ready.")
 	if (candidates.len <= 0)
 		log_game("DYNAMIC: [candidates.len] candidates.")
@@ -685,6 +684,15 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 				var/datum/executed = _executed
 				if(blocking == executed.type)
 					return TRUE
+	return FALSE
+
+/// Checks if client age is age or older.
+/datum/game_mode/dynamic/proc/check_age(client/C, age)
+	enemy_minimum_age = age
+	if(get_remaining_days(C) == 0)
+		enemy_minimum_age = initial(enemy_minimum_age)
+		return TRUE // Available in 0 days = available right now = player is old enough to play.
+	enemy_minimum_age = initial(enemy_minimum_age)
 	return FALSE
 
 /datum/game_mode/dynamic/make_antag_chance(mob/living/carbon/human/newPlayer)
