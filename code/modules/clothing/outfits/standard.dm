@@ -30,7 +30,7 @@
 	..()
 
 /datum/outfit/centcom/intel_commander
-	name = "Inteligence Command Officer"
+	name = "Intelligence Command Officer"
 	id = /obj/item/card/id/advanced/centcom
 	id_trim = /datum/id_trim/centcom/specops_officer/lead
 	implants = list(
