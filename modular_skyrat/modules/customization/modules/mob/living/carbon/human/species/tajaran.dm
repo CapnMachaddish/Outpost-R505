@@ -27,6 +27,7 @@
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	liked_food = GROSS | MEAT | FRIED
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
+	species_language_holder = /datum/language_holder/felinid
 	limbs_icon = 'modular_skyrat/modules/customization/icons/mob/species/mammal_parts_greyscale.dmi'
 	limbs_id = "mammal"
 
