@@ -166,6 +166,7 @@
 
 /obj/effect/proc_holder/spell/targeted/area_teleport/teleport/centcom
 	invocation = "none"
+	invocation_type = "none"
 	clothes_req = FALSE
 	say_destination = FALSE
 
