@@ -62,77 +62,69 @@
 
 	B.deity_name = new_deity
 
-	var/new_bible = DEFAULT_BIBLE
-	if(M.client && M.client.prefs.custom_names["bible"])
-		new_bible = M.client.prefs.custom_names["bible"]
-
 	switch(lowertext(new_religion))
 		if("christianity") // DEFAULT_RELIGION
-			new_bible = pick("The Holy Bible","The Dead Sea Scrolls")
+			B.name = pick("The Holy Bible","The Dead Sea Scrolls")
 		if("buddhism")
-			new_bible = "The Sutras"
+			B.name = "The Sutras"
 		if("clownism","honkmother","honk","honkism","comedy")
-			new_bible = pick("The Holy Joke Book", "Just a Prank", "Hymns to the Honkmother")
+			B.name = pick("The Holy Joke Book", "Just a Prank", "Hymns to the Honkmother")
 		if("chaos")
-			new_bible = "The Book of Lorgar"
+			B.name = "The Book of Lorgar"
 		if("cthulhu")
-			new_bible = "The Necronomicon"
+			B.name = "The Necronomicon"
 		if("hinduism")
-			new_bible = "The Vedas"
+			B.name = "The Vedas"
 		if("homosexuality")
-			new_bible = pick("Guys Gone Wild","Coming Out of The Closet")
+			B.name = pick("Guys Gone Wild","Coming Out of The Closet")
 		if("imperium")
-			new_bible = "Uplifting Primer"
+			B.name = "Uplifting Primer"
 		if("islam")
-			new_bible = "Quran"
+			B.name = "Quran"
 		if("judaism")
-			new_bible = "The Torah"
+			B.name = "The Torah"
 		if("lampism")
-			new_bible = "Fluorescent Incandescence"
+			B.name = "Fluorescent Incandescence"
 		if("lol", "wtf", "gay", "penis", "ass", "poo", "badmin", "shitmin", "deadmin", "cock", "cocks", "meme", "memes")
-			new_bible = pick("Woodys Got Wood: The Aftermath", "War of the Cocks", "Sweet Bro and Hella Jef: Expanded Edition","F.A.T.A.L. Rulebook")
+			B.name = pick("Woodys Got Wood: The Aftermath", "War of the Cocks", "Sweet Bro and Hella Jef: Expanded Edition","F.A.T.A.L. Rulebook")
 			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 100) // starts off brain damaged as fuck
 		if("monkeyism","apism","gorillism","primatism")
-			new_bible = pick("Going Bananas", "Bananas Out For Harambe")
+			B.name = pick("Going Bananas", "Bananas Out For Harambe")
 		if("mormonism")
-			new_bible = "The Book of Mormon"
+			B.name = "The Book of Mormon"
 		if("pastafarianism")
-			new_bible = "The Gospel of the Flying Spaghetti Monster"
+			B.name = "The Gospel of the Flying Spaghetti Monster"
 		if("rastafarianism","rasta")
-			new_bible = "The Holy Piby"
+			B.name = "The Holy Piby"
 		if("satanism")
-			new_bible = "The Unholy Bible"
+			B.name = "The Unholy Bible"
 		if("sikhism")
-			new_bible = "Guru Granth Sahib"
+			B.name = "Guru Granth Sahib"
 		if("science")
-			new_bible = pick("Principle of Relativity", "Quantum Enigma: Physics Encounters Consciousness", "Programming the Universe", "Quantum Physics and Theology", "String Theory for Dummies", "How To: Build Your Own Warp Drive", "The Mysteries of Bluespace", "Playing God: Collector's Edition")
+			B.name = pick("Principle of Relativity", "Quantum Enigma: Physics Encounters Consciousness", "Programming the Universe", "Quantum Physics and Theology", "String Theory for Dummies", "How To: Build Your Own Warp Drive", "The Mysteries of Bluespace", "Playing God: Collector's Edition")
 		if("scientology")
-			new_bible = pick("The Biography of L. Ron Hubbard","Dianetics")
+			B.name = pick("The Biography of L. Ron Hubbard","Dianetics")
 		if("servicianism", "partying")
-			new_bible = "The Tenets of Servicia"
+			B.name = "The Tenets of Servicia"
 			B.deity_name = pick("Servicia", "Space Bacchus", "Space Dionysus")
 			B.desc = "Happy, Full, Clean. Live it and give it."
 		if("subgenius")
-			new_bible = "Book of the SubGenius"
+			B.name = "Book of the SubGenius"
 		if("toolboxia","greytide")
-			new_bible = pick("Toolbox Manifesto","iGlove Assistants")
+			B.name = pick("Toolbox Manifesto","iGlove Assistants")
 		if("weeaboo","kawaii")
-			new_bible = pick("Fanfiction Compendium","Japanese for Dummies","The Manganomicon","Establishing Your O.T.P")
+			B.name = pick("Fanfiction Compendium","Japanese for Dummies","The Manganomicon","Establishing Your O.T.P")
 		else
-			if(new_bible == DEFAULT_BIBLE)
-				new_bible = "The Holy Book of [new_religion]"
-
-	B.name = new_bible
+			B.name = "The Holy Book of [new_religion]"
 
 	GLOB.religion = new_religion
-	GLOB.bible_name = new_bible
+	GLOB.bible_name = B.name
 	GLOB.deity = B.deity_name
 
 	H.equip_to_slot_or_del(B, ITEM_SLOT_BACKPACK)
 
 	SSblackbox.record_feedback("text", "religion_name", 1, "[new_religion]", 1)
 	SSblackbox.record_feedback("text", "religion_deity", 1, "[new_deity]", 1)
-	SSblackbox.record_feedback("text", "religion_bible", 1, "[new_bible]", 1)
 
 /datum/outfit/job/chaplain
 	name = "Chaplain"
