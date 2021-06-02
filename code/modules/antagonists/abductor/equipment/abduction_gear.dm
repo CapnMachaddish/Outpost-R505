@@ -627,6 +627,19 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	to_chat(user, "<span class='notice'>Probing result:</span>[species]")
 	to_chat(user, "[helptext]")
 
+/obj/item/melee/baton/abductor/examine(mob/user)
+	. = ..()
+	if(AbductorCheck(user))
+		switch(mode)
+			if(BATON_STUN)
+				. += "<span class='warning'>The baton is in stun mode.</span>"
+			if(BATON_SLEEP)
+				. += "<span class='warning'>The baton is in sleep inducement mode.</span>"
+			if(BATON_CUFF)
+				. += "<span class='warning'>The baton is in restraining mode.</span>"
+			if(BATON_PROBE)
+				. += "<span class='warning'>The baton is in probing mode.</span>"
+
 /obj/item/restraints/handcuffs/energy
 	name = "hard-light energy field"
 	desc = "A hard-light field restraining the hands."
@@ -648,18 +661,33 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	S.start()
 	. = ..()
 
-/obj/item/melee/baton/abductor/examine(mob/user)
-	. = ..()
-	if(AbductorCheck(user))
-		switch(mode)
-			if(BATON_STUN)
-				. += "<span class='warning'>The baton is in stun mode.</span>"
-			if(BATON_SLEEP)
-				. += "<span class='warning'>The baton is in sleep inducement mode.</span>"
-			if(BATON_CUFF)
-				. += "<span class='warning'>The baton is in restraining mode.</span>"
-			if(BATON_PROBE)
-				. += "<span class='warning'>The baton is in probing mode.</span>"
+/obj/item/restraints/handcuffs/energy/projector
+	name = "hard-light energy field projector"
+	desc = "A hard-light field restraining the hands."
+	icon = 'icons/obj/items_and_weapons.dmi'
+	icon_state = "handcuffAlien"
+	var/time_to_cuff = 3 SECONDS
+
+/obj/item/restraints/handcuffs/energy/projector/attack(mob/living/L,mob/living/user)
+	if(!iscarbon(L))
+		return
+	var/mob/living/carbon/C = L
+	if(!C.handcuffed)
+		if(C.canBeHandcuffed())
+			playsound(src, 'sound/weapons/cablecuff.ogg', 30, TRUE, -2)
+			C.visible_message("<span class='danger'>[user] begins restraining [C] with [src]!</span>", \
+									"<span class='userdanger'>[user] begins shaping an energy field around your hands!</span>")
+			if(do_mob(user, C, time_to_cuff) && C.canBeHandcuffed())
+				if(!C.handcuffed)
+					C.set_handcuffed(new /obj/item/restraints/handcuffs/energy/used(C))
+					C.update_handcuffed()
+					to_chat(user, "<span class='notice'>You restrain [C].</span>")
+					log_combat(user, C, "handcuffed")
+			else
+				to_chat(user, "<span class='warning'>You fail to restrain [C].</span>")
+		else
+			to_chat(user, "<span class='warning'>[C] doesn't have two hands...</span>")
+
 
 /obj/item/radio/headset/abductor
 	name = "alien headset"
