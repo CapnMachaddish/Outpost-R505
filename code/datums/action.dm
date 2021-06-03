@@ -416,6 +416,12 @@
 	check_flags = NONE
 	name = "Activate Explosive Implant"
 
+//START R505 ADDITION - Dusting Implant
+/datum/action/item_action/dusting_implant
+	check_flags = NONE
+	name = "Activate Dusting Implant"
+//END R505 ADDITION - Dusting Implant
+
 /datum/action/item_action/toggle_research_scanner
 	name = "Toggle Research Scanner"
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
