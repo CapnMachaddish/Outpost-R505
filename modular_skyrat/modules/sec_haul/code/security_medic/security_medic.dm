@@ -37,7 +37,7 @@
 	shoes = /obj/item/clothing/shoes/combat/peacekeeper
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses
 	suit = /obj/item/clothing/suit/armor/vest/peacekeeper/security_medic
-	l_hand = /obj/item/storage/firstaid/brute
+	l_hand = /obj/item/storage/firstaid/medical
 	head = /obj/item/clothing/head/beret/sec/peacekeeper/security_medic
 
 	backpack_contents = list(/obj/item/melee/classic_baton/telescopic, /obj/item/storage/box/gunset/security_medic)

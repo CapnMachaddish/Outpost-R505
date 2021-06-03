@@ -41,15 +41,14 @@
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
 		/obj/item/storage/box/debugtools/alt,\
-		/obj/item/book/granter/spell/ccphaseshift,\
-		/obj/item/book/granter/spell/ccteleport
+		/obj/item/spellbook/centcom
 	)
 	skillchips = list(
 		/obj/item/skillchip/job/engineer,\
 		/obj/item/skillchip/disk_verifier,\
 		/obj/item/skillchip/quickercarry
 	)
-	belt = /obj/item/pda/centcom
+	belt = /obj/item/gun/energy/pulse/pistol/m1911/loyalpin/nosafety
 	ears = /obj/item/radio/headset/headset_cent/alt/commander
 	glasses = /obj/item/clothing/glasses/debug/eyepatch
 	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
