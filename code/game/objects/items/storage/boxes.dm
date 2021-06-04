@@ -1422,6 +1422,6 @@
 		/obj/item/autosurgeon/organ/syndicate/breathtubecc=1,\
 		/obj/item/autosurgeon/organ/syndicate/combattoolscc=1,\
 		/obj/item/autosurgeon/organ/syndicate/constructiontoolscc=1,\
-		/obj/item/implanter/krav_maga=1
+		/obj/item/book/granter/martial/cqc/plus=1
 		)
 	generate_items_inside(items_inside,src)
