@@ -95,6 +95,10 @@ DEFINE_BITFIELD(smoothing_flags, list(
 #define SMOOTH_GROUP_SURVIVAL_TIANIUM_POD S_OBJ(14) ///turf/closed/wall/mineral/titanium/survival/pod, /obj/machinery/door/airlock/survival_pod, /obj/structure/window/shuttle/survival_pod
 #define SMOOTH_GROUP_HIERO_WALL S_OBJ(15) ///obj/effect/temp_visual/elite_tumor_wall, /obj/effect/temp_visual/hierophant/wall
 
+//R505: All material walls that you can fabricate normally, excluding titanium and plastitanium, abductor, cult, and cog walls
+#define SMOOTH_GROUP_MATERIAL_WALLS_NOSPECIAL SMOOTH_GROUP_URANIUM_WALLS, SMOOTH_GROUP_GOLD_WALLS, SMOOTH_GROUP_SILVER_WALLS, SMOOTH_GROUP_DIAMOND_WALLS, SMOOTH_GROUP_PLASMA_WALLS,\
+			SMOOTH_GROUP_BANANIUM_WALLS, SMOOTH_GROUP_SANDSTONE_WALLS, SMOOTH_GROUP_WOOD_WALLS, SMOOTH_GROUP_IRON_WALLS
+
 #define SMOOTH_GROUP_PAPERFRAME S_OBJ(20) ///obj/structure/window/paperframe, /obj/structure/mineral_door/paperframe
 
 #define SMOOTH_GROUP_WINDOW_FULLTILE S_OBJ(21) ///turf/closed/indestructible/fakeglass, /obj/structure/window/fulltile, /obj/structure/window/reinforced/fulltile, /obj/structure/window/reinforced/tinted/fulltile, /obj/structure/window/plasma/fulltile, /obj/structure/window/plasma/reinforced/fulltile
