@@ -1,7 +1,7 @@
 /obj/item/organ/cyberimp/arm/combat/centcom
 	name = "combat cybernetics implant"
 	desc = "A powerful cybernetic implant that contains combat modules built into the user's arm."
-	contents = newlist(/obj/item/gun/energy/laser/instakill, /obj/item/reagent_containers/hypospray/combat/nanites, /obj/item/restraints/handcuffs/energy/projector, /obj/item/melee/transforming/energy/blade/hardlight, /obj/item/gun/medbeam, /obj/item/assembly/flash/armimplant)
+	contents = newlist(/obj/item/gun/energy/e_gun/advtaser/mounted/infcharge, /obj/item/reagent_containers/hypospray/combat/nanites, /obj/item/restraints/handcuffs/energy/projector, /obj/item/melee/transforming/energy/blade/hardlight, /obj/item/gun/medbeam, /obj/item/assembly/flash/armimplant)
 	organ_flags = EMP_PROTECT_SELF
 
 /obj/item/organ/cyberimp/arm/combat/centcom/Initialize()
@@ -41,8 +41,8 @@
 				"}
 	return dat
 
-/obj/item/implant/dust/trigger(emote, mob/source, force)
-	if(force && emote == "deathgasp")
+/obj/item/implant/dust/trigger(emote, mob/source)
+	if(emote == "deathgasp")
 		activate("death")
 
 /obj/item/implant/dust/activate(cause)
@@ -63,3 +63,6 @@
 /obj/item/implanter/dust/New()
 	imp = new /obj/item/implant/dust(src)
 	..()
+
+/obj/item/gun/energy/e_gun/advtaser/mounted/infcharge
+	cell_type = "/obj/item/stock_parts/cell/infinite"

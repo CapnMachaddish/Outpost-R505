@@ -33,9 +33,6 @@
 	name = "Intelligence Command Officer"
 	id = /obj/item/card/id/advanced/centcom
 	id_trim = /datum/id_trim/centcom/specops_officer/lead
-	implants = list(
-		/obj/item/implant/dust
-	)
 	uniform = /obj/item/clothing/under/syndicate
 	suit = /obj/item/clothing/suit/space/officer
 	back = /obj/item/storage/backpack/satchel/leather
