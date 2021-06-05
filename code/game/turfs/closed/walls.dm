@@ -15,9 +15,9 @@
 
 	flags_ricochet = RICOCHET_HARD
 
-	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS)
-	canSmoothWith = list(SMOOTH_GROUP_WALLS)
+	smoothing_flags = SMOOTH_BITMASK	//R505: Walls now smooth with material walls and vice versa
+	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MATERIAL_WALLS_NOSPECIAL)
+	canSmoothWith = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MATERIAL_WALLS_NOSPECIAL)
 
 	rcd_memory = RCD_MEMORY_WALL
 
