@@ -6,5 +6,6 @@
 
 AdmiralMegavolt = Host
 Lyricalpaws = Host
-DragonTrance = Game Master
-
+DragonTrance = Game Admin
+Deadbolt = Game Admin
+Zagarnt = Moderator
