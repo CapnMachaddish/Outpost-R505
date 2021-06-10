@@ -3570,6 +3570,7 @@
 #include "modular_R505\code\mob\dead\new_player\sprite_accessories\frills.dm"
 #include "modular_R505\code\mob\dead\new_player\sprite_accessories\synthliz.dm"
 #include "modular_R505\code\mob\dead\new_player\sprite_accessories\tails.dm"
+#include "modular_R505\code\modules\growthchems.dm"
 #include "modular_skyrat\master_files\code\_globalvars\configuration.dm"
 #include "modular_skyrat\master_files\code\_globalvars\maint_loot_common.dm"
 #include "modular_skyrat\master_files\code\_globalvars\maint_loot_oddity.dm"

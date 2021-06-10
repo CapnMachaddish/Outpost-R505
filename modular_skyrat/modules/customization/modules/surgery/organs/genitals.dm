@@ -20,6 +20,10 @@
 /obj/item/organ/genital/proc/get_sprite_size_string()
 	return 0
 
+//This is an internal function for both get_sprite_size_string() and update_genital_icon_state()
+/obj/item/organ/genital/proc/affix_size()
+	return 0
+
 //This translates the float size into a sprite string
 /obj/item/organ/genital/proc/update_sprite_suffix()
 	sprite_suffix = "[get_sprite_size_string()]"
@@ -85,9 +89,10 @@
 				returned_string += " It's fully erect."
 	return returned_string
 
-/obj/item/organ/genital/penis/update_genital_icon_state()
-	var/size_affix
+//Translates the float of size into something to be used by icon updates and sprite size strings.
+/obj/item/organ/genital/penis/affix_size()
 	var/measured_size = round(genital_size)
+	var/size_affix
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
@@ -102,6 +107,10 @@
 		else
 			size_affix = 5
 	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
+	return size_affix
+
+/obj/item/organ/genital/penis/update_genital_icon_state()
+	var/size_affix = affix_size()
 	var/passed_string = "penis_[genital_type]_[size_affix]"
 	icon_state = passed_string
 
@@ -109,27 +118,23 @@
 	if(aroused != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
 		return "[lowertext(sheath)]_[aroused == AROUSAL_PARTIAL ? 1 : 0]"
 
-	var/size_affix
-	var/measured_size = round(genital_size)
+	var/size_affix = affix_size()
 	var/is_erect = 0
+
 	if(aroused == AROUSAL_FULL)
 		is_erect = 1
-	if(measured_size < 1)
-		measured_size = 1
-	switch(measured_size)
-		if(1 to 7)
-			size_affix = 1
-		if(8 to 15)
-			size_affix = 2
-		if(16 to 24)
-			size_affix = 3
-		if(25 to 38)
-			size_affix = 4
-		else
-			size_affix = 5
-	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
+
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
 	return passed_string
+
+//Increases the length of the penis, and the girth in turn. **Note: Cyanosis wants to rework girth, so that part may become defunct**
+/obj/item/organ/genital/penis/proc/change_penis_length(amount as num)
+	var/length = genital_size
+	var/girth_length_ratio = girth/length
+	genital_size += amount
+	girth = length*girth_length_ratio
+	update_genital_icon_state()
+	return
 
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
 	..()
@@ -219,6 +224,12 @@
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_BREASTS
 	var/lactates = FALSE
+
+//Simply increases the size of booba
+/obj/item/organ/genital/breasts/proc/change_breast_size(amount as num)
+	genital_size += amount
+	update_genital_icon_state()
+	return
 
 /obj/item/organ/genital/breasts/get_description_string(datum/sprite_accessory/genital/gas)
 	var/returned_string = "You see a [lowertext(genital_name)] of breasts."
