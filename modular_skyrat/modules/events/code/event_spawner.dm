@@ -161,6 +161,9 @@
 		user.mind.transfer_to(H, TRUE)
 	else
 		H.ckey = user.ckey
+	
+	if((H.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+		H.AddComponent(/datum/component/arousal)
 
 	//Greet!
 	to_chat(H, "<span class='big'>You are the [job_name]</span>")

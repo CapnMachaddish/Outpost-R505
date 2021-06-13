@@ -2986,9 +2986,6 @@ GLOBAL_LIST_INIT(food, list(
 
 	character.selected_scream = pref_scream
 
-	if((r_preferences & R_PREF_AROUSAL))	//R505 Edit
-		character.AddComponent(/datum/component/arousal)
-
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type
 	if(roundstart_checks && !(pref_species.id in GLOB.customizable_races))

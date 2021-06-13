@@ -363,6 +363,8 @@
 				usr.client.prefs.copy_to(admin_officer)
 				admin_officer.equipOutfit(chosen_outfit)
 				admin_officer.key = usr.key
+				if((admin_officer.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+					admin_officer.AddComponent(/datum/component/arousal)
 			else
 				to_chat(usr, "<span class='warning'>Could not spawn you in as briefing officer as you are not a ghost!</spawn>")
 
@@ -420,7 +422,10 @@
 
 			if(ertemplate.enforce_human || !(ert_operative.dna.species.changesource_flags & ERT_SPAWN)) // Don't want any exploding plasmemes
 				ert_operative.set_species(/datum/species/human)
-
+			
+			if(ishuman(ert_operative))
+				if((ert_operative.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+					ert_operative.AddComponent(/datum/component/arousal)
 			//Give antag datum
 			var/datum/antagonist/ert/ert_antag
 

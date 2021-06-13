@@ -517,6 +517,8 @@
 	if(.)
 		new_character.key = key //Manually transfer the key to log them in,
 		new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+		if((new_character.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+			new_character.AddComponent(/datum/component/arousal)
 		new_character = null
 		qdel(src)
 

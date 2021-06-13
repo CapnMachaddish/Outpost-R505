@@ -370,6 +370,8 @@
 	M.key = new_team_member.key
 	M.faction += team
 	M.equipOutfit(chosen_class)
+	if((M.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+		M.AddComponent(/datum/component/arousal)
 	RegisterSignal(M, COMSIG_PARENT_QDELETING, .proc/ctf_qdelled_player) //just in case CTF has some map hazards (read: chasms). bit shorter than dust
 	for(var/trait in player_traits)
 		ADD_TRAIT(M, trait, CAPTURE_THE_FLAG_TRAIT)

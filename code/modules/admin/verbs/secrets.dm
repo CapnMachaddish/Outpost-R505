@@ -588,6 +588,8 @@
 			if (chosen.client)
 				chosen.client.prefs.copy_to(spawnedMob)
 				spawnedMob.key = chosen.key
+				if((spawnedMob.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+					spawnedMob.AddComponent(/datum/component/arousal)
 			players -= chosen
 		if (ishuman(spawnedMob) && ispath(humanoutfit, /datum/outfit))
 			var/mob/living/carbon/human/H = spawnedMob

@@ -57,6 +57,8 @@
 /obj/effect/mob_spawn/human/ghostcafe/special(mob/living/carbon/human/new_spawn)
 	if(new_spawn.client)
 		new_spawn.client.prefs.copy_to(new_spawn)
+		if((new_spawn.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+			new_spawn.AddComponent(/datum/component/arousal)
 		var/area/A = get_area(src)
 		//new_spawn.AddElement(/datum/element/ghost_role_eligibility, free_ghosting = TRUE)
 		new_spawn.AddElement(/datum/element/dusts_on_catatonia)

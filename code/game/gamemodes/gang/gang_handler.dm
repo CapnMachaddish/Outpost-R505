@@ -482,6 +482,8 @@ GLOBAL_VAR_INIT(deaths_during_shift, 0)
 			var/mob/living/carbon/human/cop = new(spawnloc)
 			chosen_candidate.client.prefs.copy_to(cop)
 			cop.key = chosen_candidate.key
+			if((cop.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+				cop.AddComponent(/datum/component/arousal)
 
 			//Give antag datum
 			var/datum/antagonist/ert/families/ert_antag = new cops_to_send

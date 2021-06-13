@@ -75,6 +75,8 @@
 	C.prefs.copy_to(M)
 	M.key = C.key
 	var/datum/mind/app_mind = M.mind
+	if((M.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+		M.AddComponent(/datum/component/arousal)
 
 	var/datum/antagonist/wizard/apprentice/app = new()
 	app.master = user
@@ -150,6 +152,8 @@
 	C.prefs.copy_to(nukie)
 	nukie.ckey = C.key
 	var/datum/mind/op_mind = nukie.mind
+	if((nukie.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+		nukie.AddComponent(/datum/component/arousal)
 
 	antag_datum = new()
 	antag_datum.send_to_spawnpoint = FALSE
