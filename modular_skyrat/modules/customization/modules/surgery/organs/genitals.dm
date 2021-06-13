@@ -38,10 +38,6 @@
 	. = ..()
 	update_sprite_suffix()
 
-/obj/item/organ/genital/Remove(mob/living/carbon/M, special = FALSE)
-	. = ..()
-	update_genital_icon_state()
-
 /obj/item/organ/genital/build_from_dna(datum/dna/DNA, associated_key)
 	..()
 	var/datum/sprite_accessory/genital/SA = GLOB.sprite_accessories[associated_key][DNA.mutant_bodyparts[associated_key][MUTANT_INDEX_NAME]]
@@ -65,18 +61,17 @@
 
 /obj/item/organ/genital/penis/get_description_string(datum/sprite_accessory/genital/gas)
 	var/returned_string = ""
-	var/pname = lowertext(genital_name)
-	if(sheath != SHEATH_NONE && aroused != AROUSAL_FULL) //Hidden in sheath
+	if(sheath != SHEATH_NONE && forced_arousal != AROUSAL_FULL) //Hidden in sheath
 		switch(sheath)
 			if(SHEATH_NORMAL)
 				returned_string = "You see a sheath."
 			if(SHEATH_SLIT)
 				returned_string = "You see genital slit."
-		if(aroused == AROUSAL_PARTIAL)
-			returned_string += " There's a [pname] penis poking out of it."
+		if(forced_arousal == AROUSAL_PARTIAL)
+			returned_string += " There's a [return_proper_name()] poking out of it."
 	else
-		returned_string = "You see a [pname] penis. You estimate it's [genital_size] inches long, and [girth] inches in circumference."
-		switch(aroused)
+		returned_string = "You see a [return_proper_name()]. You estimate it's [genital_size] inches long, and [girth] inches in circumference."
+		switch(forced_arousal)
 			if(AROUSAL_NONE)
 				returned_string += " It seems flaccid."
 			if(AROUSAL_PARTIAL)
@@ -106,13 +101,13 @@
 	icon_state = passed_string
 
 /obj/item/organ/genital/penis/get_sprite_size_string()
-	if(aroused != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
-		return "[lowertext(sheath)]_[aroused == AROUSAL_PARTIAL ? 1 : 0]"
+	if(forced_arousal != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
+		return "[lowertext(sheath)]_[return_arousal() == AROUSAL_PARTIAL ? 1 : 0]"
 
 	var/size_affix
 	var/measured_size = round(genital_size)
 	var/is_erect = 0
-	if(aroused == AROUSAL_FULL)
+	if(return_arousal() == AROUSAL_FULL)
 		is_erect = 1
 	if(measured_size < 1)
 		measured_size = 1
@@ -178,10 +173,8 @@
 	slot = ORGAN_SLOT_VAGINA
 
 /obj/item/organ/genital/vagina/get_description_string(datum/sprite_accessory/genital/gas)
-	var/returned_string = "You see a [lowertext(genital_name)] vagina."
-	if(lowertext(genital_name) == "cloaca")
-		returned_string = "You see a cloaca."
-	switch(aroused)
+	var/returned_string = "You see a [return_proper_name()]."
+	switch(forced_arousal)
 		if(AROUSAL_NONE)
 			returned_string += " It seems dry."
 		if(AROUSAL_PARTIAL)
@@ -192,7 +185,7 @@
 
 /obj/item/organ/genital/vagina/get_sprite_size_string()
 	var/is_dripping = 0
-	if(aroused == AROUSAL_FULL)
+	if(forced_arousal == AROUSAL_FULL)
 		is_dripping = 1
 	return "[genital_type]_[is_dripping]"
 
@@ -232,7 +225,7 @@
 		else
 			size_description = " You estimate they are [translation]-cups."
 	returned_string += size_description
-	if(aroused == AROUSAL_FULL)
+	if(forced_arousal == AROUSAL_FULL)
 		if(lactates)
 			returned_string += " The nipples seem hard, perky, and are leaking milk."
 		else
@@ -296,7 +289,7 @@
 	set desc = "Allows you to toggle which genitals should show through clothes or not."
 
 	if(stat != CONSCIOUS)
-		to_chat(usr, "<span class='warning'>You can't toggle genitals visibility right now...</span>")
+		to_chat(usr, "<span class='warning'>You can't do that right now.</span>")
 		return
 
 	var/list/genital_list = list()
@@ -330,21 +323,22 @@
 
 	var/list/genital_list = list()
 	for(var/obj/item/organ/genital/G in internal_organs)
-		if(!G.aroused == AROUSAL_CANT)
+		if(G.aroused != AROUSAL_CANT)
 			genital_list += G
 	if(!genital_list.len) //There is nothing to expose
 		return
 	//Full list of exposable genitals created
 	var/obj/item/organ/genital/picked_organ
-	picked_organ = input(src, "Choose which genitalia to change arousal", "Expose/Hide genitals") as null|anything in genital_list
+	picked_organ = input(src, "Choose which genitalia to temporarily change arousal", "Expose/Hide genitals") as null|anything in genital_list
 	if(picked_organ && (picked_organ in internal_organs))
-		var/list/gen_arous_trans = list("Not aroused" = AROUSAL_NONE,
-												"Partly aroused" = AROUSAL_PARTIAL,
-												"Very aroused" = AROUSAL_FULL
-												)
+		var/list/gen_arous_trans = list("Reset" = AROUSAL_CANT,
+											"Not aroused" = AROUSAL_NONE,
+											"Partly aroused" = AROUSAL_PARTIAL,
+											"Very aroused" = AROUSAL_FULL
+											)
 		var/picked_arousal = input(src, "Choose arousal", "Toggle Arousal") as null|anything in gen_arous_trans
 		if(picked_arousal && picked_organ && (picked_organ in internal_organs))
-			picked_organ.aroused = gen_arous_trans[picked_arousal]
+			picked_organ.forced_arousal = gen_arous_trans[picked_arousal]
 			picked_organ.update_sprite_suffix()
 			update_body()
 	return

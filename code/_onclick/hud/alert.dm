@@ -752,19 +752,38 @@ so as to remain in compliance with the most up-to-date laws."
 		var/atom/movable/screen/alert/alert = alerts[alerts[i]]
 		if(alert.icon_state == "template")
 			alert.icon = ui_style
-		switch(i)
-			if(1)
-				. = ui_alert1
-			if(2)
-				. = ui_alert2
-			if(3)
-				. = ui_alert3
-			if(4)
-				. = ui_alert4
-			if(5)
-				. = ui_alert5 // Right now there's 5 slots
-			else
-				. = ""
+
+		//BEGIN R505 EDIT: Arousal hud re-orders alert positions
+		if(screenmob.GetComponent(/datum/component/arousal))
+			switch(i)
+				if(1)
+					. = ui_alert1_arousal
+				if(2)
+					. = ui_alert2_arousal
+				if(3)
+					. = ui_alert3_arousal
+				if(4)
+					. = ui_alert4_arousal
+				if(5)
+					. = ui_alert5_arousal
+				else
+					. = ""
+		//END R505 EDIT
+		else
+			switch(i)
+				if(1)
+					. = ui_alert1
+				if(2)
+					. = ui_alert2
+				if(3)
+					. = ui_alert3
+				if(4)
+					. = ui_alert4
+				if(5)
+					. = ui_alert5 // Right now there's 5 slots
+				else
+					. = ""
+
 		alert.screen_loc = .
 		screenmob.client.screen |= alert
 	if(!viewmob)

@@ -235,6 +235,12 @@ GLOBAL_LIST_INIT(food, list(
 	//Associative list, keyed by language typepath, pointing to LANGUAGE_UNDERSTOOD, or LANGUAGE_SPOKEN, for whether we understand or speak the language
 	var/list/languages = list()
 
+	//
+	//R505 CHANGES
+	var/r_preferences = R_PREF_AROUSAL
+	//END R505 CHANGES
+	//
+
 /datum/preferences/New(client/C)
 	parent = C
 
@@ -1148,12 +1154,12 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<b>See Pull Requests:</b> <a href='?_src_=prefs;preference=pull_requests'>[(chat_toggles & CHAT_PULLR) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
 
+			//R505 CHANGE - Accept Arousal
+			dat += "<b>Toggle Arousal:</b> <a href='?_src_=prefs;preference=toggle_arousal'>[r_preferences & R_PREF_AROUSAL ? "Enabled":"Disabled"]</a><br>"
+			//R505 CHANGE - Also exhibitionist
+			dat += "<b>Exhibitionist Preference:</b> <a href='?_src_=prefs;preference=toggle_exhibition'>[r_preferences & R_PREF_EXHIBITIONIST ? "Enabled":"Disabled"]</a><br>"
 			//aphrodisiac pref
-			dat += "<b>Be Affected by Aphrodisiacs:</b> <a href='?_src_=prefs;preference=aphrodisiacs_pref'>[(skyrat_toggles & APHRO_PREF) ? "Enabled":"Disabled"]</a><br>"
-			//cumface pref
-			dat += "<b>Be Able To Get Covered In \"Reproductive Reagent\":</b> <a href='?_src_=prefs;preference=cumfaced_pref'>[(skyrat_toggles & CUMFACE_PREF) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<br>"
-
+			dat += "<b>Lewd Chemical Processing:</b> <a href='?_src_=prefs;preference=aphrodisiacs_pref'>[(skyrat_toggles & APHRO_PREF) ? "Enabled":"Disabled"]</a><br>"
 
 			if(user.client)
 				if(unlock_content)
@@ -2784,10 +2790,15 @@ GLOBAL_LIST_INIT(food, list(
 				//aphro pref
 				if("aphrodisiacs_pref")
 					skyrat_toggles ^= APHRO_PREF
-
-				//cumface pref
-				if("cumfaced_pref")
-					skyrat_toggles ^= CUMFACE_PREF
+				
+				//
+				//R505 PREFERENCES
+				if("toggle_arousal")
+					r_preferences ^= R_PREF_AROUSAL
+				if("toggle_exhibition")
+					r_preferences ^= R_PREF_EXHIBITIONIST
+				//End R505 Edit
+				//
 
 				if("parallaxup")
 					parallax = WRAP(parallax + 1, PARALLAX_INSANE, PARALLAX_DISABLE + 1)
@@ -2975,6 +2986,9 @@ GLOBAL_LIST_INIT(food, list(
 
 	character.selected_scream = pref_scream
 
+	if((r_preferences & R_PREF_AROUSAL))	//R505 Edit
+		character.AddComponent(/datum/component/arousal)
+
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type
 	if(roundstart_checks && !(pref_species.id in GLOB.customizable_races))
@@ -2993,7 +3007,7 @@ GLOBAL_LIST_INIT(food, list(
 		for(var/organ_key in list(ORGAN_SLOT_VAGINA, ORGAN_SLOT_PENIS, ORGAN_SLOT_BREASTS))
 			var/obj/item/organ/genital/gent = character.getorganslot(organ_key)
 			if(gent)
-				gent.aroused = arousal_preview
+				gent.forced_arousal = arousal_preview
 				gent.update_sprite_suffix()
 
 	if(length(augments))
