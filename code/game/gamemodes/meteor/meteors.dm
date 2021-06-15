@@ -237,20 +237,6 @@ GLOBAL_LIST_INIT(meteorsD, list(/obj/effect/meteor/dust/weak))
 	meteordrop = list(/obj/item/stack/ore/glass)
 	threat = 1
 
-/obj/effect/meteor/dust/weak	//R505 edit: weak as hell debris because this gets spawned constantly
-	hitpwr = EXPLODE_NONE
-
-/obj/effect/meteor/dust/weak/Move()
-	. = ..()
-	if(!isspaceturf(loc) && !QDELING(src))
-		make_debris()
-		qdel(src)
-		return
-
-	var/obj/structure/lattice/lattice = locate(/obj/structure/lattice) in get_turf(loc)
-	if(lattice && prob(50))
-		get_hit()
-
 //Medium-sized
 /obj/effect/meteor/medium
 	name = "meteor"
