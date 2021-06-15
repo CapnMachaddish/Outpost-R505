@@ -77,6 +77,16 @@
 /mob/living/carbon/human/handle_mutations_and_radiation(delta_time, times_fired)
 	if(!dna || !dna.species.handle_mutations_and_radiation(src, delta_time, times_fired))
 		..()
+	else
+		//BEGIN R505 EDIT: Being in space gives radiation based on the lack of nearby closed turfs
+		if(isspaceturf(loc))	//This is copypasta, because handle_mutations_and_radiation for species doesn't run the parent proc when we're rad immune
+			var/rad_pulse = rand(90, 133)
+			for(var/turf/T in orange(1, src))
+				if(isclosedturf(T))
+					rad_pulse *= 0.5
+			radiation_pulse(src, rad_pulse)
+			radiation = 0
+		//END R505 EDIT
 
 /mob/living/carbon/human/breathe()
 	if(!dna.species.breathe(src))
