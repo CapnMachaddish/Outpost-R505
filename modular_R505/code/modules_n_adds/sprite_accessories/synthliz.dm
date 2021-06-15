@@ -41,6 +41,12 @@
 	name = "Synthetic Lizard - Protogen type 2"
 	icon_state = "synthliz_proto2"
 
+/datum/sprite_accessory/snouts/synthliz/synthliz_assaultron
+	icon = 'modular_R505/icons/mob/player/synthliz_snouts.dmi'
+	color_src = USE_MATRIXED_COLORS
+	name = "Synthetic Lizard - Assaultron"
+	icon_state = "synthliz_assaultron"
+
 //Antennas
 /datum/sprite_accessory/antenna/synthliz/synthliz_antenna
 	icon = 'modular_R505/icons/mob/player/synthliz_antennas.dmi'
