@@ -12,7 +12,7 @@
 		return
 	ADD_TRAIT(H, TRAIT_RADIMMUNE, GENETIC_MUTATION)
 
-/datum/mutation/human/radiation_protection/on_acquiring(mob/living/carbon/human/H)
+/datum/mutation/human/radiation_protection/on_losing(mob/living/carbon/human/H)
 	if(..())
 		return
 	REMOVE_TRAIT(H, TRAIT_RADIMMUNE, GENETIC_MUTATION)
