@@ -275,7 +275,7 @@ Contains:
 	icon_state = "space"
 	inhand_icon_state = "s_suit"
 	desc = "A lightweight space suit with the basic ability to protect the wearer from the vacuum of space during emergencies."
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 100, RAD = 20, FIRE = 50, ACID = 65)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 100, RAD = 80, FIRE = 50, ACID = 65)
 
 /obj/item/clothing/head/helmet/space/eva
 	name = "EVA helmet"
@@ -283,7 +283,7 @@ Contains:
 	inhand_icon_state = "space"
 	desc = "A lightweight space helmet with the basic ability to protect the wearer from the vacuum of space during emergencies."
 	flash_protect = FLASH_PROTECTION_NONE
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 100, RAD = 20, FIRE = 50, ACID = 65)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 100, RAD = 80, FIRE = 50, ACID = 65)
 
 /obj/item/clothing/head/helmet/space/freedom
 	name = "eagle helmet"
@@ -313,7 +313,7 @@ Contains:
 	desc = "Spaceworthy and it looks like a space carp's head, smells like one too."
 	icon_state = "carp_helm"
 	inhand_icon_state = "syndicate"
-	armor = list(MELEE = -20, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, RAD = 75, FIRE = 60, ACID = 75) //As whimpy as a space carp
+	armor = list(MELEE = -20, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, RAD = 95, FIRE = 60, ACID = 75) //As whimpy as a space carp
 	light_system = NO_LIGHT_SUPPORT
 	light_range = 0 //luminosity when on
 	actions_types = list()
@@ -329,7 +329,7 @@ Contains:
 	icon_state = "carp_suit"
 	inhand_icon_state = "space_suit_syndicate"
 	slowdown = 0 //Space carp magic, never stop believing
-	armor = list(MELEE = -20, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, RAD = 75, FIRE = 60, ACID = 75) //As whimpy whimpy whoo
+	armor = list(MELEE = -20, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, RAD = 100, FIRE = 60, ACID = 75) //As whimpy whimpy whoo
 	allowed = list(/obj/item/tank/internals, /obj/item/gun/ballistic/rifle/boltaction/harpoon) //I'm giving you a hint here
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/carp
 
@@ -391,7 +391,7 @@ Contains:
 	inhand_icon_state = "hardsuit-berserker"
 	slowdown = 0
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/berserker
-	armor = list(MELEE = 30, BULLET = 10, LASER = 10, ENERGY = 20, BOMB = 50, BIO = 100, RAD = 10, FIRE = 100, ACID = 100)
+	armor = list(MELEE = 30, BULLET = 10, LASER = 10, ENERGY = 20, BOMB = 50, BIO = 100, RAD = 45, FIRE = 100, ACID = 100)
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/pickaxe, /obj/item/spear, /obj/item/organ/regenerative_core/legion, /obj/item/kitchen/knife, /obj/item/kinetic_crusher, /obj/item/resonator, /obj/item/melee/transforming/cleaving_saw)
@@ -420,7 +420,7 @@ Contains:
 	icon_state = "hardsuit0-berserker"
 	inhand_icon_state = "hardsuit0-berserker"
 	hardsuit_type = "berserker"
-	armor = list(MELEE = 30, BULLET = 10, LASER = 10, ENERGY = 20, BOMB = 50, BIO = 100, RAD = 10, FIRE = 100, ACID = 100)
+	armor = list(MELEE = 30, BULLET = 10, LASER = 10, ENERGY = 20, BOMB = 50, BIO = 100, RAD = 45, FIRE = 100, ACID = 100)
 	actions_types = list(/datum/action/item_action/berserk_mode)
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF
@@ -497,7 +497,7 @@ Contains:
 	desc = "A bulky, air-tight helmet meant to protect the user during emergency situations. It doesn't look very durable."
 	icon_state = "syndicate-helm-orange"
 	inhand_icon_state = "syndicate-helm-orange"
-	armor = list(MELEE = 5, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 10, FIRE = 0, ACID = 0)
+	armor = list(MELEE = 5, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 60, FIRE = 0, ACID = 0)
 	strip_delay = 65
 
 /obj/item/clothing/suit/space/fragile
@@ -507,7 +507,7 @@ Contains:
 	icon_state = "syndicate-orange"
 	inhand_icon_state = "syndicate-orange"
 	slowdown = 2
-	armor = list(MELEE = 5, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 10, FIRE = 0, ACID = 0)
+	armor = list(MELEE = 5, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 60, FIRE = 0, ACID = 0)
 	strip_delay = 65
 
 /obj/item/clothing/suit/space/fragile/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
@@ -537,7 +537,7 @@ Contains:
 	desc = "The integrated helmet of the combat medic hardsuit, this has a bright, glowing facemask."
 	icon_state = "hardsuit0-combatmedic"
 	inhand_icon_state = "hardsuit0-combatmedic"
-	armor = list(MELEE = 35, BULLET = 10, LASER = 20, ENERGY = 30, BOMB = 5, BIO = 100, RAD = 50, FIRE = 65, ACID = 75)
+	armor = list(MELEE = 35, BULLET = 10, LASER = 20, ENERGY = 30, BOMB = 5, BIO = 100, RAD = 70, FIRE = 65, ACID = 75)
 	hardsuit_type = "combatmedic"
 
 /obj/item/clothing/suit/space/hardsuit/combatmedic
@@ -546,6 +546,6 @@ Contains:
 	icon_state = "combatmedic"
 	inhand_icon_state = "combatmedic"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/combatmedic
-	armor = list(MELEE = 35, BULLET = 10, LASER = 20, ENERGY = 30, BOMB = 5, BIO = 100, RAD = 50, FIRE = 65, ACID = 75)
+	armor = list(MELEE = 35, BULLET = 10, LASER = 20, ENERGY = 30, BOMB = 5, BIO = 100, RAD = 70, FIRE = 65, ACID = 75)
 	allowed = list(/obj/item/gun, /obj/item/melee/baton, /obj/item/circular_saw, /obj/item/tank/internals, /obj/item/storage/box/pillbottles,\
 	/obj/item/storage/firstaid, /obj/item/stack/medical/gauze, /obj/item/stack/medical/suture, /obj/item/stack/medical/mesh, /obj/item/storage/bag/chemistry)
