@@ -411,6 +411,14 @@
 
 
 /mob/living/carbon/handle_mutations_and_radiation(delta_time, times_fired)
+	//BEGIN R505 EDIT: Being in space gives radiation based on the lack of nearby closed turfs
+	if(isspaceturf(loc))
+		var/rad_pulse = 100
+		for(var/turf/T in orange(1, src))
+			if(isclosedturf(T))
+				rad_pulse *= 0.5
+		radiation_pulse(src, rad_pulse)
+	//END R505 EDIT
 	if(dna?.temporary_mutations.len)
 		for(var/mut in dna.temporary_mutations)
 			if(dna.temporary_mutations[mut] < world.time)
