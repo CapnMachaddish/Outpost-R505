@@ -2,5 +2,5 @@
 # List for people who support us! They get cool loadout items                                 #
 # Case is not important for ckey.                                                             #
 ###############################################################################################
-beefcake
-deadbolt
+This-might-be-ok
+BeefcakeLlama
