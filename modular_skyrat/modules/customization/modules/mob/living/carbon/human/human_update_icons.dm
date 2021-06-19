@@ -33,15 +33,18 @@
 				applied_style = STYLE_DIGITIGRADE
 
 		var/x_override
-		switch(applied_style)
-			if(STYLE_DIGITIGRADE)
-				icon_file = w_uniform.worn_icon_digi || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_digi.dmi'
-			if(STYLE_TAUR_SNAKE)
-				icon_file = w_uniform.worn_icon_taur_snake || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_taur_snake.dmi'
-			if(STYLE_TAUR_HOOF)
-				icon_file = w_uniform.worn_icon_taur_hoof || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_taur_hoof.dmi'
-			if(STYLE_TAUR_PAW)
-				icon_file = w_uniform.worn_icon_taur_paw || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_taur_paw.dmi'
+		if(w_uniform.sprite_sheets[dna.species.id])	//R505 EDIT -- sprite_sheets var
+			icon_file = w_uniform.sprite_sheets[dna.species.id]
+		else
+			switch(applied_style)
+				if(STYLE_DIGITIGRADE)
+					icon_file = w_uniform.worn_icon_digi || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_digi.dmi'
+				if(STYLE_TAUR_SNAKE)
+					icon_file = w_uniform.worn_icon_taur_snake || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_taur_snake.dmi'
+				if(STYLE_TAUR_HOOF)
+					icon_file = w_uniform.worn_icon_taur_hoof || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_taur_hoof.dmi'
+				if(STYLE_TAUR_PAW)
+					icon_file = w_uniform.worn_icon_taur_paw || 'modular_skyrat/master_files/icons/mob/clothing/under/uniform_taur_paw.dmi'
 
 		if(applied_style & STYLE_TAUR_ALL)
 			x_override = 64
@@ -94,15 +97,18 @@
 				applied_style = STYLE_DIGITIGRADE
 
 		var/x_override
-		switch(applied_style)
-			if(STYLE_DIGITIGRADE)
-				icon_file = wear_suit.worn_icon_digi || 'modular_skyrat/master_files/icons/mob/clothing/suit_digi.dmi'
-			if(STYLE_TAUR_SNAKE)
-				icon_file = wear_suit.worn_icon_taur_snake || 'modular_skyrat/master_files/icons/mob/clothing/suit_taur_snake.dmi'
-			if(STYLE_TAUR_HOOF)
-				icon_file = wear_suit.worn_icon_taur_hoof || 'modular_skyrat/master_files/icons/mob/clothing/suit_taur_hoof.dmi'
-			if(STYLE_TAUR_PAW)
-				icon_file = wear_suit.worn_icon_taur_paw || 'modular_skyrat/master_files/icons/mob/clothing/suit_taur_paw.dmi'
+		if(wear_suit.sprite_sheets[dna.species.id])	//R505 EDIT -- sprite_sheets var
+			icon_file = wear_suit.sprite_sheets[dna.species.id]
+		else
+			switch(applied_style)
+				if(STYLE_DIGITIGRADE)
+					icon_file = wear_suit.worn_icon_digi || 'modular_skyrat/master_files/icons/mob/clothing/suit_digi.dmi'
+				if(STYLE_TAUR_SNAKE)
+					icon_file = wear_suit.worn_icon_taur_snake || 'modular_skyrat/master_files/icons/mob/clothing/suit_taur_snake.dmi'
+				if(STYLE_TAUR_HOOF)
+					icon_file = wear_suit.worn_icon_taur_hoof || 'modular_skyrat/master_files/icons/mob/clothing/suit_taur_hoof.dmi'
+				if(STYLE_TAUR_PAW)
+					icon_file = wear_suit.worn_icon_taur_paw || 'modular_skyrat/master_files/icons/mob/clothing/suit_taur_paw.dmi'
 
 		if(applied_style & STYLE_TAUR_ALL)
 			x_override = 64
@@ -141,7 +147,9 @@
 		update_observer_view(shoes,1)
 		var/icon_file = shoes.worn_icon
 		var/applied_styles = NONE
-		if((DIGITIGRADE in dna.species.species_traits) && (shoes.mutant_variants & STYLE_DIGITIGRADE))
+		if(shoes.sprite_sheets[dna.species.id])	//R505 EDIT -- sprite_sheets var
+			icon_file = shoes.sprite_sheets[dna.species.id]
+		else if((DIGITIGRADE in dna.species.species_traits) && (shoes.mutant_variants & STYLE_DIGITIGRADE))
 			applied_styles |= STYLE_DIGITIGRADE
 			icon_file = shoes.worn_icon_digi || 'modular_skyrat/master_files/icons/mob/clothing/feet_digi.dmi'
 
@@ -259,11 +267,10 @@
 		update_observer_view(glasses,1)
 		if(!(head && (head.flags_inv & HIDEEYES)) && !(wear_mask && (wear_mask.flags_inv & HIDEEYES)))
 			var/icon_file = glasses.worn_icon
-			var/applied_style = NONE
-			if(dna.species.id == "vox")
-				applied_style |= STYLE_VOX
-				icon_file = 'modular_skyrat/master_files/icons/mob/clothing/eyes_vox.dmi'
-			overlays_standing[GLASSES_LAYER] = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = 'icons/mob/clothing/eyes.dmi', override_icon = icon_file, mutant_styles = applied_style)
+			//var/applied_style = NONE	//R505 EDIT -- sprite_sheets var
+			if(glasses.sprite_sheets[dna.species.id])
+				icon_file = glasses.sprite_sheets[dna.species.id]
+			overlays_standing[GLASSES_LAYER] = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = 'icons/mob/clothing/eyes.dmi', override_icon = icon_file)
 
 		var/mutable_appearance/glasses_overlay = overlays_standing[GLASSES_LAYER]
 		if(glasses_overlay)

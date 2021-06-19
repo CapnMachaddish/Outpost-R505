@@ -134,7 +134,7 @@
 
 	if(wear_neck)
 		if(!(check_obscured_slots() & ITEM_SLOT_NECK))
-			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi')
+			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi', override_icon = wear_neck.sprite_sheets[dna?.species.id])	//R505 EDIT -- sprite_sheets var
 		update_hud_neck(wear_neck)
 
 	apply_overlay(NECK_LAYER)
@@ -147,7 +147,7 @@
 		inv.update_appearance()
 
 	if(back)
-		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi')
+		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi', override_icon = back.sprite_sheets[dna?.species.id])	//R505 EDIT -- sprite_sheets var
 		update_hud_back(back)
 
 	apply_overlay(BACK_LAYER)
