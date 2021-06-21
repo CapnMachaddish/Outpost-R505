@@ -545,10 +545,10 @@ DEFAULT_VIEW_SQUARE 15x15
 ENABLE_DISCORD_AUTOROLE
 
 ## Add your discord bot token here. Make sure it has the ability to manage roles
-DISCORD_TOKEN NzEyNDYyNzQ0MjA0NjA3NjE4.XsR6ow.DIbLFgFzCQlKU9P9eYdUsltboRI
+DISCORD_TOKEN 
 
 ## Add the ID of your guild (server) here
-DISCORD_GUILDID 786530231841456159
+DISCORD_GUILDID 
 
 ## Add the ID of the role you want assigning here
-DISCORD_ROLEID 852172835764830238
+DISCORD_ROLEID 
