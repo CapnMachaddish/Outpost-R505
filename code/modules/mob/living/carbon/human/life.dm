@@ -75,6 +75,7 @@
 	return ..()
 
 /mob/living/carbon/human/handle_mutations_and_radiation(delta_time, times_fired)
+	var/before_radstuff = radiation
 	if(!dna || !dna.species.handle_mutations_and_radiation(src, delta_time, times_fired))
 		..()
 	else
@@ -85,7 +86,8 @@
 				if(isclosedturf(T))
 					rad_pulse *= 0.5
 			radiation_pulse(src, rad_pulse)
-			radiation = 0
+	if(istype(wear_suit, /obj/item/clothing/suit/space/))
+		radiation = before_radstuff
 		//END R505 EDIT
 
 /mob/living/carbon/human/breathe()
