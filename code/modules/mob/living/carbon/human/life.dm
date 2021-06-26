@@ -80,14 +80,14 @@
 		..()
 	else
 		//BEGIN R505 EDIT: Being in space gives radiation based on the lack of nearby closed turfs
-		if(isspaceturf(loc))	//This is copypasta, because handle_mutations_and_radiation for species doesn't run the parent proc when we're rad immune
-			var/rad_pulse = rand(90, 133)
-			for(var/turf/T in orange(1, src))
+		if(isspaceturf(loc))
+			var/rad_pulse = GLOB.space_radiation
+			for(var/turf/T in orange(2, src))
 				if(isclosedturf(T))
 					rad_pulse *= 0.5
 			radiation_pulse(src, rad_pulse)
-	if(istype(wear_suit, /obj/item/clothing/suit/space/))
-		radiation = before_radstuff
+		if(istype(wear_suit, /obj/item/clothing/suit/space))
+			radiation = before_radstuff
 		//END R505 EDIT
 
 /mob/living/carbon/human/breathe()

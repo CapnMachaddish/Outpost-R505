@@ -413,8 +413,8 @@
 /mob/living/carbon/handle_mutations_and_radiation(delta_time, times_fired)
 	//BEGIN R505 EDIT: Being in space gives radiation based on the lack of nearby closed turfs
 	if(isspaceturf(loc))
-		var/rad_pulse = rand(90, 133)
-		for(var/turf/T in orange(1, src))
+		var/rad_pulse = GLOB.space_radiation
+		for(var/turf/T in orange(2, src))
 			if(isclosedturf(T))
 				rad_pulse *= 0.5
 		radiation_pulse(src, rad_pulse)

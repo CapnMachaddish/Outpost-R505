@@ -68,6 +68,8 @@
 	T = SSmapping.get_turf_below(src)
 	if(T)
 		T.multiz_turf_new(src, UP)
+	
+	GLOB.all_space_turfs += src	//R505 Edit
 
 	ComponentInitialize()
 
@@ -90,6 +92,10 @@
 /turf/open/space/AfterChange()
 	..()
 	atmos_overlay_types = null
+
+/turf/open/space/Destroy()	//R505 Edit
+	GLOB.all_space_turfs -= src
+	return ..()
 
 /turf/open/space/Assimilate_Air()
 	return

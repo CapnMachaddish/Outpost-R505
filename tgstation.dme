@@ -3569,6 +3569,7 @@
 #include "modular_R505\_HELPERS\lists\events.dm"
 #include "modular_R505\_HELPERS\lists\genitals.dm"
 #include "modular_R505\_HELPERS\lists\mapping.dm"
+#include "modular_R505\code\gamemode.dm"
 #include "modular_R505\code\datums\components\cleanable.dm"
 #include "modular_R505\code\datums\events\roundstart_events.dm"
 #include "modular_R505\code\datums\events\dust_storm\dust_obj.dm"

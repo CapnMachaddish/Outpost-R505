@@ -69,6 +69,8 @@ SUBSYSTEM_DEF(ticker)
 
 	var/discord_alerted = FALSE //SKYRAT EDIT - DISCORD PING SPAM PREVENTION
 
+	var/datum/roundstart_event/chosen_roundstart_event //R505 edit
+
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
 
@@ -362,10 +364,22 @@ SUBSYSTEM_DEF(ticker)
 		else
 			to_chat(iter_human, "<span class='notice'>You will gain [round(iter_human.hardcore_survival_score)] hardcore random points if you survive this round!</span>")
 	
-	//R505 edit: roundstart events. very bare-bones right now
-	var/datum/roundstart_event/_R = pickweightAllowZero(get_working_roundstart_events())
-	_R.start()
-	testing("Running Roundstart Event \"[_R.name]\"")
+	//START R505 EDIT -- roundstart events
+	get_working_roundstart_events()
+	chosen_roundstart_event = pickweightAllowZero(GLOB.working_roundstart_events)
+
+	if(chosen_roundstart_event.summon_default_mapevents)
+		for(var/_R in GLOB.default_roundstart_events)
+			for(var/datum/roundstart_event/RE in GLOB.working_roundstart_events)
+				if(istype(chosen_roundstart_event, RE.type))
+					continue
+				if(RE.type == _R)
+					RE.start()
+					WARNING("Running Roundstart Default Event \"[RE.name]\"")
+					break
+	chosen_roundstart_event.start()
+	WARNING("Running Roundstart Event \"[chosen_roundstart_event.name]\"")
+	//END R505 EDIT
 
 //These callbacks will fire after roundstart key transfer
 /datum/controller/subsystem/ticker/proc/OnRoundstart(datum/callback/cb)
