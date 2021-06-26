@@ -53,7 +53,7 @@
 
 //Space Radiation
 //The radiation_pulse will cause a bit of lag, but this is okay because this is happening roundstart and probably wouldn't be noticed
-GLOBAL_VAR(space_radiation)
+GLOBAL_VAR_INIT(space_radiation, 66)
 /datum/roundstart_event/radiated_space
 	name = "Irradiated Sector"
 	weight = 4
