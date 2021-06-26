@@ -1,6 +1,13 @@
 /obj/effect/meteor/dust/weak
 	hitpwr = EXPLODE_NONE
 
+/obj/effect/meteor/dust/weak/Move()
+	. = ..()
+	if(.)
+		for(var/obj/structure/lattice/thing in get_turf(src))
+			if(thing.type == /obj/structure/lattice)	//Don't remove catwalks
+				qdel(thing)
+
 /obj/effect/meteor/dust/weak/ram_turf(turf/T)	//We don't explode, so this is the next best thing
 	for(var/thing in T)
 		if(isstructure(thing) || ismachinery(thing))
