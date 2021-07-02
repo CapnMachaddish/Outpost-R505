@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	  * They also allow for faster '[]' list access versus 'in'. Other than that, they are useless right now.
 	  * Layer hiding is handled by [/datum/species/proc/handle_mutant_bodyparts] below.
 	  */
-	var/list/mutant_bodyparts = list()
+	var/list/list/mutant_bodyparts = list()
 	///Internal organs that are unique to this race, like a tail.
 	var/list/mutant_organs = list()
 	///The bodyparts this species uses. assoc of bodypart string - bodypart type. Make sure all the fucking entries are in or I'll skin you alive.
