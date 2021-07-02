@@ -1,26 +1,124 @@
-///////////
-// PROCS //
-///////////
+/datum/species/proc/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+	// Drop the items the new species can't wear
+	if((AGENDER in species_traits))
+		C.gender = PLURAL
+	for(var/slot_id in no_equip)
+		var/obj/item/thing = C.get_item_by_slot(slot_id)
+		if(thing && (!thing.species_exception || !is_type_in_list(src,thing.species_exception)))
+			C.dropItemToGround(thing)
 
+	if(C.hud_used)
+		C.hud_used.update_locked_slots()
 
-/datum/species/New()
-	if(!limbs_id) //if we havent set a limbs id to use, just use our own id
-		limbs_id = id
-	wings_icons = string_list(wings_icons)
-	if(can_have_genitals)
-		default_mutant_bodyparts["vagina"] = "None"
-		default_mutant_bodyparts["womb"] = "None"
-		default_mutant_bodyparts["testicles"] = "None"
-		default_mutant_bodyparts["breasts"] = "None"
-		default_mutant_bodyparts["penis"] = "None"
-	..()
+	fix_non_native_limbs(C)
 
-/**
- * Checks if a species is eligible to be picked at roundstart.
- *
- * Checks the config to see if this species is allowed to be picked in the character setup menu.
- * Used by [/proc/generate_selectable_species].
- */
+	// this needs to be FIRST because qdel calls update_body which checks if we have DIGITIGRADE legs or not and if not then removes DIGITIGRADE from species_traits
+	if(C.dna.species.mutant_bodyparts["legs"] && C.dna.species.mutant_bodyparts["legs"][MUTANT_INDEX_NAME] == "Digitigrade Legs")
+		species_traits += DIGITIGRADE
+	if(DIGITIGRADE in species_traits)
+		C.Digitigrade_Leg_Swap(FALSE)
+
+	C.mob_biotypes = inherent_biotypes
+
+	regenerate_organs(C,old_species)
+
+	if(exotic_bloodtype && C.dna.blood_type != exotic_bloodtype)
+		C.dna.blood_type = exotic_bloodtype
+
+	if(old_species.mutanthands)
+		for(var/obj/item/I in C.held_items)
+			if(istype(I, old_species.mutanthands))
+				qdel(I)
+
+	if(mutanthands)
+		// Drop items in hands
+		// If you're lucky enough to have a TRAIT_NODROP item, then it stays.
+		for(var/V in C.held_items)
+			var/obj/item/I = V
+			if(istype(I))
+				C.dropItemToGround(I)
+			else	//Entries in the list should only ever be items or null, so if it's not an item, we can assume it's an empty hand
+				C.put_in_hands(new mutanthands())
+
+	for(var/X in inherent_traits)
+		ADD_TRAIT(C, X, SPECIES_TRAIT)
+
+	if(TRAIT_VIRUSIMMUNE in inherent_traits)
+		for(var/datum/disease/A in C.diseases)
+			A.cure(FALSE)
+
+	if(TRAIT_TOXIMMUNE in inherent_traits)
+		C.setToxLoss(0, TRUE, TRUE)
+
+	if(TRAIT_OXYIMMUNE in inherent_traits)
+		C.setOxyLoss(0, TRUE, TRUE)
+
+	if(TRAIT_NOMETABOLISM in inherent_traits)
+		C.reagents.end_metabolization(C, keep_liverless = TRUE)
+
+	if(TRAIT_GENELESS in inherent_traits)
+		C.dna.remove_all_mutations() // Radiation immune mobs can't get mutations normally
+
+	if(inherent_factions)
+		for(var/i in inherent_factions)
+			C.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
+
+	if(flying_species && isnull(fly))
+		fly = new
+		fly.Grant(C)
+
+	var/robotic_limbs
+	if(ROBOTIC_LIMBS in species_traits)
+		robotic_limbs = TRUE
+	for(var/obj/item/bodypart/B in C.bodyparts)
+		B.alpha = specific_alpha
+		if(robotic_limbs)
+			B.change_bodypart_status(BODYPART_ROBOTIC, FALSE, TRUE)
+			B.organic_render = TRUE
+		else if (B.status == BODYPART_ORGANIC)
+			B.organic_render = TRUE
+
+	C.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/species, multiplicative_slowdown=speedmod)
+
+	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
+
+/datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
+	if(C.dna.species.exotic_bloodtype)
+		C.dna.blood_type = random_blood_type()
+	if(DIGITIGRADE in species_traits)
+		C.Digitigrade_Leg_Swap(TRUE)
+	for(var/X in inherent_traits)
+		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
+
+	//If their inert mutation is not the same, swap it out
+	if((inert_mutation != new_species.inert_mutation) && LAZYLEN(C.dna.mutation_index) && (inert_mutation in C.dna.mutation_index))
+		C.dna.remove_mutation(inert_mutation)
+		//keep it at the right spot, so we can't have people taking shortcuts
+		var/location = C.dna.mutation_index.Find(inert_mutation)
+		C.dna.mutation_index[location] = new_species.inert_mutation
+		C.dna.default_mutation_genes[location] = C.dna.mutation_index[location]
+		C.dna.mutation_index[new_species.inert_mutation] = create_sequence(new_species.inert_mutation)
+		C.dna.default_mutation_genes[new_species.inert_mutation] = C.dna.mutation_index[new_species.inert_mutation]
+
+	if(inherent_factions)
+		for(var/i in inherent_factions)
+			C.faction -= i
+
+	if(flying_species)
+		fly.Remove(C)
+		QDEL_NULL(fly)
+		if(C.movement_type & FLYING)
+			ToggleFlight(C)
+	if(C.dna && C.dna.species && (C.dna.features["wings"] == wings_icon))
+		C.dna.species.mutant_bodyparts -= "wings"
+		C.dna.features["wings"] = "None"
+		C.update_body()
+	clear_tail_moodlets(C)
+
+	C.remove_movespeed_modifier(/datum/movespeed_modifier/species)
+
+	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
+
 /datum/species/proc/check_roundstart_eligible()
 	if(id in (CONFIG_GET(keyed_list/roundstart_races)))
 		return TRUE
@@ -133,43 +231,6 @@
 				current_organ.before_organ_replacement(replacement)
 			// organ.Insert will qdel any current organs in that slot, so we don't need to.
 			replacement.Insert(C, TRUE, FALSE)
-
-/datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
-	if(C.dna.species.exotic_bloodtype)
-		C.dna.blood_type = random_blood_type()
-	if(DIGITIGRADE in species_traits)
-		C.Digitigrade_Leg_Swap(TRUE)
-	for(var/X in inherent_traits)
-		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
-
-	//If their inert mutation is not the same, swap it out
-	if((inert_mutation != new_species.inert_mutation) && LAZYLEN(C.dna.mutation_index) && (inert_mutation in C.dna.mutation_index))
-		C.dna.remove_mutation(inert_mutation)
-		//keep it at the right spot, so we can't have people taking shortcuts
-		var/location = C.dna.mutation_index.Find(inert_mutation)
-		C.dna.mutation_index[location] = new_species.inert_mutation
-		C.dna.default_mutation_genes[location] = C.dna.mutation_index[location]
-		C.dna.mutation_index[new_species.inert_mutation] = create_sequence(new_species.inert_mutation)
-		C.dna.default_mutation_genes[new_species.inert_mutation] = C.dna.mutation_index[new_species.inert_mutation]
-
-	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction -= i
-
-	if(flying_species)
-		fly.Remove(C)
-		QDEL_NULL(fly)
-		if(C.movement_type & FLYING)
-			ToggleFlight(C)
-	if(C.dna && C.dna.species && (C.dna.features["wings"] == wings_icon))
-		C.dna.species.mutant_bodyparts -= "wings"
-		C.dna.features["wings"] = "None"
-		C.update_body()
-	clear_tail_moodlets(C)
-
-	C.remove_movespeed_modifier(/datum/movespeed_modifier/species)
-
-	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 
 /**
  * Handles hair icons and dynamic hair.
@@ -1924,90 +1985,6 @@
 
 /datum/species/proc/get_random_body_markings(list/features) //Needs features to base the colour off of
 	return list()
-
-/datum/species/proc/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	// Drop the items the new species can't wear
-	if((AGENDER in species_traits))
-		C.gender = PLURAL
-	for(var/slot_id in no_equip)
-		var/obj/item/thing = C.get_item_by_slot(slot_id)
-		if(thing && (!thing.species_exception || !is_type_in_list(src,thing.species_exception)))
-			C.dropItemToGround(thing)
-
-	if(C.hud_used)
-		C.hud_used.update_locked_slots()
-
-	fix_non_native_limbs(C)
-
-	// this needs to be FIRST because qdel calls update_body which checks if we have DIGITIGRADE legs or not and if not then removes DIGITIGRADE from species_traits
-	if(C.dna.species.mutant_bodyparts["legs"] && C.dna.species.mutant_bodyparts["legs"][MUTANT_INDEX_NAME] == "Digitigrade Legs")
-		species_traits += DIGITIGRADE
-	if(DIGITIGRADE in species_traits)
-		C.Digitigrade_Leg_Swap(FALSE)
-
-	C.mob_biotypes = inherent_biotypes
-
-	regenerate_organs(C,old_species)
-
-	if(exotic_bloodtype && C.dna.blood_type != exotic_bloodtype)
-		C.dna.blood_type = exotic_bloodtype
-
-	if(old_species.mutanthands)
-		for(var/obj/item/I in C.held_items)
-			if(istype(I, old_species.mutanthands))
-				qdel(I)
-
-	if(mutanthands)
-		// Drop items in hands
-		// If you're lucky enough to have a TRAIT_NODROP item, then it stays.
-		for(var/V in C.held_items)
-			var/obj/item/I = V
-			if(istype(I))
-				C.dropItemToGround(I)
-			else	//Entries in the list should only ever be items or null, so if it's not an item, we can assume it's an empty hand
-				C.put_in_hands(new mutanthands())
-
-	for(var/X in inherent_traits)
-		ADD_TRAIT(C, X, SPECIES_TRAIT)
-
-	if(TRAIT_VIRUSIMMUNE in inherent_traits)
-		for(var/datum/disease/A in C.diseases)
-			A.cure(FALSE)
-
-	if(TRAIT_TOXIMMUNE in inherent_traits)
-		C.setToxLoss(0, TRUE, TRUE)
-
-	if(TRAIT_OXYIMMUNE in inherent_traits)
-		C.setOxyLoss(0, TRUE, TRUE)
-
-	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(C, keep_liverless = TRUE)
-
-	if(TRAIT_GENELESS in inherent_traits)
-		C.dna.remove_all_mutations() // Radiation immune mobs can't get mutations normally
-
-	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
-
-	if(flying_species && isnull(fly))
-		fly = new
-		fly.Grant(C)
-
-	var/robotic_limbs
-	if(ROBOTIC_LIMBS in species_traits)
-		robotic_limbs = TRUE
-	for(var/obj/item/bodypart/B in C.bodyparts)
-		B.alpha = specific_alpha
-		if(robotic_limbs)
-			B.change_bodypart_status(BODYPART_ROBOTIC, FALSE, TRUE)
-			B.organic_render = TRUE
-		else if (B.status == BODYPART_ORGANIC)
-			B.organic_render = TRUE
-
-	C.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/species, multiplicative_slowdown=speedmod)
-
-	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/handle_body(mob/living/carbon/human/species_human)
 	species_human.remove_overlay(BODY_LAYER)
