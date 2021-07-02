@@ -728,7 +728,7 @@
 						continue
 					//Not hallucinating
 					var/damage = body_part.burn_dam + body_part.brute_dam
-					var/comparison = (body_part.max_damage/5)
+					var/comparison = (body_part.max_damage/5) * dna.species.health_hud_intensity
 					if(damage)
 						icon_num = 1
 					if(damage > (comparison))

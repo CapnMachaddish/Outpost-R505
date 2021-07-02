@@ -8,9 +8,9 @@
 #define ui_alert5_arousal "EAST-1:28,CENTER+2:14"
 
 //Middle right (status indicators)
-#define ui_health_arousal "EAST-1:28,CENTER+1:25"
-#define ui_healthdoll_arousal "EAST-1:28,CENTER:23"
-#define ui_internal_arousal "EAST-1:28,CENTER-1:20"
-#define ui_arousal "EAST-1:28,CENTER-2:17"
-#define ui_mood_arousal "EAST-1:28,CENTER-3:15"
+#define ui_health_arousal "EAST-1:28,CENTER+1:20"
+#define ui_healthdoll_arousal "EAST-1:28,CENTER:18"
+#define ui_internal_arousal "EAST-1:28,CENTER-1:15"
+#define ui_arousal "EAST-1:28,CENTER-2:12"
+#define ui_mood_arousal "EAST-1:28,CENTER-3:10"
 #define ui_spacesuit_arousal "EAST-1:28,CENTER-4:20"

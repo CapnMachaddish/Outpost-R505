@@ -52,3 +52,9 @@
 	if(dna.species.space_move(src))
 		return TRUE
 	return ..()
+
+/mob/living/carbon/human/update_turf_movespeed(turf/open/T)
+	if(istype(T, /turf/open/floor/plating/asteroid/snow) && dna?.species)
+		add_or_update_variable_actionspeed_modifier(/datum/movespeed_modifier/turf_slowdown, multiplicative_slowdown = T.slowdown/dna.species.snow_movement)
+	else
+		..()

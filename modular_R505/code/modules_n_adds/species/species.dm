@@ -77,8 +77,8 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	var/exotic_blood
 	var/exotic_bloodtype = ""
 	var/blood_trail
-	var/blood_color = "#A10808"
-	var/blood_volume = 560
+	var/blood_color = COLOR_BLOOD
+	var/blood_volume = BLOOD_VOLUME_NORMAL
 	var/list/family_heirlooms
 
 	var/list/offset_features = list(OFFSET_UNIFORM = list(0,0), OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0), OFFSET_GLASSES = list(0,0), OFFSET_EARS = list(0,0), OFFSET_SHOES = list(0,0), OFFSET_S_STORE = list(0,0), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), OFFSET_FACE = list(0,0), OFFSET_BELT = list(0,0), OFFSET_BACK = list(0,0), OFFSET_SUIT = list(0,0), OFFSET_NECK = list(0,0))
@@ -107,7 +107,7 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	var/total_health = MAX_LIVING_HEALTH
 	var/health_hud_intensity = 1
 	var/speedmod = 0
-	var/snow_movement = 0
+	var/snow_movement = 1
 	var/armor = 0
 	var/brutemod = 1
 	var/burnmod = 1
@@ -117,24 +117,24 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	var/siemens_coeff = 1
 	var/hunger_factor = HUNGER_FACTOR
 
-	var/cold_level_1 = 260
+	var/bodytemp_cold_damage_limit = BODYTEMP_COLD_DAMAGE_LIMIT
+	var/cold_level_1 = 270
 	var/cold_level_2 = 200
 	var/cold_level_3 = 120
+	var/bodytemp_heat_damage_limit = BODYTEMP_HEAT_DAMAGE_LIMIT
 	var/heat_level_1 = 360
 	var/heat_level_2 = 400
 	var/heat_level_3 = 1000
 
 	var/heat_discomfort_level = 315
 	var/cold_discomfort_level = 285
-	var/heat_discomfort_flavor = list()
-	var/cold_discomfort_flavor = list()
+	var/list/heat_discomfort_flavor = list()
+	var/list/cold_discomfort_flavor = list()
 
 	var/bodytemp_normal = BODYTEMP_NORMAL
 	var/bodytemp_autorecovery_min = BODYTEMP_AUTORECOVERY_MINIMUM
-	var/bodytemp_heat_damage_limit = BODYTEMP_HEAT_DAMAGE_LIMIT
-	var/bodytemp_cold_damage_limit = BODYTEMP_COLD_DAMAGE_LIMIT
 
-	//Do NOT remove by setting to null. use OR make a RESPECTIVE TRAIT (removing stomach? add the NOSTOMACH trait to your species)
+	//Do NOT remove by setting to null. use or make a respective trait. (removing stomach? add the NOSTOMACH trait to your species)
 	//why does it work this way? because traits also disable the downsides of not having an organ, removing organs but not having the trait will make your species die
 	var/obj/item/organ/brain/mutantbrain = /obj/item/organ/brain
 	var/obj/item/organ/heart/mutantheart = /obj/item/organ/heart
@@ -150,6 +150,7 @@ GLOBAL_LIST_EMPTY(customizable_races)
 
 	var/icon/ass_image
 	var/list/body_vis_overlays = list()	//Do not modify
+	var/temperature_text_cooldown as num
 
 /datum/species/New()
 	if(!limbs_id) //if we havent set a limbs id to use, just use our own id

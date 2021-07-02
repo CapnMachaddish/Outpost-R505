@@ -21,6 +21,8 @@
 	C.mob_biotypes = inherent_biotypes
 
 	regenerate_organs(C,old_species)
+	C.setMaxHealth(total_health)
+	C.blood_volume = blood_volume
 
 	if(exotic_bloodtype && C.dna.blood_type != exotic_bloodtype)
 		C.dna.blood_type = exotic_bloodtype
@@ -1149,6 +1151,8 @@
 	//Do not cause more damage in statis
 	if(!IS_IN_STASIS(humi))
 		body_temperature_damage(humi, delta_time, times_fired)
+		if(world.time > temperature_text_cooldown)
+			body_temperature_flavor(humi)
 
 /**
  * Used to stabilize the core temperature back to normal on living mobs
@@ -1241,9 +1245,9 @@
 		humi.remove_movespeed_modifier(/datum/movespeed_modifier/cold)
 		// display alerts based on how hot it is
 		switch(humi.bodytemperature)
-			if(0 to 460)
+			if(bodytemp_heat_damage_limit to heat_level_2)
 				humi.throw_alert("temp", /atom/movable/screen/alert/hot, 1)
-			if(461 to 700)
+			if(heat_level_2 to heat_level_3)
 				humi.throw_alert("temp", /atom/movable/screen/alert/hot, 2)
 			else
 				humi.throw_alert("temp", /atom/movable/screen/alert/hot, 3)
@@ -1257,9 +1261,9 @@
 		humi.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/cold, multiplicative_slowdown = ((bodytemp_cold_damage_limit - humi.bodytemperature) / COLD_SLOWDOWN_FACTOR))
 		// Display alerts based how cold it is
 		switch(humi.bodytemperature)
-			if(201 to bodytemp_cold_damage_limit)
+			if(cold_level_2 to bodytemp_cold_damage_limit)
 				humi.throw_alert("temp", /atom/movable/screen/alert/cold, 1)
-			if(120 to 200)
+			if(cold_level_3 to cold_level_2)
 				humi.throw_alert("temp", /atom/movable/screen/alert/cold, 2)
 			else
 				humi.throw_alert("temp", /atom/movable/screen/alert/cold, 3)
@@ -1270,6 +1274,16 @@
 		humi.remove_movespeed_modifier(/datum/movespeed_modifier/cold)
 		SEND_SIGNAL(humi, COMSIG_CLEAR_MOOD_EVENT, "cold")
 		SEND_SIGNAL(humi, COMSIG_CLEAR_MOOD_EVENT, "hot")
+
+/**
+ * Used to simply apply flavortext to the mob when it's too damn cold
+ */
+/datum/species/proc/body_temperature_flavor(mob/living/carbon/human/humi, delta_time, times_fired)
+	if(heat_discomfort_flavor.len && humi.bodytemperature > heat_discomfort_level)
+		to_chat(humi, "<span class='warning'>[pick(heat_discomfort_flavor)]</span>")
+	if(cold_discomfort_flavor.len && humi.bodytemperature < cold_discomfort_level)
+		to_chat(humi, "<span class='warning'>[pick(cold_discomfort_flavor)]</span>")
+	temperature_text_cooldown = world.time + 20 SECONDS
 
 /**
  * Used to apply wounds and damage based on core/body temp
@@ -1318,9 +1332,9 @@
 		var/damage_type = is_hulk ? BRUTE : BURN // Why?
 		var/damage_mod = coldmod * humi.physiology.cold_mod * (is_hulk ? HULK_COLD_DAMAGE_MOD : 1)
 		switch(humi.coretemperature)
-			if(201 to cold_damage_limit)
+			if(cold_level_2 to cold_level_1)
 				humi.apply_damage(COLD_DAMAGE_LEVEL_1 * damage_mod * delta_time, damage_type)
-			if(120 to 200)
+			if(cold_level_3 to cold_level_2)
 				humi.apply_damage(COLD_DAMAGE_LEVEL_2 * damage_mod * delta_time, damage_type)
 			else
 				humi.apply_damage(COLD_DAMAGE_LEVEL_3 * damage_mod * delta_time, damage_type)
