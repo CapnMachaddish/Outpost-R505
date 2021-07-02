@@ -3133,7 +3133,7 @@ GLOBAL_LIST_INIT(food, list(
 		background_cl = (even ? "#13171C" : "#19232C")
 		dat += "<tr style='background-color: [background_cl]'>"
 		dat += "<td><b>[initial(S.name)]</b></td>"
-		dat += "<td><i>[initial(S.flavor_text)]</i></td>"
+		dat += "<td><i>[initial(S.blurb)]</i></td>"
 		dat += "<td><a href='?_src_=prefs;selected_species=[id];preference=set_species;task=input'>Choose</a></td>"
 		dat += "</tr>"
 	dat += "<table>"
@@ -3151,7 +3151,7 @@ GLOBAL_LIST_INIT(food, list(
 		background_cl = (even ? "#852119" : "#9c2a21")
 		dat += "<tr style='background-color: [background_cl]'>"
 		dat += "<td><b>[initial(S.name)]</b></td>"
-		dat += "<td><i>[initial(S.flavor_text)]</i></td>"
+		dat += "<td><i>[initial(S.blurb)]</i></td>"
 		dat += "<td><a href='?_src_=prefs;selected_species=[id];preference=set_species;task=input'>Choose</a></td>"
 		dat += "</tr>"
 	dat += "<table>"

@@ -146,7 +146,7 @@
 /mob/living/carbon/human/newBodyPart(zone, robotic, fixed_icon)
 	var/obj/item/bodypart/L
 	var/datum/species/species = dna.species
-	var/obj/item/bodypart/selected_type = species.bodypart_overides[zone]
+	var/obj/item/bodypart/selected_type = species.limb_bodyparts[zone]
 	L = new selected_type()
 	if(L)
 		L.update_limb(fixed_icon, src)

@@ -821,7 +821,7 @@
 			skin_tone = ""
 
 		body_gender = H.body_type
-		should_draw_gender = S.sexes
+		should_draw_gender = S.unambiguous_gender
 
 		if((MUTCOLORS in S.species_traits) || (DYNCOLORS in S.species_traits))
 			if(S.fixed_mut_color)
