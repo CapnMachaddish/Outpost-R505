@@ -73,12 +73,13 @@
 					if(!istype(D, /datum/disease/advance))
 						preserve += D
 				data["viruses"] = preserve
+		//Look at this. Isn't it rediculous?
 		if(data["color"] && mix_data["color"] & holder)
 			data["color"] = BlendRGB(data["color"], mix_data["color"], (amount/holder.maximum_volume)/2)
 		else if(mix_data["color"])
 			data["color"] = mix_data["color"]
 		else
-			data["color"] = COLOR_BLOOD
+			data["color"] = COLOR_BLOOD //Maybe it will leave if we all laugh at it
 		color = data["color"]
 	return 1
 
