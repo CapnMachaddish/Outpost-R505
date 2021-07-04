@@ -497,7 +497,7 @@
 		. = ..()
 
 /obj/item/stack/proc/copy_evidences(obj/item/stack/from)
-	add_blood_DNA(from.return_blood_DNA())
+	add_blood_DNA(from.return_blood_DNA(), _color=from.return_blood_DNA_color())
 	add_fingerprint_list(from.return_fingerprints())
 	add_hiddenprint_list(from.return_hiddenprints())
 	fingerprintslast  = from.fingerprintslast

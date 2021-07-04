@@ -3,7 +3,7 @@
 	desc = "It's red and gooey. Perhaps it's the chef's cooking?"
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "floor1"
-	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7")
+	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7", "mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
 	blood_state = BLOOD_STATE_HUMAN
 	bloodiness = BLOOD_AMOUNT_PER_DECAL
 	beauty = -100
@@ -11,10 +11,15 @@
 	var/should_dry = TRUE
 	var/dryname = "dried blood" //when the blood lasts long enough, it becomes dry and gets a new name
 	var/drydesc = "Looks like it's been here a while. Eew." //as above
+	var/basecolor
 	var/drytime = 0
 
-/obj/effect/decal/cleanable/blood/Initialize(mapload)
+/obj/effect/decal/cleanable/blood/Initialize(mapload, list/datum/disease/diseases, _basecolor=COLOR_BLOOD)
 	. = ..()
+	if(!basecolor)	//To force certain things without extra init procs, like xeno blood which use green instead of white sprites
+		basecolor = _basecolor
+	if(!color)
+		color = basecolor
 	if(!should_dry)
 		return
 	if(bloodiness)
@@ -45,12 +50,14 @@
 		name = dryname
 		desc = drydesc
 		bloodiness = 0
-		color =  COLOR_GRAY //not all blood splatters have their own sprites... It still looks pretty nice
+		color = BlendRGB(color, COLOR_GRAY, 0.7)
 		STOP_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/replace_decal(obj/effect/decal/cleanable/blood/C)
 	C.add_blood_DNA(return_blood_DNA())
-	if (bloodiness)
+	if(color != C.basecolor)
+		C.color = BlendRGB(color, C.color, bloodiness/BLOOD_AMOUNT_PER_DECAL)
+	if(bloodiness)
 		C.bloodiness = min((C.bloodiness + bloodiness), BLOOD_AMOUNT_PER_DECAL)
 	return ..()
 
@@ -58,13 +65,13 @@
 	bloodiness = 0
 	icon_state = "floor1-old"
 
-/obj/effect/decal/cleanable/blood/old/Initialize(mapload, list/datum/disease/diseases)
+/obj/effect/decal/cleanable/blood/old/Initialize(mapload, list/datum/disease/diseases, _basecolor=COLOR_BLOOD)
 	add_blood_DNA(list("Non-human DNA" = random_blood_type())) // Needs to happen before ..()
 	. = ..()
 
 /obj/effect/decal/cleanable/blood/splatter
-	icon_state = "gibbl1"
-	random_icon_states = list("gibbl1", "gibbl2", "gibbl3", "gibbl4", "gibbl5")
+	icon_state = "splatter1"
+	random_icon_states = list("splatter1", "splatter2", "splatter3", "splatter4", "splatter5", "splatter6")
 
 /obj/effect/decal/cleanable/blood/tracks
 	icon_state = "tracks"
@@ -80,6 +87,12 @@
 	desc = "Your instincts say you shouldn't be following these."
 	beauty = -50
 	var/list/existing_dirs = list()
+	var/basecolor = COLOR_BLOOD
+
+/obj/effect/decal/cleanable/trail_holder/Initialize(mapload, list/datum/disease/diseases, _basecolor=COLOR_BLOOD)
+	. = ..()		
+	if(!color)
+		color = basecolor = _basecolor
 
 /obj/effect/decal/cleanable/trail_holder/can_bloodcrawl_in()
 	return TRUE
@@ -89,6 +102,7 @@
 	desc = "They look bloody and gruesome."
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "gib1"
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|KEEP_TOGETHER
 	layer = LOW_OBJ_LAYER
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
 	mergeable_decal = FALSE
@@ -96,11 +110,19 @@
 
 	dryname = "rotting gibs"
 	drydesc = "They look bloody and gruesome while some terrible smell fills the air."
+	var/limb_overlay = "flesh"
+	var/gib_color
 
-/obj/effect/decal/cleanable/blood/gibs/Initialize(mapload, list/datum/disease/diseases)
+/obj/effect/decal/cleanable/blood/gibs/Initialize(mapload, list/datum/disease/diseases, _color=COLOR_BLOOD, overlay_color=LIGHT_COLOR_TUNGSTEN)
 	. = ..()
+	if(!mapload)
+		color = gib_color = _color
 	reagents.add_reagent(/datum/reagent/liquidgibs, 5)
 	RegisterSignal(src, COMSIG_MOVABLE_PIPE_EJECTING, .proc/on_pipe_eject)
+
+	var/mutable_appearance/MA = mutable_appearance('icons/effects/blood.dmi', "[icon_state]_[limb_overlay]")
+	MA.color = overlay_color
+	add_overlay(MA)
 
 /obj/effect/decal/cleanable/blood/gibs/replace_decal(obj/effect/decal/cleanable/C)
 	return FALSE //Never fail to place us
@@ -137,7 +159,7 @@
 		if (!mapload)
 			sleep(2)
 		if(i > 0)
-			new /obj/effect/decal/cleanable/blood/splatter(loc, diseases)
+			new /obj/effect/decal/cleanable/blood/splatter(loc, diseases, gib_color)
 		if(!step_to(src, get_step(src, direction), 0))
 			break
 
@@ -174,7 +196,7 @@
 	dryname = "old rotting gibs"
 	drydesc = "Space Jesus, why didn't anyone clean this up? They smell terrible."
 
-/obj/effect/decal/cleanable/blood/gibs/old/Initialize(mapload, list/datum/disease/diseases)
+/obj/effect/decal/cleanable/blood/gibs/old/Initialize(mapload, list/datum/disease/diseases, _color=COLOR_BLOOD, overlay_color=LIGHT_COLOR_TUNGSTEN)
 	. = ..()
 	setDir(pick(1,2,4,8))
 	add_blood_DNA(list("Non-human DNA" = random_blood_type()))
@@ -184,7 +206,7 @@
 /obj/effect/decal/cleanable/blood/drip
 	name = "drips of blood"
 	desc = "It's red."
-	icon_state = "drip5" //using drip5 since the others tend to blend in with pipes & wires.
+	icon_state = "drip1"
 	random_icon_states = list("drip1","drip2","drip3","drip4","drip5")
 	bloodiness = 0
 	var/drips = 1
@@ -215,7 +237,7 @@
 	dryname = "dried footprints"
 	drydesc = "HMM... SOMEONE WAS HERE!"
 
-/obj/effect/decal/cleanable/blood/footprints/Initialize(mapload)
+/obj/effect/decal/cleanable/blood/footprints/Initialize(mapload, list/datum/disease/diseases, _basecolor=COLOR_BLOOD)
 	. = ..()
 	icon_state = "" //All of the footprint visuals come from overlays
 	if(mapload)

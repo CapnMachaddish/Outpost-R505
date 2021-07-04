@@ -220,7 +220,11 @@
 		playsound(owner, 'sound/effects/splat.ogg', 50, TRUE)
 		var/list/dirs = GLOB.alldirs.Copy()
 		for(var/i in 1 to 3)
-			var/obj/effect/decal/cleanable/blood/gibs/gibs = new(get_turf(owner))
+			var/blood_color = COLOR_BLOOD
+			if(ishuman(owner))
+				var/mob/living/carbon/human/H = owner
+				blood_color = H.dna.species.blood_color
+			var/obj/effect/decal/cleanable/blood/gibs/gibs = new(get_turf(owner), null, blood_color)
 			gibs.streak(dirs)
 
 	var/obj/item/bodypart/chest/new_chest = new(null)

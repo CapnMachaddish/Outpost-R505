@@ -7,9 +7,9 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 
 /mob/living/carbon/human/spawn_gibs(with_bodyparts)
 	if(with_bodyparts)
-		new /obj/effect/gibspawner/human(drop_location(), src, get_static_viruses())
+		new /obj/effect/gibspawner/human(drop_location(), src, get_static_viruses(), dna.species.blood_color, dna.features["uses_skintone"] ? dna.features["skin_color"] : dna.features["mcolor"])
 	else
-		new /obj/effect/gibspawner/human/bodypartless(drop_location(), src, get_static_viruses())
+		new /obj/effect/gibspawner/human/bodypartless(drop_location(), src, get_static_viruses(), dna.species.blood_color, dna.features["uses_skintone"] ? dna.features["skin_color"] : dna.features["mcolor"])
 
 /mob/living/carbon/human/spawn_dust(just_ash = FALSE)
 	if(just_ash)

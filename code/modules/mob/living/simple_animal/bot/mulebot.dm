@@ -54,6 +54,7 @@
 	var/obj/item/stock_parts/cell/cell /// Internal Powercell
 	var/cell_move_power_usage = 1///How much power we use when we move.
 	var/bloodiness = 0 ///If we've run over a mob, how many tiles will we leave tracks on while moving
+	var/blood_color
 	var/num_steps = 0 ///The amount of steps we should take until we rest for a time.
 
 
@@ -538,7 +539,7 @@
 	. = ..()
 	if(!last_move || isspaceturf(oldLoc)) //if we didn't sucessfully move, or if our old location was a spaceturf.
 		return
-	var/obj/effect/decal/cleanable/blood/tracks/B = new(oldLoc)
+	var/obj/effect/decal/cleanable/blood/tracks/B = new(oldLoc, null, blood_color)
 	B.add_blood_DNA(return_blood_DNA())
 	B.setDir(direct)
 	bloodiness--
@@ -763,6 +764,7 @@
 
 	var/list/blood_dna = H.get_blood_dna_list()
 	add_blood_DNA(blood_dna)
+	blood_color = H.dna?.species.blood_color
 	bloodiness += 4
 
 // player on mulebot attempted to move

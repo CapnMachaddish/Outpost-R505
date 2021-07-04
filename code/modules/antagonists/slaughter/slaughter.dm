@@ -151,6 +151,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "innards"
 	random_icon_states = null
+	basecolor = "#fff"
 
 /mob/living/simple_animal/hostile/imp/slaughter/phasein()
 	. = ..()

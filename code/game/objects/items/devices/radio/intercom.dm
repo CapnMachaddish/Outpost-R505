@@ -127,7 +127,7 @@
 		on = current_area.powered(AREA_USAGE_EQUIP) // set "on" to the equipment power status of our area.
 	update_appearance()
 
-/obj/item/radio/intercom/add_blood_DNA(list/blood_dna)
+/obj/item/radio/intercom/add_blood_DNA(list/blood_dna, list/datum/disease/diseases, _color)
 	return FALSE
 
 //Created through the autolathe or through deconstructing intercoms. Can be applied to wall to make a new intercom on it!

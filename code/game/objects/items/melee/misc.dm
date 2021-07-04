@@ -537,7 +537,7 @@
 	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
 	shard.Consume()
 
-/obj/item/melee/supermatter_sword/add_blood_DNA(list/blood_dna)
+/obj/item/melee/supermatter_sword/add_blood_DNA(list/blood_dna, list/datum/disease/diseases, _color)
 	return FALSE
 
 /obj/item/melee/curator_whip

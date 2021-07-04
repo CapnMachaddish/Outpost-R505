@@ -21,6 +21,9 @@
 	/// The world.time when we last picked up blood
 	var/last_pickup
 
+	/// R505 EDIT - Blood can be different colors
+	var/current_color
+
 /datum/component/bloodysoles/Initialize()
 	if(!isclothing(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -71,7 +74,8 @@
 	if(HAS_TRAIT(parent_atom, TRAIT_LIGHT_STEP)) //the character is agile enough to don't mess their clothing and hands just from one blood splatter at floor
 		return TRUE
 
-	parent_atom.add_blood_DNA(pool.return_blood_DNA())
+	parent_atom.add_blood_DNA(pool.return_blood_DNA(), _color=pool.color)
+	current_color = BlendRGB(current_color, pool.color, new_our_bloodiness/total_bloodiness)
 	update_icon()
 
 /**
@@ -150,7 +154,7 @@
 			bloody_shoes[last_blood_state] -= half_our_blood
 			update_icon()
 
-			oldLocFP = new(oldLocTurf)
+			oldLocFP = new(oldLocTurf, null, current_color)
 			oldLocFP.blood_state = last_blood_state
 			oldLocFP.exited_dirs |= wielder.dir
 			add_parent_to_footprint(oldLocFP)
@@ -169,7 +173,7 @@
 		bloody_shoes[last_blood_state] -= half_our_blood
 		update_icon()
 
-		var/obj/effect/decal/cleanable/blood/footprints/FP = new(get_turf(parent_atom))
+		var/obj/effect/decal/cleanable/blood/footprints/FP = new(get_turf(parent_atom), null, current_color)
 		FP.blood_state = last_blood_state
 		FP.entered_dirs |= wielder.dir
 		add_parent_to_footprint(FP)
@@ -197,6 +201,9 @@
 			// If our feet are bloody enough, add an entered dir
 			pool_FP.entered_dirs |= wielder.dir
 			pool_FP.update_appearance()
+
+	if(!current_color)
+		current_color = pool.color
 
 	share_blood(pool)
 
@@ -278,19 +285,17 @@
 	..()
 
 /datum/component/bloodysoles/feet/on_step_blood(datum/source, obj/effect/decal/cleanable/pool)
-	//SKYRAT EDIT ADDITION BEGIN - DIGI_BLOODSOLE
-	//this is done in on_step_blood because both update_icon() and initialize() are called before copy_to() is called, which means we wouldn't be able to see if they had digitigrade legs
 	if(!bloody_feet)
 		var/mob/living/carbon/H = parent
 		if (DIGITIGRADE in H.dna.species.species_traits)
 			bloody_feet = mutable_appearance('modular_skyrat/modules/digi_bloodsole/icons/effects/blood.dmi', "shoeblood", SHOES_LAYER)
 		else
 			bloody_feet = mutable_appearance('icons/effects/blood.dmi', "shoeblood", SHOES_LAYER)
-	//SKYRAT EDIT ADDITION END
 	if(wielder.num_legs < 2)
 		return
 
 	..()
+	bloody_feet.color = current_color
 
 /datum/component/bloodysoles/feet/proc/unequip_shoecover(datum/source)
 	SIGNAL_HANDLER

@@ -556,7 +556,12 @@ world
 	amount=0.5 is directly between the two colors
 	amount<0 or amount>1 are allowed
  */
-/proc/BlendRGB(rgb1, rgb2, amount)
+/proc/BlendRGB(rgb1, rgb2, amount=0.5)
+	if(!rgb1)
+		rgb1 = "#fff"
+	if(!rgb2)
+		rgb2 = "#fff"
+
 	var/list/RGB1 = ReadRGB(rgb1)
 	var/list/RGB2 = ReadRGB(rgb2)
 

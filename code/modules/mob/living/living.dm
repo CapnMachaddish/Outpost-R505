@@ -875,14 +875,21 @@
 			newdir = EAST
 	if((newdir in GLOB.cardinals) && (prob(50)))
 		newdir = turn(get_dir(target_turf, start), 180)
+	
+	var/bloodcolor = COLOR_BLOOD
 	if(!blood_exists)
-		new /obj/effect/decal/cleanable/trail_holder(start, get_static_viruses())
+		if(ishuman(src))
+			var/mob/living/carbon/human/H = src
+			bloodcolor = H.dna.species.blood_color
+		new /obj/effect/decal/cleanable/trail_holder (start, get_static_viruses(), bloodcolor)
 
 	for(var/obj/effect/decal/cleanable/trail_holder/TH in start)
 		if((!(newdir in TH.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
 			TH.existing_dirs += newdir
 			TH.add_overlay(image('icons/effects/blood.dmi', trail_type, dir = newdir))
 			TH.transfer_mob_blood_dna(src)
+			if(TH.color != bloodcolor)
+				TH.color = BlendRGB(bloodcolor, TH.color)
 
 /mob/living/carbon/human/makeTrail(turf/T)
 	if((NOBLOOD in dna.species.species_traits) || !is_bleeding() || HAS_TRAIT(src, TRAIT_NOBLEED))

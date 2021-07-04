@@ -1,6 +1,4 @@
-/datum/element/decal/blood
-
-/datum/element/decal/blood/Attach(datum/target, _icon, _icon_state, _dir, _cleanable=CLEAN_TYPE_BLOOD, _color, _layer=ABOVE_OBJ_LAYER)
+/datum/element/decal/blood/Attach(datum/target, _icon, _icon_state, _dir, _cleanable=CLEAN_TYPE_BLOOD, _color=COLOR_BLOOD, _layer=ABOVE_OBJ_LAYER)
 	if(!isitem(target))
 		return ELEMENT_INCOMPATIBLE
 
@@ -12,7 +10,7 @@
 	UnregisterSignal(source, COMSIG_ATOM_GET_EXAMINE_NAME)
 	return ..()
 
-/datum/element/decal/blood/generate_appearance(_icon, _icon_state, _dir, _layer, _color, _alpha, source)
+/datum/element/decal/blood/generate_appearance(_icon, _icon_state, _dir, _layer, _color=COLOR_BLOOD, _alpha, source)
 	var/obj/item/I = source
 	if(!_icon)
 		_icon = 'icons/effects/blood.dmi'
@@ -34,7 +32,8 @@
 		blood_splatter_icon.Blend("#fff", ICON_ADD) //fills the icon_state with white (except where it's transparent)
 		blood_splatter_icon.Blend(icon(_icon, _icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 		pic = mutable_appearance(blood_splatter_icon, initial(I.icon_state))
-		blood_splatter_appearances[index] = pic
+	pic.color = _color
+	blood_splatter_appearances[index] = pic
 	return TRUE
 
 /datum/element/decal/blood/proc/get_examine_name(datum/source, mob/user, list/override)

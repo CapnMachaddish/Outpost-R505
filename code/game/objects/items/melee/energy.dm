@@ -26,7 +26,7 @@
 	user.visible_message("<span class='suicide'>[user] is [pick("slitting [user.p_their()] stomach open with", "falling on")] [src]! It looks like [user.p_theyre()] trying to commit seppuku!</span>")
 	return (BRUTELOSS|FIRELOSS)
 
-/obj/item/melee/transforming/energy/add_blood_DNA(list/blood_dna)
+/obj/item/melee/transforming/energy/add_blood_DNA(list/blood_dna, list/datum/disease/diseases, _color)
 	return FALSE
 
 /obj/item/melee/transforming/energy/get_sharpness()

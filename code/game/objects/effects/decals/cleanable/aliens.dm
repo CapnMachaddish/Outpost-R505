@@ -91,6 +91,7 @@
 /obj/effect/decal/cleanable/blood/xtracks
 	icon_state = "xtracks"
 	random_icon_states = null
+	basecolor = "#fff"
 
 /obj/effect/decal/cleanable/blood/xtracks/Initialize()
 	. = ..()

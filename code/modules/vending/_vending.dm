@@ -593,7 +593,11 @@ GLOBAL_LIST_EMPTY(vending_products)
 							O.dismember()
 							O.drop_organs()
 							qdel(O)
-							new /obj/effect/gibspawner/human/bodypartless(get_turf(C))
+							var/blood_color
+							if(ishuman(C))
+								var/mob/living/carbon/human/H = C
+								blood_color = H.dna.species.blood_color
+							new /obj/effect/gibspawner/human/bodypartless(get_turf(C), null, null, blood_color)
 
 				if(prob(30))
 					C.apply_damage(max(0, squish_damage - crit_rebate), forced=TRUE, spread_damage=TRUE) // the 30% chance to spread the damage means you escape breaking any bones
