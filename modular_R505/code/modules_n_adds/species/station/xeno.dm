@@ -4,6 +4,7 @@
 	id = "xeno"
 	say_mod = "hisses"
 	default_color = "00FF00"
+	blood_color = "#aaff12"
 	species_traits = list(
 		MUTCOLORS,
 		EYECOLOR,

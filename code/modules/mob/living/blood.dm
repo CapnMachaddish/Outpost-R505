@@ -259,6 +259,11 @@
 			blood_data["quirks"] += T.type
 		return blood_data
 
+/mob/living/carbon/human/get_blood_data(blood_id)
+	. = ..()
+	if(.)
+		.["color"] = dna.species.blood_color
+
 //get the id of the substance this mob use as blood.
 /mob/proc/get_blood_id()
 	return

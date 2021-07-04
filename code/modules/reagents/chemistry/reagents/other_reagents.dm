@@ -1,5 +1,5 @@
 /datum/reagent/blood
-	data = list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null)
+	data = list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"color"=COLOR_BLOOD)
 	name = "Blood"
 	color = COLOR_BLOOD
 	metabolization_rate = 12.5 * REAGENTS_METABOLISM //fast rate so it disappears fast.
@@ -44,8 +44,12 @@
 /datum/reagent/blood/on_new(list/data)
 	if(istype(data))
 		SetViruses(src, data)
+		if(data["color"])
+			color = data["color"]
+		else
+			color = data["color"] = COLOR_BLOOD	//damn you blood packs
 
-/datum/reagent/blood/on_merge(list/mix_data)
+/datum/reagent/blood/on_merge(list/mix_data, amount)
 	if(data && mix_data)
 		if(data["blood_DNA"] != mix_data["blood_DNA"])
 			data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
@@ -69,6 +73,13 @@
 					if(!istype(D, /datum/disease/advance))
 						preserve += D
 				data["viruses"] = preserve
+		if(data["color"] && mix_data["color"] & holder)
+			data["color"] = BlendRGB(data["color"], mix_data["color"], (amount/holder.maximum_volume)/2)
+		else if(mix_data["color"])
+			data["color"] = mix_data["color"]
+		else
+			data["color"] = COLOR_BLOOD
+		color = data["color"]
 	return 1
 
 /datum/reagent/blood/proc/get_diseases()
@@ -87,9 +98,10 @@
 
 	var/obj/effect/decal/cleanable/blood/bloodsplatter = locate() in exposed_turf //find some blood here
 	if(!bloodsplatter)
-		bloodsplatter = new(exposed_turf)
+		bloodsplatter = new(exposed_turf, null, color)
 	if(data["blood_DNA"])
 		bloodsplatter.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
+		bloodsplatter.color = BlendRGB(color, bloodsplatter.color, reac_volume/holder.maximum_volume)
 
 /datum/reagent/blood/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray)
 	. = ..()
