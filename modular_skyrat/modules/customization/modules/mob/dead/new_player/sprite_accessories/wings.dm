@@ -16,6 +16,7 @@
 	name = "None"
 	icon_state = "none"
 	factual = FALSE
+	recommended_species = list("human", "synthhuman", "felinid", "lizard", "synthmammal", "mammal", "synthliz")
 
 /datum/sprite_accessory/wings/angel
 	color_src = USE_ONE_COLOR
