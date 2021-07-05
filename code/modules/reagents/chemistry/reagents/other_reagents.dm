@@ -74,7 +74,7 @@
 						preserve += D
 				data["viruses"] = preserve
 		//Look at this. Isn't it rediculous?
-		if(data["color"] && mix_data["color"] & holder)
+		if(data["color"] && mix_data["color"] && holder)
 			data["color"] = BlendRGB(data["color"], mix_data["color"], (amount/holder.maximum_volume)/2)
 		else if(mix_data["color"])
 			data["color"] = mix_data["color"]
