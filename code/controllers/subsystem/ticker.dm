@@ -367,7 +367,6 @@ SUBSYSTEM_DEF(ticker)
 	//START R505 EDIT -- roundstart events
 	get_working_roundstart_events()
 	chosen_roundstart_event = pickweightAllowZero(GLOB.working_roundstart_events)
-/* Temporarily disabled. If you see this comment, you should re-enable this
 	if(chosen_roundstart_event.summon_default_mapevents)
 		for(var/_R in GLOB.default_roundstart_events)
 			for(var/datum/roundstart_event/RE in GLOB.working_roundstart_events)
@@ -379,7 +378,6 @@ SUBSYSTEM_DEF(ticker)
 					break
 	chosen_roundstart_event.start()
 	WARNING("Running Roundstart Event \"[chosen_roundstart_event.name]\"")
-*/
 	//END R505 EDIT
 
 //These callbacks will fire after roundstart key transfer
