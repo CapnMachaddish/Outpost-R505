@@ -15,7 +15,7 @@
 	exp_type_department = EXP_TYPE_SECURITY
 
 	outfit = /datum/outfit/job/hos
-	plasmaman_outfit = /datum/outfit/plasmaman/head_of_security
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/head_of_security, "teshari" = /datum/outfit/teshari/hos)
 	departments = DEPARTMENT_SECURITY | DEPARTMENT_COMMAND
 
 	mind_traits = list(TRAIT_DONUT_LOVER)

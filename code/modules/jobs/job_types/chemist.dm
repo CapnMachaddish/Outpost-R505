@@ -10,7 +10,7 @@
 	exp_requirements = 60
 
 	outfit = /datum/outfit/job/chemist
-	plasmaman_outfit = /datum/outfit/plasmaman/chemist
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/chemist, "teshari" = /datum/outfit/teshari/chemist)
 
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_MED

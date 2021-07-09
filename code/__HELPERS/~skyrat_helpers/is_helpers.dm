@@ -7,3 +7,4 @@
 #define isxenohybrid(A) (is_species(A,/datum/species/xeno))
 #define isdwarf(A) (is_species(A,/datum/species/dwarf))
 #define isroundstartslime(A) (is_species(A,/datum/species/jelly/roundstartslime))
+#define isteshari(A) (is_species(A,/datum/species/teshari))

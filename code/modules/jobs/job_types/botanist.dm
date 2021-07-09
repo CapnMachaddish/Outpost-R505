@@ -8,7 +8,7 @@
 	selection_color = "#bbe291"
 
 	outfit = /datum/outfit/job/botanist
-	plasmaman_outfit = /datum/outfit/plasmaman/botany
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/botany, "teshari" = /datum/outfit/teshari/botanist)
 
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_SRV

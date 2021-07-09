@@ -16,7 +16,7 @@
 	exp_type_department = EXP_TYPE_SERVICE
 
 	outfit = /datum/outfit/job/hop
-	plasmaman_outfit = /datum/outfit/plasmaman/head_of_personnel
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/head_of_personnel, "teshari" = /datum/outfit/teshari/hop)
 	departments = DEPARTMENT_COMMAND | DEPARTMENT_SERVICE
 
 	paycheck = PAYCHECK_COMMAND

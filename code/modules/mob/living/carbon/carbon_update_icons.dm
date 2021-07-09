@@ -176,7 +176,10 @@
 /mob/living/carbon/update_inv_handcuffed()
 	remove_overlay(HANDCUFF_LAYER)
 	if(handcuffed)
-		overlays_standing[HANDCUFF_LAYER] = mutable_appearance('icons/mob/mob.dmi', "handcuff1", -HANDCUFF_LAYER)
+		var/file2use = 'icons/mob/mob.dmi'
+		if(dna?.species?.handcuff_icon)
+			file2use = dna.species.handcuff_icon
+		overlays_standing[HANDCUFF_LAYER] = mutable_appearance(file2use, "handcuff1", -HANDCUFF_LAYER)
 		apply_overlay(HANDCUFF_LAYER)
 
 

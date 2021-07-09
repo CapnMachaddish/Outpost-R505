@@ -51,16 +51,16 @@
 		H.adjustBruteLoss(2.5 * delta_time)
 		to_chat(H, "<span class='danger'>You feel empty!</span>")
 
-	if(H.blood_volume < BLOOD_VOLUME_NORMAL)
+	if(H.blood_volume < H.max_blood_volume)
 		if(H.nutrition >= NUTRITION_LEVEL_STARVING)
 			H.blood_volume += 1.5 * delta_time
 			H.adjust_nutrition(-1.25 * delta_time)
 
-	if(H.blood_volume < BLOOD_VOLUME_OKAY)
+	if(H.blood_volume < H.blood_volume_threshold(BLOOD_VOLUME_OKAY))
 		if(DT_PROB(2.5, delta_time))
 			to_chat(H, "<span class='danger'>You feel drained!</span>")
 
-	if(H.blood_volume < BLOOD_VOLUME_BAD)
+	if(H.blood_volume < H.blood_volume_threshold(BLOOD_VOLUME_BAD))
 		Cannibalize_Body(H)
 
 	if(regenerate_limbs)
@@ -95,7 +95,7 @@
 	var/list/limbs_to_heal = H.get_missing_limbs()
 	if(limbs_to_heal.len < 1)
 		return FALSE
-	if(H.blood_volume >= BLOOD_VOLUME_OKAY+40)
+	if(H.blood_volume >= H.blood_volume_threshold(BLOOD_VOLUME_OKAY)+40)
 		return TRUE
 
 /datum/action/innate/regenerate_limbs/Activate()
@@ -105,13 +105,13 @@
 		to_chat(H, "<span class='notice'>You feel intact enough as it is.</span>")
 		return
 	to_chat(H, "<span class='notice'>You focus intently on your missing [limbs_to_heal.len >= 2 ? "limbs" : "limb"]...</span>")
-	if(H.blood_volume >= 40*limbs_to_heal.len+BLOOD_VOLUME_OKAY)
+	if(H.blood_volume >= 40*limbs_to_heal.len+H.blood_volume_threshold(BLOOD_VOLUME_OKAY))
 		H.regenerate_limbs()
 		H.blood_volume -= 40*limbs_to_heal.len
 		to_chat(H, "<span class='notice'>...and after a moment you finish reforming!</span>")
 		return
 	else if(H.blood_volume >= 40)//We can partially heal some limbs
-		while(H.blood_volume >= BLOOD_VOLUME_OKAY+40)
+		while(H.blood_volume >= H.blood_volume_threshold(BLOOD_VOLUME_OKAY)+40)
 			var/healed_limb = pick(limbs_to_heal)
 			H.regenerate_limb(healed_limb)
 			limbs_to_heal -= healed_limb
@@ -145,7 +145,7 @@
 	bodies -= C // This means that the other bodies maintain a link
 	// so if someone mindswapped into them, they'd still be shared.
 	bodies = null
-	C.blood_volume = min(C.blood_volume, BLOOD_VOLUME_NORMAL)
+	C.blood_volume = min(C.blood_volume, C.max_blood_volume)
 	..()
 
 /datum/species/jelly/slime/on_species_gain(mob/living/carbon/C, datum/species/old_species)
@@ -181,7 +181,7 @@
 	bodies = old_species.bodies
 
 /datum/species/jelly/slime/spec_life(mob/living/carbon/human/H, delta_time, times_fired)
-	if(H.blood_volume >= BLOOD_VOLUME_SLIME_SPLIT)
+	if(H.blood_volume >= H.blood_volume_threshold(BLOOD_VOLUME_SLIME_SPLIT))
 		if(DT_PROB(2.5, delta_time))
 			to_chat(H, "<span class='notice'>You feel very bloated!</span>")
 
@@ -203,7 +203,7 @@
 	if(!.)
 		return
 	var/mob/living/carbon/human/H = owner
-	if(H.blood_volume >= BLOOD_VOLUME_SLIME_SPLIT)
+	if(H.blood_volume >= H.blood_volume_threshold(BLOOD_VOLUME_SLIME_SPLIT))
 		return TRUE
 	return FALSE
 
@@ -220,7 +220,7 @@
 	H.notransform = TRUE
 
 	if(do_after(owner, delay = 6 SECONDS, target = owner, timed_action_flags = IGNORE_HELD_ITEM))
-		if(H.blood_volume >= BLOOD_VOLUME_SLIME_SPLIT)
+		if(H.blood_volume >= H.blood_volume_threshold(BLOOD_VOLUME_SLIME_SPLIT))
 			make_dupe()
 		else
 			to_chat(H, "<span class='warning'>...but there is not enough of you to go around! You must attain more mass to split!</span>")

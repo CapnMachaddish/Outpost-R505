@@ -15,7 +15,7 @@
 	exp_type_department = EXP_TYPE_MEDICAL
 
 	outfit = /datum/outfit/job/cmo
-	plasmaman_outfit = /datum/outfit/plasmaman/chief_medical_officer
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/chief_medical_officer, "teshari" = /datum/outfit/teshari/cmo)
 	departments = DEPARTMENT_MEDICAL | DEPARTMENT_COMMAND
 
 	paycheck = PAYCHECK_COMMAND

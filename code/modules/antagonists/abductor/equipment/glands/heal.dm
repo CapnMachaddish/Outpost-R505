@@ -66,8 +66,8 @@
 	if(tox_amount > 10)
 		replace_blood()
 		return
-	if(owner.blood_volume < BLOOD_VOLUME_OKAY)
-		owner.blood_volume = BLOOD_VOLUME_NORMAL
+	if(owner.blood_volume < owner.blood_volume_threshold(BLOOD_VOLUME_OKAY))
+		owner.blood_volume = owner.max_blood_volume
 		to_chat(owner, "<span class='warning'>You feel your blood pulsing within you.</span>")
 		return
 
@@ -194,8 +194,8 @@
 	owner.Stun(15)
 	owner.adjustToxLoss(-15, TRUE, TRUE)
 
-	owner.blood_volume = min(BLOOD_VOLUME_NORMAL, owner.blood_volume + 20)
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
+	owner.blood_volume = min(owner.max_blood_volume, owner.blood_volume + 20)
+	if(owner.blood_volume < owner.max_blood_volume)
 		keep_going = TRUE
 
 	if(owner.getToxLoss())

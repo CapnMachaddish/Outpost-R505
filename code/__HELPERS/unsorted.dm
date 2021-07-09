@@ -1520,3 +1520,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	new /obj/effect/pod_landingzone(landing_location, pod)
 	return pod
 
+/mob/living/proc/blood_volume_threshold(volume)
+	if(!max_blood_volume)
+		return INFINITY
+	return max_blood_volume*volume

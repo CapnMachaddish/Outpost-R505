@@ -117,6 +117,10 @@
 		C.update_body()
 	clear_tail_moodlets(C)
 
+	if(ROBOTIC_LIMBS in species_traits)
+		for(var/obj/item/bodypart/B in C.bodyparts)
+			B.change_bodypart_status(BODYPART_ORGANIC, FALSE, TRUE)
+
 	C.remove_movespeed_modifier(/datum/movespeed_modifier/species)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
@@ -233,6 +237,21 @@
 				current_organ.before_organ_replacement(replacement)
 			// organ.Insert will qdel any current organs in that slot, so we don't need to.
 			replacement.Insert(C, TRUE, FALSE)
+	
+	var/robot_organs = (ROBOTIC_DNA_ORGANS in C.dna.species.species_traits)
+	for(var/key in C.dna.mutant_bodyparts)
+		var/datum/sprite_accessory/SA = GLOB.sprite_accessories[key][C.dna.mutant_bodyparts[key][MUTANT_INDEX_NAME]]
+		if(SA.factual && SA.organ_type)
+			var/obj/item/organ/path = new SA.organ_type
+			if(robot_organs)
+				path.status = ORGAN_ROBOTIC
+				path.organ_flags |= ORGAN_SYNTHETIC
+			var/obj/item/organ/oldorgan = C.getorganslot(path.slot)
+			if(oldorgan)
+				oldorgan.Remove(C,TRUE)
+				QDEL_NULL(oldorgan)
+			path.build_from_dna(C.dna, key)
+			path.Insert(C, 0, FALSE)
 
 /**
  * Handles hair icons and dynamic hair.
@@ -584,15 +603,16 @@
 	H.visible_message("<span class='notice'>[H] start putting on [I]...</span>", "<span class='notice'>You start putting on [I]...</span>")
 	return do_after(H, I.equip_delay_self, target = H)
 
-/datum/species/proc/before_equip_job(datum/job/J, mob/living/carbon/human/H)
-	return
+/datum/species/proc/before_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE)
+	if(id in J.species_outfit)
+		H.equipOutfit(J.species_outfit[id])
 
 /datum/species/proc/after_equip_job(datum/job/J, mob/living/carbon/human/H)
 	H.update_mutant_bodyparts()
 
 /datum/species/proc/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H, delta_time, times_fired)
 	if(chem.type == exotic_blood)
-		H.blood_volume = min(H.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		H.blood_volume = min(H.blood_volume + round(chem.volume, 0.1), H.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM))
 		H.reagents.del_reagent(chem.type)
 		return TRUE
 	if(!chem.overdosed && chem.overdose_threshold && chem.volume >= chem.overdose_threshold)
@@ -639,7 +659,7 @@
 	// nutrition decrease and satiety
 	if (H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 		// THEY HUNGER
-		var/hunger_rate = HUNGER_FACTOR
+		var/hunger_rate = hunger_factor
 		var/datum/component/mood/mood = H.GetComponent(/datum/component/mood)
 		if(mood && mood.sanity > SANITY_DISTURBED)
 			hunger_rate *= max(1 - 0.002 * mood.sanity, 0.5) //0.85 to 0.75
@@ -654,7 +674,7 @@
 			H.satiety++
 			if(DT_PROB(round(-H.satiety/77), delta_time))
 				H.Jitter(5)
-			hunger_rate = 3 * HUNGER_FACTOR
+			hunger_rate = 3 * hunger_factor
 		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_nutrition(-hunger_rate * delta_time)
 
@@ -1686,6 +1706,12 @@
 		new /datum/forced_movement(H, get_ranged_target_turf(H, olddir, 4), 1, FALSE, CALLBACK(H, /mob/living/carbon/.proc/spin, 1, 1))
 	return TRUE
 
+/datum/species/proc/handle_z_falling(mob/living/carbon/human/H, turf/T, levels)
+	return FALSE
+
+/datum/species/proc/successful_zfall(mob/living/carbon/human/H, turf/T, levels)
+/datum/species/proc/unsuccessful_zfall(mob/living/carbon/human/H, turf/T, levels)
+
 //UNSAFE PROC, should only be called through the Activate or other sources that check for CanFly
 /datum/species/proc/ToggleFlight(mob/living/carbon/human/H)
 	if(!HAS_TRAIT_FROM(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT))
@@ -1747,29 +1773,30 @@
 		current_part.change_bodypart(species_part)
 
 /datum/species/proc/handle_mutant_bodyparts(mob/living/carbon/human/H, forced_colour, force_update = FALSE)
-	var/list/standing	= list()
+	var/list/standing = list()
 
 	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
 
 	//Digitigrade legs are stuck in the phantom zone between true limbs and mutant bodyparts. Mainly it just needs more agressive updating than most limbs.
 	var/update_needed = FALSE
 	var/not_digitigrade = TRUE
-	for(var/X in H.bodyparts)
-		var/obj/item/bodypart/O = X
-		if(!O.use_digitigrade)
-			continue
-		not_digitigrade = FALSE
-		if(!(DIGITIGRADE in species_traits)) //Someone cut off a digitigrade leg and tacked it on
-			species_traits += DIGITIGRADE
-		var/should_be_squished = FALSE
-		if((H.wear_suit && H.wear_suit.flags_inv & HIDEJUMPSUIT && !(H.wear_suit.mutant_variants & STYLE_DIGITIGRADE) && (H.wear_suit.body_parts_covered & LEGS)) || (H.w_uniform && (H.w_uniform.body_parts_covered & LEGS) && !(H.w_uniform.mutant_variants & STYLE_DIGITIGRADE)))
-			should_be_squished = TRUE
-		if(O.use_digitigrade == FULL_DIGITIGRADE && should_be_squished)
-			O.use_digitigrade = SQUISHED_DIGITIGRADE
-			update_needed = TRUE
-		else if(O.use_digitigrade == SQUISHED_DIGITIGRADE && !should_be_squished)
-			O.use_digitigrade = FULL_DIGITIGRADE
-			update_needed = TRUE
+	if(!(NOT_DIGITIGRADE in species_traits))
+		for(var/X in H.bodyparts)
+			var/obj/item/bodypart/O = X
+			if(!O.use_digitigrade)
+				continue
+			not_digitigrade = FALSE
+			if(!(DIGITIGRADE in species_traits)) //Someone cut off a digitigrade leg and tacked it on
+				species_traits += DIGITIGRADE
+			var/should_be_squished = FALSE
+			if((H.wear_suit && H.wear_suit.flags_inv & HIDEJUMPSUIT && !(H.wear_suit.mutant_variants & STYLE_DIGITIGRADE) && (H.wear_suit.body_parts_covered & LEGS)) || (H.w_uniform && (H.w_uniform.body_parts_covered & LEGS) && !(H.w_uniform.mutant_variants & STYLE_DIGITIGRADE)))
+				should_be_squished = TRUE
+			if(O.use_digitigrade == FULL_DIGITIGRADE && should_be_squished)
+				O.use_digitigrade = SQUISHED_DIGITIGRADE
+				update_needed = TRUE
+			else if(O.use_digitigrade == SQUISHED_DIGITIGRADE && !should_be_squished)
+				O.use_digitigrade = FULL_DIGITIGRADE
+				update_needed = TRUE
 	if(update_needed)
 		H.update_body_parts()
 	if(not_digitigrade && (DIGITIGRADE in species_traits)) //Curse is lifted
@@ -2126,29 +2153,6 @@
 		return
 	T.wagging = FALSE
 	H.update_body()
-
-/datum/species/regenerate_organs(mob/living/carbon/C,datum/species/old_species,replace_current=TRUE,list/excluded_zones)
-	. = ..()
-	var/robot_organs = (ROBOTIC_DNA_ORGANS in C.dna.species.species_traits)
-	for(var/key in C.dna.mutant_bodyparts)
-		var/datum/sprite_accessory/SA = GLOB.sprite_accessories[key][C.dna.mutant_bodyparts[key][MUTANT_INDEX_NAME]]
-		if(SA.factual && SA.organ_type)
-			var/obj/item/organ/path = new SA.organ_type
-			if(robot_organs)
-				path.status = ORGAN_ROBOTIC
-				path.organ_flags |= ORGAN_SYNTHETIC
-			var/obj/item/organ/oldorgan = C.getorganslot(path.slot)
-			if(oldorgan)
-				oldorgan.Remove(C,TRUE)
-				QDEL_NULL(oldorgan)
-			path.build_from_dna(C.dna, key)
-			path.Insert(C, 0, FALSE)
-
-/datum/species/on_species_loss(mob/living/carbon/C, datum/species/old_species, pref_load)
-	. = ..()
-	if(ROBOTIC_LIMBS in species_traits)
-		for(var/obj/item/bodypart/B in C.bodyparts)
-			B.change_bodypart_status(BODYPART_ORGANIC, FALSE, TRUE)
 
 /datum/species/proc/spec_revival(mob/living/carbon/human/H)
 	return

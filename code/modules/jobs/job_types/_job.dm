@@ -43,8 +43,8 @@
 
 	var/outfit = null
 
-	/// The job's outfit that will be assigned for plasmamen.
-	var/plasmaman_outfit = null
+	/// The job's outfit that will be assigned for a certain species
+	var/list/species_outfit = list()
 
 	var/exp_requirements = 0
 

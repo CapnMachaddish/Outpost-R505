@@ -15,7 +15,7 @@
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/rd
-	plasmaman_outfit = /datum/outfit/plasmaman/research_director
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/research_director, "teshari" = /datum/outfit/teshari/rd)
 	departments = DEPARTMENT_SCIENCE | DEPARTMENT_COMMAND
 
 	paycheck = PAYCHECK_COMMAND

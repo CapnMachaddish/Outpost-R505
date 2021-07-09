@@ -28,16 +28,21 @@
 
 
 /datum/emote/living/cough/get_sound(mob/living/user)
-	if(isvox(user))
-		return 'modular_skyrat/modules/emotes/sound/emotes/voxcough.ogg'
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.dna)
+			if(H.dna.species.unambiguous_gender)
+				return pick(H.dna.species.cough_sounds[user.gender == FEMALE ? FEMALE : MALE])
+			else
+				return pick(H.dna.species.cough_sounds)
 	if(iscarbon(user))
-		if(user.gender == MALE)
-			return pick('modular_skyrat/modules/emotes/sound/emotes/male/male_cough_1.ogg',
-						'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_2.ogg',
-						'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_3.ogg')
-		return pick('modular_skyrat/modules/emotes/sound/emotes/female/female_cough_1.ogg',
-					'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_2.ogg',
-					'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_3.ogg')
+		if(user.gender == FEMALE)
+			return pick('modular_skyrat/modules/emotes/sound/emotes/female/female_cough_1.ogg',
+						'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_2.ogg',
+						'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_3.ogg')
+		return pick('modular_skyrat/modules/emotes/sound/emotes/male/male_cough_1.ogg',
+					'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_2.ogg',
+					'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_3.ogg')
 	return
 
 /datum/emote/living/sneeze
@@ -45,11 +50,18 @@
 
 /datum/emote/living/sneeze/get_sound(mob/living/user)
 	if(isvox(user))
-		return 'modular_skyrat/modules/emotes/sound/emotes/voxsneeze.ogg'
+		return 
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.dna)
+			if(H.dna.species.unambiguous_gender)
+				return pick(H.dna.species.sneeze_sounds[user.gender == FEMALE ? FEMALE : MALE])
+			else
+				return pick(H.dna.species.sneeze_sounds)
 	if(iscarbon(user))
-		if(user.gender == MALE)
-			return 'modular_skyrat/modules/emotes/sound/emotes/male/male_sneeze.ogg'
-		return 'modular_skyrat/modules/emotes/sound/emotes/female/female_sneeze.ogg'
+		if(user.gender == FEMALE)
+			return 'modular_skyrat/modules/emotes/sound/emotes/female/female_sneeze.ogg'
+		return 'modular_skyrat/modules/emotes/sound/emotes/male/male_sneeze.ogg'
 	return
 
 /datum/emote/living/peep

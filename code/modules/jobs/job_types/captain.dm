@@ -14,7 +14,7 @@
 	exp_type_department = EXP_TYPE_COMMAND
 
 	outfit = /datum/outfit/job/captain
-	plasmaman_outfit = /datum/outfit/plasmaman/captain
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/captain, "teshari" = /datum/outfit/teshari/captain)
 
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC

@@ -149,7 +149,7 @@
 				iter_wound.apply_wound(target_bodypart)
 
 		carbon_target.blood_volume -= 20
-		if(carbon_user.blood_volume < BLOOD_VOLUME_MAXIMUM) //we dont want to explode after all
+		if(carbon_user.blood_volume < carbon_user.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM)) //we dont want to explode after all
 			carbon_user.blood_volume += 20
 		return
 

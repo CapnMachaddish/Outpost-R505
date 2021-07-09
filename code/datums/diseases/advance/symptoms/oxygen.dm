@@ -48,7 +48,7 @@ Bonus
 		if(4, 5)
 			M.adjustOxyLoss(-7, 0)
 			M.losebreath = max(0, M.losebreath - 4)
-			if(regenerate_blood && M.blood_volume < BLOOD_VOLUME_NORMAL)
+			if(regenerate_blood && M.blood_volume < M.max_blood_volume)
 				M.blood_volume += 1
 		else
 			if(prob(base_message_chance))

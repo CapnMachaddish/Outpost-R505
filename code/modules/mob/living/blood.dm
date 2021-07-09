@@ -13,7 +13,7 @@
 	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.
 
 		//Blood regeneration if there is some space
-		if(blood_volume < BLOOD_VOLUME_NORMAL && !HAS_TRAIT(src, TRAIT_NOHUNGER))
+		if(blood_volume < max_blood_volume && !HAS_TRAIT(src, TRAIT_NOHUNGER))
 			var/nutrition_ratio = 0
 			switch(nutrition)
 				if(0 to NUTRITION_LEVEL_STARVING)
@@ -28,34 +28,34 @@
 					nutrition_ratio = 1
 			if(satiety > 80)
 				nutrition_ratio *= 1.25
-			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR * delta_time)
-			blood_volume = min(blood_volume + (BLOOD_REGEN_FACTOR * nutrition_ratio * delta_time), BLOOD_VOLUME_NORMAL)
+			adjust_nutrition(-nutrition_ratio * dna.species.hunger_factor * delta_time)
+			blood_volume = min(blood_volume + (BLOOD_REGEN_FACTOR * nutrition_ratio * delta_time), max_blood_volume)
 
 		//Effects of bloodloss
 		var/word = pick("dizzy","woozy","faint")
 		switch(blood_volume)
-			if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
+			if(blood_volume_threshold(BLOOD_VOLUME_EXCESS) to blood_volume_threshold(BLOOD_VOLUME_MAX_LETHAL))
 				if(DT_PROB(7.5, delta_time))
 					to_chat(src, "<span class='userdanger'>Blood starts to tear your skin apart. You're going to burst!</span>")
 					inflate_gib()
-			if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
+			if(blood_volume_threshold(BLOOD_VOLUME_MAXIMUM) to blood_volume_threshold(BLOOD_VOLUME_EXCESS))
 				if(DT_PROB(5, delta_time))
 					to_chat(src, "<span class='warning'>You feel terribly bloated.</span>")
-			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+			if(blood_volume_threshold(BLOOD_VOLUME_OKAY) to blood_volume_threshold(BLOOD_VOLUME_SAFE))
 				if(DT_PROB(2.5, delta_time))
 					to_chat(src, "<span class='warning'>You feel [word].</span>")
-				adjustOxyLoss(round(0.005 * (BLOOD_VOLUME_NORMAL - blood_volume) * delta_time, 1))
-			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-				adjustOxyLoss(round(0.01 * (BLOOD_VOLUME_NORMAL - blood_volume) * delta_time, 1))
+				adjustOxyLoss(round(0.005 * (max_blood_volume - blood_volume) * delta_time, 1))
+			if(blood_volume_threshold(BLOOD_VOLUME_BAD) to blood_volume_threshold(BLOOD_VOLUME_OKAY))
+				adjustOxyLoss(round(0.01 * (max_blood_volume - blood_volume) * delta_time, 1))
 				if(DT_PROB(2.5, delta_time))
 					blur_eyes(6)
 					to_chat(src, "<span class='warning'>You feel very [word].</span>")
-			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+			if(blood_volume_threshold(BLOOD_VOLUME_SURVIVE) to blood_volume_threshold(BLOOD_VOLUME_BAD))
 				adjustOxyLoss(2.5 * delta_time)
 				if(DT_PROB(7.5, delta_time))
 					Unconscious(rand(20,60))
 					to_chat(src, "<span class='warning'>You feel extremely [word].</span>")
-			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+			if(-INFINITY to blood_volume_threshold(BLOOD_VOLUME_SURVIVE))
 				if(!HAS_TRAIT(src, TRAIT_NODEATH))
 					death()
 
@@ -166,9 +166,10 @@
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)
+	max_blood_volume = initial(max_blood_volume)
 
 /mob/living/carbon/restore_blood()
-	blood_volume = BLOOD_VOLUME_NORMAL
+	blood_volume = max_blood_volume
 	for(var/i in bodyparts)
 		var/obj/item/bodypart/BP = i
 		BP.generic_bleedstacks = 0
@@ -181,7 +182,7 @@
 /mob/living/proc/transfer_blood_to(atom/movable/AM, amount, forced)
 	if(!blood_volume || !AM.reagents)
 		return FALSE
-	if(blood_volume < BLOOD_VOLUME_BAD && !forced)
+	if(blood_volume < blood_volume_threshold(BLOOD_VOLUME_BAD) && !forced)
 		return FALSE
 
 	if(blood_volume < amount)
@@ -209,7 +210,7 @@
 					C.reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
 					return TRUE
 
-			C.blood_volume = min(C.blood_volume + round(amount, 0.1), BLOOD_VOLUME_MAX_LETHAL)
+			C.blood_volume = min(C.blood_volume + round(amount, 0.1), blood_volume_threshold(BLOOD_VOLUME_MAX_LETHAL))
 			return TRUE
 
 	AM.reagents.add_reagent(blood_id, amount, blood_data, bodytemperature)

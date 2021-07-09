@@ -66,7 +66,10 @@ There are several things that need to be remembered:
 	..()
 
 /mob/living/carbon/human/update_fire()
-	..((fire_stacks > HUMAN_FIRE_STACK_ICON_NUM) ? "Standing" : "Generic_mob_burning")
+	if(dna.species.override_fire)
+		..(dna.species.override_fire)
+	else
+		..((fire_stacks > HUMAN_FIRE_STACK_ICON_NUM) ? "Standing" : "Generic_mob_")
 
 
 /* --------------------------------------- */
@@ -444,7 +447,10 @@ There are several things that need to be remembered:
 	remove_overlay(LEGCUFF_LAYER)
 	clear_alert("legcuffed")
 	if(legcuffed)
-		overlays_standing[LEGCUFF_LAYER] = mutable_appearance('icons/mob/mob.dmi', "legcuff1", -LEGCUFF_LAYER)
+		var/file2use = 'icons/mob/mob.dmi'
+		if(dna.species.legcuff_icon)
+			file2use = dna.species.legcuff_icon
+		overlays_standing[LEGCUFF_LAYER] = mutable_appearance(file2use, "legcuff1", -LEGCUFF_LAYER)
 		apply_overlay(LEGCUFF_LAYER)
 		throw_alert("legcuffed", /atom/movable/screen/alert/restrained/legcuffed, new_master = src.legcuffed)
 

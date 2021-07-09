@@ -58,3 +58,10 @@
 		add_or_update_variable_actionspeed_modifier(/datum/movespeed_modifier/turf_slowdown, multiplicative_slowdown = T.slowdown/dna.species.snow_movement)
 	else
 		..()
+
+/mob/living/carbon/human/onZImpact(turf/T, levels)
+	if(dna?.species.handle_z_falling(src, T, levels))
+		dna.species.successful_zfall(src, T, levels)
+	else
+		dna?.species.unsuccessful_zfall(src, T, levels)
+		return ..()

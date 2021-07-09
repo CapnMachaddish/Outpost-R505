@@ -11,7 +11,7 @@
 	bounty_types = CIV_JOB_ROBO
 
 	outfit = /datum/outfit/job/roboticist
-	plasmaman_outfit = /datum/outfit/plasmaman/robotics
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/robotics, "teshari" = /datum/outfit/teshari/roboticist)
 	departments = DEPARTMENT_SCIENCE
 
 	paycheck = PAYCHECK_MEDIUM

@@ -50,7 +50,7 @@
 		C.adjustCloneLoss(-2 * delta_time)
 		return
 	C.blood_volume -= 0.125 * delta_time
-	if(C.blood_volume <= BLOOD_VOLUME_SURVIVE)
+	if(C.blood_volume <= C.blood_volume_threshold(BLOOD_VOLUME_SURVIVE))
 		to_chat(C, "<span class='danger'>You ran out of blood!</span>")
 		var/obj/shapeshift_holder/H = locate() in C
 		if(H)
@@ -90,7 +90,7 @@
 			return
 		if(H.pulling && iscarbon(H.pulling))
 			var/mob/living/carbon/victim = H.pulling
-			if(H.blood_volume >= BLOOD_VOLUME_MAXIMUM)
+			if(H.blood_volume >= H.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM))
 				to_chat(H, "<span class='warning'>You're already full!</span>")
 				return
 			if(victim.stat == DEAD)
@@ -110,13 +110,13 @@
 				return
 			if(!do_after(H, 30, target = victim))
 				return
-			var/blood_volume_difference = BLOOD_VOLUME_MAXIMUM - H.blood_volume //How much capacity we have left to absorb blood
+			var/blood_volume_difference = H.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM) - H.blood_volume //How much capacity we have left to absorb blood
 			var/drained_blood = min(victim.blood_volume, VAMP_DRAIN_AMOUNT, blood_volume_difference)
 			to_chat(victim, "<span class='danger'>[H] is draining your blood!</span>")
 			to_chat(H, "<span class='notice'>You drain some blood!</span>")
 			playsound(H, 'sound/items/drink.ogg', 30, TRUE, -2)
-			victim.blood_volume = clamp(victim.blood_volume - drained_blood, 0, BLOOD_VOLUME_MAXIMUM)
-			H.blood_volume = clamp(H.blood_volume + drained_blood, 0, BLOOD_VOLUME_MAXIMUM)
+			victim.blood_volume = clamp(victim.blood_volume - drained_blood, 0, victim.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM))
+			H.blood_volume = clamp(H.blood_volume + drained_blood, 0, H.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM))
 			if(!victim.blood_volume)
 				to_chat(H, "<span class='notice'>You finish off [victim]'s blood supply.</span>")
 
@@ -127,7 +127,7 @@
 	. = ..()
 	var/obj/item/organ/heart/vampire/darkheart = getorgan(/obj/item/organ/heart/vampire)
 	if(darkheart)
-		. += "Current blood level: [blood_volume]/[BLOOD_VOLUME_MAXIMUM]."
+		. += "Current blood level: [blood_volume]/[blood_volume_threshold(BLOOD_VOLUME_MAXIMUM)]."
 
 
 /obj/item/organ/heart/vampire

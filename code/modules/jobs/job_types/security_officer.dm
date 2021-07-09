@@ -12,7 +12,7 @@
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/security
-	plasmaman_outfit = /datum/outfit/plasmaman/security
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/security, "teshari" = /datum/outfit/teshari/sec)
 
 	paycheck = PAYCHECK_HARD
 	paycheck_department = ACCOUNT_SEC

@@ -10,7 +10,7 @@
 	selection_color = "#dcba97"
 
 	outfit = /datum/outfit/job/cargo_tech
-	plasmaman_outfit = /datum/outfit/plasmaman/cargo
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/cargo, "teshari" = /datum/outfit/teshari/cargo)
 
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_CAR

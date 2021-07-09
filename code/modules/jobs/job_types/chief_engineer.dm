@@ -15,7 +15,7 @@
 	exp_type_department = EXP_TYPE_ENGINEERING
 
 	outfit = /datum/outfit/job/ce
-	plasmaman_outfit = /datum/outfit/plasmaman/chief_engineer
+	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/chief_engineer, "teshari" = /datum/outfit/teshari/chief)
 	departments = DEPARTMENT_ENGINEERING | DEPARTMENT_COMMAND
 
 	paycheck = PAYCHECK_COMMAND

@@ -38,7 +38,7 @@
 			if(!data || !(data["blood_type"] in get_safe_blood(exposed_carbon.dna.blood_type)))
 				exposed_carbon.reagents.add_reagent(/datum/reagent/toxin, reac_volume * 0.5)
 			else
-				exposed_carbon.blood_volume = min(exposed_carbon.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+				exposed_carbon.blood_volume = min(exposed_carbon.blood_volume + round(reac_volume, 0.1), exposed_carbon.blood_volume_threshold(BLOOD_VOLUME_MAXIMUM))
 
 
 /datum/reagent/blood/on_new(list/data)
@@ -378,7 +378,7 @@
 		M.adjustOxyLoss(-2 * REM * delta_time, 0)
 		M.adjustBruteLoss(-2 * REM * delta_time, 0)
 		M.adjustFireLoss(-2 * REM * delta_time, 0)
-		if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
+		if(ishuman(M) && M.blood_volume < M.max_blood_volume)
 			M.blood_volume += 3 * REM * delta_time
 	else  // Will deal about 90 damage when 50 units are thrown
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * REM * delta_time, 150)
@@ -1013,7 +1013,7 @@
 	ph = 6
 
 /datum/reagent/iron/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
-	if(C.blood_volume < BLOOD_VOLUME_NORMAL)
+	if(C.blood_volume < C.max_blood_volume)
 		C.blood_volume += 0.25 * delta_time
 	..()
 
@@ -2603,7 +2603,7 @@
 		M.adjustOxyLoss(-2 * REM * delta_time, FALSE)
 		M.adjustBruteLoss(-2 * REM * delta_time, FALSE)
 		M.adjustFireLoss(-2 * REM * delta_time, FALSE)
-		if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
+		if(ishuman(M) && M.blood_volume < M.max_blood_volume)
 			M.blood_volume += 3 * REM * delta_time
 	else
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * REM * delta_time, 150)

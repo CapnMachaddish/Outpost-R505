@@ -64,12 +64,23 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	var/list/special_step_sounds
 	var/deathsound
 	var/grab_sound
-	var/list/cough_sounds = list(MALE = null, FEMALE = null)
-	var/list/sneeze_sounds = list(MALE = null, FEMALE = null)
+	var/list/cough_sounds = list(MALE = list(
+		'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_1.ogg',
+		'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_2.ogg',
+		'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_3.ogg'
+	), FEMALE = list(
+		'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_1.ogg',
+		'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_2.ogg',
+		'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_3.ogg'
+	))
+	var/list/sneeze_sounds = list(MALE = list('modular_skyrat/modules/emotes/sound/emotes/male/male_sneeze.ogg'), FEMALE = list('modular_skyrat/modules/emotes/sound/emotes/female/female_sneeze.ogg'))
 
 	var/damage_overlay_type = "human"
+	var/override_fire = ""
 	var/dust_anim = "dust-h"
 	var/gib_anim = "gibbed-h"
+	var/handcuff_icon
+	var/legcuff_icon
 
 	var/meat = /obj/item/food/meat/slab/human
 	var/list/knife_butcher_results

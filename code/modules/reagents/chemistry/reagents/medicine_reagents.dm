@@ -90,8 +90,7 @@
 	M.radiation = 0
 	REMOVE_TRAITS_NOT_IN(M, list(SPECIES_TRAIT, ROUNDSTART_TRAIT, ORGAN_TRAIT))
 	M.reagents.remove_all_type(/datum/reagent/toxin, 5 * REM * delta_time, FALSE, TRUE)
-	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-		M.blood_volume = BLOOD_VOLUME_NORMAL
+	M.blood_volume = M.max_blood_volume = initial(M.max_blood_volume)
 
 	M.cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
 	for(var/organ in M.internal_organs)
