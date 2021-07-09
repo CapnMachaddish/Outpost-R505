@@ -40,7 +40,7 @@
 	
 	total_health = 50
 	health_hud_intensity = 6
-	speedmod = -0.65	//very fast
+	speedmod = -0.75	//very fast
 	snow_movement = 2	//snow makes us half as slow as normal
 	blood_volume = 400
 	hunger_factor = HUNGER_FACTOR * 0.5
