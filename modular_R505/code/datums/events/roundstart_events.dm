@@ -65,7 +65,9 @@ GLOBAL_VAR_INIT(space_radiation, 66)
 /datum/roundstart_event/radiated_space/proc/fire_space()
 	set background = TRUE
 	var/radiate = TRUE
-	for(var/turf/open/space/S in GLOB.all_space_turfs)
+	for(var/turf/open/space/S in world)
+		if(S.type != /turf/open/space)
+			continue
 		if(radiate && prob(10))
 			radiation_pulse(S, GLOB.space_radiation)
 		radiate = !radiate
