@@ -1,24 +1,33 @@
 //DO NOT CHANGE THOSE LISTS UNLESS YOU KNOW WHAT YOURE DOING (will mess savefiles)
 
 
-GLOBAL_LIST_INIT(breasts_size_translation, list("0" = "Flatchested",
-												"1" = "A",
-												"2" = "B",
-												"3" = "C",
-												"4" = "D",
-												"5" = "E",
-												"6" = "F",
-												"7" = "G",
-												"8" = "H",
-												"9" = "I",
-												"10" = "J",
-												"11" = "K",
-												"12" = "L",
-												"13" = "M",
-												"14" = "N",
-												"15" = "O",
-												"16" = "P",
-												))
+GLOBAL_LIST_INIT(breasts_size_translation, list(
+	"0" = "Flatchested",
+	"1" = "A",
+	"2" = "B",
+	"3" = "C",
+	"4" = "D",
+	"5" = "E",
+	"6" = "F",
+	"7" = "G",
+	"8" = "H",
+	"9" = "I",
+	"10" = "J",
+	"11" = "K",
+	"12" = "L",
+	"13" = "M",
+	"14" = "N",
+	"15" = "O",
+	"16" = "P",
+	"17" = "Q",
+	"18" = "Hyper",
+	))
+
+GLOBAL_LIST_INIT(breasts_max_sprite_size, list(
+	"pair" = 16,
+	"round" = 18,
+	"quad" = 5
+	))
 
 GLOBAL_LIST_INIT(balls_size_translation, list("0" = "Small",
 												"1" = "Average",

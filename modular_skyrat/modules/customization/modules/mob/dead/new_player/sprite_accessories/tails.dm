@@ -23,7 +23,7 @@
 
 	return icon_state
 
-/datum/sprite_accessory/tails/get_special_icon(mob/living/carbon/human/H, passed_state)
+/datum/sprite_accessory/tails/get_special_icon(mob/living/carbon/human/H, passed_state, datum/species/S)
 	var/returned = icon
 	if(passed_state == "[general_type]_hardsuit") //Guarantees we're wearing a hardsuit, skip checks
 		var/obj/item/clothing/suit/space/hardsuit/HS = H.wear_suit

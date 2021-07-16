@@ -63,10 +63,16 @@
 /datum/sprite_accessory/proc/get_special_render_colour(mob/living/carbon/human/H, passed_state)
 	return null
 
-/datum/sprite_accessory/proc/get_special_icon(mob/living/carbon/human/H, passed_state)
+/datum/sprite_accessory/proc/get_special_icon(mob/living/carbon/human/H, passed_state, datum/species/S)
 	return null
 
 /datum/sprite_accessory/proc/get_special_x_dimension(mob/living/carbon/human/H, passed_state)
+	return 0
+
+/datum/sprite_accessory/proc/get_x_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	return 0
+
+/datum/sprite_accessory/proc/get_y_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
 	return 0
 
 /datum/sprite_accessory/proc/get_default_color(var/list/features, var/datum/species/pref_species) //Needs features for the color information

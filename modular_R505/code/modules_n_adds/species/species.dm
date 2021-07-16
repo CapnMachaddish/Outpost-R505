@@ -92,9 +92,28 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	var/blood_volume = BLOOD_VOLUME_NORMAL
 	var/list/family_heirlooms
 
-	var/list/offset_features = list(OFFSET_UNIFORM = list(0,0), OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0), OFFSET_GLASSES = list(0,0), OFFSET_EARS = list(0,0), OFFSET_SHOES = list(0,0), OFFSET_S_STORE = list(0,0), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), OFFSET_FACE = list(0,0), OFFSET_BELT = list(0,0), OFFSET_BACK = list(0,0), OFFSET_SUIT = list(0,0), OFFSET_NECK = list(0,0))
 	var/list/no_equip = list()
 	var/nojumpsuit = FALSE
+	var/list/offset_features = list(
+		OFFSET_UNIFORM = list(0,0),
+		OFFSET_ID = list(0,0),
+		OFFSET_GLOVES = list(0,0),
+		OFFSET_GLASSES = list(0,0),
+		OFFSET_EARS = list(0,0),
+		OFFSET_SHOES = list(0,0),
+		OFFSET_S_STORE = list(0,0),
+		OFFSET_FACEMASK = list(0,0),
+		OFFSET_HEAD = list(0,0),
+		OFFSET_FACE = list(0,0),
+		OFFSET_BELT = list(0,0),
+		OFFSET_BACK = list(0,0),
+		OFFSET_SUIT = list(0,0),
+		OFFSET_NECK = list(0,0),
+		OFFSET_GENITALS = list(0,0),
+		OFFSET_GENITALS_PENIS = list(0,0),
+		OFFSET_GENITALS_TESTICLES = list(0,0),
+		OFFSET_GENITALS_BREASTS = list(0,0),
+		OFFSET_GENITALS_VAGINA = list(0,0))
 
 	/**
 	  * Visible CURRENT bodyparts that are unique to a species.
@@ -103,9 +122,10 @@ GLOBAL_LIST_EMPTY(customizable_races)
 	  * cat ears and tails) should be assigned at organ level if possible.
 	  * Assoc values are defaults for given bodyparts, also modified by aforementioned organs.
 	  * They also allow for faster '[]' list access versus 'in'. Other than that, they are useless right now.
-	  * Layer hiding is handled by [/datum/species/proc/handle_mutant_bodyparts] below.
 	  */
 	var/list/list/mutant_bodyparts = list()
+
+
 	var/datum/outfit/outfit_important_for_life
 
 	var/flying_species = FALSE

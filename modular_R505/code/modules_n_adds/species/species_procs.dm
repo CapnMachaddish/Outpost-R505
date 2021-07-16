@@ -1862,10 +1862,15 @@
 		else
 			render_state = "m_[key]_[render_state]"
 
+		var/pixel_x = S.get_x_offset(H, render_state, src)
+		var/pixel_y = S.get_y_offset(H, render_state, src)
+
 		for(var/layer in S.relevent_layers)
 			var/layertext = mutant_bodyparts_layertext(layer)
 
 			var/mutable_appearance/accessory_overlay = mutable_appearance(icon_to_use, layer = -layer)
+			accessory_overlay.pixel_x = pixel_x
+			accessory_overlay.pixel_y = pixel_y
 
 			accessory_overlay.icon_state = "[render_state]_[layertext]"
 
@@ -1916,6 +1921,8 @@
 
 			if(S.hasinner)
 				var/mutable_appearance/inner_accessory_overlay = mutable_appearance(S.icon, layer = -layer)
+				inner_accessory_overlay.pixel_x = pixel_x
+				inner_accessory_overlay.pixel_y = pixel_y
 				if(S.gender_specific)
 					inner_accessory_overlay.icon_state = "[g]_[key]inner_[S.icon_state]_[layertext]"
 				else
@@ -1929,6 +1936,8 @@
 			//Here's EXTRA parts of accessories which I should get rid of sometime TODO i guess
 			if(S.extra) //apply the extra overlay, if there is one
 				var/mutable_appearance/extra_accessory_overlay = mutable_appearance(S.icon, layer = -layer)
+				extra_accessory_overlay.pixel_x = pixel_x
+				extra_accessory_overlay.pixel_y = pixel_y
 				if(S.gender_specific)
 					extra_accessory_overlay.icon_state = "[g]_[key]_extra_[S.icon_state]_[layertext]"
 				else
@@ -1961,6 +1970,8 @@
 
 			if(S.extra2) //apply the extra overlay, if there is one
 				var/mutable_appearance/extra2_accessory_overlay = mutable_appearance(S.icon, layer = -layer)
+				extra2_accessory_overlay.pixel_x = pixel_x
+				extra2_accessory_overlay.pixel_y = pixel_y
 				if(S.gender_specific)
 					extra2_accessory_overlay.icon_state = "[g]_[key]_extra2_[S.icon_state]_[layertext]"
 				else

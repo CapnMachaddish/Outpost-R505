@@ -27,6 +27,18 @@
 	else
 		return null
 
+/datum/sprite_accessory/genital/get_x_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS][1]
+
+/datum/sprite_accessory/genital/get_y_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS][2]
+
 /datum/sprite_accessory/genital/penis
 	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/genitals/penis_onmob.dmi'
 	organ_type = /obj/item/organ/genital/penis
@@ -46,13 +58,12 @@
 		return TRUE
 	. = ..()
 
-/datum/sprite_accessory/genital/penis/get_special_icon(mob/living/carbon/human/H)
-	var/returned = icon
+/datum/sprite_accessory/genital/penis/get_special_icon(mob/living/carbon/human/H, passed_state, datum/species/S)
+	. = icon
 	if(H.dna.species.mutant_bodyparts["taur"] && H.dna.features["penis_taur_mode"])
 		var/datum/sprite_accessory/taur/SP = GLOB.sprite_accessories["taur"][H.dna.mutant_bodyparts["taur"][MUTANT_INDEX_NAME]]
 		if(!(SP.taur_mode & STYLE_TAUR_SNAKE))
-			returned = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/genitals/taur_penis_onmob.dmi'
-	return returned
+			. = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/genitals/taur_penis_onmob.dmi'
 
 /datum/sprite_accessory/genital/penis/get_special_x_dimension(mob/living/carbon/human/H)
 	var/returned = dimension_x
@@ -61,6 +72,18 @@
 		if(!(SP.taur_mode & STYLE_TAUR_SNAKE))
 			returned = 64
 	return returned
+
+/datum/sprite_accessory/genital/penis/get_x_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_PENIS in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_PENIS][1] + ..()
+
+/datum/sprite_accessory/genital/penis/get_y_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_PENIS in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_PENIS][2] + ..()
 
 /datum/sprite_accessory/genital/penis/none
 	icon_state = "none"
@@ -125,13 +148,12 @@
 		return TRUE
 	. = ..()
 
-/datum/sprite_accessory/genital/testicles/get_special_icon(mob/living/carbon/human/H)
-	var/returned = icon
+/datum/sprite_accessory/genital/testicles/get_special_icon(mob/living/carbon/human/H, passed_state, datum/species/S)
+	. = icon
 	if(H.dna.species.mutant_bodyparts["taur"] && H.dna.features["penis_taur_mode"])
 		var/datum/sprite_accessory/taur/SP = GLOB.sprite_accessories["taur"][H.dna.mutant_bodyparts["taur"][MUTANT_INDEX_NAME]]
 		if(!(SP.taur_mode & STYLE_TAUR_SNAKE))
-			returned = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/genitals/taur_testicles_onmob.dmi'
-	return returned
+			. = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/genitals/taur_testicles_onmob.dmi'
 
 /datum/sprite_accessory/genital/testicles/get_special_x_dimension(mob/living/carbon/human/H)
 	var/returned = dimension_x
@@ -140,6 +162,18 @@
 		if(!(SP.taur_mode & STYLE_TAUR_SNAKE))
 			returned = 64
 	return returned
+
+/datum/sprite_accessory/genital/testicles/get_x_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_TESTICLES in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_TESTICLES][1] + ..()
+
+/datum/sprite_accessory/genital/testicles/get_y_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_TESTICLES in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_TESTICLES][2] + ..()
 
 /datum/sprite_accessory/genital/testicles/none
 	icon_state = "none"
@@ -180,6 +214,18 @@
 		return "[gen.sprite_suffix]"
 	else
 		return null
+
+/datum/sprite_accessory/genital/vagina/get_x_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_VAGINA in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_VAGINA][1] + ..()
+
+/datum/sprite_accessory/genital/vagina/get_y_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_VAGINA in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_VAGINA][2] + ..()
 
 /datum/sprite_accessory/genital/vagina/none
 	icon_state = "none"
@@ -254,11 +300,27 @@
 		return TRUE
 	. = ..()
 
+/datum/sprite_accessory/genital/breasts/get_x_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_BREASTS in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_BREASTS][1] + ..()
+
+/datum/sprite_accessory/genital/breasts/get_y_offset(mob/living/carbon/human/H, passed_state, datum/species/S)
+	if(!S)
+		return 0
+	if(OFFSET_GENITALS_BREASTS in S.offset_features)
+		return S.offset_features[OFFSET_GENITALS_BREASTS][2] + ..()
+
 /datum/sprite_accessory/genital/breasts/none
 	icon_state = "none"
 	name = "None"
 	factual = FALSE
 	color_src = null
+
+/datum/sprite_accessory/genital/breasts/round
+	icon_state = "round"
+	name = "Round"
 
 /datum/sprite_accessory/genital/breasts/pair
 	icon_state = "pair"
@@ -267,7 +329,3 @@
 /datum/sprite_accessory/genital/breasts/quad
 	icon_state = "quad"
 	name = "Quad"
-
-/datum/sprite_accessory/genital/breasts/sextuple
-	icon_state = "sextuple"
-	name = "Sextuple"

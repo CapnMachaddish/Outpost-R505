@@ -245,14 +245,8 @@
 	icon_state = passed_string
 
 /obj/item/organ/genital/breasts/get_sprite_size_string()
-	var/max_size = 5
-	if(genital_type == "pair")
-		max_size = 16
-	var/current_size = round(genital_size)
-	if(current_size < 0)
-		current_size = 0
-	else if (current_size > max_size)
-		current_size = max_size
+	var/max_size = GLOB.breasts_max_sprite_size[genital_type]
+	var/current_size = clamp(round(genital_size), 0, max_size)
 	var/passed_string = "[genital_type]_[current_size]"
 	if(uses_skintones)
 		passed_string += "_s"
@@ -264,10 +258,10 @@
 	set_size(DNA.features["breasts_size"])
 
 /proc/breasts_size_to_cup(number)
-	return number > 16 ? "beyond measurement" : number < 1 ? 0 : ascii2text(number + 63)
+	return number > 17 ? "beyond measurement" : number < 1 ? 0 : ascii2text(number + 63)
 
 /proc/breasts_cup_to_size(cup)
-	return lowertext(cup) == "flatchested" ? 0 : text2ascii(uppertext(cup)) - 63
+	return lowertext(cup) == "Flatchested" ? 0 : text2ascii(uppertext(cup)) - 63
 
 /proc/balls_size_to_description(number)
 	if(number < 0)

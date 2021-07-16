@@ -37,6 +37,8 @@
 	unambiguous_gender = FALSE
 	handcuff_icon = 'modular_R505/icons/ported/mob/teshari/clothing/handcuffs.dmi'
 	legcuff_icon = 'modular_R505/icons/ported/mob/teshari/clothing/handcuffs.dmi'
+
+	offset_features = list(OFFSET_GENITALS_BREASTS = list(0,-4), OFFSET_GENITALS_VAGINA = list(0,-4))
 	
 	total_health = 50
 	health_hud_intensity = 6
