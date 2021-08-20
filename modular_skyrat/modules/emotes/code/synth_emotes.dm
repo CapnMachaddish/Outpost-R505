@@ -44,7 +44,7 @@
 	message = "beeps."
 	message_param = "beeps at %t."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_skyrat/modules/emotes/sound/emotes/twobeep.ogg'
+	sound = 'modular_R505/sound/voice/twobeep.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
 /datum/emote/living/human/buzz2
@@ -105,26 +105,26 @@
 	key = "error"
 	message = "emits an error noise."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'sound/machines/xp_error.ogg'
+	sound = 'modular_R505/sound/voice/xp_error.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
 /datum/emote/living/human/yay
 	key = "yay"
 	message = "emits an triumphant noise!"
 	emote_type = EMOTE_AUDIBLE
-	sound = 'sound/machines/hurray.ogg'
+	sound = 'modular_R505/sound/voice/hurray.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 	
 /datum/emote/living/human/chime
 	key = "chime"
 	message = "chimes a few notes."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_skyrat/modules/emotes/sound/emotes/chime.ogg'
+	sound = 'modular_R505/sound/voice/chime.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 	
 /datum/emote/living/human/chord
 	key = "chord"
 	message = "emits an erroneous chord!"
 	emote_type = EMOTE_AUDIBLE
-	sound = 'sound/machines/chord.ogg'
+	sound = 'modular_R505/sound/voice/chord.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
