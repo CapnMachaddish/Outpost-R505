@@ -488,3 +488,11 @@
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/feline_purr.ogg'
+
+/datum/emote/living/meow2
+	key = "meow2"
+	key_third_person = "merowrs!"
+	message = "merowrs!"
+	emote_type = EMOTE_AUDIBLE
+	vary = TRUE
+	sound = 'modular_skyrat/modules/emotes/sound/voice/merowr.ogg'
