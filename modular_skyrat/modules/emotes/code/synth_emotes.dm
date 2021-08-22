@@ -105,19 +105,19 @@
 	key = "error"
 	message = "sounds an error notification."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/xp_error.ogg'
+	sound = 'modular_R505/sound/effects/xp_error.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
 /datum/emote/living/human/fanfare
 	key = "tada"
 	message = "emits an triumphant noise!"
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/emotes/tada.ogg'
+	sound = 'modular_R505/sound/effects/tada.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 	
 /datum/emote/living/human/chime
 	key = "chime"
 	message = "emits a quick descending chime."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/emotes/chime.ogg'
+	sound = 'modular_R505/sound/effects/chime.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
