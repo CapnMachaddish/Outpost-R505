@@ -96,35 +96,28 @@
 
 /datum/emote/living/human/slowclaps
 	key = "slowclap"
-	message = "activates their slow clap processor."
+	message = "claps slowly."
 	emote_type = EMOTE_AUDIBLE
 	sound = 'sound/machines/slowclap.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
 /datum/emote/living/human/error
 	key = "error"
-	message = "emits an error noise."
+	message = "sounds an error notification."
 	emote_type = EMOTE_AUDIBLE
 	sound = 'modular_R505/sound/voice/xp_error.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
-/datum/emote/living/human/yay
-	key = "yay"
+/datum/emote/living/human/fanfare
+	key = "tada"
 	message = "emits an triumphant noise!"
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/hurray.ogg'
+	sound = 'modular_R505/sound/emotes/tada.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 	
 /datum/emote/living/human/chime
 	key = "chime"
-	message = "chimes a few notes."
+	message = "emits a quick descending chime."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/chime.ogg'
-	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
-	
-/datum/emote/living/human/chord
-	key = "chord"
-	message = "emits an erroneous chord!"
-	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/chord.ogg'
+	sound = 'modular_R505/sound/emotes/chime.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)

@@ -19,7 +19,13 @@ GLOBAL_LIST_EMPTY(scream_types)
 
 /datum/scream_type/robotic
 	name = "Robotic Scream"
-	male_screamsounds = list('modular_R505/sound/voice/scream_dialup1.ogg', 'modular_skyrat/modules/emotes/sound/voice/scream_silicon.ogg', 'modular_R505/sound/voice/scream_dialup2.ogg')
+	male_screamsounds = list('modular_skyrat/modules/emotes/sound/voice/scream_silicon.ogg')
+	female_screamsounds = null
+	restricted_species_type = /datum/species/robotic
+
+/datum/scream_type/robotic2
+	name = "Robotic Scream 2"
+	male_screamsounds = list('modular_R505/sound/effects/scream_dialup1.ogg', 'modular_R505/effects/voice/scream_dialup2.ogg')
 	female_screamsounds = null
 	restricted_species_type = /datum/species/robotic
 
