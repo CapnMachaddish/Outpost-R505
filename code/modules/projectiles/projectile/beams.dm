@@ -29,9 +29,9 @@
 
 /obj/projectile/beam/laser/hitscan
 	hitscan = TRUE
-	muzzle_type = /obj/effect/projectile/muzzle/laser/emitter
-	tracer_type = /obj/effect/projectile/tracer/laser/emitter
-	impact_type = /obj/effect/projectile/impact/laser/emitter
+	muzzle_type = /obj/effect/projectile/muzzle/laser
+	tracer_type = /obj/effect/projectile/tracer/laser
+	impact_type = /obj/effect/projectile/impact/laser
 	impact_effect_type = null
 	hitscan_light_intensity = 3
 	hitscan_light_range = 0.75
@@ -51,9 +51,9 @@
 
 /obj/projectile/beam/laser/hellfire/hitscan
 	hitscan = TRUE
-	muzzle_type = /obj/effect/projectile/muzzle/laser/emitter
-	tracer_type = /obj/effect/projectile/tracer/laser/emitter
-	impact_type = /obj/effect/projectile/impact/laser/emitter
+	muzzle_type = /obj/effect/projectile/muzzle/laser
+	tracer_type = /obj/effect/projectile/tracer/laser
+	impact_type = /obj/effect/projectile/impact/laser
 	impact_effect_type = null
 	hitscan_light_intensity = 3
 	hitscan_light_range = 0.75
@@ -103,9 +103,9 @@
 
 /obj/projectile/beam/scatter/hitscan
 	hitscan = TRUE
-	muzzle_type = /obj/effect/projectile/muzzle/laser/emitter
-	tracer_type = /obj/effect/projectile/tracer/laser/emitter
-	impact_type = /obj/effect/projectile/impact/laser/emitter
+	muzzle_type = /obj/effect/projectile/muzzle/laser
+	tracer_type = /obj/effect/projectile/tracer/laser
+	impact_type = /obj/effect/projectile/impact/laser
 	impact_effect_type = null
 	hitscan_light_intensity = 3
 	hitscan_light_range = 0.75
@@ -133,9 +133,9 @@
 	impact_type = /obj/effect/projectile/impact/xray
 /obj/projectile/beam/xray/hitscan
 	hitscan = TRUE
-	muzzle_type = /obj/effect/projectile/muzzle/laser/emitter
-	tracer_type = /obj/effect/projectile/tracer/laser/emitter
-	impact_type = /obj/effect/projectile/impact/laser/emitter
+	muzzle_type = /obj/effect/projectile/muzzle/xray
+	tracer_type = /obj/effect/projectile/tracer/xray
+	impact_type = /obj/effect/projectile/impact/xray
 	impact_effect_type = null
 	hitscan_light_intensity = 3
 	hitscan_light_range = 0.75
@@ -174,9 +174,9 @@
 
 /obj/projectile/beam/pulse/hitscan
 	hitscan = TRUE
-	muzzle_type = /obj/effect/projectile/muzzle/laser/emitter
-	tracer_type = /obj/effect/projectile/tracer/laser/emitter
-	impact_type = /obj/effect/projectile/impact/laser/emitter
+	muzzle_type = /obj/effect/projectile/muzzle/pulse
+	tracer_type = /obj/effect/projectile/tracer/pulse
+	impact_type = /obj/effect/projectile/impact/pulse
 	impact_effect_type = null
 	hitscan_light_intensity = 3
 	hitscan_light_range = 0.75
