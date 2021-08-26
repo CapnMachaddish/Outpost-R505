@@ -4310,4 +4310,5 @@
 #include "modular_skyrat\modules\verbs\code\modules\mob\say.dm"
 #include "modular_skyrat\modules\verbs\code\modules\mob\subtle.dm"
 #include "modular_skyrat\modules\xenomorph\code\xenomorph_balance.dm"
+#include "modular_R505\code\mobs\mimic.dm"
 // END_INCLUDE
