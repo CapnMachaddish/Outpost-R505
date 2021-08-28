@@ -17,7 +17,7 @@
 	explosion_block = 1
 	safe = FALSE
 	layer = BELOW_OPEN_DOOR_LAYER
-	closingLayer = BELOW_OPEN_DOOR_LAYER //SKYRAT EDIT CHANGE - AESTHETICS - ORIGINAL: CLOSED_FIREDOOR_LAYER
+	closingLayer = CLOSED_FIREDOOR_LAYER
 	assemblytype = /obj/structure/firelock_frame
 	armor = list(MELEE = 10, BULLET = 30, LASER = 20, ENERGY = 20, BOMB = 30, BIO = 100, RAD = 100, FIRE = 95, ACID = 70)
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
@@ -44,17 +44,19 @@
 	else
 		. += "<span class='notice'>The bolt locks have been <i>unscrewed</i>, but the bolts themselves are still <b>wrenched</b> to the floor.</span>"
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/door/firedoor/proc/CalculateAffectingAreas()
 	remove_from_areas()
 	affecting_areas = get_adjacent_open_areas(src) | get_area(src)
 	for(var/I in affecting_areas)
 		var/area/A = I
 		LAZYADD(A.firedoors, src)
+*/ //SKYRAT EDIT END
 
 /obj/machinery/door/firedoor/closed
 	icon_state = "door_closed"
 	density = TRUE
-
+/* //SKYRAT EDIT REMOVAL BEGIN
 //see also turf/AfterChange for adjacency shennanigans
 
 /obj/machinery/door/firedoor/proc/remove_from_areas()
@@ -67,6 +69,7 @@
 	remove_from_areas()
 	affecting_areas.Cut()
 	return ..()
+*/ //SKYRAT EDIT REMOVAL END
 
 /obj/machinery/door/firedoor/Bumped(atom/movable/AM)
 	if(panel_open || operating)
@@ -209,10 +212,11 @@
 		if("closing")
 			flick("door_closing", src)
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/door/firedoor/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state]_[density ? "closed" : "open"]"
-
+*/ //SKYRAT EDIT REMOVAL END
 /obj/machinery/door/firedoor/update_overlays()
 	. = ..()
 	if(!welded)

@@ -39,6 +39,7 @@
 	//Has this firealarm been triggered by its enviroment?
 	var/triggered = FALSE
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/firealarm/Initialize(mapload, dir, building)
 	. = ..()
 	if(dir)
@@ -51,15 +52,16 @@
 	update_appearance()
 	myarea = get_area(src)
 	LAZYADD(myarea.firealarms, src)
-	
+
 	AddElement(/datum/element/atmos_sensitive, mapload)
 	RegisterSignal(SSsecurity_level, COMSIG_SECURITY_LEVEL_CHANGED, .proc/check_security_level)
+
 
 /obj/machinery/firealarm/Destroy()
 	myarea.firereset(src)
 	LAZYREMOVE(myarea.firealarms, src)
 	return ..()
-
+*/ //SKYRAT EDIT REMOVAL END
 /obj/machinery/firealarm/update_icon_state()
 	if(panel_open)
 		icon_state = "fire_b[buildstage]"
@@ -124,6 +126,7 @@
 							"<span class='notice'>You emag [src], disabling its thermal sensors.</span>")
 	playsound(src, "sparks", 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/firealarm/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
 	return (exposed_temperature > T0C + 200 || exposed_temperature < BODYTEMP_COLD_DAMAGE_LIMIT) && !(obj_flags & EMAGGED) && !machine_stat
 
@@ -143,6 +146,7 @@
 		triggered = FALSE
 		myarea.triggered_firealarms -= 1
 		update_appearance()
+*/ //SKYRAT EDIT REMOVAL END
 
 /**
  * Signal handler for checking if we should update fire alarm appearance accordingly to a newly set security level
@@ -157,6 +161,7 @@
 	if(is_station_level(z))
 		update_appearance()
 
+	/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/firealarm/proc/alarm(mob/user)
 	if(!is_operational || !COOLDOWN_FINISHED(src, last_alarm))
 		return
@@ -185,6 +190,7 @@
 		reset(user)
 	else
 		alarm(user)
+*/ //SKYRAT EDIT REMOVAL END
 
 /obj/machinery/firealarm/attack_ai(mob/user)
 	return attack_hand(user)
@@ -192,6 +198,7 @@
 /obj/machinery/firealarm/attack_robot(mob/user)
 	return attack_hand(user)
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/firealarm/attackby(obj/item/W, mob/living/user, params)
 	add_fingerprint(user)
 
@@ -296,6 +303,7 @@
 					return
 
 	return ..()
+*/ //SKYRAT EDIT REMOVAL END
 
 /obj/machinery/firealarm/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if((buildstage == 0) && (the_rcd.upgrade & RCD_UPGRADE_SIMPLE_CIRCUITS))
@@ -324,12 +332,14 @@
 		deconstruct()
 	..()
 
+/* //SKYRAT EDIT REMOVAL BEGIN
 /obj/machinery/firealarm/obj_break(damage_flag)
 	if(buildstage == 0) //can't break the electronics if there isn't any inside.
 		return
 	. = ..()
 	if(.)
 		LAZYREMOVE(myarea.firealarms, src)
+*/ //SKYRAT EDIT REMOVAL END
 
 /obj/machinery/firealarm/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))

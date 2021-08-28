@@ -34,3 +34,12 @@
 	#define COMPONENT_POWER_SUCCESS (1<<0)
 	#define COMPONENT_NO_CELL  (1<<1)
 	#define COMPONENT_NO_CHARGE (1<<2)
+
+// Firealarm signals
+/// /obj/machinery/firealarm/proc/trigger_effects(manual = FALSE)
+#define COMSIG_FIREALARM_TRIGGERED_ON "firealarm_triggered_on"
+#define COMSIG_FIREALARM_TRIGGER_DOORS "firealarm_trigger_doors"
+/// /obj/machinery/firealarm/proc/untrigger_effects()
+#define COMSIG_FIREALARM_TRIGGERED_OFF "firealarm_triggered_off"
+/// /obj/machinery/door/firedoor/proc/trigger_hot()
+#define COMSIG_FIREDOOR_CLOSED_FIRE "firedoor_closed_fire"
