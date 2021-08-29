@@ -93,7 +93,7 @@
 	name = "durathread jumpskirt"
 	desc = "A jumpskirt made from durathread, its resilient fibres provide some protection to the wearer."
 	icon_state = "durathreadskirt"
-	item_state = "durathreadskirt"
+	inhand_icon_state = "durathreadskirt"
 	armor = list("melee" = 9, "laser" = 9, "fire" = 39, "acid" = 9, "bomb" = 4)
 
 /obj/item/clothing/under/misc/bouncer
