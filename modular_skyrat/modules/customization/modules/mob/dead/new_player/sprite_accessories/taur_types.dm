@@ -85,6 +85,7 @@
 	icon_state = "naga"
 	taur_mode = STYLE_TAUR_SNAKE
 	hide_legs = TRUE
+	relevent_layers = list(BODY_ADJ_LAYER)
 
 /datum/sprite_accessory/taur/otie
 	name = "Otie"

@@ -183,3 +183,4 @@
 	name = "Cybernetic Naga"
 	icon_state = "synthnaga"
 	taur_mode = STYLE_TAUR_SNAKE
+	relevent_layers = list(BODY_ADJ_LAYER)
