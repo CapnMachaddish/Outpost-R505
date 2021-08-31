@@ -242,3 +242,27 @@
 	turf_type = /turf/open/floor/grass/snow/safe
 	mineralType = "snow"
 	merge_type = /obj/item/stack/tile/mineral/snow
+
+/obj/item/stack/tile/mineral/sandstone
+	name = "sandstone tile"
+	singular_name = "sandstone floor tile"
+	desc = "A rough sandstone tile."
+	icon_state = "tile_sandstone"
+	turf_type = /turf/open/floor/mineral/sandstone_floor
+	mineralType = "sandstone"
+
+/obj/item/stack/tile/mineral/crimsonstone
+	name = "crimson tile"
+	singular_name = "crimson floor tile"
+	desc = "A rough, red stone tile."
+	icon_state = "tile_crimsonstone"
+	turf_type = /turf/open/floor/mineral/crimsonstone_floor
+	mineralType = "sandstone"
+
+/obj/item/stack/tile/mineral/basaltstone
+	name = "basalt tile"
+	singular_name = "basalt floor tile"
+	desc = "A rough basalt tile."
+	icon_state = "tile_basaltstone"
+	turf_type = /turf/open/floor/mineral/basaltstone_floor
+	mineralType = "sandstone"

@@ -21,7 +21,7 @@
 	time = 40
 	category = CAT_CLOTHING
 
-	/datum/crafting_recipe/durathread_jumpskirt
+/datum/crafting_recipe/durathread_jumpskirt
 	name = "Durathread Jumpskirt"
 	result = /obj/item/clothing/under/misc/durathread/skirt
 	reqs = list(/obj/item/stack/sheet/durathread = 4)

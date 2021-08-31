@@ -7,6 +7,7 @@
  * Diamond floor
  * Uranium floor
  * Shuttle floor (Titanium)
+ * Sand floors
  */
 
 /turf/open/floor/mineral
@@ -307,3 +308,28 @@
 
 /turf/open/floor/mineral/abductor/burn_tile()
 	return //unburnable
+
+//SAND
+/turf/open/floor/mineral/sandstone_floor
+	name = "sandstone floor"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "sandstonef"
+	floor_tile = /obj/item/stack/tile/mineral/sandstone
+	icons = list("sandstonef","sandstonef_dam")
+	custom_materials = list(/datum/material/sandstone = 500)
+
+/turf/open/floor/mineral/crimsonstone_floor
+	name = "crimson floor"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "crimsonstone"
+	floor_tile = /obj/item/stack/tile/mineral/crimsonstone
+	icons = list("crimsonstone","crimsonstone_dam")
+	custom_materials = list(/datum/material/sandstone = 500)
+
+/turf/open/floor/mineral/basaltstone_floor
+	name = "basalt floor"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "basaltstone"
+	floor_tile = /obj/item/stack/tile/mineral/basaltstone
+	icons = list("basaltstone","basaltstone_dam")
+	custom_materials = list(/datum/material/sandstone = 500)
