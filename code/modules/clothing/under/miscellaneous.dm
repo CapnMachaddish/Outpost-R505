@@ -92,9 +92,13 @@
 /obj/item/clothing/under/misc/durathread/skirt
 	name = "durathread jumpskirt"
 	desc = "A jumpskirt made from durathread, its resilient fibres provide some protection to the wearer."
+	icon = 'icons/mob/clothing/under/misc.dmi'
 	icon_state = "durathreadskirt"
 	inhand_icon_state = "durathreadskirt"
-	armor = list("melee" = 9, "laser" = 9, "fire" = 39, "acid" = 9, "bomb" = 4)
+	body_parts_covered = CHEST|GROIN|ARMS
+	mutant_variants = NONE
+	can_adjust = FALSE
+	armor = list(MELEE = 10, LASER = 10, FIRE = 40, ACID = 10, BOMB = 5)
 
 /obj/item/clothing/under/misc/bouncer
 	name = "bouncer uniform"
