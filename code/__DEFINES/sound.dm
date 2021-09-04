@@ -15,6 +15,7 @@
 #define CHANNEL_AMBIENCE 1014
 #define CHANNEL_BUZZ 1013
 #define CHANNEL_BICYCLE 1012
+#define CHANNEL_HEV 1011
 //SKYRAT EDIT CHANGE END
 ///Default range of a sound.
 #define SOUND_RANGE 17
@@ -86,6 +87,7 @@
 #define SOUND_ENVIRONMENT_DIZZY 24
 #define SOUND_ENVIRONMENT_PSYCHOTIC 25
 //If we ever make custom ones add them here
+#define SOUND_ENVIROMENT_PHASED list(1.8, 0.5, -1000, -4000, 0, 5, 0.1, 1, -15500, 0.007, 2000, 0.05, 0.25, 1, 1.18, 0.348, -5, 2000, 250, 0, 3, 100, 63)
 
 //"sound areas": easy way of keeping different types of areas consistent.
 #define SOUND_AREA_STANDARD_STATION SOUND_ENVIRONMENT_PARKING_LOT
@@ -140,6 +142,7 @@
 #define ANNOUNCER_SPOOKY "announcer_spooky"
 #define ANNOUNCER_ERTYES "announcer_ertyes"
 #define ANNOUNCER_MUTANTS "announcer_mutants"
+#define ANNOUNCER_KLAXON "announcer_klaxon"
 //SKYRAT EDIT END
 
 
@@ -180,6 +183,7 @@ GLOBAL_LIST_INIT(announcer_keys, list(
 	ANNOUNCER_BLUESPACEARTY,
 	ANNOUNCER_SPOOKY,
 	ANNOUNCER_ERTYES,
-	ANNOUNCER_MUTANTS
+	ANNOUNCER_MUTANTS,
+	ANNOUNCER_KLAXON
 	//SKYRAT EDIT END
 ))

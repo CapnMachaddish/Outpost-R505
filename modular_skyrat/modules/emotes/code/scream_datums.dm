@@ -23,12 +23,6 @@ GLOBAL_LIST_EMPTY(scream_types)
 	female_screamsounds = null
 	restricted_species_type = /datum/species/robotic
 
-/datum/scream_type/robotic2
-	name = "Robotic Scream 2"
-	male_screamsounds = list('modular_R505/sound/effects/scream_dialup1.ogg', 'modular_R505/sound/effects/scream_dialup2.ogg')
-	female_screamsounds = null
-	restricted_species_type = /datum/species/robotic
-
 /datum/scream_type/lizard
 	name = "Lizard Scream"
 	male_screamsounds = list('sound/voice/lizard/lizard_scream_1.ogg', 'sound/voice/lizard/lizard_scream_3.ogg')

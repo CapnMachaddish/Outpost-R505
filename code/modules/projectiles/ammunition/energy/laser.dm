@@ -1,27 +1,27 @@
 /obj/item/ammo_casing/energy/laser
 	projectile_type = /obj/projectile/beam/laser
+	e_cost = 83
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/laser/hellfire
-	projectile_type = /obj/projectile/beam/laser/hellfire/hitscan
-	e_cost = 130
+	projectile_type = /obj/projectile/beam/laser/hellfire
+	e_cost = 100
 	select_name = "maim"
 
 /obj/item/ammo_casing/energy/laser/hellfire/antique
 	e_cost = 100
 
 /obj/item/ammo_casing/energy/lasergun
-	projectile_type = /obj/projectile/beam/laser/hitscan
-	e_cost = 71
+	projectile_type = /obj/projectile/beam/laser
+	e_cost = 62.5
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/lasergun/old
-	projectile_type = /obj/projectile/beam/laser/hitscan
+	projectile_type = /obj/projectile/beam/laser
 	e_cost = 200
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/laser/hos
-	projectile_type = /obj/projectile/beam/laser/hitscan
 	e_cost = 120
 
 /obj/item/ammo_casing/energy/laser/practice
@@ -30,7 +30,7 @@
 	harmful = FALSE
 
 /obj/item/ammo_casing/energy/laser/scatter
-	projectile_type = /obj/projectile/beam/scatter/hitscan
+	projectile_type = /obj/projectile/beam/scatter
 	pellets = 5
 	variance = 25
 	select_name = "scatter"
@@ -47,7 +47,7 @@
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 
 /obj/item/ammo_casing/energy/laser/pulse
-	projectile_type = /obj/projectile/beam/pulse/hitscan
+	projectile_type = /obj/projectile/beam/pulse
 	e_cost = 200
 	select_name = "DESTROY"
 	fire_sound = 'sound/weapons/pulse.ogg'
@@ -69,7 +69,7 @@
 	projectile_type = /obj/projectile/beam/lasertag/redtag/hitscan
 
 /obj/item/ammo_casing/energy/xray
-	projectile_type = /obj/projectile/beam/xray/hitscan
+	projectile_type = /obj/projectile/beam/xray
 	e_cost = 50
 	fire_sound = 'sound/weapons/laser3.ogg'
 

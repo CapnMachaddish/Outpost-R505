@@ -1,5 +1,5 @@
 
-#define EMOTE_DELAY 0 SECONDS //To prevent spam emotes.
+#define EMOTE_DELAY 5 SECONDS //To prevent spam emotes.
 
 /mob
 	var/nextsoundemote = 1 //Time at which the next emote can be played
@@ -28,21 +28,16 @@
 
 
 /datum/emote/living/cough/get_sound(mob/living/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.dna)
-			if(H.dna.species.unambiguous_gender)
-				return pick(H.dna.species.cough_sounds[user.gender == FEMALE ? FEMALE : MALE])
-			else
-				return pick(H.dna.species.cough_sounds)
+	if(isvox(user))
+		return 'modular_skyrat/modules/emotes/sound/emotes/voxcough.ogg'
 	if(iscarbon(user))
-		if(user.gender == FEMALE)
-			return pick('modular_skyrat/modules/emotes/sound/emotes/female/female_cough_1.ogg',
-						'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_2.ogg',
-						'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_3.ogg')
-		return pick('modular_skyrat/modules/emotes/sound/emotes/male/male_cough_1.ogg',
-					'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_2.ogg',
-					'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_3.ogg')
+		if(user.gender == MALE)
+			return pick('modular_skyrat/modules/emotes/sound/emotes/male/male_cough_1.ogg',
+						'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_2.ogg',
+						'modular_skyrat/modules/emotes/sound/emotes/male/male_cough_3.ogg')
+		return pick('modular_skyrat/modules/emotes/sound/emotes/female/female_cough_1.ogg',
+					'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_2.ogg',
+					'modular_skyrat/modules/emotes/sound/emotes/female/female_cough_3.ogg')
 	return
 
 /datum/emote/living/sneeze
@@ -50,18 +45,11 @@
 
 /datum/emote/living/sneeze/get_sound(mob/living/user)
 	if(isvox(user))
-		return 
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.dna)
-			if(H.dna.species.unambiguous_gender)
-				return pick(H.dna.species.sneeze_sounds[user.gender == FEMALE ? FEMALE : MALE])
-			else
-				return pick(H.dna.species.sneeze_sounds)
+		return 'modular_skyrat/modules/emotes/sound/emotes/voxsneeze.ogg'
 	if(iscarbon(user))
-		if(user.gender == FEMALE)
-			return 'modular_skyrat/modules/emotes/sound/emotes/female/female_sneeze.ogg'
-		return 'modular_skyrat/modules/emotes/sound/emotes/male/male_sneeze.ogg'
+		if(user.gender == MALE)
+			return 'modular_skyrat/modules/emotes/sound/emotes/male/male_sneeze.ogg'
+		return 'modular_skyrat/modules/emotes/sound/emotes/female/female_sneeze.ogg'
 	return
 
 /datum/emote/living/peep
@@ -252,9 +240,10 @@
 	key = "clap"
 	key_third_person = "claps"
 	message = "claps."
-	emote_type = EMOTE_AUDIBLE
 	muzzle_ignore = TRUE
 	hands_use_check = TRUE
+	emote_type = EMOTE_AUDIBLE
+	audio_cooldown = 5 SECONDS
 	vary = TRUE
 	mob_type_allowed_typecache = list(/mob/living/carbon, /mob/living/silicon/pai)
 
@@ -287,28 +276,6 @@
 	if(user.usable_hands < 2)
 		return FALSE
 	return ..()
-
-/datum/emote/living/laugh
-	key = "laugh"
-	key_third_person = "laughs"
-	message = "laughs."
-	message_mime = "laughs silently!"
-	emote_type = EMOTE_AUDIBLE
-	vary = TRUE
-	mob_type_allowed_typecache = list(/mob/living/carbon, /mob/living/silicon/pai)
-
-/datum/emote/living/laugh/get_sound(mob/living/user)
-	if(ismoth(user))
-		return 'modular_skyrat/modules/emotes/sound/emotes/mothlaugh.ogg'
-	if(isinsect(user))
-		return 'modular_skyrat/modules/emotes/sound/emotes/mothlaugh.ogg'
-	if(iscarbon(user))
-		if(user.gender == MALE)
-			return pick('sound/voice/human/manlaugh1.ogg',
-						'sound/voice/human/manlaugh2.ogg')
-		return pick('modular_skyrat/modules/emotes/sound/emotes/female/female_giggle_1.ogg',
-					'modular_skyrat/modules/emotes/sound/emotes/female/female_giggle_2.ogg')
-	return
 
 /datum/emote/living/headtilt
 	key = "tilt"
@@ -375,7 +342,6 @@
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/hoot.ogg'
-	//cooldown = 2 SECONDS -- Removed as the current global cooldown is larger
 
 /datum/emote/living/growl
 	key = "growl"
@@ -417,15 +383,6 @@
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/wurble.ogg'
-
-/datum/emote/living/awoo2
-	key = "awoo2"
-	key_third_person = "awoos"
-	message = "lets out an awoo!"
-	emote_type = EMOTE_AUDIBLE
-	vary = TRUE
-	sound = 'modular_skyrat/modules/emotes/sound/voice/long_awoo.ogg'
-	//cooldown = 3 SECONDS -- Removed as the current global cooldown is larger
 
 /datum/emote/living/rattle
 	key = "rattle"
@@ -489,10 +446,18 @@
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/feline_purr.ogg'
 
-/datum/emote/living/meow2
-	key = "meow2"
-	key_third_person = "merowrs!"
-	message = "merowrs!"
+/datum/emote/living/moo
+	key = "moo"
+	key_third_person = "moos!"
+	message = "moos!"
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
-	sound = 'modular_skyrat/modules/emotes/sound/voice/merowr.ogg'
+	sound = 'modular_skyrat/modules/emotes/sound/voice/moo.ogg'
+
+/datum/emote/living/honk
+	key = "honk1"
+	key_third_person = "honks loudly like a goose!"
+	message = "honks loudly like a goose!"
+	emote_type = EMOTE_AUDIBLE
+	vary = TRUE
+	sound = 'modular_skyrat/modules/emotes/sound/voice/goose_honk.ogg'

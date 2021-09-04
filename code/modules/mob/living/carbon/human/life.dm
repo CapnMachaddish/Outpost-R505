@@ -64,6 +64,10 @@
 
 	if(chest_covered && head_covered)
 		return ONE_ATMOSPHERE
+	if(ismovable(loc))
+		/// If we're in a space with 0.5 content pressure protection, it averages the values, for example.
+		var/atom/movable/occupied_space = loc
+		return (occupied_space.contents_pressure_protection * ONE_ATMOSPHERE + (1 - occupied_space.contents_pressure_protection) * pressure)
 	return pressure
 
 
@@ -75,24 +79,12 @@
 	return ..()
 
 /mob/living/carbon/human/handle_mutations_and_radiation(delta_time, times_fired)
-	var/before_radstuff = radiation
 	if(!dna || !dna.species.handle_mutations_and_radiation(src, delta_time, times_fired))
 		..()
-	else
-		//BEGIN R505 EDIT: Being in space gives radiation based on the lack of nearby closed turfs
-		if(isspaceturf(loc))
-			var/rad_pulse = GLOB.space_radiation
-			for(var/turf/T in orange(2, src))
-				if(isclosedturf(T))
-					rad_pulse *= 0.5
-			radiation_pulse(src, rad_pulse)
-		if(istype(wear_suit, /obj/item/clothing/suit/space))
-			radiation = before_radstuff
-		//END R505 EDIT
 
 /mob/living/carbon/human/breathe()
-	if(!dna.species.breathe(src))
-		..()
+	if(!HAS_TRAIT(src, TRAIT_NOBREATH))
+		return ..()
 
 /mob/living/carbon/human/check_breath(datum/gas_mixture/breath)
 
@@ -110,8 +102,8 @@
 
 		if(S.breathid == "o2")
 			throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
-		else if(S.breathid == "tox")
-			throw_alert("not_enough_tox", /atom/movable/screen/alert/not_enough_tox)
+		else if(S.breathid == "plas")
+			throw_alert("not_enough_plas", /atom/movable/screen/alert/not_enough_plas)
 		else if(S.breathid == "co2")
 			throw_alert("not_enough_co2", /atom/movable/screen/alert/not_enough_co2)
 		else if(S.breathid == "n2")

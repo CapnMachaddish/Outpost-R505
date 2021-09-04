@@ -9,7 +9,7 @@
 	modifystate = TRUE
 	flags_1 =  CONDUCT_1
 	slot_flags = ITEM_SLOT_BACK
-	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse, /obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/lasergun)
+	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse, /obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/laser)
 	cell_type = "/obj/item/stock_parts/cell/pulse"
 
 /obj/item/gun/energy/pulse/emp_act(severity)
@@ -55,7 +55,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse)
 
 /obj/item/gun/energy/pulse/destroyer/attack_self(mob/living/user)
-	to_chat(user, "<span class='danger'>[src.name] has three settings, and they are all DESTROY.</span>")
+	to_chat(user, span_danger("[src.name] has three settings, and they are all DESTROY."))
 
 /obj/item/gun/energy/pulse/pistol
 	name = "pulse pistol"
@@ -76,9 +76,3 @@
 	icon_state = "m1911"
 	inhand_icon_state = "gun"
 	cell_type = "/obj/item/stock_parts/cell/infinite"
-
-/obj/item/gun/energy/pulse/pistol/m1911/loyalpin
-	pin = /obj/item/firing_pin/implant/mindshield
-
-/obj/item/gun/energy/pulse/pistol/m1911/loyalpin/nosafety
-	has_gun_safety = FALSE

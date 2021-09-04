@@ -5,28 +5,22 @@
 	var/list/hiddenprints //assoc ckey = realname/gloves/ckey
 	var/list/blood_DNA //assoc dna = bloodtype
 	var/list/fibers //assoc print = print
-	var/blood_color
 
 /datum/component/forensics/InheritComponent(datum/component/forensics/F, original) //Use of | and |= being different here is INTENTIONAL.
-	fingerprints = fingerprints | F.fingerprints
-	hiddenprints = hiddenprints | F.hiddenprints
-	blood_DNA = blood_DNA | F.blood_DNA
-	fibers = fibers | F.fibers
-	if(blood_color != F.blood_color && blood_color)
-		blood_color = BlendRGB(blood_color, F.blood_color, 0.5)
-	else
-		blood_color = F.blood_color
+	fingerprints = LAZY_LISTS_OR(fingerprints, F.fingerprints)
+	hiddenprints = LAZY_LISTS_OR(hiddenprints, F.hiddenprints)
+	blood_DNA = LAZY_LISTS_OR(blood_DNA, F.blood_DNA)
+	fibers = LAZY_LISTS_OR(fibers, F.fibers)
 	check_blood()
 	return ..()
 
-/datum/component/forensics/Initialize(new_fingerprints, new_hiddenprints, new_blood_DNA, new_fibers, new_color=COLOR_BLOOD)
+/datum/component/forensics/Initialize(new_fingerprints, new_hiddenprints, new_blood_DNA, new_fibers)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 	fingerprints = new_fingerprints
 	hiddenprints = new_hiddenprints
 	blood_DNA = new_blood_DNA
 	fibers = new_fibers
-	blood_color = new_color
 	check_blood()
 
 /datum/component/forensics/RegisterWithParent()
@@ -97,7 +91,7 @@
 			if(!ignoregloves)
 				H.gloves.add_fingerprint(H, TRUE) //ignoregloves = 1 to avoid infinite loop.
 				return
-		var/full_print = md5(H.dna.uni_identity)
+		var/full_print = md5(H.dna.unique_identity)
 		LAZYSET(fingerprints, full_print, full_print)
 	return TRUE
 
@@ -177,14 +171,12 @@
 	A.fingerprintslast = M.ckey
 	return TRUE
 
-/datum/component/forensics/proc/add_blood_DNA(list/dna, _color) //list(dna_enzymes = type)
+/datum/component/forensics/proc/add_blood_DNA(list/dna) //list(dna_enzymes = type)
 	if(!length(dna))
 		return
 	LAZYINITLIST(blood_DNA)
 	for(var/i in dna)
 		blood_DNA[i] = dna[i]
-	if(_color)
-		blood_color = _color
 	check_blood()
 	return TRUE
 

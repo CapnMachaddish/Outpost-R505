@@ -33,8 +33,14 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 	var/cell_can_be_removed = TRUE
 	///Our reference to the cell overlay
 	var/mutable_appearance/cell_overlay = null
+	///Do we have cell overlays to be applied?
+	var/has_cell_overlays
 
-/datum/component/cell/Initialize(cell_override, _on_cell_removed, _power_use_amount, start_with_cell = TRUE, _cell_can_be_removed)
+/datum/component/cell/Initialize(cell_override, _on_cell_removed, _power_use_amount, start_with_cell = TRUE, _cell_can_be_removed, _has_cell_overlays = TRUE)
+	if(QDELETED(parent))
+		qdel(src)
+		return
+
 	if(!isitem(parent)) //Currently only compatable with items.
 		return COMPONENT_INCOMPATIBLE
 
@@ -42,6 +48,8 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 
 	if(_on_cell_removed)
 		src.on_cell_removed = _on_cell_removed
+
+	has_cell_overlays = _has_cell_overlays
 
 	if(_power_use_amount)
 		power_use_amount = _power_use_amount
@@ -56,10 +64,10 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 		inside_robot = TRUE
 	else if(start_with_cell)
 		var/obj/item/stock_parts/cell/new_cell
-		if(cell_override)
-			new_cell = new cell_override()
-		else
+		if(!cell_override)
 			new_cell = new /obj/item/stock_parts/cell/upgraded()
+		else
+			new_cell = new cell_override()
 		inserted_cell = new_cell
 		new_cell.forceMove(parent) //We use the parents location so things like EMP's can interact with the cell.
 	handle_cell_overlays()
@@ -124,13 +132,14 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 	if(!inserted_cell)
 		examine_list += "<span class='danger'>It does not have a cell inserted!</span>"
 	else if(!inside_robot)
-		examine_list += "<span class='notice'>It has [inserted_cell] inserted. It has <b>[inserted_cell.percent()]%</b> charge left.\
+		examine_list += "<span class='notice'>It has [inserted_cell] inserted. It has <b>[inserted_cell.percent()]%</b> charge left. \
 						Ctrl+Shift+Click to remove the [inserted_cell]."
 	else
 		examine_list += "<span class='notice'>It is drawing power from an external powersource, reading <b>[inserted_cell.percent()]%</b> charge.</span>"
 
 /// Handling of cell removal.
 /datum/component/cell/proc/remove_cell(datum/source, mob/user)
+	SIGNAL_HANDLER
 	if(!equipment.can_interact(user))
 		return
 
@@ -138,6 +147,9 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 		return
 
 	if(!cell_can_be_removed)
+		return
+
+	if(!isliving(user))
 		return
 
 	if(inserted_cell)
@@ -154,6 +166,7 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 
 /// Handling of cell insertion.
 /datum/component/cell/proc/insert_cell(datum/source, obj/item/inserting_item, mob/living/user, params)
+	SIGNAL_HANDLER
 	if(!equipment.can_interact(user))
 		return
 
@@ -174,6 +187,8 @@ component_cell_out_of_charge/component_cell_removed proc using loc where necessa
 	handle_cell_overlays(FALSE)
 
 /datum/component/cell/proc/handle_cell_overlays(update_overlays)
+	if(!has_cell_overlays)
+		return
 	if(inserted_cell)
 		cell_overlay = mutable_appearance(equipment.icon, "[initial(equipment.icon_state)]_cell")
 		equipment.add_overlay(cell_overlay)

@@ -1,23 +1,29 @@
 /datum/job/shaft_miner
 	title = "Shaft Miner"
 	department_head = list("Head of Personnel")
-	faction = "Station"
-	total_positions = 5		//SKYRAT EDIT: Original value (3)
-	spawn_positions = 5		//SKYRAT EDIT: Original value (3)
+	faction = FACTION_STATION
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#dcba97"
+	exp_granted_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/miner
-	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/mining)
+	plasmaman_outfit = /datum/outfit/plasmaman/mining
 
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_CAR
 
 	display_order = JOB_DISPLAY_ORDER_SHAFT_MINER
 	bounty_types = CIV_JOB_MINE
-	departments = DEPARTMENT_CARGO
+	departments_list = list(
+		/datum/job_department/cargo,
+		)
 
 	family_heirlooms = list(/obj/item/pickaxe/mini, /obj/item/shovel)
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_REOPEN_ON_ROUNDSTART_LOSS | JOB_ASSIGN_QUIRKS
+
 
 /datum/outfit/job/miner
 	name = "Shaft Miner"

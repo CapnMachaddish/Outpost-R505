@@ -29,43 +29,6 @@
 	R.freqlock = TRUE
 	..()
 
-/datum/outfit/centcom/intel_commander
-	name = "Intelligence Command Officer"
-	id = /obj/item/card/id/advanced/centcom
-	id_trim = /datum/id_trim/centcom/specops_officer/lead
-	uniform = /obj/item/clothing/under/syndicate
-	suit = /obj/item/clothing/suit/space/officer
-	back = /obj/item/storage/backpack/satchel/leather
-	backpack_contents = list(
-		/obj/item/storage/box/debugtools/alt,\
-		/obj/item/spellbook/centcom
-	)
-	skillchips = list(
-		/obj/item/skillchip/job/engineer,\
-		/obj/item/skillchip/disk_verifier,\
-		/obj/item/skillchip/quickercarry
-	)
-	belt = /obj/item/gun/energy/pulse/pistol/m1911/loyalpin/nosafety
-	ears = /obj/item/radio/headset/headset_cent/alt/commander
-	glasses = /obj/item/clothing/glasses/debug/eyepatch
-	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
-	head = /obj/item/clothing/head/helmet/space/beret
-	shoes = /obj/item/clothing/shoes/combat/swat
-	r_pocket = /obj/item/tank/internals/emergency_oxygen/double/pluox
-
-/datum/outfit/centcom/intel_commander/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	if(visualsOnly)
-		return
-
-	var/obj/item/card/id/W = H.wear_id
-	W.registered_name = H.real_name
-	W.update_label()
-	W.update_icon()
-
-	var/obj/item/radio/headset/R = H.ears
-	R.set_frequency(FREQ_COMMON)
-	..()
-
 /datum/outfit/space
 	name = "Standard Space Gear"
 
@@ -162,6 +125,9 @@
 	head = /obj/item/clothing/head/bandana/armored
 	shoes = /obj/item/clothing/shoes/sneakers/brown
 
+	back = /obj/item/storage/backpack/satchel/leather //SKYRAT EDIT ADDITION
+	backpack_contents = list(/obj/item/gun/ballistic/automatic/pistol/m1911, /obj/item/ammo_box/magazine/m45 = 3) //SKYRAT EDIT ADDITION
+
 /datum/outfit/pirate/post_equip(mob/living/carbon/human/equipped)
 	equipped.faction |= "pirate"
 
@@ -190,6 +156,9 @@
 	head = /obj/item/clothing/head/helmet/space/pirate/bandana
 	mask = /obj/item/clothing/mask/breath
 
+	back = /obj/item/storage/backpack/satchel/leather //SKYRAT EDIT ADDITION
+	backpack_contents = list(/obj/item/gun/ballistic/automatic/pistol/m1911, /obj/item/ammo_box/magazine/m45 = 3) //SKYRAT EDIT ADDITION
+
 /datum/outfit/pirate/space/captain
 	name = "Space Pirate Captain (EVA)"
 
@@ -206,6 +175,9 @@
 	gloves = /obj/item/clothing/gloves/color/black
 	head = /obj/item/clothing/head/collectable/tophat
 	shoes = /obj/item/clothing/shoes/laceup
+
+	back = /obj/item/storage/backpack/satchel/leather //SKYRAT EDIT ADDITION
+	backpack_contents = list(/obj/item/gun/ballistic/automatic/pistol/m1911, /obj/item/ammo_box/magazine/m45 = 3) //SKYRAT EDIT ADDITION
 
 /datum/outfit/pirate/silverscale/captain
 	name = "Silver Scale Captain"
@@ -348,19 +320,19 @@
 	back = /obj/item/storage/backpack
 	backpack_contents = list(
 		/obj/item/storage/box/survival = 1,
+		/obj/item/spellbook = 1,
 )
 	ears = /obj/item/radio/headset
 	head = /obj/item/clothing/head/wizard
 	shoes = /obj/item/clothing/shoes/sandal/magic
 	r_pocket = /obj/item/teleportation_scroll
 	l_hand = /obj/item/staff
-	r_hand = /obj/item/spellbook
 
 /datum/outfit/wizard/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
 		return
 
-	var/obj/item/spellbook/S = locate() in H.held_items
+	var/obj/item/spellbook/S = locate() in H.back
 	if(S)
 		S.owner = H
 
@@ -370,6 +342,7 @@
 	r_pocket = /obj/item/teleportation_scroll/apprentice
 	r_hand = null
 	l_hand = null
+	backpack_contents = list(/obj/item/storage/box/survival = 1)
 
 /datum/outfit/wizard/red
 	name = "Red Wizard"
@@ -382,7 +355,7 @@
 
 	suit = /obj/item/clothing/suit/wizrobe/marisa
 	head = /obj/item/clothing/head/wizard/marisa
-	shoes = /obj/item/clothing/shoes/sandal/marisa
+	shoes = /obj/item/clothing/shoes/sneakers/marisa
 
 /datum/outfit/centcom/soviet
 	name = "Soviet Admiral"

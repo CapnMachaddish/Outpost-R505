@@ -93,11 +93,37 @@ CREATE TABLE `ban` (
   `unbanned_ip` INT(10) UNSIGNED NULL DEFAULT NULL,
   `unbanned_computerid` VARCHAR(32) NULL DEFAULT NULL,
   `unbanned_round_id` INT(11) UNSIGNED NULL DEFAULT NULL,
+  `discord_reported` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0', /* SKYRAT EDIT - Labelling bans for ease of reporting them over Discord. */
   PRIMARY KEY (`id`),
   KEY `idx_ban_isbanned` (`ckey`,`role`,`unbanned_datetime`,`expiration_time`),
   KEY `idx_ban_isbanned_details` (`ckey`,`ip`,`computerid`,`role`,`unbanned_datetime`,`expiration_time`),
   KEY `idx_ban_count` (`bantime`,`a_ckey`,`applies_to_admins`,`unbanned_datetime`,`expiration_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `citation`
+--
+DROP TABLE IF EXISTS `citation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE IF NOT EXISTS `citation` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `round_id` int(11) unsigned NOT NULL,
+  `server_ip` int(11) unsigned NOT NULL,
+  `server_port` int(11) unsigned NOT NULL,
+  `citation` text NOT NULL,
+  `action` varchar(20) NOT NULL DEFAULT '',
+  `sender` varchar(32) NOT NULL DEFAULT '',
+  `sender_ic` varchar(64) NOT NULL DEFAULT '' COMMENT 'Longer because this is the character name, not the ckey',
+  `recipient` varchar(64) NOT NULL DEFAULT '' COMMENT 'Longer because this is the character name, not the ckey',
+  `crime` text NOT NULL,
+  `fine` int(4) DEFAULT NULL,
+  `paid` int(4) DEFAULT 0,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_constraints` (`round_id`,`server_ip`,`server_port`,`citation`(100)) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,6 +263,25 @@ CREATE TABLE `library` (
   KEY `idx_lib_del_title` (`deleted`,`title`),
   KEY `idx_lib_search` (`deleted`,`author`,`title`,`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `library_action`
+--
+
+DROP TABLE IF EXISTS `library_action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `library_action` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `book` int(10) unsigned NOT NULL,
+  `reason` longtext DEFAULT NULL,
+  `ckey` varchar(11) NOT NULL DEFAULT '',
+  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `action` varchar(11) NOT NULL DEFAULT '',
+  `ip_addr` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -613,6 +658,33 @@ CREATE TABLE `game_log` (
   `message` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Table structure for table `text_adventures`
+--
+DROP TABLE IF EXISTS `text_adventures`;
+CREATE TABLE `text_adventures` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`adventure_data` LONGTEXT NOT NULL,
+	`uploader` VARCHAR(32) NOT NULL,
+	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`approved` TINYINT(1) NOT NULL DEFAULT FALSE,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+--
+-- Table structure for table `admin_connections`
+--
+DROP TABLE IF EXISTS `admin_connections`;
+CREATE TABLE `admin_connections` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `ckey` VARCHAR(32) NOT NULL,
+  `ip` INT(11) UNSIGNED NOT NULL,
+  `cid` VARCHAR(32) NOT NULL,
+  `verification_time` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `unique_constraints` (`ckey`, `ip`, `cid`)
+) ENGINE=InnoDB;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

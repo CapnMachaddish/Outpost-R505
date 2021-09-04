@@ -62,9 +62,6 @@
 
 	access = SSid_access.get_region_access_list(list(REGION_CENTCOM, REGION_ALL_STATION))
 
-/datum/id_trim/centcom/specops_officer/lead
-	assignment = "Intelligence Lead Officer"
-
 /// Trim for Centcom (Soviet) Admirals. All Centcom and Station Access.
 /datum/id_trim/centcom/admiral
 	assignment = "Admiral"

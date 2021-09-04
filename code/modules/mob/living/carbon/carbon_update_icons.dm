@@ -1,5 +1,5 @@
 //IMPORTANT: Multiple animate() calls do not stack well, so try to do them all at once if you can.
-/mob/living/carbon/update_transform()
+/mob/living/carbon/perform_update_transform()
 	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
 	var/final_pixel_y = pixel_y
 	var/final_dir = dir
@@ -57,9 +57,8 @@
 		if(client && hud_used && hud_used.hud_version != HUD_STYLE_NOHUD)
 			I.screen_loc = ui_hand_position(get_held_index_of_item(I))
 			client.screen += I
-			if(observers?.len)
-				for(var/M in observers)
-					var/mob/dead/observe = M
+			if(length(observers))
+				for(var/mob/dead/observe as anything in observers)
 					if(observe.client && observe.client.eye == src)
 						observe.client.screen += I
 					else
@@ -134,7 +133,7 @@
 
 	if(wear_neck)
 		if(!(check_obscured_slots() & ITEM_SLOT_NECK))
-			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi', override_icon = wear_neck.sprite_sheets[dna?.species.id])	//R505 EDIT -- sprite_sheets var
+			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi')
 		update_hud_neck(wear_neck)
 
 	apply_overlay(NECK_LAYER)
@@ -147,7 +146,7 @@
 		inv.update_appearance()
 
 	if(back)
-		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi', override_icon = back.sprite_sheets[dna?.species.id])	//R505 EDIT -- sprite_sheets var
+		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi')
 		update_hud_back(back)
 
 	apply_overlay(BACK_LAYER)
@@ -175,11 +174,14 @@
 
 /mob/living/carbon/update_inv_handcuffed()
 	remove_overlay(HANDCUFF_LAYER)
-	if(handcuffed)
-		var/file2use = 'icons/mob/mob.dmi'
-		if(dna?.species?.handcuff_icon)
-			file2use = dna.species.handcuff_icon
-		overlays_standing[HANDCUFF_LAYER] = mutable_appearance(file2use, "handcuff1", -HANDCUFF_LAYER)
+	if(handcuffed && !(handcuffed.item_flags & ABSTRACT)) //SKYRAT EDIT ADDED !(handcuffed.item_flags & ABSTRACT)
+		var/mutable_appearance/handcuff_overlay = mutable_appearance('icons/mob/mob.dmi', "handcuff1", -HANDCUFF_LAYER)
+		if(handcuffed.blocks_emissive)
+			var/mutable_appearance/handcuff_blocker = mutable_appearance('icons/mob/mob.dmi', "handcuff1", plane = EMISSIVE_PLANE, appearance_flags = KEEP_APART)
+			handcuff_blocker.color = GLOB.em_block_color
+			handcuff_overlay.overlays += handcuff_blocker
+
+		overlays_standing[HANDCUFF_LAYER] = handcuff_overlay
 		apply_overlay(HANDCUFF_LAYER)
 
 
@@ -215,10 +217,18 @@
 //eg: ammo counters, primed grenade flashing, etc.
 //"icon_file" is used automatically for inhands etc. to make sure it gets the right inhand file
 //SKYRAT EDIT CHANGE - CUSTOMIZATION
-///obj/item/proc/worn_overlays(isinhands = FALSE, icon_file) (original)
-/obj/item/proc/worn_overlays(isinhands = FALSE, icon_file, mutant_styles = NONE)
-	. = list()
+///obj/item/proc/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file) (original)
+/obj/item/proc/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, mutant_styles = NONE)
+	SHOULD_CALL_PARENT(TRUE)
+	RETURN_TYPE(/list)
 
+	. = list()
+	if(!blocks_emissive)
+		return
+
+	var/mutable_appearance/blocker_overlay = mutable_appearance(standing.icon, standing.icon_state, plane = EMISSIVE_PLANE, appearance_flags = KEEP_APART)
+	blocker_overlay.color = GLOB.em_block_color
+	. += blocker_overlay
 
 /mob/living/carbon/update_body()
 	update_body_parts()

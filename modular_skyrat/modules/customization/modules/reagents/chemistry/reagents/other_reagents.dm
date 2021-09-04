@@ -30,7 +30,7 @@
 	..()
 
 /datum/reagent/oil/on_mob_life(mob/living/carbon/C)
-	if(C.mob_biotypes & MOB_ROBOTIC && C.blood_volume < C.max_blood_volume)
+	if(C.mob_biotypes & MOB_ROBOTIC && C.blood_volume < BLOOD_VOLUME_NORMAL)
 		C.blood_volume += 0.5
 	..()
 

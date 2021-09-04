@@ -1,14 +1,15 @@
 /datum/job/doctor
 	title = "Medical Doctor"
 	department_head = list("Chief Medical Officer")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
+	exp_granted_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/doctor
-	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/medical, "teshari" = /datum/outfit/teshari/medical)
+	plasmaman_outfit = /datum/outfit/plasmaman/medical
 
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_MED
@@ -17,7 +18,9 @@
 
 	display_order = JOB_DISPLAY_ORDER_MEDICAL_DOCTOR
 	bounty_types = CIV_JOB_MED
-	departments = DEPARTMENT_MEDICAL
+	departments_list = list(
+		/datum/job_department/medical,
+		)
 
 	family_heirlooms = list(/obj/item/storage/firstaid/ancient/heirloom)
 
@@ -26,10 +29,13 @@
 		/obj/item/scalpel/advanced = 6,
 		/obj/item/retractor/advanced = 6,
 		/obj/item/cautery/advanced = 6,
-		/datum/reagent/toxin/formaldehyde = 6,
+		/obj/item/reagent_containers/glass/bottle/formaldehyde = 6,
 		/obj/effect/spawner/lootdrop/organ_spawner = 5,
 		/obj/effect/spawner/lootdrop/memeorgans = 1
 	)
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_REOPEN_ON_ROUNDSTART_LOSS | JOB_ASSIGN_QUIRKS
+
 
 /datum/outfit/job/doctor
 	name = "Medical Doctor"
@@ -48,7 +54,7 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
 	box = /obj/item/storage/box/survival/medical
 
-	skillchips = list(/obj/item/skillchip/entrails_reader, /obj/item/skillchip/quickcarry)
+	skillchips = list(/obj/item/skillchip/entrails_reader)
 
 	chameleon_extras = /obj/item/gun/syringe
 

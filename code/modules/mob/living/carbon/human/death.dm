@@ -7,9 +7,9 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 
 /mob/living/carbon/human/spawn_gibs(with_bodyparts)
 	if(with_bodyparts)
-		new /obj/effect/gibspawner/human(drop_location(), src, get_static_viruses(), dna.species.blood_color, dna.features["uses_skintone"] ? dna.features["skin_color"] : dna.features["mcolor"])
+		new /obj/effect/gibspawner/human(drop_location(), src, get_static_viruses())
 	else
-		new /obj/effect/gibspawner/human/bodypartless(drop_location(), src, get_static_viruses(), dna.species.blood_color, dna.features["uses_skintone"] ? dna.features["skin_color"] : dna.features["mcolor"])
+		new /obj/effect/gibspawner/human/bodypartless(drop_location(), src, get_static_viruses())
 
 /mob/living/carbon/human/spawn_dust(just_ash = FALSE)
 	if(just_ash)
@@ -40,7 +40,7 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 		SSblackbox.ReportDeath(src)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()])", LOG_ATTACK)
 
-	to_chat(src, "<span class='warning'>You have died. Barring complete bodyloss, you can in most cases be revived by other players. If you do not wish to be brought back, use the \"Do Not Resuscitate\" verb in the ghost tab.</span>")
+	to_chat(src, span_warning("You have died. Barring complete bodyloss, you can in most cases be revived by other players. If you do not wish to be brought back, use the \"Do Not Resuscitate\" verb in the ghost tab."))
 
 /mob/living/carbon/human/proc/makeSkeleton()
 	ADD_TRAIT(src, TRAIT_DISFIGURED, TRAIT_GENERIC)
