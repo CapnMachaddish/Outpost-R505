@@ -25,7 +25,7 @@
 
 /datum/roundstart_event/proc/generate_report_details()
 	return
-
+/*
 //Dust Storms
 /datum/roundstart_event/dust_storm
 	name = "Light Dust Storm"
@@ -50,7 +50,7 @@
 	return "Your station is hidden in the middle of an uncountably-large debris cloud. \
 	Take exercised caution when maintaining outside equipment. \
 	Meteor defense satellites are required to keep the station's hull fully maintained."
-
+*/
 //Space Radiation
 //The radiation_pulse will cause a bit of lag, but this is okay because this is happening roundstart and probably wouldn't be noticed
 GLOBAL_VAR_INIT(space_radiation, 66)

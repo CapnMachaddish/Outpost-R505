@@ -499,6 +499,8 @@
 	G_found.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
 	new_character.key = G_found.key
+	if((new_character.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+		new_character.AddComponent(/datum/component/arousal)
 
 	return new_character
 

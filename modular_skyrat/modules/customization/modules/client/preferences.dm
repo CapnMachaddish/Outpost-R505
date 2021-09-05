@@ -255,6 +255,8 @@ GLOBAL_LIST_INIT(food, list(
 	//Associative list, keyed by language typepath, pointing to LANGUAGE_UNDERSTOOD, or LANGUAGE_SPOKEN, for whether we understand or speak the language
 	var/list/languages = list()
 
+	var/r_preferences = R_PREF_AROUSAL //R505 Edit
+
 /datum/preferences/New(client/C)
 	parent = C
 
@@ -1202,6 +1204,10 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<b>Darkened Flashes:</b> (replaces flashes with a black screen) <a href='?_src_=prefs;preference=darkened_flash'>[darkened_flash ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
 
+			//R505 CHANGE - Accept Arousal
+			dat += "<b>Toggle Arousal:</b> <a href='?_src_=prefs;preference=toggle_arousal'>[r_preferences & R_PREF_AROUSAL ? "Enabled":"Disabled"]</a><br>"
+			//R505 CHANGE - Also exhibitionist
+			dat += "<b>Exhibitionist Preference:</b> <a href='?_src_=prefs;preference=toggle_exhibition'>[r_preferences & R_PREF_EXHIBITIONIST ? "Enabled":"Disabled"]</a><br>"
 			//aphrodisiac pref
 			dat += "<b>Be Affected by Aphrodisiacs:</b> <a href='?_src_=prefs;preference=aphrodisiacs_pref'>[(skyrat_toggles & APHRO_PREF) ? "Enabled":"Disabled"]</a><br>"
 			//cumface pref
@@ -2939,6 +2945,15 @@ GLOBAL_LIST_INIT(food, list(
 				//aphro pref
 				if("aphrodisiacs_pref")
 					skyrat_toggles ^= APHRO_PREF
+
+				//
+				//R505 PREFERENCES
+				if("toggle_arousal")
+					r_preferences ^= R_PREF_AROUSAL
+				if("toggle_exhibition")
+					r_preferences ^= R_PREF_EXHIBITIONIST
+				//End R505 Edit
+				//
 
 				//cumface pref
 				if("cumfaced_pref")

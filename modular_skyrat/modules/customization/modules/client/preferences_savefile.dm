@@ -447,6 +447,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["pda_style"], pda_style)
 	READ_FILE(S["pda_ringer"], pda_ringer)
 	READ_FILE(S["pda_color"], pda_color)
+
+	READ_FILE(S["r505_preferences"],	r_preferences) //R505 Edit
 	/*READ_FILE(S["feature_mcolor"], features["mcolor"])
 	READ_FILE(S["feature_ethcolor"], features["ethcolor"])
 	READ_FILE(S["feature_lizard_tail"], features["tail_lizard"])
@@ -799,6 +801,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pref_faction"] , pref_faction)
 
 	WRITE_FILE(S["languages"] , languages)
+
+	WRITE_FILE(S["r505_preferences"],  r_preferences) //R505 EDIT
 
 	return TRUE
 

@@ -39,6 +39,8 @@
 	else
 		M.name = src.name
 		M.real_name = src.real_name
+	if((M.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+		M.AddComponent(/datum/component/arousal)
 
 	if(has_dna() && M.has_dna())
 		var/mob/living/carbon/C = src

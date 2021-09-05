@@ -125,6 +125,8 @@
 				usr.client.prefs.safe_transfer_prefs_to(admin_officer, is_antag = TRUE)
 				admin_officer.equipOutfit(chosen_outfit)
 				admin_officer.key = usr.key
+				if((admin_officer.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+					admin_officer.AddComponent(/datum/component/arousal)
 			else
 				to_chat(usr, "<span class='warning'>Could not spawn you in as briefing officer as you are not a ghost!</spawn>")
 

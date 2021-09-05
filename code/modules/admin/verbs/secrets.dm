@@ -605,6 +605,8 @@
 			if (chosen.client)
 				chosen.client.prefs.safe_transfer_prefs_to(spawnedMob, is_antag = TRUE)
 				spawnedMob.key = chosen.key
+				if((spawnedMob.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+					spawnedMob.AddComponent(/datum/component/arousal)
 			players -= chosen
 		if (ishuman(spawnedMob) && ispath(humanoutfit, /datum/outfit))
 			var/mob/living/carbon/human/H = spawnedMob
