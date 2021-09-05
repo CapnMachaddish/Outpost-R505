@@ -778,3 +778,9 @@
 	target.layer = old_layer
 	target.plane = old_plane
 	current_button.appearance_cache = target.appearance
+
+//R505 Edit - Start
+/datum/action/item_action/dusting_implant
+	check_flags = NONE
+	name = "Activate Dusting Implant"
+//R505 Edit - End

@@ -343,6 +343,7 @@
 	var/flashcd = 20
 	var/overheat = 0
 	//Wearef to our arm
+	var/obj/item/organ/cyberimp/arm/flash/I = null //R505 Edit
 	var/datum/weakref/arm
 
 /obj/item/assembly/flash/armimplant/burn_out()
