@@ -3887,6 +3887,7 @@
 #include "modular_R505\code\modules_n_adds\arousal\hud.dm"
 #include "modular_R505\code\modules_n_adds\arousal\lewd_reagents.dm"
 #include "modular_R505\code\modules_n_adds\arousal\vars.dm"
+#include "modular_R505\code\modules_n_adds\augs\augment.dm"
 #include "modular_R505\code\modules_n_adds\body_markings\body_markings.dm"
 #include "modular_R505\code\modules_n_adds\centcomaugs\centcomimplants.dm"
 #include "modular_R505\code\modules_n_adds\centcomaugs\centcomspellbook.dm"
