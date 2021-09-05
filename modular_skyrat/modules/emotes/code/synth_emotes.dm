@@ -137,3 +137,11 @@
 	sound = 'modular_R505/sound/effects/chime.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 	cooldown = 2 SECONDS
+	
+/datum/emote/living/human/chord
+	key = "chord"
+	message = "emits a harsh chord."
+	emote_type = EMOTE_AUDIBLE
+	sound = 'modular_R505/sound/effects/chord.ogg'
+	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
+	cooldown = 2 SECONDS
