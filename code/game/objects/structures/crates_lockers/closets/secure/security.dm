@@ -129,7 +129,7 @@
 	// new /obj/item/clothing/under/rank/security/warden/formal(src) - SKRYAT EDIT REMOVAL - SEC_HUAL
 	// new /obj/item/clothing/under/rank/security/warden/skirt(src) - SKRYAT EDIT REMOVAL - SEC_HUAL
 	new /obj/item/clothing/under/rank/security/peacekeeper/tactical(src) //SKYRAT EDIT ADDITON - SEC_HAUL
-	new /obj/item/clothing/glasses/hud/security/sunglasses/peacekeeper(src) //SKYRAT EDIT CHANGE - SEC_HAUL
+	new /obj/item/clothing/glasses/hud/security/sunglasses(src) //R505 Edit - Reverts peacekeeper glasses to sec hud glasses
 	new /obj/item/holosign_creator/security(src)
 	new /obj/item/clothing/mask/gas/sechailer(src)
 	new /obj/item/storage/box/zipties(src)
@@ -152,7 +152,7 @@
 	new /obj/item/clothing/under/rank/security/peacekeeper/tactical(src) //SKYRAT EDIT ADDITON - SEC_HAUL
 	new /obj/item/radio/headset/headset_sec(src)
 	new /obj/item/radio/headset/headset_sec/alt(src)
-	new /obj/item/clothing/glasses/hud/security/sunglasses/peacekeeper(src) //SKRYAT EDIT CHANGE - SEC_HAUL - ORIGINAL: /obj/item/clothing/glasses/hud/security/sunglasses
+	new /obj/item/clothing/glasses/hud/security/sunglasses(src) //R505 Edit - Reverts peacekeeper glasses to sec hud glasses
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/holosign_creator/security(src) // SKYRAT EDIT ADD
 

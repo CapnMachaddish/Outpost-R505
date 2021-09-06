@@ -58,6 +58,7 @@
 	/// Something that can be worn by either gender, but looks different on each.
 	var/gender_specific
 	/// Determines if the accessory will be skipped by color preferences.
+	var/list/transmutable_bodyparts = list() //If the accessory will be applied to the mob's body parts - Outpost Edit
 	var/use_static
 	/**
 	 * Currently only used by mutantparts so don't worry about hair and stuff.

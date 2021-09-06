@@ -380,6 +380,8 @@
 	var/area/joined_area = get_area(new_character.loc)
 	if(joined_area)
 		joined_area.on_joining_game(new_character)
+	if((new_character.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+		new_character.AddComponent(/datum/component/arousal)
 	new_character = null
 	qdel(src)
 

@@ -277,6 +277,15 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	. = ..()
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
+//R505 Edit - Start
+/obj/item/radio/headset/headset_cent/alt/commander
+	name = "\improper CentCom bowman headset"
+	desc = "A headset especially for emergency response personnel. Protects ears from flashbangs."
+	icon_state = "cent_headset_alt"
+	inhand_icon_state = "cent_headset_alt"
+	keyslot = new /obj/item/encryptionkey/omni
+//R505 Edit - End
+
 /obj/item/radio/headset/silicon/pai
 	name = "\proper mini Integrated Subspace Transceiver "
 	subspace_transmission = FALSE

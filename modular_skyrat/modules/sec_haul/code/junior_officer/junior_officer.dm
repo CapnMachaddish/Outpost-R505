@@ -46,7 +46,7 @@
 	ears = /obj/item/radio/headset/headset_sec
 	uniform = /obj/item/clothing/under/rank/security/peacekeeper/junior
 	shoes = /obj/item/clothing/shoes/sneakers/black
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/peacekeeper
+	glasses =  /obj/item/clothing/glasses/hud/security/sunglasses //R505 Edit - Reverts peacekeeper glasses to sec hud glasses
 	head = /obj/item/clothing/head/soft/black/junior_officer
 
 	suit = /obj/item/clothing/suit/toggle/labcoat/junior_officer

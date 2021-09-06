@@ -94,5 +94,7 @@
 	body.flash_act()
 
 	if(ishuman(body) && istype(outfit))
+		if((body.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+			body.AddComponent(/datum/component/arousal)
 		outfit.equip(body)
 	playsound(T, respawn_sound, 50, TRUE)

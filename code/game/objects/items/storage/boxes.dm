@@ -1395,6 +1395,23 @@
 		)
 	generate_items_inside(items_inside,src)
 
+//R505 Edit - Start
+/obj/item/storage/box/debugtools/alt
+	name = "box of centcom tools"
+	icon_state = "syndiebox"
+
+/obj/item/storage/box/debugtools/alt/PopulateContents()
+	var/static/items_inside = list(
+		/obj/item/uplink/debug=1,\
+		/obj/item/uplink/nuclear/debug=1,\
+		/obj/item/autosurgeon/organ/syndicate/breathtubecc=1,\
+		/obj/item/autosurgeon/organ/syndicate/combattoolscc=1,\
+		/obj/item/autosurgeon/organ/syndicate/constructiontoolscc=1,\
+		/obj/item/book/granter/martial/cqc/plus=1
+		)
+	generate_items_inside(items_inside,src)
+//R505 Edit - End
+
 /obj/item/storage/box/ingredients //This box is for the randomly chosen version the chef used to spawn with, it shouldn't actually exist.
 	name = "ingredients box"
 	illustration = "fruit"

@@ -109,3 +109,14 @@
 
 /obj/item/autosurgeon/organ/syndicate/reviver
 	starting_organ = /obj/item/organ/cyberimp/chest/reviver
+
+//R505 Edit - Start
+/obj/item/autosurgeon/organ/syndicate/breathtubecc
+	starting_organ = /obj/item/organ/cyberimp/mouth/breathing_tube/empproof
+
+/obj/item/autosurgeon/organ/syndicate/combattoolscc
+	starting_organ = /obj/item/organ/cyberimp/arm/combat/centcom
+
+/obj/item/autosurgeon/organ/syndicate/constructiontoolscc
+	starting_organ = /obj/item/organ/cyberimp/arm/toolset/empproof/l
+//R505 Edit - End

@@ -101,7 +101,7 @@
 	uniform = /obj/item/clothing/under/rank/security/peacekeeper/armadyne
 	gloves = /obj/item/clothing/gloves/combat/peacekeeper/armadyne
 	head =  /obj/item/clothing/head/beret/sec/peacekeeper/armadyne
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/peacekeeper/armadyne
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses //R505 Edit - Reverts peacekeeper glasses to sec hud glasses/armadyne
 	suit = /obj/item/clothing/suit/armor/vest/peacekeeper/armadyne
 	shoes = /obj/item/clothing/shoes/combat/peacekeeper/armadyne
 	belt = /obj/item/storage/belt/security/peacekeeper/armadyne
@@ -122,7 +122,7 @@
 	uniform = /obj/item/clothing/under/rank/security/peacekeeper/armadyne/tactical
 	gloves = /obj/item/clothing/gloves/combat/peacekeeper/armadyne
 	head =  /obj/item/clothing/head/beret/sec/peacekeeper/armadyne
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/peacekeeper/armadyne
+	glasses =  /obj/item/clothing/glasses/hud/security/sunglasses //R505 Edit - Reverts peacekeeper glasses to sec hud glasses/armadyne
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	suit = /obj/item/clothing/suit/armor/vest/peacekeeper/armadyne/armor
 	suit_store = /obj/item/gun/ballistic/automatic/dmr
