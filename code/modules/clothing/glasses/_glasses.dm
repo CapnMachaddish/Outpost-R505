@@ -547,16 +547,18 @@
 	. = ..()
 	if(ishuman(user))
 		if(xray)
-			vision_flags -= SEE_OBJS | SEE_TURFS
+			vision_flags -= SEE_OBJS | SEE_TURFS //R505 Edit - Original: vision_flags -= SEE_MOBS|SEE_OBJS
 		else
-			vision_flags += SEE_OBJS | SEE_TURFS
+			vision_flags += SEE_OBJS | SEE_TURFS //R505 Edit - Original: SEE_MOBS|SEE_OBJS
 		xray = !xray
 		var/mob/living/carbon/human/H = user
 		H.update_sight()
 
+//R505 Edit - Start
 /obj/item/clothing/glasses/debug/eyepatch
 	name = "optical omni eyepatch"
 	desc = "A pricey eyepatch that has thermal optics by default. Alt click to enable X-ray vision."
 	icon_state = "eyepatch"
 	inhand_icon_state = "eyepatch"
 	vision_flags = SEE_MOBS
+//R505 Edit - End

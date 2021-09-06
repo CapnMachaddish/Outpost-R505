@@ -29,6 +29,7 @@
 	R.freqlock = TRUE
 	..()
 
+//R505 Edit - Start
 /datum/outfit/centcom/intel_commander
 	name = "Intelligence Command Officer"
 	id = /obj/item/card/id/advanced/centcom
@@ -69,6 +70,7 @@
 	var/obj/item/radio/headset/R = H.ears
 	R.set_frequency(FREQ_COMMON)
 	..()
+//R505 Edit - End
 
 /datum/outfit/space
 	name = "Standard Space Gear"
