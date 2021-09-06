@@ -868,7 +868,7 @@ SUBSYSTEM_DEF(job)
 
 	centcom_jobs = list("Central Command", "VIP Guest", "Custodian", "Thunderdome Overseer", "CentCom Official", "Medical Officer", "Research Officer", \
 		"Special Ops Officer", "Admiral", "CentCom Commander", "CentCom Bartender", "Private Security Force", "Fleetmaster", "Bridge Officer", "Operations Inspector", \
-		"Deck Crewman")
+		"Deck Crewman", "Intelligence Lead Officer") //R505 Edit - "Intelligence Lead Officer"
 
 /obj/item/paper/fluff/spare_id_safe_code
 	name = "Nanotrasen-Approved Spare ID Safe Code"

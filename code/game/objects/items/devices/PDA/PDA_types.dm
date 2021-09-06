@@ -253,3 +253,11 @@
 	default_cartridge = /obj/item/cartridge/medical
 	greyscale_config = /datum/greyscale_config/pda/stripe_split
 	greyscale_colors = "#e2e2e2#000099#0097ca"
+
+//R505 Edit - Start
+/obj/item/pda/centcom
+	default_cartridge = /obj/item/cartridge/captain
+	icon_state = "pda-syndi"
+	name = "military PDA"
+	hidden = 1
+//R505 Edit - End

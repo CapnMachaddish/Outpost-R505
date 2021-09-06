@@ -184,6 +184,14 @@
 /obj/item/tank/internals/emergency_oxygen/double/empty/populate_gas()
 	return
 
+/obj/item/tank/internals/emergency_oxygen/double/pluox
+	volume = 24
+	distribute_pressure = 3
+
+/obj/item/tank/internals/emergency_oxygen/double/pluox/populate_gas()
+	air_contents.assert_gas(/datum/gas/pluoxium)
+	air_contents.gases[/datum/gas/pluoxium][MOLES] = (10*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C)
+
 // *
 // * GENERIC
 // *

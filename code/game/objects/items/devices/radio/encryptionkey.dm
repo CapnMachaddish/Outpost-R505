@@ -136,3 +136,14 @@
 
 /obj/item/encryptionkey/secbot
 	channels = list(RADIO_CHANNEL_AI_PRIVATE = 1, RADIO_CHANNEL_SECURITY = 1)
+
+//R505 Edit - Start
+/obj/item/encryptionkey/omni
+	name = "\improper Omni radio encryption key"
+	icon_state = "cent_cypherkey"
+	desc = "You shouldn't see this."
+	channels = list(RADIO_CHANNEL_SYNDICATE = 1, RADIO_CHANNEL_COMMAND = 1, RADIO_CHANNEL_SECURITY = 1, RADIO_CHANNEL_ENGINEERING = 1, RADIO_CHANNEL_SCIENCE = 1, RADIO_CHANNEL_MEDICAL = 1, RADIO_CHANNEL_SUPPLY = 1, RADIO_CHANNEL_SERVICE = 1, RADIO_CHANNEL_AI_PRIVATE = 1)
+	syndie = TRUE
+	translate_binary = TRUE
+	independent = TRUE
+//R505 Edit - End
