@@ -20,6 +20,17 @@
 	result = /obj/item/food/spaghetti/copypasta
 	subcategory = CAT_SPAGHETTI
 
+/datum/crafting_recipe/food/authenticspaghetti
+	name = "Authentic spaghetti"
+	reqs = list(
+		/obj/item/food/spaghetti/boiledspaghetti = 1,
+		/obj/item/food/meatball = 2,
+		/obj/item/food/cheese = 1,
+		/obj/item/food/grown/tomato = 1
+	)
+	result = /obj/item/food/spaghetti/authenticspaghetti
+	subcategory = CAT_SPAGHETTI
+
 /datum/crafting_recipe/food/spaghettimeatball
 	name = "Spaghetti meatball"
 	reqs = list(
