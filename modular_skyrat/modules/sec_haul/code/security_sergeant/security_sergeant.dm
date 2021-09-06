@@ -41,7 +41,7 @@
 	uniform = /obj/item/clothing/under/rank/security/peacekeeper/sergeant
 	gloves = /obj/item/clothing/gloves/combat/peacekeeper
 	shoes = /obj/item/clothing/shoes/combat/peacekeeper
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/peacekeeper
+	glasses =  /obj/item/clothing/glasses/hud/security/sunglasses //R505 Edit - Reverts peacekeeper glasses to sec hud glasses
 	suit = /obj/item/clothing/suit/armor/vest/peacekeeper/black
 	head = /obj/item/clothing/head/sec/peacekeeper/sergeant
 

@@ -1395,7 +1395,7 @@
 		)
 	generate_items_inside(items_inside,src)
 
-//R505 Edit - Begin
+//R505 Edit - Start
 /obj/item/storage/box/debugtools/alt
 	name = "box of centcom tools"
 	icon_state = "syndiebox"
@@ -1407,7 +1407,7 @@
 		/obj/item/autosurgeon/organ/syndicate/breathtubecc=1,\
 		/obj/item/autosurgeon/organ/syndicate/combattoolscc=1,\
 		/obj/item/autosurgeon/organ/syndicate/constructiontoolscc=1,\
-		/obj/item/implanter/krav_maga=1
+		/obj/item/book/granter/martial/cqc/plus=1
 		)
 	generate_items_inside(items_inside,src)
 //R505 Edit - End

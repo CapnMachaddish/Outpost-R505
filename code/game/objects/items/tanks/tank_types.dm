@@ -181,7 +181,7 @@
 	tank_holder_icon_state = "holder_emergency_engi"
 	volume = 12 //If it's double of the above, shouldn't it be double the volume??
 
-//R505 Edit - Begin
+//R505 Edit - Start
 /obj/item/tank/internals/emergency_oxygen/double/empty/populate_gas()
 	return
 

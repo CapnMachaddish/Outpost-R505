@@ -153,7 +153,7 @@
 		targets += caller
 	var/targ_len = length(targets)
 	var/smash_len = length(smashes)
-	var/number = max(targ_len * (4-(targ_len-1)) - smash_len,1)
+	var/number = max(targ_len * (8-(targ_len-1)) - smash_len,1) //R505 Edit - Original: var/number = max(targ_len * (4-(targ_len-1)) - smash_len,1)
 
 	for(var/i in 0 to number)
 		var/turf/chosen_location = get_safe_random_station_turf()
@@ -247,8 +247,8 @@
 //SKYRAT REMOVAL START - Probably don't need this if we're just decapping now
 	/*var/datum/effect_system/reagents_explosion/explosion = new()
 	explosion.set_up(1, get_turf(human_user), TRUE, 0)
-	explosion.start()*/ 
-//SKYRAT REMOVAL END 
+	explosion.start()*/
+//SKYRAT REMOVAL END
 
 /obj/effect/broken_illusion/examine(mob/user)
 	. = ..()

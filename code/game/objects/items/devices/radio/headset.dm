@@ -277,7 +277,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	. = ..()
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))
 
-//R505 Edit - Begin
+//R505 Edit - Start
 /obj/item/radio/headset/headset_cent/alt/commander
 	name = "\improper CentCom bowman headset"
 	desc = "A headset especially for emergency response personnel. Protects ears from flashbangs."
