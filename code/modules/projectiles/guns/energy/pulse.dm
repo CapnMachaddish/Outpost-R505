@@ -76,3 +76,11 @@
 	icon_state = "m1911"
 	inhand_icon_state = "gun"
 	cell_type = "/obj/item/stock_parts/cell/infinite"
+
+//R505 Edit - Start
+/obj/item/gun/energy/pulse/pistol/m1911/loyalpin
+	pin = /obj/item/firing_pin/implant/mindshield
+
+/obj/item/gun/energy/pulse/pistol/m1911/loyalpin/nosafety
+	has_gun_safety = FALSE
+//R505 Edit - End

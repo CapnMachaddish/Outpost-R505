@@ -1,7 +1,7 @@
 /obj/item/organ/cyberimp/arm/combat/centcom
 	name = "combat cybernetics implant"
 	desc = "A powerful cybernetic implant that contains combat modules built into the user's arm."
-	contents = newlist(/obj/item/gun/energy/e_gun/advtaser/mounted/infcharge, /obj/item/reagent_containers/hypospray/combat/nanites, /obj/item/restraints/handcuffs/energy, /obj/item/melee/transforming/energy/blade/hardlight, /obj/item/gun/medbeam, /obj/item/assembly/flash/armimplant)
+	contents = newlist(/obj/item/gun/energy/e_gun/advtaser/mounted/infcharge, /obj/item/reagent_containers/hypospray/combat/nanites, /obj/item/restraints/handcuffs/energy/projector, /obj/item/melee/transforming/energy/blade/hardlight, /obj/item/gun/medbeam, /obj/item/assembly/flash/armimplant)
 	organ_flags = EMP_PROTECT_SELF
 
 /obj/item/organ/cyberimp/arm/combat/centcom/Initialize()
