@@ -129,6 +129,7 @@
 	name = "Synthetic Lizard - Horns Light"
 	icon_state = "synth_hornslight"
 
+/* R505 Edit - Start
 /datum/sprite_accessory/antenna/synthliz/cobrahood
 	name = "Synthetic Lizard - Cobra Hood"
 	icon_state = "cobrahood"
@@ -138,6 +139,7 @@
 	name = "Synthetic Lizard - Cobra Hood (Ears)"
 	icon_state = "cobraears"
 	color_src = USE_MATRIXED_COLORS
+*/ //R505 Edit - End
 
 //Synth Taurs (Ported from Virgo)
 /datum/sprite_accessory/taur/synthliz
