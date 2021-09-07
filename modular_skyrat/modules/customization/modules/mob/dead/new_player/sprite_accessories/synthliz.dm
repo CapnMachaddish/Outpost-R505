@@ -1,11 +1,12 @@
 //Synth snouts (This is the most important part)
 /datum/sprite_accessory/snouts/synthliz
-	recommended_species = list("synthliz")
-	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/synthliz_snouts.dmi'
+	recommended_species = list(SPECIES_SYNTHLIZ)
+	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/synthliz_snouts.dmi'
 	color_src = USE_ONE_COLOR
 	default_color = null
 	name = "Synthetic Lizard - Snout"
 	icon_state = "synthliz_basic"
+	genetic = FALSE
 
 /datum/sprite_accessory/snouts/synthliz/synthliz_under
 	color_src = USE_MATRIXED_COLORS
@@ -58,8 +59,6 @@
 	icon_state = "synthliz_barless_tertunder"
 
 //Protogen snoot
-//REMOVED - We have a better one now
-/*
 /datum/sprite_accessory/snouts/synthliz/protogen
 	color_src = USE_MATRIXED_COLORS
 	name = "Protogen"
@@ -69,21 +68,22 @@
 	color_src = USE_MATRIXED_COLORS
 	name = "Protogen - With Bolt"
 	icon_state = "protogen_withbolt"
-*/
+
 
 //Synth tails
 /datum/sprite_accessory/tails/synthliz
-	recommended_species = list("synthliz")
-	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/synthliz_tails.dmi'
+	recommended_species = list(SPECIES_SYNTHLIZ)
+	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/synthliz_tails.dmi'
 	color_src = USE_ONE_COLOR
 	name = "Synthetic Lizard"
 	icon_state = "synthliz"
-	general_type = "lizard"
+	general_type = SPECIES_LIZARD
+	genetic = FALSE
 
 //Synth Antennae
 /datum/sprite_accessory/antenna/synthliz
-	recommended_species = list("synthliz")
-	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/synthliz_antennas.dmi'
+	recommended_species = list(SPECIES_SYNTHLIZ)
+	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/synthliz_antennas.dmi'
 	color_src = USE_ONE_COLOR
 	name = "Synthetic Lizard - Antennae"
 	icon_state = "synth_antennae"
@@ -129,8 +129,7 @@
 	name = "Synthetic Lizard - Horns Light"
 	icon_state = "synth_hornslight"
 
-//REMOVED - we have a better one now
-/*
+/* R505 Edit - Start
 /datum/sprite_accessory/antenna/synthliz/cobrahood
 	name = "Synthetic Lizard - Cobra Hood"
 	icon_state = "cobrahood"
@@ -140,14 +139,15 @@
 	name = "Synthetic Lizard - Cobra Hood (Ears)"
 	icon_state = "cobraears"
 	color_src = USE_MATRIXED_COLORS
-*/
+*/ //R505 Edit - End
 
 //Synth Taurs (Ported from Virgo)
 /datum/sprite_accessory/taur/synthliz
 	name = "Cybernetic Lizard"
 	icon_state = "synthlizard"
 	taur_mode = STYLE_TAUR_PAW
-	recommended_species = list("synthliz")
+	recommended_species = list(SPECIES_SYNTHLIZ)
+	genetic = FALSE
 
 /datum/sprite_accessory/taur/synthliz/inv
 	name = "Cybernetic Lizard (Inverted)"
@@ -183,4 +183,3 @@
 	name = "Cybernetic Naga"
 	icon_state = "synthnaga"
 	taur_mode = STYLE_TAUR_SNAKE
-	relevent_layers = list(BODY_ADJ_LAYER)

@@ -21,7 +21,7 @@
 		for(var/i in channels)
 			examine_text_list += "[GLOB.channel_tokens[i]] - [lowertext(i)]"
 
-		. += "<span class='notice'>It can access the following channels; [jointext(examine_text_list, ", ")].</span>"
+		. += span_notice("It can access the following channels; [jointext(examine_text_list, ", ")].")
 
 /obj/item/encryptionkey/syndicate
 	name = "syndicate encryption key"
@@ -137,6 +137,7 @@
 /obj/item/encryptionkey/secbot
 	channels = list(RADIO_CHANNEL_AI_PRIVATE = 1, RADIO_CHANNEL_SECURITY = 1)
 
+//R505 Edit - Start
 /obj/item/encryptionkey/omni
 	name = "\improper Omni radio encryption key"
 	icon_state = "cent_cypherkey"
@@ -145,3 +146,4 @@
 	syndie = TRUE
 	translate_binary = TRUE
 	independent = TRUE
+//R505 Edit - End

@@ -6,7 +6,7 @@
 	///Sprite name of the genital, it's what shows up on character creation
 	var/genital_name = "Human"
 	///Type of the genital. For penises tapered/horse/human etc. for breasts quadruple/sixtuple etc...
-	var/genital_type = "human"
+	var/genital_type = SPECIES_HUMAN
 	///Used for determining what sprite is being used, derrives from size and type
 	var/sprite_suffix
 	///Used for input from the user whether to show a genital through clothing or not, always or never etc.
@@ -38,6 +38,10 @@
 	. = ..()
 	update_sprite_suffix()
 
+/obj/item/organ/genital/Remove(mob/living/carbon/M, special = FALSE)
+	. = ..()
+	update_genital_icon_state()
+
 /obj/item/organ/genital/build_from_dna(datum/dna/DNA, associated_key)
 	..()
 	var/datum/sprite_accessory/genital/SA = GLOB.sprite_accessories[associated_key][DNA.mutant_bodyparts[associated_key][MUTANT_INDEX_NAME]]
@@ -51,7 +55,7 @@
 	name = "penis"
 	desc = "A male reproductive organ."
 	icon_state = "penis"
-	icon = 'modular_skyrat/modules/customization/icons/obj/genitals/penis.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/genitals/penis.dmi'
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_PENIS
 	mutantpart_key = "penis"
@@ -61,17 +65,18 @@
 
 /obj/item/organ/genital/penis/get_description_string(datum/sprite_accessory/genital/gas)
 	var/returned_string = ""
-	if(sheath != SHEATH_NONE && forced_arousal != AROUSAL_FULL) //Hidden in sheath
+	var/pname = lowertext(genital_name) == "nondescript" ? "" : lowertext(genital_name) + " "
+	if(sheath != SHEATH_NONE && aroused != AROUSAL_FULL) //Hidden in sheath
 		switch(sheath)
 			if(SHEATH_NORMAL)
 				returned_string = "You see a sheath."
 			if(SHEATH_SLIT)
 				returned_string = "You see genital slit."
-		if(forced_arousal == AROUSAL_PARTIAL)
-			returned_string += " There's a [return_proper_name()] poking out of it."
+		if(aroused == AROUSAL_PARTIAL)
+			returned_string += " There's a [pname]penis poking out of it."
 	else
-		returned_string = "You see a [return_proper_name()]. You estimate it's [genital_size] inches long, and [girth] inches in circumference."
-		switch(forced_arousal)
+		returned_string = "You see a [pname]penis. You estimate it's [genital_size] inches long, and [girth] inches in circumference."
+		switch(aroused)
 			if(AROUSAL_NONE)
 				returned_string += " It seems flaccid."
 			if(AROUSAL_PARTIAL)
@@ -82,61 +87,64 @@
 
 /obj/item/organ/genital/penis/update_genital_icon_state()
 	var/size_affix
-	var/measured_size = round(genital_size)
+	var/measured_size = FLOOR(genital_size,1)
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
-		if(1 to 7)
-			size_affix = 1
-		if(8 to 15)
-			size_affix = 2
+		if(1 to 10)
+			size_affix = "1"
+		if(11 to 15)
+			size_affix = "2"
 		if(16 to 24)
-			size_affix = 3
-		if(25 to 38)
-			size_affix = 4
+			size_affix = "3"
 		else
-			size_affix = 5
-	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
+			size_affix = "4"
 	var/passed_string = "penis_[genital_type]_[size_affix]"
+	if(uses_skintones)
+		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/penis/get_sprite_size_string()
-	if(forced_arousal != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
-		return "[lowertext(sheath)]_[return_arousal() == AROUSAL_PARTIAL ? 1 : 0]"
+	if(aroused != AROUSAL_FULL && sheath != SHEATH_NONE) //Sheath time!
+		var/poking_out = 0
+		if(aroused == AROUSAL_PARTIAL)
+			poking_out = 1
+		return "[lowertext(sheath)]_[poking_out]"
 
 	var/size_affix
-	var/measured_size = round(genital_size)
+	var/measured_size = FLOOR(genital_size,1)
 	var/is_erect = 0
-	if(return_arousal() == AROUSAL_FULL)
+	if(aroused == AROUSAL_FULL)
 		is_erect = 1
 	if(measured_size < 1)
 		measured_size = 1
 	switch(measured_size)
-		if(1 to 7)
-			size_affix = 1
-		if(8 to 15)
-			size_affix = 2
+		if(1 to 10)
+			size_affix = "1"
+		if(11 to 15)
+			size_affix = "2"
 		if(16 to 24)
-			size_affix = 3
-		if(25 to 38)
-			size_affix = 4
+			size_affix = "3"
 		else
-			size_affix = 5
-	size_affix = clamp(size_affix, 1, GLOB.penis_sprite_sizes[genital_type])
+			size_affix = "4"
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
+	if(uses_skintones)
+		passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
 	..()
 	girth = DNA.features["penis_girth"]
-	sheath = DNA.features["penis_sheath"]
+	var/datum/sprite_accessory/genital/penis/PS = GLOB.sprite_accessories[associated_key][DNA.mutant_bodyparts[associated_key][MUTANT_INDEX_NAME]]
+	if(PS.can_have_sheath)
+		sheath = DNA.features["penis_sheath"]
 	set_size(DNA.features["penis_size"])
 
 /obj/item/organ/genital/testicles
 	name = "testicles"
 	desc = "A male reproductive organ."
 	icon_state = "testicles"
-	icon = 'modular_skyrat/modules/customization/icons/obj/genitals/testicles.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/genitals/testicles.dmi'
 	mutantpart_key = "testicles"
 	mutantpart_info = list(MUTANT_INDEX_NAME = "Pair", MUTANT_INDEX_COLOR_LIST = list("FEB"))
 	zone = BODY_ZONE_PRECISE_GROIN
@@ -144,28 +152,30 @@
 	aroused = AROUSAL_CANT
 
 /obj/item/organ/genital/testicles/update_genital_icon_state()
-	var/measured_size = clamp(genital_size, 1, 5)
+	var/measured_size = clamp(genital_size, 1, 3)
 	var/passed_string = "testicles_[genital_type]_[measured_size]"
+	if(uses_skintones)
+		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/testicles/get_description_string(datum/sprite_accessory/genital/gas)
-	return "You see a pair of testicles, their size is [lowertext(balls_size_to_description(genital_size))]."
+	return "You see a pair of testicles, they look [lowertext(balls_size_to_description(genital_size))]."
 
 /obj/item/organ/genital/testicles/build_from_dna(datum/dna/DNA, associated_key)
 	..()
-	if(DNA.features["penis_sheath"] == SHEATH_NORMAL)
-		genital_type = "sheath"
 	set_size(DNA.features["balls_size"])
 
 /obj/item/organ/genital/testicles/get_sprite_size_string()
-	var/measured_size = round(genital_size)
-	measured_size = clamp(measured_size, 0, 5)
+	var/measured_size = FLOOR(genital_size,1)
+	measured_size = clamp(measured_size, 0, 3)
 	var/passed_string = "[genital_type]_[measured_size]"
+	if(uses_skintones)
+		passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/vagina
 	name = "vagina"
-	icon = 'modular_skyrat/modules/customization/icons/obj/genitals/vagina.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/genitals/vagina.dmi'
 	icon_state = "vagina"
 	mutantpart_key = "vagina"
 	mutantpart_info = list(MUTANT_INDEX_NAME = "Human", MUTANT_INDEX_COLOR_LIST = list("FEB"))
@@ -173,8 +183,10 @@
 	slot = ORGAN_SLOT_VAGINA
 
 /obj/item/organ/genital/vagina/get_description_string(datum/sprite_accessory/genital/gas)
-	var/returned_string = "You see a [return_proper_name()]."
-	switch(forced_arousal)
+	var/returned_string = "You see a [lowertext(genital_name)] vagina."
+	if(lowertext(genital_name) == "cloaca")
+		returned_string = "You see a cloaca." //i deserve a pipebomb for this
+	switch(aroused)
 		if(AROUSAL_NONE)
 			returned_string += " It seems dry."
 		if(AROUSAL_PARTIAL)
@@ -185,14 +197,14 @@
 
 /obj/item/organ/genital/vagina/get_sprite_size_string()
 	var/is_dripping = 0
-	if(forced_arousal == AROUSAL_FULL)
+	if(aroused == AROUSAL_FULL)
 		is_dripping = 1
 	return "[genital_type]_[is_dripping]"
 
 /obj/item/organ/genital/womb
 	name = "womb"
 	desc = "A female reproductive organ."
-	icon = 'modular_skyrat/modules/customization/icons/obj/genitals/vagina.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/genitals/vagina.dmi'
 	icon_state = "womb"
 	mutantpart_key = "womb"
 	mutantpart_info = list(MUTANT_INDEX_NAME = "Normal", MUTANT_INDEX_COLOR_LIST = list("FEB"))
@@ -205,7 +217,7 @@
 	name = "breasts"
 	desc = "Female milk producing organs."
 	icon_state = "breasts"
-	icon = 'modular_skyrat/modules/customization/icons/obj/genitals/breasts.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/genitals/breasts.dmi'
 	genital_type = "pair"
 	mutantpart_key = "penis"
 	mutantpart_info = list(MUTANT_INDEX_NAME = "Pair", MUTANT_INDEX_COLOR_LIST = list("FEB"))
@@ -217,24 +229,24 @@
 	var/returned_string = "You see a [lowertext(genital_name)] of breasts."
 	var/size_description
 	var/translation = breasts_size_to_cup(genital_size)
-	switch (translation)
-		if(0)
+	switch(translation)
+		if("Flatchested")
 			size_description = " They are small and flat, however."
 		if("beyond measurement")
 			size_description = " Their size is enormous, you estimate they're around [genital_size] inches in diameter."
 		else
 			size_description = " You estimate they are [translation]-cups."
 	returned_string += size_description
-	if(forced_arousal == AROUSAL_FULL)
+	if(aroused == AROUSAL_FULL)
 		if(lactates)
-			returned_string += " The nipples seem hard, perky, and are leaking milk."
+			returned_string += " The nipples seem hard, perky and are leaking milk."
 		else
 			returned_string += " Their nipples look hard and perky."
 	return returned_string
 
 /obj/item/organ/genital/breasts/update_genital_icon_state()
 	var/max_size = 5
-	var/current_size = round(genital_size)
+	var/current_size = FLOOR(genital_size, 1)
 	if(current_size < 0)
 		current_size = 0
 	else if (current_size > max_size)
@@ -245,8 +257,14 @@
 	icon_state = passed_string
 
 /obj/item/organ/genital/breasts/get_sprite_size_string()
-	var/max_size = GLOB.breasts_max_sprite_size[genital_type]
-	var/current_size = clamp(round(genital_size), 0, max_size)
+	var/max_size = 5
+	if(genital_type == "pair")
+		max_size = 16
+	var/current_size = FLOOR(genital_size, 1)
+	if(current_size < 0)
+		current_size = 0
+	else if (current_size > max_size)
+		current_size = max_size
 	var/passed_string = "[genital_type]_[current_size]"
 	if(uses_skintones)
 		passed_string += "_s"
@@ -258,10 +276,18 @@
 	set_size(DNA.features["breasts_size"])
 
 /proc/breasts_size_to_cup(number)
-	return number > 17 ? "beyond measurement" : number < 1 ? 0 : ascii2text(number + 63)
+	if(number < 0)
+		number = 0
+	var/returned = GLOB.breasts_size_translation["[number]"]
+	if(!returned)
+		returned = "beyond measurement"
+	return returned
 
 /proc/breasts_cup_to_size(cup)
-	return lowertext(cup) == "Flatchested" ? 0 : text2ascii(uppertext(cup)) - 63
+	for(var/key in GLOB.breasts_size_translation)
+		if(GLOB.breasts_size_translation[key] == cup)
+			return text2num(key)
+	return 0
 
 /proc/balls_size_to_description(number)
 	if(number < 0)
@@ -283,7 +309,7 @@
 	set desc = "Allows you to toggle which genitals should show through clothes or not."
 
 	if(stat != CONSCIOUS)
-		to_chat(usr, "<span class='warning'>You can't do that right now.</span>")
+		to_chat(usr, "<span class='warning'>You can't toggle genitals visibility right now...</span>")
 		return
 
 	var/list/genital_list = list()
@@ -317,22 +343,21 @@
 
 	var/list/genital_list = list()
 	for(var/obj/item/organ/genital/G in internal_organs)
-		if(G.aroused != AROUSAL_CANT)
+		if(!G.aroused == AROUSAL_CANT)
 			genital_list += G
 	if(!genital_list.len) //There is nothing to expose
 		return
 	//Full list of exposable genitals created
 	var/obj/item/organ/genital/picked_organ
-	picked_organ = input(src, "Choose which genitalia to temporarily change arousal", "Expose/Hide genitals") as null|anything in genital_list
+	picked_organ = input(src, "Choose which genitalia to change arousal", "Expose/Hide genitals") as null|anything in genital_list
 	if(picked_organ && (picked_organ in internal_organs))
-		var/list/gen_arous_trans = list("Reset" = AROUSAL_CANT,
-											"Not aroused" = AROUSAL_NONE,
-											"Partly aroused" = AROUSAL_PARTIAL,
-											"Very aroused" = AROUSAL_FULL
-											)
+		var/list/gen_arous_trans = list("Not aroused" = AROUSAL_NONE,
+												"Partly aroused" = AROUSAL_PARTIAL,
+												"Very aroused" = AROUSAL_FULL
+												)
 		var/picked_arousal = input(src, "Choose arousal", "Toggle Arousal") as null|anything in gen_arous_trans
 		if(picked_arousal && picked_organ && (picked_organ in internal_organs))
-			picked_organ.forced_arousal = gen_arous_trans[picked_arousal]
+			picked_organ.aroused = gen_arous_trans[picked_arousal]
 			picked_organ.update_sprite_suffix()
 			update_body()
 	return

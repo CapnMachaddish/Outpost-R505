@@ -1,7 +1,7 @@
 GLOBAL_LIST_INIT(roundstart_events, build_roundstart_events())
 GLOBAL_LIST_EMPTY(working_roundstart_events)
 GLOBAL_LIST_INIT(default_roundstart_events, list(
-		/datum/roundstart_event/dust_storm,
+		// /datum/roundstart_event/dust_storm,
 		/datum/roundstart_event/radiated_space,
 	))
 

@@ -1,3 +1,4 @@
+/*
 GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0))
 /datum/dust_storm
 	var/z_level as num
@@ -37,12 +38,12 @@ GLOBAL_LIST_INIT(dust_storms_active, list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5
 	var/spawned_in_group = 0
 	while(!stop_process && iteration != num_to_spawn)
 		iteration++
-		
+
 		if(spawned_in_group > group_num && group_num > 0)
 			spawned_in_group = 0
 			sleep(group_speed)
-		
+
 		spawn_meteor(GLOB.meteorsD, z_level, FALSE)
 		spawned_in_group++
 		sleep(speed)
-	GLOB.dust_storms_active["[z_level]"]--
+	GLOB.dust_storms_active["[z_level]"]-- */

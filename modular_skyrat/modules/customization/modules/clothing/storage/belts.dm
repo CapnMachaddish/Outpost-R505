@@ -1,6 +1,6 @@
 /obj/item/storage/belt/crusader	//Belt + sheath combination - still only holds one sword at a time though
-	icon = 'modular_skyrat/modules/customization/icons/obj/clothing/storage.dmi'
-	worn_icon = 'modular_skyrat/modules/customization/icons/mob/clothing/storage.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/clothing/belts.dmi'
+	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/belt.dmi'
 	name = "crusader belt"
 	desc = "Holds an assortment of equipment for whatever situation an adventurer may encounter, as well as having an attached sheath."
 	icon_state = "crusader_belt"
@@ -89,12 +89,12 @@
 		/obj/item/nullrod/carp,
 		/obj/item/nullrod/chainsaw,
 		/obj/item/nullrod/claymore/bostaff,
-		/obj/item/nullrod/hammmer,
+		/obj/item/nullrod/hammer,
 		/obj/item/nullrod/pitchfork,
 		/obj/item/nullrod/pride_hammer,
 		/obj/item/nullrod/spear,
 		/obj/item/nullrod/staff,
-		/obj/item/nullrod/fedora, 
+		/obj/item/nullrod/fedora,
 		/obj/item/nullrod/godhand,
 		/obj/item/nullrod/staff,
 		/obj/item/nullrod/whip
@@ -105,8 +105,8 @@
 	new /obj/item/storage/belt/storage_pouch(src)
 
 /obj/item/storage/belt/storage_pouch	//seperate mini-storage inside the belt, leaving room for only one sword. Inspired by a (very poorly implemented) belt on Desert Rose
-	icon = 'modular_skyrat/modules/customization/icons/obj/clothing/storage.dmi'
-	worn_icon = 'modular_skyrat/modules/customization/icons/mob/clothing/storage.dmi'
+	icon = 'modular_skyrat/master_files/icons/obj/clothing/belts.dmi'
+	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/belt.dmi'
 	name = "storage pouch"
 	desc = "<span class='notice'>Click on this to open your belt's inventory!</span>"
 	icon_state = "storage_pouch_icon"
@@ -126,3 +126,38 @@
 	STR.max_items = 6
 	STR.rustle_sound = TRUE
 	STR.max_w_class = WEIGHT_CLASS_SMALL //Rather than have a huge whitelist, the belt can simply hold anything a pocket can hold - Can easily be changed if it somehow becomes an issue
+
+/obj/item/storage/belt/holster/cowboy
+	icon = 'modular_skyrat/master_files/icons/obj/clothing/belts.dmi'
+	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/belt.dmi'
+	name = "cowboy belt"
+	desc = "Yee haw! The holster on the side of the hip is leather stamped with swirling lines, all leading back to a deer's antlers."
+	icon_state = "cowboy_belt"
+	worn_icon_state = "cowboy_belt"
+	inhand_icon_state = "utility"
+
+/obj/item/storage/belt/medbandolier
+	icon = 'modular_skyrat/master_files/icons/obj/clothing/belts.dmi'
+	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/belt.dmi'
+	name = "medical bandolier"
+	desc = "A pocketed, pine green belt slung like a sash over the shoulder. Features numerous pockets for medicines and poisons alike. Now is coward healing time."
+	icon_state = "med_bandolier"
+	worn_icon_state = "med_bandolier"
+
+/obj/item/storage/belt/medbandolier/ComponentInitialize()
+	. = ..()
+	var/datum/component/storage/bandolier_storage = GetComponent(/datum/component/storage)
+	bandolier_storage.max_w_class = WEIGHT_CLASS_NORMAL
+	bandolier_storage.max_items = 14
+	bandolier_storage.max_combined_w_class = 35
+	bandolier_storage.set_holdable(list(
+		/obj/item/dnainjector,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/reagent_containers/medigel,
+		/obj/item/storage/pill_bottle,
+		/obj/item/implanter,
+		/obj/item/medicell
+		))

@@ -2,28 +2,41 @@
 	title = "Civil Disputes Officer"
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	department_head = list("Head of Security")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of security, security sergeants and security officers"
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
-	exp_requirements = 120
-	exp_type = EXP_TYPE_MEDICAL
+	exp_requirements = 60
+	exp_required_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/junior_officer
-	species_outfit = list("plasmaman" = /datum/outfit/plasmaman/security)
+	plasmaman_outfit = /datum/outfit/plasmaman/security
 
 	paycheck = PAYCHECK_EASY
-	paycheck_department = ACCOUNT_SEC
+	paycheck_department = ACCOUNT_CCM
 
 	mind_traits = list(TRAIT_DONUT_LOVER)
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_JUNIOR_SECURITY_OFFICER
 	bounty_types = CIV_JOB_SEC
+	departments_list = list(
+		/datum/job_department/security,
+	)
 
 	family_heirlooms = list(/obj/item/book/manual/wiki/security_space_law, /obj/item/clothing/head/beret/sec)
+
+	mail_goodies = list(
+		/obj/item/food/donut/caramel = 10,
+		/obj/item/food/donut/matcha = 10,
+		/obj/item/food/donut/blumpkin = 5,
+		/obj/item/clothing/mask/whistle = 5
+	)
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_REOPEN_ON_ROUNDSTART_LOSS | JOB_ASSIGN_QUIRKS
 
 /datum/outfit/job/junior_officer
 	name = "Civil Disputes Officer"
@@ -33,7 +46,7 @@
 	ears = /obj/item/radio/headset/headset_sec
 	uniform = /obj/item/clothing/under/rank/security/peacekeeper/junior
 	shoes = /obj/item/clothing/shoes/sneakers/black
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses //R505 change: Revert peacekeeper glasses to sec hud glasses
+	glasses =  /obj/item/clothing/glasses/hud/security/sunglasses //R505 Edit - Reverts peacekeeper glasses to sec hud glasses
 	head = /obj/item/clothing/head/soft/black/junior_officer
 
 	suit = /obj/item/clothing/suit/toggle/labcoat/junior_officer

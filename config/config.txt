@@ -3,7 +3,6 @@
 $include game_options.txt
 $include dbconfig.txt
 $include comms.txt
-$include antag_rep.txt
 $include resources.txt
 $include skyrat/skyrat_config.txt
 $include interviews.txt
@@ -17,10 +16,10 @@ $include interviews.txt
 # There are various options which are hard-locked for security reasons.
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
- SERVERNAME Outpost R505
+# SERVERNAME tgstation
 
 ## Server tagline: This will appear right below the server's title.
- SERVERTAGLINE Outpost R505 - It's the last stop in the galaxy, a bustling freeport, protected under Exosolar Trading Guild charter. Welcome aboard, Spacer.
+# SERVERTAGLINE A generic TG-based server
 
 ## Discord Link: This is the link to Skyrat's discord server
 # DISCORD_LINK https://discord.gg/hGpZ4Z3
@@ -29,13 +28,13 @@ $include interviews.txt
 # SERVERSQLNAME tgstation
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
-STATIONNAME Outpost R505
+STATIONNAME Space Station 13
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
 #HUB
 
 ## Enable server swapping, uncomment to enable reading of server_ips.txt
-#SERVER_SWAP_ENABLED
+SERVER_SWAP_ENABLED
 
 ## Once the server population reaches this number, it will be taken off the byond hub. 0 disables.
 #MAX_HUB_POP 100
@@ -107,6 +106,9 @@ LOG_ADMINCHAT
 ## log client access (logon/logoff)
 LOG_ACCESS
 
+## Enables log entries for logins that failed due to suspicious circumstances (banned player, CID randomiser, spoofed BYOND version, etc.) to a dedicated file.
+LOG_SUSPICIOUS_LOGIN
+
 ## log game actions (start of round, results, etc.)
 LOG_GAME
 
@@ -168,6 +170,9 @@ LOG_CLONING
 ## log shuttle actions
 LOG_SHUTTLE
 
+## Log all timers on timer auto reset
+# LOG_TIMERS_ON_BUCKET_RESET
+
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
 
@@ -211,10 +216,10 @@ VOTE_PERIOD 600
 # DEFAULT_NO_VOTE
 
 ## disable abandon mob
-#NORESPAWN
+NORESPAWN
 
 ## set a hosted by name for unix platforms
-HOSTEDBY lyricalpaws
+HOSTEDBY Yournamehere
 
 ## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)
 GUEST_BAN
@@ -263,7 +268,7 @@ CHECK_RANDOMIZER
 # GITHUBURL https://www.github.com/tgstation/tgstation
 
 ## Discord bot command prefix, if the discord bot is used
- DISCORDBOTCOMMANDPREFIX ?
+# DISCORDBOTCOMMANDPREFIX ?
 
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
@@ -285,18 +290,18 @@ CHECK_RANDOMIZER
 ## from https://github.com/rg3/youtube-dl/releases
 ## or your package manager
 ## The default value assumes youtube-dl is in your system PATH
-INVOKE_YOUTUBEDL /home/ss13/yt-dl/youtube-dl
+# INVOKE_YOUTUBEDL youtube-dl
 
 ## In-game features
 ##Toggle for having jobs load up from the .txt
-# LOAD_JOBS_FROM_TXT
+LOAD_JOBS_FROM_TXT
 
 ## Uncomment this to forbid admins from possessing the singularity.
 #FORBID_SINGULO_POSSESSION
 
-## Uncomment to show a popup 'reply to' window to every non-admin that receives an adminPM.
-## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
-#POPUP_ADMIN_PM
+## Uncomment to give admins the ability to send a maptext popup to players.
+## Only fires when an admin requests it, not every ahelp.
+POPUP_ADMIN_PM
 
 ## Uncomment to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
@@ -327,16 +332,19 @@ NOTE_FRESH_DAYS 91.31055
 ## Notes older then this will be completely faded out.
 NOTE_STALE_DAYS 365.2422
 
+## Uncomment to allow drastic performence enhancemet measures to turn on automatically once there are equal or more clients than the configured amount (will also prompt admin for veto)
+#AUTO_LAG_SWITCH_POP 75
+
 ##Note: all population caps can be used with each other if desired.
 
 ## Uncomment for 'soft' population caps, players will be warned while joining if the living crew exceeds the listed number.
-SOFT_POPCAP 40
+#SOFT_POPCAP 100
 
 ## Message for soft cap
 SOFT_POPCAP_MESSAGE Be warned that the server is currently serving a high number of users, consider using alternative game servers.
 
 ## Uncomment for 'hard' population caps, players will not be allowed to spawn if the living crew exceeds the listed number, though they may still observe or wait for the living crew to decrease in size.
-HARD_POPCAP 50
+#HARD_POPCAP 150
 
 ## Message for hard cap
 HARD_POPCAP_MESSAGE The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers.
@@ -364,7 +372,7 @@ NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
 
 ## Deny all new connections by ckeys we haven't seen before (exempts admins and only denies the connection if the database is enabled and connected)
 ##	Requires database
-PANIC_BUNKER
+#PANIC_BUNKER
 
 ## Uncomment to enable the interview system for players who are below the living hour requirement instead of explicitly blocking them from the server
 ## Note this requires the PANIC_BUNKER to be enabled to do anything.
@@ -511,7 +519,7 @@ DISABLE_HIGH_POP_MC_MODE_AMOUNT 60
 #RESUME_AFTER_INITIALIZATIONS
 
 ## Uncomment to set the number of /world/Reboot()s before the DreamDaemon restarts itself. 0 means restart every round. Requires tgstation server tools.
-ROUNDS_UNTIL_HARD_RESTART 10
+#ROUNDS_UNTIL_HARD_RESTART 10
 
 
 ##Default view size, in tiles.
@@ -537,18 +545,29 @@ DEFAULT_VIEW_SQUARE 15x15
 ## If enabled, only bans from these servers will be shown to admins using CentCom. The default sources list is an example.
 #CENTCOM_SOURCE_WHITELIST Beestation MRP,TGMC,FTL13
 
+## If uncommented, this will enable admin 2FA (two-factor authentication).
+## The URL admins will be asked to go to will be here, with %ID% being the ID
+## of their connection attempt.
+#ADMIN_2FA_URL https://example.com/id/%ID%
+
 #### DISCORD STUFFS ####
 ## MAKE SURE ALL SECTIONS OF THIS ARE FILLED OUT BEFORE ENABLING
 ## Discord IDs can be obtained by following this guide: https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-
 
 ## Uncomment to enable discord auto-roling when users link their BYOND and Discord accounts
-ENABLE_DISCORD_AUTOROLE
+#ENABLE_DISCORD_AUTOROLE
 
 ## Add your discord bot token here. Make sure it has the ability to manage roles
-DISCORD_TOKEN 
+#DISCORD_TOKEN someDiscordToken
 
 ## Add the ID of your guild (server) here
-DISCORD_GUILDID 
+#DISCORD_GUILDID 000000000000000000
 
 ## Add the ID of the role you want assigning here
-DISCORD_ROLEID 
+#DISCORD_ROLEID 000000000000000000
+
+## How long in seconds after which a hard delete is treated as causing lag. This can be a float and supports a precision as low as nanoseconds.
+#HARD_DELETES_OVERRUN_THRESHOLD 0.5
+
+## Once a typepath causes overrun from hard deletes this many times, stop hard deleting it on garbage collection failures. (set to 0 to disable)
+#HARD_DELETES_OVERRUN_LIMIT 0

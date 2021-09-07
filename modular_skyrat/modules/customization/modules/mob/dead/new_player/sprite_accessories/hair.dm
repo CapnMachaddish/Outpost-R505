@@ -1,7 +1,7 @@
 // Hairstyles
 
 /datum/sprite_accessory/hair/skyrat
-	icon = 'modular_skyrat/modules/customization/icons/mob/sprite_accessory/hair.dmi'
+	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/hair.dmi'
 
 /datum/sprite_accessory/hair/skyrat/pigtails4
 	name = "Pigtails 4"
@@ -335,10 +335,34 @@
 	name = "New You"
 	icon_state = "hair_newyou"
 
+/datum/sprite_accessory/hair/skyrat/spicy
+	name = "Spicy"
+	icon_state = "hair_spicy"
+
+/datum/sprite_accessory/hair/skyrat/sabitsuki
+	name = "Sabitsuki"
+	icon_state = "hair_sabitsuki"
+
+/datum/sprite_accessory/hair/skyrat/jessica
+	name = "Jessica"
+	icon_state = "hair_jessica"
+
+/datum/sprite_accessory/hair/skyrat/gentle21
+	name = "Gently Brushed"
+	icon_state = "hair_gentle21"
+
+/datum/sprite_accessory/hair/skyrat/country_s
+	name = "Country Side-Braid"
+	icon_state = "hair_country_s"
+
+/datum/sprite_accessory/hair/skyrat/beachwave
+	name = "Beachwave"
+	icon_state = "hair_beachwave"
+
 // Facial hair
 
 /datum/sprite_accessory/facial_hair/skyrat
-	icon = 'modular_skyrat/modules/customization//icons/mob/sprite_accessory/facialhair.dmi'
+	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/facialhair.dmi'
 
 /datum/sprite_accessory/facial_hair/skyrat/sideburns
 	name = "Sideburns"
@@ -367,3 +391,9 @@
 /datum/sprite_accessory/facial_hair/skyrat/neckfluff
 	name = "Neckfluff"
 	icon_state = "facial_neckfluff"
+
+/datum/sprite_accessory/facial_hair/skyrat/squid
+	name = "Tentacle Beard"
+	icon_state = "facial_squid"
+
+

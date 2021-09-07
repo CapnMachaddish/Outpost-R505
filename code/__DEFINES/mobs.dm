@@ -5,29 +5,21 @@
 //Ready states at roundstart for mob/dead/new_player
 #define PLAYER_NOT_READY 0
 #define PLAYER_READY_TO_PLAY 1
-#define PLAYER_READY_TO_OBSERVE 2
-
-//Game mode list indexes
-#define CURRENT_LIVING_PLAYERS "living_players_list"
-#define CURRENT_LIVING_ANTAGS "living_antags_list"
-#define CURRENT_DEAD_PLAYERS "dead_players_list"
-#define CURRENT_OBSERVERS "current_observers_list"
 
 //movement intent defines for the m_intent var
 #define MOVE_INTENT_WALK "walk"
 #define MOVE_INTENT_RUN  "run"
 
 //Blood levels
+#define BLOOD_VOLUME_MAX_LETHAL 2150
+#define BLOOD_VOLUME_EXCESS 2100
+#define BLOOD_VOLUME_MAXIMUM 2000
+#define BLOOD_VOLUME_SLIME_SPLIT 1120
 #define BLOOD_VOLUME_NORMAL 560
-#define BLOOD_VOLUME_MAX_LETHAL 4.5
-#define BLOOD_VOLUME_EXCESS 4
-#define BLOOD_VOLUME_MAXIMUM 3.5
-#define BLOOD_VOLUME_SLIME_SPLIT 2.5
-//#define BLOOD_VOLUME_NORMAL 1
-#define BLOOD_VOLUME_SAFE 0.8
-#define BLOOD_VOLUME_OKAY 0.6
-#define BLOOD_VOLUME_BAD 0.45
-#define BLOOD_VOLUME_SURVIVE 0.2
+#define BLOOD_VOLUME_SAFE 475
+#define BLOOD_VOLUME_OKAY 336
+#define BLOOD_VOLUME_BAD 224
+#define BLOOD_VOLUME_SURVIVE 122
 
 /// How efficiently humans regenerate blood.
 #define BLOOD_REGEN_FACTOR 0.25
@@ -67,9 +59,17 @@
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'icons/mob/augmentation/augments.dmi'
 
+
 #define MONKEY_BODYPART "monkey"
 #define ALIEN_BODYPART "alien"
 #define LARVA_BODYPART "larva"
+
+
+///Body type bitfields for allowed_animal_origin used to check compatible surgery body types (use NONE for no matching body type)
+#define HUMAN_BODY (1 << 0)
+#define MONKEY_BODY (1 << 1)
+#define ALIEN_BODY (1 << 2)
+#define LARVA_BODY (1 << 3)
 /*see __DEFINES/inventory.dm for bodypart bitflag defines*/
 
 // Health/damage defines
@@ -288,9 +288,26 @@
 //ED209's ignore monkeys
 #define JUDGE_IGNOREMONKEYS (1<<4)
 
-#define MEGAFAUNA_DEFAULT_RECOVERY_TIME 5
-
 #define SHADOW_SPECIES_LIGHT_THRESHOLD 0.2
+
+#define COOLDOWN_UPDATE_SET_MELEE "set_melee"
+#define COOLDOWN_UPDATE_ADD_MELEE "add_melee"
+#define COOLDOWN_UPDATE_SET_RANGED "set_ranged"
+#define COOLDOWN_UPDATE_ADD_RANGED "add_ranged"
+#define COOLDOWN_UPDATE_SET_ENRAGE "set_enrage"
+#define COOLDOWN_UPDATE_ADD_ENRAGE "add_enrage"
+#define COOLDOWN_UPDATE_SET_SPAWN "set_spawn"
+#define COOLDOWN_UPDATE_ADD_SPAWN "add_spawn"
+#define COOLDOWN_UPDATE_SET_HELP "set_help"
+#define COOLDOWN_UPDATE_ADD_HELP "add_help"
+#define COOLDOWN_UPDATE_SET_DASH "set_dash"
+#define COOLDOWN_UPDATE_ADD_DASH "add_dash"
+#define COOLDOWN_UPDATE_SET_TRANSFORM "set_transform"
+#define COOLDOWN_UPDATE_ADD_TRANSFORM "add_transform"
+#define COOLDOWN_UPDATE_SET_CHASER "set_chaser"
+#define COOLDOWN_UPDATE_ADD_CHASER "add_chaser"
+#define COOLDOWN_UPDATE_SET_ARENA "set_arena"
+#define COOLDOWN_UPDATE_ADD_ARENA "add_arena"
 
 // Offsets defines
 
@@ -308,11 +325,6 @@
 #define OFFSET_BACK "back"
 #define OFFSET_SUIT "suit"
 #define OFFSET_NECK "neck"
-#define OFFSET_GENITALS "genitals"
-#define OFFSET_GENITALS_TESTICLES "testicles"
-#define OFFSET_GENITALS_PENIS "penis"
-#define OFFSET_GENITALS_BREASTS "breasts"
-#define OFFSET_GENITALS_VAGINA "vagina"
 
 //MINOR TWEAKS/MISC
 //#define AGE_MIN 17	//youngest a character can be //ORIGINAL
@@ -457,3 +469,5 @@
 #define THROW_MODE_TOGGLE 1
 #define THROW_MODE_HOLD 2
 
+//Saves a proc call, life is suffering. If who has no targets_from var, we assume it's just who
+#define GET_TARGETS_FROM(who) (who.targets_from ? who.get_targets_from() : who)

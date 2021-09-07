@@ -32,9 +32,10 @@
 
 /obj/structure/geyser/Initialize(mapload) //if xenobio wants to bother, nethermobs are around geysers.
 	. = ..()
+
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_NETHER, CELL_VIRUS_TABLE_GENERIC, 1, 5)
 
-///Start producing chems, should be called just once
+///start producing chems, should be called just once
 /obj/structure/geyser/proc/start_chemming()
 	activated = TRUE
 	create_reagents(max_volume, DRAINABLE)
@@ -53,25 +54,25 @@
 
 /obj/structure/geyser/plunger_act(obj/item/plunger/P, mob/living/user, _reinforced)
 	if(!_reinforced)
-		to_chat(user, "<span class='warning'>The [P.name] isn't strong enough!</span>")
+		to_chat(user, span_warning("The [P.name] isn't strong enough!"))
 		return
 	if(activated)
-		to_chat(user, "<span class='warning'>The [name] is already active!</span>")
+		to_chat(user, span_warning("The [name] is already active!"))
 		return
 
-	to_chat(user, "<span class='notice'>You start vigorously plunging [src]!</span>")
+	to_chat(user, span_notice("You start vigorously plunging [src]!"))
 	if(do_after(user, 50 * P.plunge_mod, target = src) && !activated)
 		start_chemming()
 
 /obj/structure/geyser/attackby(obj/item/item, mob/user, params)
 	if(!istype(item, /obj/item/mining_scanner) && !istype(item, /obj/item/t_scanner/adv_mining_scanner))
-		return
+		return ..() //this runs the plunger code
 
 	if(discovered)
-		to_chat(user, "<span class='warning'>This geyser has already been discovered!</span>")
+		to_chat(user, span_warning("This geyser has already been discovered!"))
 		return
 
-	to_chat(user, "<span class='notice'>You discovered the geyser and mark it on the GPS system!</span>")
+	to_chat(user, span_notice("You discovered the geyser and mark it on the GPS system!"))
 	if(discovery_message)
 		to_chat(user, discovery_message)
 
@@ -86,7 +87,7 @@
 
 		var/obj/item/card/id/card = living.get_idcard()
 		if(card)
-			to_chat(user, "<span class='notice'>[point_value] mining points have been paid out!</span>")
+			to_chat(user, span_notice("[point_value] mining points have been paid out!"))
 			card.mining_points += point_value
 
 /obj/structure/geyser/wittel
@@ -110,7 +111,7 @@
 /obj/structure/geyser/random
 	point_value = 500
 	true_name = "strange geyser"
-	discovery_message = "It's a strange geyser! How does any of this even work?" //It doesn't
+	discovery_message = "It's a strange geyser! How does any of this even work?" //it doesnt
 
 /obj/structure/geyser/random/Initialize()
 	. = ..()
@@ -157,7 +158,7 @@
 		var/mob/living/carbon/H = hit_atom
 		if(!H.wear_mask)
 			H.equip_to_slot_if_possible(src, ITEM_SLOT_MASK)
-			H.visible_message("<span class='warning'>The plunger slams into [H]'s face!</span>", "<span class='warning'>The plunger suctions to your face!</span>")
+			H.visible_message(span_warning("The plunger slams into [H]'s face!"), span_warning("The plunger suctions to your face!"))
 
 /obj/item/plunger/attack_self(mob/user)
 	. = ..()
@@ -166,10 +167,10 @@
 
 	if(!layer_mode)
 		icon_state = initial(icon_state)
-		to_chat(user, "<span class='notice'>You set the plunger to 'Plunger Mode'.</span>")
+		to_chat(user, span_notice("You set the plunger to 'Plunger Mode'."))
 	else
 		icon_state = layer_mode_sprite
-		to_chat(user, "<span class='notice'>You set the plunger to 'Layer Mode'.</span>")
+		to_chat(user, span_notice("You set the plunger to 'Layer Mode'."))
 
 	playsound(src, 'sound/machines/click.ogg', 10, TRUE)
 
