@@ -163,7 +163,7 @@
 	if(!operating) //in case of emag
 		operating = TRUE
 	do_animate("opening")
-	playsound(src, 'modular_R505/sound/doors/windowdoor.ogg', 100, TRUE) //R505 Edit - Original: playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	playsound(src, 'modular_R505/sound/doors/windowdoor.ogg', 100, FALSE) //R505 Edit - Original: playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
 	icon_state ="[base_state]open"
 	sleep(10)
 	set_density(FALSE)
@@ -185,7 +185,7 @@
 			return 0
 	operating = TRUE
 	do_animate("closing")
-	playsound(src, 'modular_R505/sound/doors/windowdoor.ogg', 100, TRUE) //R505 Edit - Original: playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	playsound(src, 'modular_R505/sound/doors/windowdoor.ogg', 100, FALSE) //R505 Edit - Original: playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
 	icon_state = base_state
 
 	set_density(TRUE)
