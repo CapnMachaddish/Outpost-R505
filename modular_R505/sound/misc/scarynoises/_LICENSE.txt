@@ -1,0 +1,22 @@
+All files under the path "/modular_R505/sound/misc/scarynoises/" are to be assumed under the HLRC (HALLEY LABS RESOURCE CENTER) Lisence from https://heckscaper.com/resources/index.html, unless explicitly stated
+
+
+
+HALLEY RESOURCES LICENSE // v2021.03.15
+we establish that:
+work: a creative pieces of some kind (music, film, video games, streaming, etc.)
+you: the reader and/or user of HALLEY LABS RESOURCE CENTER works
+HLRC: HALLEY LABS RESOURCE CENTER (heckscaper.com/resources)
+
+everybody is permitted to access and use the works provided through the HLRC in their own creations.
+
+1. HLRC works may only be used by "small works". HLRC defines "small works" as a piece of work (album/film/game/stream/etc) that earns less than USD$100,000 per year and is independent. this does not refer to the entire body of work by a creator, but instead the work in which the HLRC content is contained. if you exist beyond this scope (earning more than USD$100,000/year or are not an independent creator) please contact emma@halleylabs.com for potential further licensing arrangements. any fees will be nominal and the process will be smooth.
+
+2. HLRC works may not be resold/redistributed. to resell in this case is to take the works directly and sell it without at least mild transformative effort, and redistribution is the same without payment. you cannot include these works directly in your own sample packs for resale/redistribution, for example.
+HLRC works may not be used without permission by political groups or organizations, or to promote a political ideology. if you feel that HLRC works are a good fit for your message, please get in touch via emma@halleylabs.com and we can work on a case by case basis.
+
+3. notable amounts of HLRC works (melodies, vocals, etc) may not be used in work being published to Spotify and must not be submitted to any kind of content ID databases - smaller elements such as percussion samples, synth/instrument one-shots, etc are OK for use (but i still recommend against content ID, it harms everybody's ability to use these works). please ask your publisher or distributor (if you have one) if they do this. if they do not allow you to opt out of content ID database submissions, the work must not be published through those means. you can still upload your work to Bandcamp, YouTube, SoundCloud, etc, of course.
+
+4. HLRC works licensing terms are non-negotiable. credit is never necessary but always appreciated. if you wish, you can credit either "e. essex" or "HALLEY LABS RESOURCE CENTER". feel free to link back if you feel like it will help others.
+
+5. HLRC asks that you consider creating a similar license for your work. this is not a necessity by any means, but i encourage all artists to create a library that others can pull from, given my reasoning above. retaining rights while allowing other independents to learn from your output is a great call in an otherwise overprotected world. again, not necessary, but do consider it.
