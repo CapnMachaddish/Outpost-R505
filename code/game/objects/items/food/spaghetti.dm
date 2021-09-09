@@ -95,3 +95,13 @@
 	food_reagents = list(/datum/reagent/consumable/nutriment = 9, /datum/reagent/consumable/nutriment/vitamin = 2)
 	tastes = list("noodle" = 1, "butter" = 1)
 	foodtypes = GRAIN | DAIRY
+
+/obj/item/food/spaghetti/authenticspaghetti
+	name = "authentic spaghetti"
+	desc = "Spaghetti chitarra alla teramana! Just like mama used to make!"
+	icon_state = "authenticspaghetti"
+
+	food_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/protein = 10, /datum/reagent/consumable/tomatojuice = 10, /datum/reagent/consumable/nutriment/vitamin = 4)
+	microwaved_type = null
+	tastes = list("noodle" = 1, "tomato" = 1, "cheese" = 1, "meat" = 1)
+	foodtypes = GRAIN | DAIRY | MEAT
