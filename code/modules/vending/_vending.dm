@@ -524,7 +524,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 	var/crit_case
 	if(crit)
-		crit_case = rand(1,6)
+		crit_case = rand(1,4) //R505 Edit - Original: rand(1,6)
 
 	if(forcecrit)
 		crit_case = forcecrit
@@ -572,11 +572,13 @@ GLOBAL_LIST_EMPTY(vending_products)
 							C.hitby(shard, skipcatch = TRUE, hitpush = FALSE)
 							shard.embedding = list()
 							shard.updateEmbedding()
+					/* //R505 Edit Start
 					if(4) // paralyze this binch
 						// the new paraplegic gets like 4 lines of losing their legs so skip them
 						visible_message(span_danger("[C]'s spinal cord is obliterated with a sickening crunch!"), ignored_mobs = list(C))
 						C.gain_trauma(/datum/brain_trauma/severe/paralysis/paraplegic)
-					if(5) // limb squish!
+					*/ //R505 Edit End
+					if(4) // limb squish! //R505 Edit - Original: if(5)
 						for(var/i in C.bodyparts)
 							var/obj/item/bodypart/squish_part = i
 							if(squish_part.is_organic_limb())
@@ -586,6 +588,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 								squish_part.receive_damage(brute=30)
 						C.visible_message(span_danger("[C]'s body is maimed underneath the mass of [src]!"), \
 							span_userdanger("Your body is maimed underneath the mass of [src]!"))
+					/*	//R505 Edit Start
 					if(6) // skull squish!
 						var/obj/item/bodypart/head/O = C.get_bodypart(BODY_ZONE_HEAD)
 						if(O)
@@ -595,6 +598,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 							O.drop_organs()
 							qdel(O)
 							new /obj/effect/gibspawner/human/bodypartless(get_turf(C))
+				*/ //R505 Edit End
 
 				if(prob(30))
 					C.apply_damage(max(0, squish_damage - crit_rebate), forced=TRUE, spread_damage=TRUE) // the 30% chance to spread the damage means you escape breaking any bones
