@@ -1,7 +1,7 @@
 //Tier 2 Medicells//
 /datum/design/brute2medicell
 	name = "Brute II Medicell"
-	desc = "Allows cell loaded Mediguns to use the Brute II functoinality"
+	desc = "Allows cell loaded Mediguns to use the Brute II functionality"
 	id = "brute2medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 2000, /datum/material/glass = 2000, /datum/material/plasma = 1000)
@@ -12,7 +12,7 @@
 
 /datum/design/burn2medicell
 	name = "Burn II Medicell"
-	desc = "Allows cell loaded Mediguns to use the Burn II functoinality"
+	desc = "Allows cell loaded Mediguns to use the Burn II functionality"
 	id = "burn2medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 2000, /datum/material/glass = 2000, /datum/material/plasma = 1000)
@@ -23,7 +23,7 @@
 
 /datum/design/toxin2medicell
 	name = "Toxin II Medicell"
-	desc = "Allows cell loaded Mediguns to use the Toxin II functoinality"
+	desc = "Allows cell loaded Mediguns to use the Toxin II functionality"
 	id = "toxin2medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 2000, /datum/material/glass = 2000, /datum/material/plasma = 1000)
@@ -34,7 +34,7 @@
 
 /datum/design/oxy2medicell
 	name = "Oxygen II Medicell"
-	desc = "Allows cell loaded Mediguns to use the Oxygen II functoinality"
+	desc = "Allows cell loaded Mediguns to use the Oxygen II functionality"
 	id = "oxy2medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 2000, /datum/material/glass = 2000, /datum/material/plasma = 1000)
@@ -46,7 +46,7 @@
 //Tier 3 Medicells//
 /datum/design/brute3medicell
 	name = "Brute III Medicell"
-	desc = "Allows cell loaded Mediguns to use the Brute III functoinality"
+	desc = "Allows cell loaded Mediguns to use the Brute III functionality"
 	id = "brute3medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 2000, /datum/material/glass = 2000, /datum/material/plasma = 1000, /datum/material/diamond = 500)
@@ -57,7 +57,7 @@
 
 /datum/design/burn3medicell
 	name = "Burn III Medicell"
-	desc = "Allows cell loaded Mediguns to use the Burn III functoinality"
+	desc = "Allows cell loaded Mediguns to use the Burn III functionality"
 	id = "burn3medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 3000, /datum/material/glass = 3000, /datum/material/plasma = 1000, /datum/material/diamond = 500)
@@ -68,7 +68,7 @@
 
 /datum/design/toxin3medicell
 	name = "Toxin III Medicell"
-	desc = "Allows cell loaded Mediguns to use the Toxin III functoinality"
+	desc = "Allows cell loaded Mediguns to use the Toxin III functionality"
 	id = "toxin3medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 3000, /datum/material/glass = 3000, /datum/material/plasma = 1000, /datum/material/diamond = 500)
@@ -78,8 +78,8 @@
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
 /datum/design/oxy3medicell
-	name = "Oxygem III Medicell"
-	desc = "Allows cell loaded Mediguns to use the Oxygen III functoinality"
+	name = "Oxygen III Medicell"
+	desc = "Allows cell loaded Mediguns to use the Oxygen III functionality"
 	id = "oxy3medicell"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/plastic = 2000, /datum/material/glass = 2000, /datum/material/plasma = 1000, /datum/material/diamond = 500)

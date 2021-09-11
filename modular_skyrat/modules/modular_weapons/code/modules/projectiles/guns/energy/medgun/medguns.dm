@@ -159,7 +159,7 @@
 //Brute III//
 /obj/item/medicell/brute3
 	name = "Brute III Medicell"
-	desc = "A small cell with a intense red glow. Can be used on Mediguns to unlock the Brute III Functoinality"
+	desc = "A small cell with a intense red glow. Can be used on Mediguns to unlock the Brute III functionality"
 	icon_state = "Brute3"
 	ammo_type = /obj/item/ammo_casing/energy/medical/brute3/safe
 	unsafe_ammo = /obj/item/ammo_casing/energy/medical/brute3
@@ -168,7 +168,7 @@
 //Burn III//
 /obj/item/medicell/burn3
 	name = "Burn III Medicell"
-	desc = "A small cell with a intense yellow glow. Can be used on Mediguns to unlock the Burn III Functoinality"
+	desc = "A small cell with a intense yellow glow. Can be used on Mediguns to unlock the Burn III functionality"
 	icon_state = "Burn3"
 	ammo_type = /obj/item/ammo_casing/energy/medical/burn3/safe
 	unsafe_ammo = /obj/item/ammo_casing/energy/medical/burn3
@@ -177,13 +177,13 @@
 //Toxin III//
 /obj/item/medicell/toxin3
 	name = "Toxin III Medicell"
-	desc = "A small cell with a intense green glow. Can be used on Mediguns to unlock the Toxin II Functionality."
+	desc = "A small cell with a intense green glow. Can be used on Mediguns to unlock the Toxin III Functionality."
 	icon_state = "Toxin3"
 	ammo_type = /obj/item/ammo_casing/energy/medical/toxin3
 //Oxygen III//
 /obj/item/medicell/oxy3
 	name = "Oxygen III Medicell"
-	desc = "A small cell with a intense blue glow. Can be used on Mediguns to unlock the Oxygen II Functionality."
+	desc = "A small cell with a intense blue glow. Can be used on Mediguns to unlock the Oxygen III Functionality."
 	icon_state = "Oxy3"
 	ammo_type = /obj/item/ammo_casing/energy/medical/oxy3
 //End of Tier III
