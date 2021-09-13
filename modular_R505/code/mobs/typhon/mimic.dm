@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/hs13mimic
+/mob/living/simple_animal/hostile/typhon/mimic
 	name = "Mimic"
 	icon = 'modular_R505/icons/mob/mimic.dmi'
 	desc = "What the fuck is that?"
@@ -50,17 +50,17 @@
 							You can also change your form to that of simple animals, but be wary that anyone examining you can \
 							find out.</b>"
 
-/mob/living/simple_animal/hostile/hs13mimic/Initialize()
+/mob/living/simple_animal/hostile/typhon/mimic/Initialize()
 	. = ..()
 	trytftorandomobject() // When initialized, make sure they take the form of something.
 	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 
-/mob/living/simple_animal/hostile/hs13mimic/Login()
+/mob/living/simple_animal/hostile/typhon/mimic/Login()
 	. = ..()
 	SEND_SOUND(src, sound('sound/ambience/antag/ling_aler.ogg'))
 	to_chat(src, src.playstyle_string)
 
-/mob/living/simple_animal/hostile/hs13mimic/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/hostile/typhon/mimic/attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(stealthed && stat == CONSCIOUS)
 		if(M.combat_mode == 0)//They're trying to pick us up! We tricked them boys! *plays runescape sea shanty*
@@ -68,7 +68,7 @@
 			guaranteedknockdown(M)
 		trigger() // Bring our friends if any!
 
-/mob/living/simple_animal/hostile/hs13mimic/AttackingTarget()
+/mob/living/simple_animal/hostile/typhon/mimic/AttackingTarget()
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
@@ -94,36 +94,36 @@
 			if(A.stat == CONSCIOUS)
 				adjustBruteLoss(-3) //We heal 3 damage
 
-/mob/living/simple_animal/hostile/hs13mimic/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/simple_animal/hostile/typhon/mimic/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	trigger()
 	. = ..()
 
-/mob/living/simple_animal/hostile/hs13mimic/FindTarget()
+/mob/living/simple_animal/hostile/typhon/mimic/FindTarget()
 	. = ..()
 	if(.)
 		trigger() //We have a target! Trigger!
 	else if(!target && !stealthed) //Has no target, isn't stealthed, let's search for an object to transform
 		trytftorandomobject()
 
-/mob/living/simple_animal/hostile/hs13mimic/death(gibbed)
+/mob/living/simple_animal/hostile/typhon/mimic/death(gibbed)
 	restore() //We died. Restore form.
 	. = ..()
 
-/mob/living/simple_animal/hostile/hs13mimic/med_hud_set_health()
+/mob/living/simple_animal/hostile/typhon/mimic/med_hud_set_health()
 	if(stealthed)
 		var/image/holder = hud_list[HEALTH_HUD]
 		holder.icon_state = null
 		return //we hide medical hud while morphed
 	..()
 
-/mob/living/simple_animal/hostile/hs13mimic/med_hud_set_status()
+/mob/living/simple_animal/hostile/typhon/mimic/med_hud_set_status()
 	if(stealthed)
 		var/image/holder = hud_list[STATUS_HUD]
 		holder.icon_state = null
 		return //we hide medical hud while morphed
 	..()
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/mimicTransformList() //The list of default things to transform needs to be bigger, consider this in the future.
+/mob/living/simple_animal/hostile/typhon/mimic/proc/mimicTransformList() //The list of default things to transform needs to be bigger, consider this in the future.
 	var/transformitem = rand(1,80)
 	medhudupdate()
 	wander = FALSE
@@ -190,16 +190,16 @@
 			desc = "Floppy!"
 			*/
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/guaranteedknockdown(mob/living/carbon/human/M)
+/mob/living/simple_animal/hostile/typhon/mimic/proc/guaranteedknockdown(mob/living/carbon/human/M)
 	M.Knockdown(40)
 	M.visible_message("<span class='danger'>\The [src] knocks down \the [M]!</span>", \
 	"<span class='userdanger'>\The [src] tricks you, knocking you down!</span>")
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/medhudupdate()
+/mob/living/simple_animal/hostile/typhon/mimic/proc/medhudupdate()
 	med_hud_set_health()
 	med_hud_set_status()
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/restore()
+/mob/living/simple_animal/hostile/typhon/mimic/proc/restore()
 	//back to normal mimic sprite
 	stealthed = FALSE
 	medhudupdate()
@@ -211,20 +211,20 @@
 	wander = TRUE
 	vision_range = 9
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/trigger()
+/mob/living/simple_animal/hostile/typhon/mimic/proc/trigger()
 	if(stealthed && stat == CONSCIOUS)
 		visible_message("<span class='danger'>The [src] Reveals itself to be a Mimic!</span>")
 		restore()
 		playsound(loc, 'modular_R505/sound/creatures/mimic/mimic_transform.ogg', 75, TRUE)
 		triggerOthers(target) // Friends too!
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/triggerOthers(passtarget) //
-	for(var/mob/living/simple_animal/hostile/hs13mimic/C in oview(5, src.loc))
+/mob/living/simple_animal/hostile/typhon/mimic/proc/triggerOthers(passtarget) //
+	for(var/mob/living/simple_animal/hostile/typhon/mimic/C in oview(5, src.loc))
 		if(passtarget && C.target == null && !(isdead(target)))
 			C.target = passtarget
 		C.trigger()
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/trytftorandomobject()
+/mob/living/simple_animal/hostile/typhon/mimic/proc/trytftorandomobject()
 	stealthed = TRUE
 	medhudupdate()
 	var/list/obj/item/listItems = list()
@@ -242,12 +242,12 @@
 	else
 		mimicTransformList() //Couldn't find any valid items, let's go for the default list then.
 
-/mob/living/simple_animal/hostile/hs13mimic/proc/allowed(atom/movable/A)
+/mob/living/simple_animal/hostile/typhon/mimic/proc/allowed(atom/movable/A)
 	return !is_type_in_typecache(A, mimic_blacklisted_transform_items) && (isitem(A) || isanimal(A))
 
 //Player control code
 
-/mob/living/simple_animal/hostile/hs13mimic/ShiftClickOn(atom/movable/A)
+/mob/living/simple_animal/hostile/typhon/mimic/ShiftClickOn(atom/movable/A)
 	if(playerTfTime <= world.time && stat == CONSCIOUS)
 		if(A == src)
 			restore()
@@ -358,7 +358,7 @@
 	notify_ghosts("A group of mimics has spawned in [pickedArea]!", source=pickedArea, action=NOTIFY_ATTACK, flashwindow = FALSE)
 	while(spawncount > 0 && validTurfs.len)
 		var/turf/pickedTurf = pick_n_take(validTurfs)
-		var/spawn_type = /mob/living/simple_animal/hostile/hs13mimic
+		var/spawn_type = /mob/living/simple_animal/hostile/typhon/mimic
 		spawn_atom_to_turf(spawn_type, pickedTurf, 1, FALSE)
 		spawncount--
 	return SUCCESSFUL_SPAWN
