@@ -36,8 +36,8 @@
 
 /mob/living/simple_animal/hostile/heliophage/Destroy()
 	var/turf/open/location = get_turf(loc)
-	//Add smol trit fire on death
-	location.atmos_spawn_air("o2=5;tritium=5;TEMP=1000")
+	//Add smol plas fire on death
+	location.atmos_spawn_air("o2=5;plasma=5;TEMP=1000")
 	. = ..()
 
 //Your most basic form of Heliophage - little floaty balls of fiery energy. Weak but fast-moving.
