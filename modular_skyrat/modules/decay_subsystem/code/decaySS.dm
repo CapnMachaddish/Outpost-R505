@@ -1,6 +1,8 @@
 /*
 This is the decay subsystem that is run once at startup.
 These procs are incredibly expensive and should only really be run once. That's why the only run once.
+
+FAIR WARNING: This subsystem is subject to a bunch of R505 tweaks and changes - labeled individually below.
 */
 
 
@@ -28,8 +30,10 @@ SUBSYSTEM_DEF(decay)
 
 	var/list/possible_nests = list(
 		/obj/structure/mob_spawner/spiders,
-		/obj/structure/mob_spawner/bush,
-		/obj/structure/mob_spawner/beehive,
+		/obj/structure/mob_spawner/snake,
+		// /obj/structure/mob_spawner/bush,
+		//I never liked the beehives much
+		// /obj/structure/mob_spawner/beehive, 
 		/obj/structure/mob_spawner/rats
 		)
 
@@ -49,21 +53,36 @@ SUBSYSTEM_DEF(decay)
 	if(!possible_turfs)
 		CRASH("SSDecay had no possible turfs to use!")
 
+	//Not sure why it totally disables itself on a coinflip.
+	//Note to self - maybe make it proc differently on different maps, or even based on prior rounds?
+	/*
 	if(prob(50))
 		message_admins("SSDecay will not interact with this round.")
 		return ..()
+	*/
 
-	severity_modifier = rand(1, 4)
+	//Redoing how it interacts with different depts a bit.
 
-	message_admins("SSDecay severity modifier set to [severity_modifier]")
+	//severity_modifier = rand(1, 4)
 
+	//message_admins("SSDecay severity modifier set to [severity_modifier]")
+
+	//This is jsut a temporary measure, I'll reconfuckulate the system better later.
+	message_admins("Executing SSDecay system...")
+	severity_modifier = rand(1, 3)
+	message_admins("Decaying common spaces at [severity_modifier]")
 	do_common()
 
+	severity_modifier = 4
+	message_admins("Decaying maintenance at [severity_modifier]")
 	do_maintenance()
 
+	severity_modifier = rand(1, 4)
+	message_admins("Decaying engineering at [severity_modifier]")
 	do_engineering()
 
-	do_medical()
+	//Med stays clean for now
+	//do_medical()
 
 	return ..()
 
