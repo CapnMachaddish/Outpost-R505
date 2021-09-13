@@ -3875,6 +3875,7 @@
 #include "modular_R505\code\datums\components\cleanable.dm"
 #include "modular_R505\code\datums\components\crafting\duraskirt.dm"
 #include "modular_R505\code\datums\events\roundstart_events.dm"
+#include "modular_R505\code\datums\events\cme\infested_cme.dm"
 #include "modular_R505\code\datums\events\dust_storm\dust_obj.dm"
 #include "modular_R505\code\datums\events\dust_storm\dust_storm.dm"
 #include "modular_R505\code\datums\mood_events\arousal.dm"

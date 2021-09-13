@@ -41,8 +41,9 @@ Armageddon is truly going to fuck the station, use it sparingly.
 /datum/round_event_control/cme/minimal
 	name = "Coronal Mass Ejection: Minimal"
 	typepath = /datum/round_event/cme/minimal
-	weight = 0
-	max_occurrences = 0
+	weight = 5 //R505 edit - rare natural spawn
+	max_occurrences = 1
+	earliest_start = 25 MINUTES
 
 /datum/round_event/cme/minimal
 	cme_intensity = CME_MINIMAL
