@@ -29,12 +29,12 @@
 	if(powered)
 		to_chat(user, "<span class='notice'>You turn [src] on.</span>")
 		//R505 EDIT - new noises for this thang
-		playsound(src, 'modular_R505/sound/tools/ewelderOn.ogg', 100, FALSE)
+		playsound(src, 'modular_R505/sound/tools/ewelderOn.ogg', 70, FALSE)
 		switched_on()
 		return
 	to_chat(user, "<span class='notice'>You turn [src] off.</span>")
 	//R505 EDIT - new noises for this thang
-	playsound(src, 'modular_R505/sound/tools/ewelderOff.ogg', 100, FALSE)
+	playsound(src, 'modular_R505/sound/tools/ewelderOff.ogg', 70, FALSE)
 	switched_off()
 
 /obj/item/weldingtool/electric/switched_on(mob/user)
