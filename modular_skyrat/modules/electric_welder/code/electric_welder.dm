@@ -1,6 +1,6 @@
 /obj/item/weldingtool/electric
-	name = "electrical welding tool"
-	desc = "An experimental welding tool capable of welding functionality through the use of electricity. The flame seems almost cold."
+	name = "arc welder"
+	desc = "A sophisticated electroplasma arc welder, powered by a battery."
 	icon = 'modular_skyrat/modules/aesthetics/tools/tools.dmi'
 	icon_state = "elwelder"
 	inhand_icon_state = "elwelder"
@@ -14,6 +14,7 @@
 	var/cell_override = /obj/item/stock_parts/cell/high
 	var/powered = FALSE
 	max_fuel = 20
+	
 
 /obj/item/weldingtool/electric/ComponentInitialize()
 	. = ..()
@@ -25,12 +26,15 @@
 		if(!(item_use_power(power_use_amount, user, TRUE) & COMPONENT_POWER_SUCCESS))
 			return
 	powered = !powered
-	playsound(src, 'sound/effects/sparks4.ogg', 100, TRUE)
 	if(powered)
 		to_chat(user, "<span class='notice'>You turn [src] on.</span>")
+		//R505 EDIT - new noises for this thang
+		playsound(src, 'modular_R505/sound/tools/ewelderOn.ogg', 100, TRUE)
 		switched_on()
 		return
 	to_chat(user, "<span class='notice'>You turn [src] off.</span>")
+	//R505 EDIT - new noises for this thang
+	playsound(src, 'modular_R505/sound/tools/ewelderOff.ogg', 100, TRUE)
 	switched_off()
 
 /obj/item/weldingtool/electric/switched_on(mob/user)
@@ -87,8 +91,8 @@
 	return ..()
 
 /datum/design/exwelder
-	name = "Electrical Welding Tool"
-	desc = "An experimental welding tool capable of welding using electricity."
+	name = "Arc Welder"
+	desc = "A sophisticated electroplasma arc welder, powered by a battery."
 	id = "exwelder"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/iron = 1000, /datum/material/glass = 500, /datum/material/plasma = 1500, /datum/material/uranium = 200)
