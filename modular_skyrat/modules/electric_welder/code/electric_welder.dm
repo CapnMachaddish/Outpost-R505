@@ -10,7 +10,7 @@
 	toolspeed = 0.2
 	power_use_amount = POWER_CELL_USE_LOW
 	// We don't use fuel
-	change_icons = FALSE
+	change_icons = TRUE
 	var/cell_override = /obj/item/stock_parts/cell/high
 	var/powered = FALSE
 	max_fuel = 20
@@ -89,6 +89,12 @@
 	else
 		inhand_icon_state = "[initial(inhand_icon_state)]"
 	return ..()
+
+//R505 edit
+/obj/item/weldingtool/electric/update_overlays()
+	. = ..()
+	if(!powered)
+		. -= "[initial(icon_state)]-on"
 
 /datum/design/exwelder
 	name = "Arc Welder"
