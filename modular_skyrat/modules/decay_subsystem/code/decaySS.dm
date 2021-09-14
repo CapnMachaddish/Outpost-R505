@@ -17,7 +17,7 @@ FAIR WARNING: This subsystem is subject to a bunch of R505 tweaks and changes - 
 
 #define NEST_PERCENT_CHANCE 1
 
-#define LIGHT_FLICKER_PERCENT_CHANCE 10
+#define LIGHT_FLICKER_PERCENT_CHANCE 5
 
 SUBSYSTEM_DEF(decay)
 	name = "Decay System"
