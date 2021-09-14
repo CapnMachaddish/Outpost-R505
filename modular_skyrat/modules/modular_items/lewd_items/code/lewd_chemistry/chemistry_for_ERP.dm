@@ -208,7 +208,7 @@
 	color = "#E60584" // rgb: 96, 0, 255
 	taste_description = "a milky ice cream like flavour."
 	overdose_threshold = 17
-	metabolization_rate = 0.25
+	metabolization_rate = 0.5
 	var/message_spam = FALSE
 
 /datum/reagent/breast_enlarger/on_mob_metabolize(mob/living/M)
@@ -272,7 +272,7 @@
 	if(!(M.client?.prefs.skyrat_toggles & FORCED_FEM))
 		var/obj/item/organ/liver/L = M.getorganslot(ORGAN_SLOT_LIVER)
 		if(L)
-			L.applyOrganDamage(0.25)
+			L.applyOrganDamage(0)
 		return ..()
 
 	if(M.gender == MALE)
