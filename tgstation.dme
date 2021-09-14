@@ -3897,6 +3897,8 @@
 #include "modular_R505\code\modules_n_adds\sprite_accessories\synthliz.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\tails.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\teshari.dm"
+#include "modular_R505\code\objects\neuromod\connectome.dm"
+#include "modular_R505\code\objects\neuromod\neuromod.dm"
 #include "modular_R505\code\objects\items.dm"
 #include "modular_R505\code\objects\clothing\sprite_sheets.dm"
 #include "modular_R505\code\objects\clothing\teshari\outfits.dm"
