@@ -10,7 +10,7 @@
 	var/uses = 1
 	var/neuro_type = /obj/item/skillchip/connectome
 	var/starting_connectome
-	var/obj/item/neuromod/storedconnectome
+	var/obj/item/skillchip/connectome/storedorgan
 
 
 /obj/item/neuromod/illegal
@@ -21,10 +21,10 @@
 /obj/item/neuromod/attack_self_tk(mob/user)
 	return //stops TK fuckery
 
-/obj/item/neuromod/proc/insert_connectome(obj/item/item)
-	storedconnectome = item
+/obj/item/neuromod/proc/insert_organ(obj/item/item)
+	storedorgan = item
 	item.forceMove(src)
-	name = "[initial(name)] ([storedconnectome.name])"
+	name = "[initial(name)] ([storedorgan.name])"
 
 /obj/item/neuromod/Initialize(mapload)
 	. = ..()
@@ -35,14 +35,14 @@
 	if(!uses)
 		to_chat(user, span_alert("[src] has already been used; the needles aren't sterile, and its payload is spent."))
 		return
-	else if(!storedconnectome)
+	else if(!storedorgan)
 		to_chat(user, span_alert("[src] does not appear to have a payload; it must be a display piece."))
 		return
-	storedconnectome.Insert(user)//insert stored organ into the user
+	storedorgan.Insert(user)//insert stored organ into the user
 	user.visible_message(span_notice("[user] holds the [src] to their eye for a moment."), span_notice("You feel a sharp sting as [src]'s needles plunge into your eye."))
 	playsound(get_turf(user), 'sound/weapons/circsawhit.ogg', 50, TRUE)
-	storedconnectome = null
-	name = initial(name)
+	storedorgan = null
+	name += initial(name)
 	if(uses != INFINITE)
 		uses--
 	if(!uses)
