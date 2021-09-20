@@ -1,3 +1,4 @@
+//Baguette: my first "original" item, all duct tape and stitches. Anyway, without any further ado:
 //AND NOW ITS TIME TO BEAT THE MIND GAME
 /obj/item/neuromod
 	name = "neuromod"
@@ -6,44 +7,57 @@
 	icon_state = "autoimplanter"
 	inhand_icon_state = "nothing"
 	w_class = WEIGHT_CLASS_SMALL
-
 	var/uses = 1
 	var/neuro_type = /obj/item/skillchip/connectome
 	var/starting_connectome
-	var/obj/item/skillchip/connectome/storedorgan
-
-
-/obj/item/neuromod/illegal
-	name = "experimental neuromod"
-	icon_state = "syndicate_autoimplanter"
-	desc = "A neuromod, unpainted and larger than normal with an orange sticker bearing a serial code on its back; it's frigid to the touch, heavier than you'd expect, and the needles..."
+	var/obj/item/skillchip/connectome/storedconnectome
 
 /obj/item/neuromod/attack_self_tk(mob/user)
 	return //stops TK fuckery
 
-/obj/item/neuromod/proc/insert_organ(obj/item/item)
-	storedorgan = item
+/obj/item/neuromod/illegal //For future use. Typhon mods and such.
+	name = "experimental neuromod"
+	icon_state = "syndicate_autoimplanter"
+	desc = "A neuromod, unpainted and larger than normal with an orange sticker bearing a serial code on its back; it's frigid to the touch, heavier than it looks, and the needles..."
+
+/obj/item/neuromod/proc/insert_connectome(obj/item/item)
+	storedconnectome = item
 	item.forceMove(src)
-	name = "[initial(name)] ([storedorgan.name])"
+	name = "[initial(name)] ([storedconnectome.name])"
 
 /obj/item/neuromod/Initialize(mapload)
 	. = ..()
 	if(starting_connectome)
 		insert_connectome(new starting_connectome(src))
 
-/obj/item/neuromod/attack_self(mob/user)//when the object it used...
+/obj/item/neuromod/attack_self(mob/living/carbon/user)//when the object is used //originally mob/user in autosurgeon code, but that didn't work with the skillchip code
 	if(!uses)
 		to_chat(user, span_alert("[src] has already been used; the needles aren't sterile, and its payload is spent."))
 		return
-	else if(!storedorgan)
+	else if(!storedconnectome)
 		to_chat(user, span_alert("[src] does not appear to have a payload; it must be a display piece."))
 		return
-	storedorgan.Insert(user)//insert stored organ into the user
+	user.implant_skillchip(storedconnectome, FALSE)//implant skillchip into the user. organ procs don't work with skillchips
 	user.visible_message(span_notice("[user] holds the [src] to their eye for a moment."), span_notice("You feel a sharp sting as [src]'s needles plunge into your eye."))
 	playsound(get_turf(user), 'sound/weapons/circsawhit.ogg', 50, TRUE)
-	storedorgan = null
+	storedconnectome = null
 	name += initial(name)
 	if(uses != INFINITE)
 		uses--
 	if(!uses)
 		desc = "[initial(desc)] Looks like it's been used up."
+
+/obj/item/neuromod/qcarry
+	starting_connectome = /obj/item/skillchip/connectome/quickcarry
+
+/obj/item/neuromod/qcarryplus
+	starting_connectome = /obj/item/skillchip/connectome/quickercarry
+
+/obj/item/neuromod/chef
+	starting_connectome = /obj/item/skillchip/connectome/job/chef
+
+/obj/item/neuromod/robotics
+	starting_connectome = /obj/item/skillchip/connectome/job/roboticist
+
+/obj/item/neuromod/engineering
+	starting_connectome = /obj/item/skillchip/connectome/job/engineer
