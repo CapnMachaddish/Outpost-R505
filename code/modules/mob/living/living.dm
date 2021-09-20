@@ -1164,6 +1164,8 @@
 		return FALSE
 	if(invisibility || alpha == 0)//cloaked
 		return FALSE
+	if(ismimic(src)) // Are we a mimic? Mimics should not be tracked to prevent AI camera cheese. //R505 Edit
+		return 0
 	// Now, are they viewable by a camera? (This is last because it's the most intensive check)
 	if(!near_camera(src))
 		return FALSE
