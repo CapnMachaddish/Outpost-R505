@@ -3879,6 +3879,7 @@
 #include "modular_R505\code\datums\events\dust_storm\dust_storm.dm"
 #include "modular_R505\code\datums\mood_events\arousal.dm"
 #include "modular_R505\code\datums\mutations\rad_protection.dm"
+#include "modular_R505\code\mobs\mimic.dm"
 #include "modular_R505\code\modules_n_adds\antagonists\wizard\equipments\noclothes.dm"
 #include "modular_R505\code\modules_n_adds\antagonists\wizard\equipments\spellbooks.dm"
 #include "modular_R505\code\modules_n_adds\arousal\component.dm"
