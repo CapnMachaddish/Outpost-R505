@@ -3,9 +3,9 @@
 /obj/item/neuromod
 	name = "neuromod"
 	desc = "A device that reformats the brain to possess a particular skill or set of skills, using the neural map or connectome of someone who already had said skills as a template."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "autoimplanter"
-	inhand_icon_state = "nothing"
+	icon = 'modular_R505/icons/obj/neuromod.dmi'
+	icon_state = "neuromod"
+	inhand_icon_state = "neuromod"
 	w_class = WEIGHT_CLASS_SMALL
 	var/uses = 1
 	var/neuro_type = /obj/item/skillchip/connectome
@@ -29,6 +29,19 @@
 	. = ..()
 	if(starting_connectome)
 		insert_connectome(new starting_connectome(src))
+	update_appearance()
+
+/obj/item/neuromod/update_overlays() //Called by update_appearance()
+	. = ..()
+	if(uses != 0 && storedconnectome) //Usable and has connectome
+		. += mutable_appearance('modular_R505/icons/obj/neuromod.dmi', "neuromod-ready") //Applies ready status light overlay
+		. += mutable_appearance('modular_R505/icons/obj/neuromod.dmi', "neuromod-full")  //Applies full serum overlay
+	else if (uses == 0 && !storedconnectome) //Not usable and no connectome
+		. += mutable_appearance('modular_R505/icons/obj/neuromod.dmi', "neuromod-used") //Applies used status light overlay
+		. += mutable_appearance('modular_R505/icons/obj/neuromod.dmi', "neuromod-empty") //Applies empty serum overlay
+	else //Spawned in a plain neuromod or something fucky has happened.
+		. += mutable_appearance('modular_R505/icons/obj/neuromod.dmi', "neuromod-error") //Applies error status light overlay
+		. += mutable_appearance('modular_R505/icons/obj/neuromod.dmi', "neuromod-empty") //Applies empty serum overlay
 
 /obj/item/neuromod/attack_self(mob/living/carbon/user)//when the object is used //originally mob/user in autosurgeon code, but that didn't work with the skillchip code
 	if(!uses)
@@ -46,6 +59,7 @@
 		uses--
 	if(!uses)
 		desc = "[initial(desc)] Looks like it's been used up."
+	update_appearance()
 
 /obj/item/neuromod/qcarry
 	starting_connectome = /obj/item/skillchip/connectome/quickcarry
