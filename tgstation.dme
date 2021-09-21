@@ -170,6 +170,7 @@
 #include "code\__DEFINES\dcs\signals.dm"
 #include "code\__DEFINES\research\anomalies.dm"
 #include "code\__DEFINES\~R505_defines\lewd.dm"
+#include "code\__DEFINES\~R505_defines\mimic.dm"
 #include "code\__DEFINES\~R505_defines\preferences.dm"
 #include "code\__DEFINES\~R505_defines\ui_elements.dm"
 #include "code\__DEFINES\~skyrat_defines\ambitions.dm"
