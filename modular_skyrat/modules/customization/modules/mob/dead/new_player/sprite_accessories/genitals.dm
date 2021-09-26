@@ -28,11 +28,11 @@
 		return null
 
 /datum/sprite_accessory/genital/penis
-	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/genitals/penis_onmob.dmi'
+	icon = 'modular_R505/icons/mob/player/genital/penis_onmob.dmi' //R505 edit - please welcome the superior dongus sprites
 	organ_type = /obj/item/organ/genital/penis
 	associated_organ_slot = ORGAN_SLOT_PENIS
 	key = "penis"
-	color_src = USE_MATRIXED_COLORS
+	color_src = USE_ONE_COLOR //R505 edit - new sprites are monochrome
 	always_color_customizable = TRUE
 	center = TRUE
 	special_icon_case = TRUE
@@ -71,15 +71,9 @@
 
 /datum/sprite_accessory/genital/penis/human
 	icon_state = "human"
-	name = "Human"
-	color_src = USE_ONE_COLOR
+	name = "Humanoid"
 	default_color = DEFAULT_SKIN_OR_PRIMARY
-	uses_skintones = TRUE
-	can_have_sheath = FALSE
 
-/datum/sprite_accessory/genital/penis/nondescript
-	icon_state = "nondescript"
-	name = "Nondescript"
 
 /datum/sprite_accessory/genital/penis/knotted
 	icon_state = "knotted"
@@ -97,10 +91,6 @@
 	icon_state = "tapered"
 	name = "Tapered"
 
-/datum/sprite_accessory/genital/penis/tentacle
-	icon_state = "tentacle"
-	name = "Tentacled"
-
 /datum/sprite_accessory/genital/penis/hemi
 	icon_state = "hemi"
 	name = "Hemi"
@@ -109,8 +99,13 @@
 	icon_state = "hemiknot"
 	name = "Knotted Hemi"
 
+//R505 addition - the "thick" style from HyperStation
+/datum/sprite_accessory/genital/penis/thick
+	icon_state = "thick"
+	name = "Thick"
+
 /datum/sprite_accessory/genital/testicles
-	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/genitals/testicles_onmob.dmi'
+	icon = 'modular_R505/icons/mob/player/genital/testicles_onmob.dmi'
 	organ_type = /obj/item/organ/genital/testicles
 	associated_organ_slot = ORGAN_SLOT_TESTICLES
 	key = "testicles"
@@ -190,9 +185,10 @@
 	factual = FALSE
 	color_src = null
 
+//R505 edit - literally just this was bothering the everliving fuck out of me
 /datum/sprite_accessory/genital/vagina/human
 	icon_state = "human"
-	name = "Human"
+	name = "Humanoid"
 
 /datum/sprite_accessory/genital/vagina/tentacles
 	icon_state = "tentacle"
@@ -243,7 +239,7 @@
 	color_src = null
 
 /datum/sprite_accessory/genital/breasts
-	icon = 'modular_skyrat/master_files/icons/mob/sprite_accessory/genitals/breasts_onmob.dmi'
+	icon = 'modular_R505/icons/mob/player/genital/breasts_onmob.dmi' //R505 edit - behold, improved booba
 	organ_type = /obj/item/organ/genital/breasts
 	associated_organ_slot = ORGAN_SLOT_BREASTS
 	key = "breasts"
@@ -272,7 +268,3 @@
 /datum/sprite_accessory/genital/breasts/quad
 	icon_state = "quad"
 	name = "Quad"
-
-/datum/sprite_accessory/genital/breasts/sextuple
-	icon_state = "sextuple"
-	name = "Sextuple"
