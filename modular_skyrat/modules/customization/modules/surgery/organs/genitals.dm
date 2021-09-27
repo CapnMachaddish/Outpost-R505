@@ -130,7 +130,6 @@
 		else
 			size_affix = "5"
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
-	message_admins(passed_string) //DEBUG
 	return passed_string
 
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
@@ -265,7 +264,6 @@
 	var/passed_string = "[genital_type]_[current_size]"
 	if(uses_skintones)
 		passed_string += "-s"
-	message_admins(passed_string) //DEBUG
 	return passed_string
 
 /obj/item/organ/genital/breasts/build_from_dna(datum/dna/DNA, associated_key)
