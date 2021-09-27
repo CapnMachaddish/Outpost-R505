@@ -97,11 +97,11 @@
 			size_affix = "2"
 		if(16 to 24)
 			size_affix = "3"
-		else
+		if(24 to 36)
 			size_affix = "4"
+		else
+			size_affix = "5"
 	var/passed_string = "penis_[genital_type]_[size_affix]"
-	if(uses_skintones)
-		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/penis/get_sprite_size_string()
@@ -112,7 +112,7 @@
 		return "[lowertext(sheath)]_[poking_out]"
 
 	var/size_affix
-	var/measured_size = FLOOR(genital_size,1)
+	var/measured_size = round(genital_size)
 	var/is_erect = 0
 	if(aroused == AROUSAL_FULL)
 		is_erect = 1
@@ -125,11 +125,12 @@
 			size_affix = "2"
 		if(16 to 24)
 			size_affix = "3"
-		else
+		if(24 to 36)
 			size_affix = "4"
+		else
+			size_affix = "5"
 	var/passed_string = "[genital_type]_[size_affix]_[is_erect]"
-	if(uses_skintones)
-		passed_string += "_s"
+	message_admins(passed_string) //DEBUG
 	return passed_string
 
 /obj/item/organ/genital/penis/build_from_dna(datum/dna/DNA, associated_key)
@@ -152,10 +153,8 @@
 	aroused = AROUSAL_CANT
 
 /obj/item/organ/genital/testicles/update_genital_icon_state()
-	var/measured_size = clamp(genital_size, 1, 3)
+	var/measured_size = clamp(genital_size, 1, 5)
 	var/passed_string = "testicles_[genital_type]_[measured_size]"
-	if(uses_skintones)
-		passed_string += "_s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/testicles/get_description_string(datum/sprite_accessory/genital/gas)
@@ -167,10 +166,8 @@
 
 /obj/item/organ/genital/testicles/get_sprite_size_string()
 	var/measured_size = FLOOR(genital_size,1)
-	measured_size = clamp(measured_size, 0, 3)
+	measured_size = clamp(measured_size, 0, 5)
 	var/passed_string = "[genital_type]_[measured_size]"
-	if(uses_skintones)
-		passed_string += "_s"
 	return passed_string
 
 /obj/item/organ/genital/vagina
@@ -239,7 +236,7 @@
 	returned_string += size_description
 	if(aroused == AROUSAL_FULL)
 		if(lactates)
-			returned_string += " The nipples seem hard, perky and are leaking milk."
+			returned_string += " The nipples seem hard, perky, and are leaking milk."
 		else
 			returned_string += " Their nipples look hard and perky."
 	return returned_string
@@ -253,13 +250,13 @@
 		current_size = max_size
 	var/passed_string = "breasts_pair_[current_size]"
 	if(uses_skintones)
-		passed_string += "_s"
+		passed_string += "-s"
 	icon_state = passed_string
 
 /obj/item/organ/genital/breasts/get_sprite_size_string()
 	var/max_size = 5
 	if(genital_type == "pair")
-		max_size = 16
+		max_size = 19
 	var/current_size = FLOOR(genital_size, 1)
 	if(current_size < 0)
 		current_size = 0
@@ -267,7 +264,8 @@
 		current_size = max_size
 	var/passed_string = "[genital_type]_[current_size]"
 	if(uses_skintones)
-		passed_string += "_s"
+		passed_string += "-s"
+	message_admins(passed_string) //DEBUG
 	return passed_string
 
 /obj/item/organ/genital/breasts/build_from_dna(datum/dna/DNA, associated_key)
@@ -309,7 +307,7 @@
 	set desc = "Allows you to toggle which genitals should show through clothes or not."
 
 	if(stat != CONSCIOUS)
-		to_chat(usr, "<span class='warning'>You can't toggle genitals visibility right now...</span>")
+		to_chat(usr, "<span class='warning'>You can't toggle genital visibility right now...</span>")
 		return
 
 	var/list/genital_list = list()
