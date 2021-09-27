@@ -26,12 +26,16 @@
 		TRAIT_SUPERMATTER_MADNESS_IMMUNE,
 		TRAIT_SNOWSTORM_IMMUNE,
 		TRAIT_VOIDSTORM_IMMUNE,
+		TRAIT_NOFLASH,
+		TRAIT_NEVER_WOUNDED,
+		TRAIT_NOLIMBDISABLE
 
 
 	)
 	mutant_bodyparts = list()
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	reagent_flags = PROCESS_SYNTHETIC
+	armor = 25
 	burnmod = 1.2 // Every 0.1% is 10% above the base.
 	brutemod = 0.5
 	coldmod = 0.5
