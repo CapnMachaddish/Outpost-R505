@@ -118,29 +118,22 @@
 //R505 Edit - Start
 /datum/emote/living/human/error
 	key = "error"
-	message = "emits an error noise."
+	message = "audibly signals an error."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/xp_error.ogg'
+	sound = 'modular_R505/sound/effects/xp_error.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
 /datum/emote/living/human/yay
 	key = "yay"
-	message = "emits an triumphant noise!"
+	message = "emits a triumphant fanfare!"
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/hurray.ogg'
+	sound = 'modular_R505/sound/effects/tada.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
 /datum/emote/living/human/chime
 	key = "chime"
-	message = "chimes a few notes."
+	message = "emits a musical chime."
 	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/chime.ogg'
-	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
-
-/datum/emote/living/human/chord
-	key = "chord"
-	message = "emits an erroneous chord!"
-	emote_type = EMOTE_AUDIBLE
-	sound = 'modular_R505/sound/voice/chord.ogg'
+	sound = 'modular_R505/sound/effects/chime.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 //R505 Edit - End
