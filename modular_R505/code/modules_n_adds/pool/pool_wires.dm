@@ -17,6 +17,7 @@
 	var/obj/machinery/pool/controller/P = holder
 	if(P.panel_open)
 		return TRUE
+	return ..()
 
 /datum/wires/poolcontroller/get_status()
 	var/obj/machinery/pool/controller/P = holder
@@ -54,6 +55,6 @@
 			P.shock(usr, 50)
 		if(WIRE_SHOCK)
 			if(mend)
-				P.stat &= ~NOPOWER
+				P.machine_stat &= ~NOPOWER
 			else
-				P.stat |= NOPOWER
+				P.machine_stat |= NOPOWER

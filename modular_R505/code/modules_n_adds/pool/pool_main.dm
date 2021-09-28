@@ -50,7 +50,7 @@
 	layer = BELOW_MOB_LAYER
 
 // Mousedrop hook to normal turfs to get out of pools.
-/turf/open/MouseDrop_T(atom/from, mob/user)
+/turf/open/MouseDrop_T(atom/from, mob/living/user)
 	// I could make this /open/floor and not have the !istype but ehh - kev
 	if(isliving(from) && HAS_TRAIT(from, TRAIT_SWIMMING) && isliving(user) && ((user == from) || user.CanReach(from)) && !user.IsStun() && !user.IsKnockdown() && !user.incapacitated() && !istype(src, /turf/open/pool))
 		var/mob/living/L = from
@@ -152,12 +152,12 @@
 			playsound(src, "water_wade", 20, TRUE)
 	return ..()
 
-/turf/open/pool/MouseDrop_T(atom/from, mob/user)
+/turf/open/pool/MouseDrop_T(atom/from, mob/living/carbon/human/user)
 	. = ..()
 	if(!isliving(from))
 		return
 	var/mob/living/victim = from
-	if(user.stat || user.lying || !Adjacent(user) || !from.Adjacent(user) || !iscarbon(user) || !victim.has_gravity(src) || HAS_TRAIT(victim, TRAIT_SWIMMING))
+	if(user.stat || user.body_position == LYING_DOWN || !Adjacent(user) || !from.Adjacent(user) || !iscarbon(user) || !victim.has_gravity(src) || HAS_TRAIT(victim, TRAIT_SWIMMING))
 		return
 	var/victimname = victim == user? "themselves" : "[victim]"
 	var/starttext = victim == user? "[user] is descending into [src]." : "[user] is lowering [victim] into [src]."

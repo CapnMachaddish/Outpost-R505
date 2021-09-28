@@ -90,7 +90,7 @@
 						if(ishuman(M) && (get_dist(M, src) <= 1))
 							var/mob/living/carbon/human/H = M
 							playsound(src, pick('modular_R505/sound/pool/crack.ogg','modular_R505/sound/pool/crunch.ogg'), 50, TRUE)
-							if(H.lying)			//down for any reason
+							if(H.body_position == LYING_DOWN)			//down for any reason
 								H.adjustBruteLoss(2)
 								to_chat(H, "<span class='danger'>You're caught in the drain!</span>")
 							else

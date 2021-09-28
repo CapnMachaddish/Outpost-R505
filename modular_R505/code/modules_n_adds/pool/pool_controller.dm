@@ -69,7 +69,7 @@
 	START_PROCESSING(SSfastprocess, src)
 	create_reagents(1000)
 	if(noreact_reagents)
-		reagents.reagents_holder_flags |= NO_REACT
+		reagents.flags |= NO_REACT
 	wires = new /datum/wires/poolcontroller(src)
 	scan_things()
 
@@ -109,7 +109,7 @@
 		to_chat(user, "<span class='warning'>The interface on [src] is already too damaged to short it again.</span>")
 		return
 
-/obj/machinery/pool/controller/AltClick(mob/user)
+/obj/machinery/pool/controller/AltClick(mob/living/carbon/human/user)
 	. = ..()
 	if(!isliving(user) || !user.Adjacent(src) || !user.CanReach(src) || user.IsStun() || user.IsKnockdown() || user.incapacitated())
 		return FALSE
@@ -126,9 +126,9 @@
 	return TRUE
 
 /obj/machinery/pool/controller/attackby(obj/item/W, mob/user)
-	if(shocked && !(stat & NOPOWER))
+	if(shocked && !(machine_stat & NOPOWER))
 		shock(user,50)
-	if(stat & (BROKEN))
+	if(machine_stat & (BROKEN))
 		return
 	if(istype(W,/obj/item/reagent_containers))
 		if(W.reagents.total_volume) //check if there's reagent
@@ -149,7 +149,7 @@
 				var/list/reagent_names = list()
 				var/list/rejected = list()
 				for(var/datum/reagent/R in reagents.reagent_list)
-					if((R.volume >= min_reagent_amount) && (!respect_reagent_blacklist || R.can_synth))
+					if((R.volume >= min_reagent_amount) && (!respect_reagent_blacklist || REAGENT_CAN_BE_SYNTHESIZED))
 						reagent_names += R.name
 					else
 						reagents.remove_reagent(R.type, INFINITY)
@@ -185,7 +185,7 @@
 
 //procs
 /obj/machinery/pool/controller/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))		// unpowered, no shock
+	if(machine_stat & (BROKEN|NOPOWER))		// unpowered, no shock
 		return FALSE
 	if(!prob(prb))
 		return FALSE
@@ -209,15 +209,15 @@
 					R.reagent_state = LIQUID
 				if(!swimee.reagents.has_reagent(POOL_NO_OVERDOSE_MEDICINE_MAX))
 					swimee.reagents.add_reagent(R.type, 0.5) //osmosis
-			reagents.reaction(swimee, VAPOR, 0.03) //3 percent. Need to find a way to prevent this from stacking chems at some point like the above.
+			reagents.expose(swimee, VAPOR, 0.03) //3 percent. Need to find a way to prevent this from stacking chems at some point like the above.
 		for(var/obj/objects in W)
 			if(W.reagents)
-				W.reagents.reaction(objects, VAPOR, 1)
+				W.reagents.expose(objects, VAPOR, 1)
 	last_reagent_process = world.time
 
 /obj/machinery/pool/controller/process()
 	updateUsrDialog()
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	if(drained)
 		return
@@ -299,12 +299,12 @@
 	icon_state = "poolc_[temperature]"
 
 /obj/machinery/pool/controller/proc/CanUpTemp(mob/user)
-	if(temperature == POOL_WARM && (temperature_unlocked || issilicon(user) || IsAdminGhost(user)) || temperature < POOL_WARM)
+	if(temperature == POOL_WARM && (temperature_unlocked || issilicon(user) || isAdminGhostAI(user)) || temperature < POOL_WARM)
 		return TRUE
 	return FALSE
 
 /obj/machinery/pool/controller/proc/CanDownTemp(mob/user)
-	if(temperature == POOL_COOL && (temperature_unlocked || issilicon(user) || IsAdminGhost(user)) || temperature > POOL_COOL)
+	if(temperature == POOL_COOL && (temperature_unlocked || issilicon(user) || isAdminGhostAI(user)) || temperature > POOL_COOL)
 		return TRUE
 	return FALSE
 
@@ -332,7 +332,7 @@
 			message_admins(msg)
 			interact_delay = world.time + 15
 	if(href_list["Activate Drain"])
-		if((drainable || issilicon(usr) || IsAdminGhost(usr)) && !linked_drain.active)
+		if((drainable || issilicon(usr) || isAdminGhostAI(usr)) && !linked_drain.active)
 			var/msg = "POOL: [key_name(usr)] activated [src]'s pool drain in [linked_drain.filling? "FILLING" : "DRAINING"] mode at [COORD(src)]"
 			log_game(msg)
 			message_admins(msg)
@@ -370,11 +370,11 @@
 	. = ..()
 	if(.)
 		return
-	if(shocked && !(stat & NOPOWER))
+	if(shocked && !(machine_stat & NOPOWER))
 		shock(user,50)
 	if(panel_open && !isAI(user))
 		return wires.interact(user)
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 	var/datum/browser/popup = new(user, "Pool Controller", name, 300, 450)
 	var/dat = ""
@@ -389,13 +389,13 @@
 		</div>
 		<h3>Drain</h3>
 		<div class='statusDisplay'>
-		<B>Drain status:</B> [(issilicon(user) || IsAdminGhost(user) || drainable) ? "<span class='bad'>Enabled</span>" : "<span class='good'>Disabled</span>"]
+		<B>Drain status:</B> [(issilicon(user) || isAdminGhostAI(user) || drainable) ? "<span class='bad'>Enabled</span>" : "<span class='good'>Disabled</span>"]
 		<br><b>Pool status:</b> "})
 	if(!drained)
 		dat += "<span class='good'>Full</span><BR>"
 	else
 		dat += "<span class='bad'>Drained</span><BR>"
-	if((issilicon(user) || IsAdminGhost(user) || drainable) && !linked_drain.active)
+	if((issilicon(user) || isAdminGhostAI(user) || drainable) && !linked_drain.active)
 		dat += "<a href='?src=\ref[src];Activate Drain=1'>[drained ? "Fill" : "Drain"] Pool</a><br>"
 	popup.set_content(dat)
 	popup.open()
