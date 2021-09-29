@@ -137,7 +137,7 @@
 	sound = 'modular_R505/sound/effects/hurray.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 	
-/datum/emote/living/human/chord //you touch this and i will annihilate you
+/datum/emote/living/human/chord //you touch this and i will annihilate you, Cydia
 	key = "chord"
 	message = "emits a sharp chord!"
 	emote_type = EMOTE_AUDIBLE
