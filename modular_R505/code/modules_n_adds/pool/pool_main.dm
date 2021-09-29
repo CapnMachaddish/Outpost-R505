@@ -51,6 +51,8 @@
 
 // Mousedrop hook to normal turfs to get out of pools.
 /turf/open/MouseDrop_T(atom/from, mob/living/user)
+	if(!istype(user))
+		return ..()
 	// I could make this /open/floor and not have the !istype but ehh - kev
 	if(isliving(from) && HAS_TRAIT(from, TRAIT_SWIMMING) && isliving(user) && ((user == from) || user.CanReach(from)) && !user.IsStun() && !user.IsKnockdown() && !user.incapacitated() && !istype(src, /turf/open/pool))
 		var/mob/living/L = from
@@ -71,7 +73,7 @@
 		return ..()
 
 // Exit check
-/turf/open/pool/Exit(atom/movable/AM, atom/newloc)
+/turf/open/pool/Exit(atom/movable/AM, direction)
 	if(!AM.has_gravity(src))
 		return ..()
 	if(isliving(AM) || isstructure(AM))
@@ -83,15 +85,15 @@
 			return ..()			//human weak, monkey (and anyone else) ook ook eek eek strong
 		if(isliving(AM) && (locate(/obj/structure/pool/ladder) in src))
 			return ..()			//climbing out
-		return istype(newloc, /turf/open/pool)
+		if(!istype(get_step(src, direction), /turf/open/pool))
+			return FALSE
 	return ..()
 
 // Exited logic
-/turf/open/pool/Exited(atom/A, atom/newLoc)
+/turf/open/pool/Exited(atom/A, direction)
 	. = ..()
 	if(isliving(A))
-		var/turf/open/pool/P = newLoc
-		if(!istype(P) || (P.controller != controller))
+		if(!istype(get_step(src, direction), /turf/open/pool) || (src.controller != controller))
 			controller?.mobs_in_pool -= A
 
 // Entered logic
@@ -171,7 +173,7 @@
 	if(istype(W, /obj/item/mop) && filled)
 		W.reagents.add_reagent("water", 5)
 		to_chat(user, "<span class='notice'>You wet [W] in [src].</span>")
-		playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
+		playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
 	else
 		return ..()
 
