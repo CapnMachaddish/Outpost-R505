@@ -236,7 +236,7 @@
 		M.breast_enlarger_amount += 5
 		if(M.breast_enlarger_amount >= 100)
 			if(B?.genital_size < 16)
-				B.genital_size += 1
+				B.genital_size += 2
 				B.update_sprite_suffix()
 				M.update_body()
 				M.breast_enlarger_amount = 0
