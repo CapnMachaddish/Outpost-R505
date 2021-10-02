@@ -123,8 +123,8 @@
 	sound = 'modular_R505/sound/effects/xp_error.ogg'
 	allowed_species = list(/datum/species/robotic/ipc, /datum/species/synth, /datum/species/synth/military, /datum/species/robotic/synthliz, /datum/species/robotic/synthetic_human, /datum/species/robotic/synthetic_mammal)
 
-/datum/emote/living/human/yay
-	key = "yay"
+/datum/emote/living/human/tada
+	key = "tada"
 	message = "emits a triumphant fanfare!"
 	emote_type = EMOTE_AUDIBLE
 	sound = 'modular_R505/sound/effects/tada.ogg'
