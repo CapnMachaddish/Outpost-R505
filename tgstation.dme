@@ -3884,6 +3884,7 @@
 #include "modular_R505\code\datums\mood_events\arousal.dm"
 #include "modular_R505\code\datums\mutations\rad_protection.dm"
 #include "modular_R505\code\mobs\heliophage.dm"
+#include "modular_R505\code\mobs\player\hair.dm"
 #include "modular_R505\code\mobs\typhon\mimic.dm"
 #include "modular_R505\code\modules_n_adds\alerts\announcer.dm"
 #include "modular_R505\code\modules_n_adds\antagonists\wizard\equipments\noclothes.dm"

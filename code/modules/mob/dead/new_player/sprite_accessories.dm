@@ -796,11 +796,6 @@
 /datum/sprite_accessory/hair/wisp
 	name = "Wisp"
 	icon_state = "hair_wisp"
-	
-/modular_R505/icons/mob/player/hair/frizzy
-	name = "Frizzy"
-	icon = 'modular_R505/icons/mob/player/hair.dmi'
-	icon_state = "hair_frizzy"
 
 /*
 /////////////////////////////////////
