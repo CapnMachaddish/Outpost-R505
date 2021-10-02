@@ -3925,6 +3925,8 @@
 #include "modular_R505\code\objects\doors\airlock.dm"
 #include "modular_R505\code\objects\doors\blastdoor.dm"
 #include "modular_R505\code\objects\doors\windowdoor.dm"
+#include "modular_R505\code\objects\items\stacks\tile_stone.dm"
+#include "modular_R505\code\turfs\stone_floor.dm"
 #include "modular_skyrat\master_files\code\__DEFINES\chat.dm"
 #include "modular_skyrat\master_files\code\_globalvars\configuration.dm"
 #include "modular_skyrat\master_files\code\_globalvars\maint_loot_common.dm"
