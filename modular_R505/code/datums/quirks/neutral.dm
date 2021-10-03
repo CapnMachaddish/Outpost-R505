@@ -6,15 +6,6 @@
 	lose_text = "<span class='notice'>You feel hungry for anything other than blood.</span>"
 	medical_record_text = "Patient appears to have digestive system designated for only hemoglobin."
 
-/datum/quirk/item_quirk/bloodsucker/add_unique()
-	var/mob/living/carbon/human/human_holder = quirk_holder
-	var/obj/item/organ/tongue/old_tongue = human_holder.getorganslot(ORGAN_SLOT_TONGUE)
-	old_tongue.Remove(human_holder)
-	qdel(old_tongue)
-
-	var/obj/item/organ/tongue/bloodsucker/new_tongue = new(get_turf(human_holder))
-	new_tongue.Insert(human_holder)
-
 /datum/quirk/bloodsucker/add()
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	var/datum/species/species = human_holder.dna.species
