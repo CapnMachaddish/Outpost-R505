@@ -13,6 +13,11 @@
 	ph = 7.4
 
 	// FEED ME
+datum/reagent/blood/on_mob_life(mob/living/carbon/bloodsucker, delta_time, times_fired)
+    . = ..()
+    if(bloodsucker.has_quirk(/datum/quirk/bloodsucker)) //Check if the mob should gain nutrition, perhaps via a trait?
+        bloodsucker.adjust_nutrition(5 * delta_time) // adjust the nutrition here
+
 /datum/reagent/blood/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray)
 	. = ..()
 	if(chems.has_reagent(type, 1))
