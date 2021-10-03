@@ -147,15 +147,15 @@
 	desc = "There's too much carbon dioxide in the air, and you're breathing it in! Find some good air before you pass out!"
 	icon_state = "too_much_co2"
 
-/atom/movable/screen/alert/not_enough_tox
+/atom/movable/screen/alert/not_enough_plas
 	name = "Choking (No Plasma)"
 	desc = "You're not getting enough plasma. Find some good air before you pass out!"
-	icon_state = "not_enough_tox"
+	icon_state = "not_enough_plas"
 
-/atom/movable/screen/alert/too_much_tox
+/atom/movable/screen/alert/too_much_plas
 	name = "Choking (Plasma)"
 	desc = "There's highly flammable, toxic plasma in the air and you're breathing it in. Find some fresh air. The box in your backpack has an oxygen tank and gas mask in it."
-	icon_state = "too_much_tox"
+	icon_state = "too_much_plas"
 
 /atom/movable/screen/alert/not_enough_n2o
 	name = "Choking (No N2O)"
@@ -247,7 +247,7 @@ or something covering your eyes."
 	. = ..()
 	if(!.)
 		return
-	to_chat(owner, "<span class='mind_control'>[command]</span>")
+	to_chat(owner, span_mind_control("[command]"))
 
 /atom/movable/screen/alert/drunk
 	name = "Drunk"
@@ -326,13 +326,13 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 	add_overlay(receiving)
 	src.receiving = receiving
 	src.giver = giver
-	RegisterSignal(taker, COMSIG_MOVABLE_MOVED, .proc/check_in_range)
+	RegisterSignal(taker, COMSIG_MOVABLE_MOVED, .proc/check_in_range, override = TRUE) //Override to prevent runtimes when people offer a item multiple times
 
 /atom/movable/screen/alert/give/proc/check_in_range(atom/taker)
 	SIGNAL_HANDLER
 
 	if (!giver.CanReach(taker))
-		to_chat(owner, "<span class='warning'>You moved out of range of [giver]!</span>")
+		to_chat(owner, span_warning("You moved out of range of [giver]!"))
 		owner.clear_alert("[giver]")
 
 /atom/movable/screen/alert/give/Click(location, control, params)
@@ -392,10 +392,10 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 
 //ALIENS
 
-/atom/movable/screen/alert/alien_tox
+/atom/movable/screen/alert/alien_plas
 	name = "Plasma"
 	desc = "There's flammable plasma in the air. If it lights up, you'll be toast."
-	icon_state = "alien_tox"
+	icon_state = "alien_plas"
 	alerttooltipstyle = "alien"
 
 /atom/movable/screen/alert/alien_fire
@@ -656,18 +656,18 @@ so as to remain in compliance with the most up-to-date laws."
 		return
 	if(!target)
 		return
-	var/mob/dead/observer/dead_owner = owner
-	if(!istype(dead_owner))
+	var/mob/dead/observer/ghost_owner = owner
+	if(!istype(ghost_owner))
 		return
 	switch(action)
 		if(NOTIFY_ATTACK)
-			target.attack_ghost(dead_owner)
+			target.attack_ghost(ghost_owner)
 		if(NOTIFY_JUMP)
 			var/turf/target_turf = get_turf(target)
 			if(target_turf && isturf(target_turf))
-				dead_owner.forceMove(target_turf)
+				ghost_owner.abstract_move(target_turf)
 		if(NOTIFY_ORBIT)
-			dead_owner.ManualFollow(target)
+			ghost_owner.ManualFollow(target)
 
 //OBJECT-BASED
 
@@ -752,38 +752,19 @@ so as to remain in compliance with the most up-to-date laws."
 		var/atom/movable/screen/alert/alert = alerts[alerts[i]]
 		if(alert.icon_state == "template")
 			alert.icon = ui_style
-
-		//BEGIN R505 EDIT: Arousal hud re-orders alert positions
-		if(screenmob.GetComponent(/datum/component/arousal))
-			switch(i)
-				if(1)
-					. = ui_alert1_arousal
-				if(2)
-					. = ui_alert2_arousal
-				if(3)
-					. = ui_alert3_arousal
-				if(4)
-					. = ui_alert4_arousal
-				if(5)
-					. = ui_alert5_arousal
-				else
-					. = ""
-		//END R505 EDIT
-		else
-			switch(i)
-				if(1)
-					. = ui_alert1
-				if(2)
-					. = ui_alert2
-				if(3)
-					. = ui_alert3
-				if(4)
-					. = ui_alert4
-				if(5)
-					. = ui_alert5 // Right now there's 5 slots
-				else
-					. = ""
-
+		switch(i)
+			if(1)
+				. = ui_alert1
+			if(2)
+				. = ui_alert2
+			if(3)
+				. = ui_alert3
+			if(4)
+				. = ui_alert4
+			if(5)
+				. = ui_alert5 // Right now there's 5 slots
+			else
+				. = ""
 		alert.screen_loc = .
 		screenmob.client.screen |= alert
 	if(!viewmob)
@@ -798,7 +779,7 @@ so as to remain in compliance with the most up-to-date laws."
 		return FALSE
 	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, SHIFT_CLICK)) // screen objects don't do the normal Click() stuff so we'll cheat
-		to_chat(usr, "<span class='boldnotice'>[name]</span> - <span class='info'>[desc]</span>")
+		to_chat(usr, span_boldnotice("[name]</span> - <span class='info'>[desc]"))
 		return FALSE
 	if(master && click_master)
 		return usr.client.Click(master, location, control, params)

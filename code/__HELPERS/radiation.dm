@@ -7,7 +7,6 @@
 		/mob/camera,
 		/obj/effect,
 		/obj/docking_port,
-		/atom/movable/lighting_object,
 		/obj/projectile,
 		))
 	var/list/processing_list = list(location)
@@ -25,6 +24,10 @@
 /proc/radiation_pulse(atom/source, intensity, range_modifier, log=FALSE, can_contaminate=TRUE)
 	if(!SSradiation.can_fire)
 		return
+	if(istype(get_turf(source), /turf/open/pool))
+		var/turf/open/pool/PL = get_turf(source)
+		if(PL.filled == TRUE)
+			intensity *= 0.15
 	for(var/dir in GLOB.cardinals)
 		new /datum/radiation_wave(source, dir, intensity, range_modifier, can_contaminate)
 

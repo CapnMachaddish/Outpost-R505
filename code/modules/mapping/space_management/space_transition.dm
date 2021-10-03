@@ -125,7 +125,6 @@
 				S.destination_x = x_pos_transition[side] == 1 ? S.x : x_pos_transition[side]
 				S.destination_y = y_pos_transition[side] == 1 ? S.y : y_pos_transition[side]
 				S.destination_z = zdestination
-				add_space_transition(S)
 				
 				// Mirage border code
 				var/mirage_dir

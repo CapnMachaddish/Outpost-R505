@@ -199,14 +199,14 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/loop = 1
 	var/safety = 0
 
-	var/banned = C ? is_banned_from(C.ckey, "Appearance") : null
+	var/random = CONFIG_GET(flag/force_random_names) || (C ? is_banned_from(C.ckey, "Appearance") : FALSE)
 
 	while(loop && safety < 5)
-		if(C?.prefs.custom_names[role] && !safety && !banned)
+		if(!safety && !random && C?.prefs.custom_names[role])
 			newname = C.prefs.custom_names[role]
 		else
 			switch(role)
-				if("human")
+				if(SPECIES_HUMAN)
 					newname = random_unique_name(gender)
 				if("clown")
 					newname = pick(GLOB.clown_names)
@@ -237,59 +237,37 @@ Turf and target are separate in case you want to teleport some distance from a t
 /proc/ionnum() //! is at the start to prevent us from changing say modes via get_message_mode()
 	return "![pick("!","@","#","$","%","^","&")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
-//Returns a list of all items of interest with their name
-/proc/getpois(mobs_only = FALSE, skip_mindless = FALSE, specify_dead_role = TRUE)
-	var/list/mobs = sortmobs()
-	var/list/namecounts = list()
-	var/list/pois = list()
-	for(var/mob/M in mobs)
-		if(skip_mindless && (!M.mind && !M.ckey))
-			if(!isbot(M) && !iscameramob(M) && !ismegafauna(M))
-				continue
-		if(M.client && M.client.holder && M.client.holder.fakekey) //stealthmins
-			continue
-		var/name = avoid_assoc_duplicate_keys(M.name, namecounts) + M.get_realname_string()
-
-		if(M.stat == DEAD && specify_dead_role)
-			if(isobserver(M))
-				name += " \[ghost\]"
-			else
-				name += " \[dead\]"
-		pois[name] = M
-
-	if(!mobs_only)
-		for(var/atom/A in GLOB.poi_list)
-			if(!A || !A.loc)
-				continue
-			pois[avoid_assoc_duplicate_keys(A.name, namecounts)] = A
-
-	return pois
-//Orders mobs by type then by name
+/// Orders mobs by type then by name. Accepts optional arg to sort a custom list, otherwise copies GLOB.mob_list.
 /proc/sortmobs()
 	var/list/moblist = list()
 	var/list/sortmob = sortNames(GLOB.mob_list)
-	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/camera/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/brain/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/dead/observer/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/dead/new_player/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/slime/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
+	for(var/mob/living/silicon/ai/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/camera/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/silicon/pai/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/silicon/robot/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/carbon/human/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/brain/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/carbon/alien/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/dead/observer/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/dead/new_player/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/simple_animal/slime/mob_to_sort in sortmob)
+		moblist += mob_to_sort
+	for(var/mob/living/simple_animal/mob_to_sort in sortmob)
+		// We've already added slimes.
+		if(isslime(mob_to_sort))
+			continue
+		moblist += mob_to_sort
+	for(var/mob/living/basic/mob_to_sort in sortmob)
+		moblist += mob_to_sort
 	return moblist
 
 // Format a power value in W, kW, MW, or GW.
@@ -315,10 +293,10 @@ Turf and target are separate in case you want to teleport some distance from a t
 // Format an energy value measured in Power Cell units.
 /proc/DisplayEnergy(units)
 	// APCs process every (SSmachines.wait * 0.1) seconds, and turn 1 W of
-	// excess power into GLOB.CELLRATE energy units when charging cells.
+	// excess power into watts when charging cells.
 	// With the current configuration of wait=20 and CELLRATE=0.002, this
 	// means that one unit is 1 kJ.
-	return DisplayJoules(units * SSmachines.wait * 0.1 / GLOB.CELLRATE)
+	return DisplayJoules(units * SSmachines.wait * 0.1 WATTS)
 
 /proc/get_mob_by_ckey(key)
 	if(!key)
@@ -332,12 +310,12 @@ Turf and target are separate in case you want to teleport some distance from a t
 //For example, using this on a disk, which is in a bag, on a mob, will return the mob because it's on the turf.
 //Optional arg 'type' to stop once it reaches a specific type instead of a turf.
 /proc/get_atom_on_turf(atom/movable/M, stop_type)
-	var/atom/loc = M
-	while(loc?.loc && !isturf(loc.loc))
-		loc = loc.loc
-		if(stop_type && istype(loc, stop_type))
+	var/atom/turf_to_check = M
+	while(turf_to_check?.loc && !isturf(turf_to_check.loc))
+		turf_to_check = turf_to_check.loc
+		if(stop_type && istype(turf_to_check, stop_type))
 			break
-	return loc
+	return turf_to_check
 
 //Returns a list of all locations (except the area) the movable is within.
 /proc/get_nested_locs(atom/movable/AM, include_turf = FALSE)
@@ -427,12 +405,13 @@ Turf and target are separate in case you want to teleport some distance from a t
 
 
 ///Returns the src and all recursive contents as a list.
-/atom/proc/GetAllContents()
+/atom/proc/GetAllContents(ignore_flag_1)
 	. = list(src)
 	var/i = 0
 	while(i < length(.))
 		var/atom/A = .[++i]
-		. += A.contents
+		if (!(A.flags_1 & ignore_flag_1))
+			. += A.contents
 
 ///identical to getallcontents but returns a list of atoms of the type passed in the argument.
 /atom/proc/get_all_contents_type(type)
@@ -510,15 +489,13 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/list/areas = list()
 	if(subtypes)
 		var/list/cache = typecacheof(areatype)
-		for(var/V in GLOB.sortedAreas)
-			var/area/A = V
-			if(cache[A.type])
-				areas += V
+		for(var/area/area_to_check as anything in GLOB.sortedAreas)
+			if(cache[area_to_check.type])
+				areas += area_to_check
 	else
-		for(var/V in GLOB.sortedAreas)
-			var/area/A = V
-			if(A.type == areatype)
-				areas += V
+		for(var/area/area_to_check as anything in GLOB.sortedAreas)
+			if(area_to_check.type == areatype)
+				areas += area_to_check
 	return areas
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
@@ -535,21 +512,19 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/list/turfs = list()
 	if(subtypes)
 		var/list/cache = typecacheof(areatype)
-		for(var/V in GLOB.sortedAreas)
-			var/area/A = V
-			if(!cache[A.type])
+		for(var/area/area_to_check as anything in GLOB.sortedAreas)
+			if(!cache[area_to_check.type])
 				continue
-			for(var/turf/T in A)
-				if(target_z == 0 || target_z == T.z)
-					turfs += T
+			for(var/turf/turf_in_area in area_to_check)
+				if(target_z == 0 || target_z == turf_in_area.z)
+					turfs += turf_in_area
 	else
-		for(var/V in GLOB.sortedAreas)
-			var/area/A = V
-			if(A.type != areatype)
+		for(var/area/area_to_check as anything in GLOB.sortedAreas)
+			if(area_to_check.type != areatype)
 				continue
-			for(var/turf/T in A)
-				if(target_z == 0 || target_z == T.z)
-					turfs += T
+			for(var/turf/turf_in_area in area_to_check)
+				if(target_z == 0 || target_z == turf_in_area.z)
+					turfs += turf_in_area
 	return turfs
 
 /proc/get_cardinal_dir(atom/A, atom/B)
@@ -1507,10 +1482,10 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		path = new path(pod)
 
 	//remove non var edits from specifications
-	specifications -= landing_location
-	specifications -= style
-	specifications -= spawn_type
-	specifications -= "paths_to_spawn" //list, we remove the key
+	specifications -= "target"
+	specifications -= "style"
+	specifications -= "path"
+	specifications -= "spawn" //list, we remove the key
 
 	//rest of specificiations are edits on the pod
 	for(var/variable_name in specifications)

@@ -9,7 +9,7 @@
 	modifystate = TRUE
 	flags_1 =  CONDUCT_1
 	slot_flags = ITEM_SLOT_BACK
-	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse, /obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/laser)
+	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse, /obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/lasergun) //R505 Edit - Original: /obj/item/ammo_casing/energy/laser
 	cell_type = "/obj/item/stock_parts/cell/pulse"
 
 /obj/item/gun/energy/pulse/emp_act(severity)
@@ -20,7 +20,7 @@
 
 /obj/item/gun/energy/pulse/prize/Initialize()
 	. = ..()
-	AddElement(/datum/element/point_of_interest)
+	SSpoints_of_interest.make_point_of_interest(src)
 	var/turf/T = get_turf(src)
 
 	message_admins("A pulse rifle prize has been created at [ADMIN_VERBOSEJMP(T)]")
@@ -55,7 +55,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse)
 
 /obj/item/gun/energy/pulse/destroyer/attack_self(mob/living/user)
-	to_chat(user, "<span class='danger'>[src.name] has three settings, and they are all DESTROY.</span>")
+	to_chat(user, span_danger("[src.name] has three settings, and they are all DESTROY."))
 
 /obj/item/gun/energy/pulse/pistol
 	name = "pulse pistol"
@@ -77,8 +77,10 @@
 	inhand_icon_state = "gun"
 	cell_type = "/obj/item/stock_parts/cell/infinite"
 
+//R505 Edit - Start
 /obj/item/gun/energy/pulse/pistol/m1911/loyalpin
 	pin = /obj/item/firing_pin/implant/mindshield
 
 /obj/item/gun/energy/pulse/pistol/m1911/loyalpin/nosafety
 	has_gun_safety = FALSE
+//R505 Edit - End

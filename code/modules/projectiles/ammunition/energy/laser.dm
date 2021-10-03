@@ -1,22 +1,23 @@
 /obj/item/ammo_casing/energy/laser
 	projectile_type = /obj/projectile/beam/laser
+	e_cost = 83
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/laser/hellfire
-	projectile_type = /obj/projectile/beam/laser/hellfire
-	e_cost = 130
+	projectile_type = /obj/projectile/beam/laser/hellfire/hitscan //R505 Edit - Addition: +/hitscan
+	e_cost = 100
 	select_name = "maim"
 
 /obj/item/ammo_casing/energy/laser/hellfire/antique
 	e_cost = 100
 
 /obj/item/ammo_casing/energy/lasergun
-	projectile_type = /obj/projectile/beam/laser
-	e_cost = 71
+	projectile_type = /obj/projectile/beam/laser/hitscan //R505 Edit - Addition: +/hitscan
+	e_cost = 62.5
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/lasergun/old
-	projectile_type = /obj/projectile/beam/laser
+	projectile_type = /obj/projectile/beam/laser/hitscan //R505 Edit - Addition: +/hitscan
 	e_cost = 200
 	select_name = "kill"
 
@@ -24,12 +25,12 @@
 	e_cost = 120
 
 /obj/item/ammo_casing/energy/laser/practice
-	projectile_type = /obj/projectile/beam/practice
+	projectile_type = /obj/projectile/beam/practice/hitscan //R505 Edit - Addition: +/hitscan
 	select_name = "practice"
 	harmful = FALSE
 
 /obj/item/ammo_casing/energy/laser/scatter
-	projectile_type = /obj/projectile/beam/scatter
+	projectile_type = /obj/projectile/beam/scatter/hitscan //R505 Edit - Addition: +/hitscan
 	pellets = 5
 	variance = 25
 	select_name = "scatter"
@@ -41,12 +42,12 @@
 	harmful = FALSE
 
 /obj/item/ammo_casing/energy/laser/heavy
-	projectile_type = /obj/projectile/beam/laser/heavylaser
+	projectile_type = /obj/projectile/beam/laser/heavy/hitscan //R505 Edit - Addition: +/hitscan
 	select_name = "anti-vehicle"
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 
 /obj/item/ammo_casing/energy/laser/pulse
-	projectile_type = /obj/projectile/beam/pulse
+	projectile_type = /obj/projectile/beam/pulse/hitscan //R505 Edit - Addition: +/hitscan
 	e_cost = 200
 	select_name = "DESTROY"
 	fire_sound = 'sound/weapons/pulse.ogg'
@@ -68,7 +69,7 @@
 	projectile_type = /obj/projectile/beam/lasertag/redtag/hitscan
 
 /obj/item/ammo_casing/energy/xray
-	projectile_type = /obj/projectile/beam/xray
+	projectile_type = /obj/projectile/beam/xray/hitscan //R505 Edit - Addition: +/hitscan
 	e_cost = 50
 	fire_sound = 'sound/weapons/laser3.ogg'
 

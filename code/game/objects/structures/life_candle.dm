@@ -35,14 +35,14 @@
 	if(!user.mind)
 		return
 	if(user.mind in linked_minds)
-		user.visible_message("<span class='notice'>[user] reaches out and pinches the flame of [src].</span>", "<span class='warning'>You sever the connection between yourself and [src].</span>")
+		user.visible_message(span_notice("[user] reaches out and pinches the flame of [src]."), span_warning("You sever the connection between yourself and [src]."))
 		linked_minds -= user.mind
 		if(!linked_minds.len)
 			REMOVE_TRAIT(src, TRAIT_MOVE_FLOATING, LIFECANDLE_TRAIT)
 	else
 		if(!linked_minds.len)
 			ADD_TRAIT(src, TRAIT_MOVE_FLOATING, LIFECANDLE_TRAIT)
-		user.visible_message("<span class='notice'>[user] touches [src]. It seems to respond to [user.p_their()] presence!</span>", "<span class='warning'>You create a connection between you and [src].</span>")
+		user.visible_message(span_notice("[user] touches [src]. It seems to respond to [user.p_their()] presence!"), span_warning("You create a connection between you and [src]."))
 		linked_minds |= user.mind
 
 	update_appearance()
@@ -85,8 +85,7 @@
 	if(!body)
 		body = new mob_type(T)
 		var/mob/ghostie = mind.get_ghost(TRUE)
-		if(ghostie.client && ghostie.client.prefs)
-			ghostie.client.prefs.copy_to(body)
+		ghostie.client?.prefs?.safe_transfer_prefs_to(body)
 		mind.transfer_to(body)
 	else
 		body.forceMove(T)
@@ -94,9 +93,8 @@
 	mind.grab_ghost(TRUE)
 	body.flash_act()
 
-	if(ishuman(body))
-		if((body.client.prefs.r_preferences & R_PREF_AROUSAL))	//R505 Edit
+	if(ishuman(body) && istype(outfit))
+		if((body.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
 			body.AddComponent(/datum/component/arousal)
-		if(istype(outfit))
-			outfit.equip(body)
+		outfit.equip(body)
 	playsound(T, respawn_sound, 50, TRUE)

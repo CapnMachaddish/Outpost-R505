@@ -11,7 +11,10 @@ SUBSYSTEM_DEF(economy)
 										ACCOUNT_MED = ACCOUNT_MED_NAME,
 										ACCOUNT_SRV = ACCOUNT_SRV_NAME,
 										ACCOUNT_CAR = ACCOUNT_CAR_NAME,
-										ACCOUNT_SEC = ACCOUNT_SEC_NAME)
+										ACCOUNT_SEC = ACCOUNT_SEC_NAME,
+										ACCOUNT_CMD = ACCOUNT_CMD_NAME, // SKYRAT EDIT
+										ACCOUNT_CCM = ACCOUNT_CCM_NAME, // SKYRAT EDIT
+										)
 	var/list/generated_accounts = list()
 	var/full_ancap = FALSE // Enables extra money charges for things that normally would be free, such as sleepers/cryo/cloning.
 							//Take care when enabling, as players will NOT respond well if the economy is set up for low cash flows.
@@ -48,12 +51,21 @@ SUBSYSTEM_DEF(economy)
 	var/import_total = 0
 	/// Number of mail items generated.
 	var/mail_waiting = 0
+	/// Mail Holiday: AKA does mail arrive today? Always blocked on Sundays.
+	var/mail_blocked = FALSE
 
 /datum/controller/subsystem/economy/Initialize(timeofday)
 	var/budget_to_hand_out = round(budget_pool / department_accounts.len)
+	if(time2text(world.timeofday, "DDD") == SUNDAY)
+		mail_blocked = TRUE
 	for(var/A in department_accounts)
 		new /datum/bank_account/department(A, budget_to_hand_out)
 	return ..()
+
+/datum/controller/subsystem/economy/Recover()
+	generated_accounts = SSeconomy.generated_accounts
+	bank_accounts_by_id = SSeconomy.bank_accounts_by_id
+	dep_cards = SSeconomy.dep_cards
 
 /datum/controller/subsystem/economy/fire(resumed = 0)
 	fire_counter_for_paycheck++ //SKYRAT EDIT ADDITION

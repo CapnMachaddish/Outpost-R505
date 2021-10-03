@@ -1,6 +1,6 @@
 /datum/species/skrell
 	name = "Skrell"
-	id = "skrell"
+	id = SPECIES_SKRELL
 	default_color = "4B4B4B"
 	species_traits = list(
 		MUTCOLORS,
@@ -28,8 +28,8 @@
 	payday_modifier = 0.75
 	default_mutant_bodyparts = list("skrell_hair" = ACC_RANDOM)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
-	limbs_icon = 'modular_skyrat/modules/customization/icons/mob/species/skrell_parts_greyscale.dmi'
-	eyes_icon = 'modular_skyrat/modules/customization/icons/mob/species/skrell_eyes.dmi'
+	limbs_icon = 'modular_skyrat/master_files/icons/mob/species/skrell_parts_greyscale.dmi'
+	eyes_icon = 'modular_skyrat/master_files/icons/mob/species/skrell_eyes.dmi'
 
 	mutantbrain = /obj/item/organ/brain/skrell
 	mutanteyes = /obj/item/organ/eyes/skrell
@@ -89,7 +89,7 @@
 	name = "skrell lungs"
 	icon = 'modular_skyrat/modules/customization/modules/mob/living/carbon/human/species/skrell_organ.dmi'
 	icon_state = "lungs"
-	safe_toxins_max = 40
+	safe_plasma_max = 40
 	safe_co2_max = 40
 
 	cold_message = "You can't stand the freezing cold with every breath you take!"

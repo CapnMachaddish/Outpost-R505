@@ -62,8 +62,10 @@
 
 	access = SSid_access.get_region_access_list(list(REGION_CENTCOM, REGION_ALL_STATION))
 
+//R505 Edit - Start
 /datum/id_trim/centcom/specops_officer/lead
 	assignment = "Intelligence Lead Officer"
+//R505 Edit - End
 
 /// Trim for Centcom (Soviet) Admirals. All Centcom and Station Access.
 /datum/id_trim/centcom/admiral

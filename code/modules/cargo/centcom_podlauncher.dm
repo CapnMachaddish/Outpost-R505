@@ -25,7 +25,7 @@
 //Variables declared to change how items in the launch bay are picked and launched. (Almost) all of these are changed in the ui_act proc
 //Some effect groups are choices, while other are booleans. This is because some effects can stack, while others dont (ex: you can stack explosion and quiet, but you cant stack ordered launch and random launch)
 /datum/centcom_podlauncher
-	var/static/list/ignored_atoms = typecacheof(list(null, /mob/dead, /obj/effect/landmark, /obj/docking_port, /atom/movable/lighting_object, /obj/effect/particle_effect/sparks, /obj/effect/pod_landingzone, /obj/effect/hallucination/simple/supplypod_selector,  /obj/effect/hallucination/simple/dropoff_location))
+	var/static/list/ignored_atoms = typecacheof(list(null, /mob/dead, /obj/effect/landmark, /obj/docking_port, /obj/effect/particle_effect/sparks, /obj/effect/pod_landingzone, /obj/effect/hallucination/simple/supplypod_selector,  /obj/effect/hallucination/simple/dropoff_location))
 	var/turf/oldTurf //Keeps track of where the user was at if they use the "teleport to centcom" button, so they can go back
 	var/client/holder //client of whoever is using this datum
 	var/area/centcom/supplypod/loading/bay //What bay we're using to launch shit from.
@@ -288,7 +288,7 @@
 				if (isnull(boomInput[i]))
 					return
 				if (!isnum(boomInput[i])) //If the user doesn't input a number, set that specific explosion value to zero
-					alert(usr, "That wasn't a number! Value set to default (zero) instead.")
+					tgui_alert(usr, "That wasn't a number! Value set to default (zero) instead.")
 					boomInput = 0
 			explosionChoice = 1
 			temp_pod.explosionSize = boomInput
@@ -310,7 +310,7 @@
 			if (isnull(damageInput))
 				return
 			if (!isnum(damageInput)) //Sanitize the input for damage to deal.s
-				alert(usr, "That wasn't a number! Value set to default (zero) instead.")
+				tgui_alert(usr, "That wasn't a number! Value set to default (zero) instead.")
 				damageInput = 0
 			damageChoice = 1
 			temp_pod.damage = damageInput
@@ -351,7 +351,7 @@
 			if (isnull(shrapnelMagnitude))
 				return
 			if (!isnum(shrapnelMagnitude))
-				alert(usr, "That wasn't a number! Value set to 3 instead.")
+				tgui_alert(usr, "That wasn't a number! Value set to 3 instead.")
 				shrapnelMagnitude = 3
 			temp_pod.shrapnel_type = shrapnelInput
 			temp_pod.shrapnel_magnitude = shrapnelMagnitude
@@ -402,14 +402,22 @@
 			if (specificTarget)
 				specificTarget = null
 				return
-			var/list/mobs = getpois()//code stolen from observer.dm
-			var/inputTarget = input("Select a mob! (Smiting does this automatically)", "Target", null, null) as null|anything in mobs
-			if (isnull(inputTarget))
-				return
-			var/mob/target = mobs[inputTarget]
-			specificTarget = target///input specific tartget
-			. = TRUE
 
+			var/list/possible_destinations = SSpoints_of_interest.get_mob_pois()
+			var/target = input("Select a mob! (Smiting does this automatically)", "Target", null, null) as null|anything in possible_destinations
+
+			if (isnull(target))
+				return
+
+			var/mob/mob_target = possible_destinations[target]
+
+			// During the break between opening the input menu and selecting our target, has this become an invalid option?
+			if(!SSpoints_of_interest.is_valid_poi(mob_target))
+				return
+
+			specificTarget = mob_target
+
+			. = TRUE
 		////////////////////////////TIMER DELAYS//////////////////
 		if("editTiming") //Change the different timers relating to the pod
 			var/delay = params["timer"]
@@ -452,7 +460,7 @@
 				if (isnull(soundLen))
 					return
 				if (!isnum(soundLen))
-					alert(usr, "That wasn't a number! Value set to default ([initial(temp_pod.fallingSoundLength)*0.1]) instead.")
+					tgui_alert(usr, "That wasn't a number! Value set to default ([initial(temp_pod.fallingSoundLength)*0.1]) instead.")
 			temp_pod.fallingSound = soundInput
 			temp_pod.fallingSoundLength = 10 * soundLen
 			. = TRUE
@@ -521,7 +529,7 @@
 			updateSelector()
 			. = TRUE
 		if("clearBay") //Delete all mobs and objs in the selected bay
-			if(alert(usr, "This will delete all objs and mobs in [bay]. Are you sure?", "Confirmation", "Delete that shit", "No") == "Delete that shit")
+			if(tgui_alert(usr, "This will delete all objs and mobs in [bay]. Are you sure?", "Confirmation", list("Delete that shit", "No")) == "Delete that shit")
 				clearBay()
 				refreshBay()
 			. = TRUE
