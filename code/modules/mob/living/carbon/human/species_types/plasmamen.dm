@@ -24,7 +24,7 @@
 	burnmod = 1.5
 	heatmod = 1.5
 	brutemod = 1.5
-	payday_modifier = 0.75
+	payday_modifier = 1 //R505 Change - Equal pay
 	breathid = "plas"
 	damage_overlay_type = ""//let's not show bloody wounds or burns over bones.
 	var/internal_fire = FALSE //If the bones themselves are burning clothes won't help you much
