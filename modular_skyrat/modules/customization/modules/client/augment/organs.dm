@@ -93,3 +93,7 @@
 /datum/augment_item/organ/tongue/bloodsucker
 	name = "Bloodsucker tongue"
 	path = /obj/item/organ/tongue/bloodsucker
+
+/datum/augment_item/organ/tongue/lizard/bloodsucker
+	name = "Forked Bloodsucker tongue"
+	path = /obj/item/organ/tongue/lizard/bloodsucker

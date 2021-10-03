@@ -4,6 +4,12 @@
 	color = "#1C1C1C"
 	var/drain_cooldown = 0
 
+/obj/item/organ/tongue/lizard/bloodsucker
+    name = "forked bloodsucker tongue"
+    actions_types = list(/datum/action/item_action/organ_action/bloodsucker)
+    color = "#1C1C1C"
+    var/drain_cooldown = 0
+
 #define VAMP_DRAIN_AMOUNT 25
 
 /datum/action/item_action/organ_action/bloodsucker
