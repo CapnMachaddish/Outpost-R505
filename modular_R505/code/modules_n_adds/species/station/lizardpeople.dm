@@ -13,7 +13,7 @@
 	mutanttongue = /obj/item/organ/tongue/lizard
 	coldmod = 1.5
 	heatmod = 0.67
-	payday_modifier = 0.75
+	payday_modifier = 1 //R505 Change - Equal pay
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	attack_verb = "slash"
 	attack_effect = ATTACK_EFFECT_CLAW

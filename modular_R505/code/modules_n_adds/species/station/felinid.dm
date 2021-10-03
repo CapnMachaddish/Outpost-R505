@@ -11,7 +11,7 @@
 	disliked_food = CLOTH
 	learnable_languages = list(/datum/language/common, /datum/language/nekomimetic)
 	var/original_felinid = TRUE //set to false for felinids created by mass-purrbation
-	payday_modifier = 0.75
+	payday_modifier = 1 //R505 Change - Equal pay
 	ass_image = 'icons/ass/asscat.png'
 	family_heirlooms = list(/obj/item/toy/cattoy)
 
