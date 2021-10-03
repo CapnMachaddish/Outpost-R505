@@ -4,7 +4,7 @@
 	color = "#1C1C1C"
 	var/drain_cooldown = 0
 
-#define VAMP_DRAIN_AMOUNT 50
+#define VAMP_DRAIN_AMOUNT 25
 
 /datum/action/item_action/organ_action/bloodsucker
 	name = "Suck Blood"
@@ -36,6 +36,6 @@
 			playsound(sucker, 'sound/items/drink.ogg', 30, TRUE, -2)
 			sucker.reagents.add_reagent(/datum/reagent/blood, 10)
 			if(!victim.blood_volume)
-				to_chat(sucker, "<span class='notice'>You finish off [victim]'s blood supply.</span>")
+				to_chat(sucker, span_notice("You finish off [victim]'s blood supply."))
 
 #undef VAMP_DRAIN_AMOUNT
