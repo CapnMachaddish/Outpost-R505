@@ -1,6 +1,6 @@
 /datum/quirk/bloodsucker
 	name = "Bloodsucker"
-	desc = "Whether by some biological function/mutation or twist of fate, you can only drink blood (And eat some nice RAW meat!)."
+	desc = "Whether by some biological function/mutation or twist of fate, you can only drink blood and some raw meats (Notice: There is a 'Bloodsucker' tongue located in the augments tab, which allows you to suck blood from carbons)."
 	value = 0
 	gain_text = "<span class='notice'>You feel thirsty for red stuff.</span>"
 	lose_text = "<span class='notice'>You feel hungry for anything other than blood.</span>"
