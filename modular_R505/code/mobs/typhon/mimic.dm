@@ -323,8 +323,8 @@
 	name = "Mimic Infestation"
 	typepath = /datum/round_event/mimic_infestation
 	weight = 5
-	max_occurrences = 1
-	min_players = 15
+	max_occurrences = 9
+	min_players = 5
 
 /datum/round_event/mimic_infestation
 	announceWhen = 200
@@ -357,7 +357,7 @@
 	var/list/area/stationAreas = list()
 	var/list/area/eligible_areas = list()
 	for(var/area/A in world) // Get the areas in the Z level
-		if(A.z == SSmapping.station_start)
+		if(is_station_level(A.z) == TRUE)
 			stationAreas += A
 	for(var/area/place in stationAreas) // first we check if it's a valid area
 		if(place.outdoors)
