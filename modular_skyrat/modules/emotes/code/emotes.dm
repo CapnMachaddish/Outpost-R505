@@ -368,9 +368,9 @@
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/baa.ogg'
 
-/datum/emote/living/baa2
-	key = "baa2"
-	key_third_person = "baas"
+/datum/emote/living/bleat //R505 edit - Why the fuck was this called baa2
+	key = "bleat"
+	key_third_person = "bleats"
 	message = "bleats."
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
@@ -461,3 +461,12 @@
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/goose_honk.ogg'
+
+//R505 addition - MANDATORY EMOTE FOR ALL AVALI
+/datum/emote/living/chirp
+	key = "chirp"
+	key_third_person = "chirps!"
+	message = "chirps!"
+	emote_type = EMOTE_AUDIBLE
+	vary = TRUE
+	sound = 'modular_R505/sound/voice/chirp.ogg'
