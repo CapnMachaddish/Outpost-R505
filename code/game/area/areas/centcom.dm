@@ -9,8 +9,7 @@
 	name = "CentCom"
 	icon_state = "centcom"
 	static_lighting = FALSE
-	base_lighting_color = COLOR_WHITE
-	base_lighting_alpha = 255
+	area_has_base_lighting = FALSE
 	requires_power = FALSE
 	has_gravity = STANDARD_GRAVITY
 	area_flags = UNIQUE_AREA | NOTELEPORT
