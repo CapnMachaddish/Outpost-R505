@@ -8,8 +8,7 @@
 /area/centcom
 	name = "CentCom"
 	icon_state = "centcom"
-	static_lighting = FALSE
-	area_has_base_lighting = FALSE
+	static_lighting = TRUE
 	requires_power = FALSE
 	has_gravity = STANDARD_GRAVITY
 	area_flags = UNIQUE_AREA | NOTELEPORT
