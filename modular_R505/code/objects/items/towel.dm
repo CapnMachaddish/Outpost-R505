@@ -5,8 +5,8 @@
 	lefthand_file = 'modular_R505/icons/obj/items_lefthand.dmi'
 	righthand_file = 'modular_R505/icons/obj/items_righthand.dmi'
 	icon_state = "towel"
-	slot_flags = ITEM_SLOT_OCLOTHING
-	body_parts_covered = CHEST|GROIN|LEGS
+	//slot_flags = ITEM_SLOT_OCLOTHING
+	//body_parts_covered = CHEST|GROIN|LEGS
 	item_flags = NOBLUDGEON
 	force = 1
 	w_class = WEIGHT_CLASS_NORMAL
