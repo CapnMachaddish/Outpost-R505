@@ -67,6 +67,18 @@
 		to_chat(user, span_notice("[src] can't fit more items!"))
 		return
 	var/list/modifiers = params2list(params)
+
+	if(istype(I, /obj/item/storage/bag/tray))
+		var/obj/item/storage/bag/tray/T = I
+		if(T.contents.len > 0) // If the tray isn't empty
+			for(var/x in T.contents)
+				if(griddled_objects.len < max_items)
+					var/obj/item/item = x
+					AddToGrill(item, user)
+			user.visible_message(span_notice("[user] empties [I] on [src]."))
+			return
+		// If the tray IS empty, continue on (tray will be placed on the table like other items)
+
 	//Center the icon where the user clicked.
 	if(!LAZYACCESS(modifiers, ICON_X) || !LAZYACCESS(modifiers, ICON_Y))
 		return
