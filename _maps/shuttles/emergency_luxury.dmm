@@ -600,7 +600,7 @@
 	pixel_x = -7;
 	pixel_y = 11
 	},
-/obj/item/reagent_containers/glass/rag{
+/obj/item/reagent_containers/rag{
 	pixel_x = -6;
 	pixel_y = 4
 	},

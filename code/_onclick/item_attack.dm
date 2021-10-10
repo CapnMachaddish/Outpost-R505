@@ -328,3 +328,8 @@
 		span_userdanger("[attack_message_victim]"), null, COMBAT_MESSAGE_RANGE, user)
 	to_chat(user, span_danger("[attack_message_attacker]"))
 	return 1
+
+//R505 Edit
+/obj/item/proc/pre_altattackby(atom/A, mob/living/user, params)
+	return FALSE //return something other than false if you wanna override attacking completely
+//R505 Edit - End

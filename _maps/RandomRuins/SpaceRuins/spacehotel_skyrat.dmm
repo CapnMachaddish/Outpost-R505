@@ -454,7 +454,7 @@
 /area/ruin/space/has_grav/hotel/dock)
 "dv" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/hotel/bar)
 "dx" = (
@@ -1778,7 +1778,7 @@
 "ji" = (
 /obj/structure/table/glass,
 /obj/item/reagent_containers/food/drinks/shaker,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/hotel/bar)
 "jm" = (

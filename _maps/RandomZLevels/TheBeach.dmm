@@ -809,7 +809,7 @@
 /area/awaymission/beach)
 "cD" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/glass/rag{
+/obj/item/reagent_containers/rag{
 	pixel_y = 7
 	},
 /obj/item/food/burger/crab{
