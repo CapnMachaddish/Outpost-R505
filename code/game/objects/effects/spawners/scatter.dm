@@ -49,7 +49,7 @@
 	loot_table = list(/obj/item/clothing/head/cone = 35,
 					/obj/item/clothing/suit/caution = 15,
 					/mob/living/simple_animal/hostile/retaliate/frog = 10,
-					/obj/item/reagent_containers/glass/rag = 10,
+					/obj/item/reagent_containers/rag = 10,
 					/obj/item/reagent_containers/glass/bucket = 10,
 					/obj/effect/decal/cleanable/blood/old = 10,
 					/obj/structure/mopbucket = 10)

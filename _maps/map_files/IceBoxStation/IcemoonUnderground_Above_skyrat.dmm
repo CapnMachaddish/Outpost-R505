@@ -1768,7 +1768,7 @@
 	pixel_x = 5;
 	pixel_y = 6
 	},
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/table/wood,
 /turf/open/floor/stone,

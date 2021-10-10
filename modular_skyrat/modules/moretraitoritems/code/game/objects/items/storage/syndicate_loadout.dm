@@ -112,7 +112,7 @@
 	new /obj/item/card/id/advanced/chameleon(src)
 	new /obj/item/card/emag/doorjack(src)
 	new /obj/item/reagent_containers/hypospray/medipen/stimulants(src)
-	new /obj/item/reagent_containers/glass/rag(src)
+	new /obj/item/reagent_containers/rag(src)
 
 /obj/item/storage/backpack/duffelbag/syndie/loadout/ninja/PopulateContents()
 	new /obj/item/vibro_weapon/ninjasr(src)

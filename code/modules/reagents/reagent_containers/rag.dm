@@ -1,5 +1,3 @@
-//R505 Edit - moved to /reagent_containers/rag.dm
-/*
 /obj/item/reagent_containers/rag
 	name = "damp rag"
 	desc = "For cleaning up messes, you suppose."
@@ -22,11 +20,12 @@
 	user.visible_message(span_suicide("[user] is smothering [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
 	return (OXYLOSS)
 
-//R505 Edit
+/* TODO R505
 /obj/item/reagent_containers/rag/examine(mob/user)
 	. = ..()
 	if(reagents.total_volume)
 		. += "<span class='notice'>Alt-Click to squeeze the liquids out of it.</span>"
+
 
 /obj/item/reagent_containers/rag/pre_altattackby(mob/living/M, mob/living/user, params)
 	if(istype(M) && user.combat_mode == 0)
@@ -84,29 +83,31 @@
 				reagents.trans_to(target, reagents.total_volume)
 			to_chat(user, "<span class='notice'>[msg].</span>")
 		return TRUE
-//R505 Edit - End
+*/
 
 /obj/item/reagent_containers/rag/afterattack(atom/A as obj|turf|area, mob/living/user,proximity)
 	. = ..()
 	if(!proximity)
 		return
-	if(iscarbon(A) && reagents?.total_volume)
+	if(iscarbon(A) && A.reagents && reagents.total_volume)
 		var/mob/living/carbon/C = A
 		var/reagentlist = pretty_string_from_reagent_list(reagents)
-		var/log_object = "containing [reagentlist]"
-		if(user.combat_mode && !C.is_mouth_covered())
-			reagents.trans_to(C, reagents.total_volume, transfered_by = user, methods = INGEST)
-			C.visible_message(span_danger("[user] smothers \the [C] with \the [src]!"), span_userdanger("[user] smothers you with \the [src]!"), span_hear("You hear some struggling and muffled cries of surprise."))
-			log_combat(user, C, "smothered", src, log_object)
+		var/log_object = "a damp rag containing [reagentlist]"
+		if(user.combat_mode == 1 && !C.is_mouth_covered())
+			reagents.expose(C, INGEST)
+			reagents.trans_to(C, 5)
+			C.visible_message("<span class='danger'>[user] has smothered \the [C] with \the [src]!</span>", "<span class='userdanger'>[user] has smothered you with \the [src]!</span>", "<span class='italics'>You hear some struggling and muffled cries of surprise.</span>")
+			log_combat(user, C, "smothered", log_object)
 		else
 			reagents.expose(C, TOUCH)
-			reagents.clear_reagents()
-			C.visible_message(span_notice("[user] touches \the [C] with \the [src]."))
-			log_combat(user, C, "touched", src, log_object)
+			reagents.remove_all(5)
+			C.visible_message("<span class='notice'>[user] has touched \the [C] with \the [src].</span>")
+			log_combat(user, C, "touched", log_object)
 
 	else if(istype(A) && (src in user))
-		user.visible_message(span_notice("[user] starts to wipe down [A] with [src]!"), span_notice("You start to wipe down [A] with [src]..."))
+		user.visible_message("[user] starts to wipe down [A] with [src]!", "<span class='notice'>You start to wipe down [A] with [src]...</span>")
 		if(do_after(user,30, target = A))
-			user.visible_message(span_notice("[user] finishes wiping off [A]!"), span_notice("You finish wiping off [A]."))
-			A.wash(CLEAN_SCRUB)
-*/
+			user.visible_message("[user] finishes wiping off [A]!", "<span class='notice'>You finish wiping off [A].</span>")
+			SEND_SIGNAL(A, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_SCRUB)
+	return
+

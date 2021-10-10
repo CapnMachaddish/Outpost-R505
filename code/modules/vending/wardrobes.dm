@@ -309,7 +309,7 @@
 					/obj/item/clothing/head/soft/black = 2,
 					/obj/item/clothing/shoes/sneakers/black = 2,
 					/obj/item/clothing/suit/hooded/wintercoat/bartender = 2,	//SKYRAT EDIT ADDITION
-					/obj/item/reagent_containers/glass/rag = 2,
+					/obj/item/reagent_containers/rag = 2,
 					/obj/item/storage/box/beanbag = 1,
 					/obj/item/clothing/suit/armor/vest/alt = 1,
 					/obj/item/circuitboard/machine/dish_drive = 1,
@@ -349,7 +349,7 @@
 					/obj/item/clothing/head/chefhat = 1,
 					/obj/item/clothing/under/rank/civilian/cookjorts = 2,
 					/obj/item/clothing/shoes/cookflops = 2,
-					/obj/item/reagent_containers/glass/rag = 1,
+					/obj/item/reagent_containers/rag = 1,
 					/obj/item/clothing/suit/hooded/wintercoat = 2)
 	refill_canister = /obj/item/vending_refill/wardrobe/chef_wardrobe
 	payment_department = ACCOUNT_SRV

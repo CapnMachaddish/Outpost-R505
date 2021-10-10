@@ -171,7 +171,7 @@
 			new /obj/item/card/id/advanced/chameleon(src)
 			new /obj/item/clothing/under/chameleon(src)
 			new /obj/item/reagent_containers/hypospray/medipen/stimulants(src)
-			new /obj/item/reagent_containers/glass/rag(src)
+			new /obj/item/reagent_containers/rag(src)
 
 		if(KIT_NINJA)
 			new /obj/item/katana(src) // Unique , hard to tell how much tc this is worth. 8 tc?
