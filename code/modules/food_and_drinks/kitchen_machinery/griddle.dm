@@ -72,10 +72,12 @@
 	//R505 Edit
 	if(istype(I, /obj/item/storage/bag/tray))
 		var/obj/item/storage/bag/tray/T = I
-		if(T.contents.len > 0) // If the tray isn't empty
+		if(T.contents.len > 0 && griddled_objects.len != max_items) // If the tray isn't empty
 			for(var/x in T.contents)
-				if(griddled_objects.len < max_items)
-					var/obj/item/item = x
+				var/obj/item/item = x
+				if(griddled_objects.len >= max_items)
+					return
+				if(SEND_SIGNAL(T, COMSIG_TRY_STORAGE_TAKE, item, src))
 					AddToGrill(item, user)
 			user.visible_message(span_notice("[user] empties [I] on [src]."))
 			return

@@ -15,18 +15,6 @@
 
 
 /obj/item/plate/attackby(obj/item/I, mob/user, params)
-	//R505 Edit
-	if(istype(I, /obj/item/storage/bag/tray))
-		var/obj/item/storage/bag/tray/T = I
-		if(T.contents.len > 0) // If the tray isn't empty
-			for(var/x in T.contents)
-				if(contents.len < max_items)
-					var/obj/item/item = x
-					AddToPlate(item, user)
-			user.visible_message(span_notice("[user] empties [I] on [src]."))
-			return
-		// If the tray IS empty, continue on (tray will be placed on the table like other items)
-	//R505 Edit - End
 	if(!IS_EDIBLE(I))
 		to_chat(user, span_notice("[src] is made for food, and food alone!"))
 		return
