@@ -8,6 +8,7 @@
 	idle_power_usage = 5
 	layer = BELOW_OBJ_LAYER
 	circuit = /obj/item/circuitboard/machine/griddle
+	interaction_flags_machine = INTERACT_MACHINE_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OFFLINE //R505 Edit
 	processing_flags = START_PROCESSING_MANUALLY
 	resistance_flags = FIRE_PROOF
 
@@ -104,6 +105,11 @@
 	update_appearance()
 	update_grill_audio()
 
+//R505 Edit
+/obj/machinery/griddle/attack_robot(mob/user)
+	. = .. ()
+	attack_hand(user)
+//R505 Edit
 
 /obj/machinery/griddle/proc/AddToGrill(obj/item/item_to_grill, mob/user)
 	vis_contents += item_to_grill
