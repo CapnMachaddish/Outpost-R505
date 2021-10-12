@@ -102,6 +102,11 @@
 	update_appearance()
 	update_grill_audio()
 
+//R505 Edit
+/obj/machinery/griddle/attack_robot(mob/user)
+	. = ..()
+	attack_hand(user)
+//R505 Edit - End
 
 /obj/machinery/griddle/proc/AddToGrill(obj/item/item_to_grill, mob/user)
 	vis_contents += item_to_grill

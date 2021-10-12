@@ -141,6 +141,12 @@
 	update_baking_audio()
 	return TRUE
 
+//R505 Edit
+/obj/machinery/griddle/attack_robot(mob/user)
+	. = ..()
+	attack_hand(user)
+//R505 Edit - End
+
 /obj/machinery/oven/proc/update_baking_audio()
 	if(!oven_loop)
 		return
