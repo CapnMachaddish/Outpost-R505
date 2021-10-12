@@ -141,6 +141,13 @@
 	update_baking_audio()
 	return TRUE
 
+//R505 Edit
+/obj/machinery/oven/attack_robot(mob/user)
+	. = .. ()
+	attack_hand(user)
+	message_admins("attack_robot")
+//R505 Edit
+
 /obj/machinery/oven/proc/update_baking_audio()
 	if(!oven_loop)
 		return

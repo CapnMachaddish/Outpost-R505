@@ -8,6 +8,7 @@
 	idle_power_usage = 5
 	layer = BELOW_OBJ_LAYER
 	circuit = /obj/item/circuitboard/machine/griddle
+	interaction_flags_machine = INTERACT_MACHINE_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OFFLINE //R505 Edit
 	processing_flags = START_PROCESSING_MANUALLY
 	resistance_flags = FIRE_PROOF
 
@@ -71,10 +72,12 @@
 	//R505 Edit
 	if(istype(I, /obj/item/storage/bag/tray))
 		var/obj/item/storage/bag/tray/T = I
-		if(T.contents.len > 0) // If the tray isn't empty
+		if(T.contents.len > 0 && griddled_objects.len != max_items) // If the tray isn't empty
 			for(var/x in T.contents)
-				if(griddled_objects.len < max_items)
-					var/obj/item/item = x
+				var/obj/item/item = x
+				if(griddled_objects.len >= max_items)
+					return
+				if(SEND_SIGNAL(T, COMSIG_TRY_STORAGE_TAKE, item, src))
 					AddToGrill(item, user)
 			user.visible_message(span_notice("[user] empties [I] on [src]."))
 			return
@@ -104,6 +107,11 @@
 	update_appearance()
 	update_grill_audio()
 
+//R505 Edit
+/obj/machinery/griddle/attack_robot(mob/user)
+	. = .. ()
+	attack_hand(user)
+//R505 Edit
 
 /obj/machinery/griddle/proc/AddToGrill(obj/item/item_to_grill, mob/user)
 	vis_contents += item_to_grill
