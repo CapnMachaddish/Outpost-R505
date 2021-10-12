@@ -482,7 +482,7 @@
 	alt_icons = TRUE
 	alt_icon_state = "ostwind_worn"
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT | ITEM_SLOT_OCLOTHING
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 	mag_type = /obj/item/ammo_box/magazine/multi_sprite/ostwind
 	spread = 10
 	fire_delay = 2
