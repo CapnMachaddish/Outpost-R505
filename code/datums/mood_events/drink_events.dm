@@ -29,7 +29,7 @@
 
 // SKYRAT ADD BEGIN
 /datum/mood_event/race_drink
-	description = "<span class='nicegreen'>That drink was made for me!</span>\n"
+	description = "<span class='nicegreen'>The signature taste of that cultural drink was amazing!</span>\n" //R505 Edit - your drinks tasted like nothing to EVERYONE. now they taste sexy to EVERYONE.
 	mood_change = 12
 	timeout = 9 MINUTES
 //SKYRAT ADD END

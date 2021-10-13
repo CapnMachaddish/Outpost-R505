@@ -287,199 +287,276 @@
 	color = "#5AEB52" //(90, 235, 82)
 	description = "A cold looking drink made for people with scales."
 	boozepwr = 50 //strong!
-	taste_description = "dead flies"
+	taste_description = "minty mushrooms" //R505 Edit Start (ends at frisky kitty)
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "coldscales"
-	glass_name = "glass of Coldscales"
-	glass_desc = "A soft green drink that looks inviting!"
+	glass_name = "Coldscales"
+	glass_desc = "I can't believe it's not Leporazine!"
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/coldscales/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/coldscales/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(islizard(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		M.adjust_bodytemperature(-5 * REM * TEMPERATURE_DAMAGE_COEFFICIENT * delta_time, M.get_body_temp_normal())
+		M.adjust_bodytemperature(25 * REM * TEMPERATURE_DAMAGE_COEFFICIENT * delta_time, 0, M.get_body_temp_normal())
+		return ..()
 
 /datum/reagent/consumable/ethanol/oil_drum
 	name = "Oil Drum"
 	color = "#000000" //(0, 0, 0)
 	description = "Industrial grade oil mixed with some ethanol to make it a drink. Somehow not known to be toxic."
 	boozepwr = 45
-	taste_description = "oil spill"
+	taste_description = "an oil spill"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "oil_drum"
-	glass_name = "Drum of oil"
-	glass_desc = "A gray can of booze and oil..."
+	glass_name = "Oil Drum"
+	glass_desc = "You can feel the penguins dying in your hands."
+	process_flags = REAGENT_ORGANIC | REAGENT_SYNTHETIC
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/oil_drum/on_mob_life(mob/living/carbon/M)
-	if(MOB_ROBOTIC)
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+/datum/reagent/consumable/ethanol/oil_drum/on_mob_metabolize(mob/living/L)
+	if(L.mob_biotypes & (MOB_ROBOTIC))
+		..()
+		L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/nuka_cola)
+		return ..()
+
+/datum/reagent/consumable/ethanol/oil_drum/on_mob_end_metabolize(mob/living/L)
+	if(L.mob_biotypes & (MOB_ROBOTIC))
+		L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/nuka_cola)
+		..()	
+		return ..()
 
 /datum/reagent/consumable/ethanol/nord_king
-	name = "Nord King"
+	name = "Nordic King"
 	color = "#EB1010" //(235, 16, 16)
-	description = "Strong mead mixed with more honey and ethanol. Beloved by its human patrons."
+	description = "Strong mead mixed with even more honey and ethanol. Beloved by its human patrons."
 	boozepwr = 50 //strong!
 	taste_description = "honey and red wine"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "nord_king"
-	glass_name = "Keg of Nord King"
-	glass_desc = "A dripping keg of red mead."
+	glass_name = "Nordic King"
+	glass_desc = "Red mead mixed in a mountainside. Magnificent."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/nord_king/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/nord_king/on_mob_metabolize(mob/living/M)
 	if(ishumanbasic(M) || isdwarf(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		to_chat(M, span_notice("I am a dwarf and I'm digging a hole..."))
+		boozepwr = 25 // you're used to it.
+
+/datum/reagent/consumable/ethanol/nord_king/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	if(ishumanbasic(M) || isdwarf(M))
+		M.adjustBruteLoss(-1.5 * REM * delta_time)
+		M.adjustFireLoss(-1.5 * REM * delta_time)
+		return ..()
 
 /datum/reagent/consumable/ethanol/velvet_kiss
 	name = "Velvet Kiss"
 	color = "#EB1010" //(235, 16, 16)
-	description = "A bloody drink mixed with wine."
+	description = "A bloody wine, supposedly very unholy."
 	boozepwr = 10 //weak
-	taste_description = "iron with grapejuice"
+	taste_description = "tart hemoglobin"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "velvet_kiss"
-	glass_name = "glass of Velvet Kiss"
-	glass_desc = "Red and white drink for the upper classes or undead."
+	glass_name = "Velvet Kiss"
+	glass_desc = "A blood-red drink for the more bloodthirsty undead in your (un)life."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/velvet_kiss/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/velvet_kiss/on_mob_metabolize(mob/living/M)
+	if(iszombie(M) || isvampire(M) || isdullahan(M)) 
+		to_chat(M, span_notice("The Blood Moon is rising..."))
+
+/datum/reagent/consumable/ethanol/velvet_kiss/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(iszombie(M) || isvampire(M) || isdullahan(M)) //Rare races!
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		holder.remove_reagent(/datum/reagent/water/holywater, 1 * REM * delta_time)
+		holder.remove_reagent(/datum/reagent/consumable/garlic, 2 * REM * delta_time)
+		M.adjustFireLoss(-2 * REM * delta_time)
+		return ..()
 
 /datum/reagent/consumable/ethanol/abduction_fruit
 	name = "Abduction Fruit"
 	color = "#DEFACD" //(222, 250, 205)
-	description = "Mixing of juices to make an alien taste."
+	description = "A strange blend of juices with an alien taste."
 	boozepwr = 80 //Strong
-	taste_description = "grass and lime"
+	taste_description = "something out of this world"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "abduction_fruit"
-	glass_name = "glass of Abduction Fruit"
+	glass_name = "Abduction Fruit"
 	glass_desc = "Mixed fruits that were never meant to be mixed..."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/abduction_fruit/on_mob_life(mob/living/carbon/M)
-	if(isabductor(M)) //add xenohyrids to this at some point
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+/datum/reagent/consumable/ethanol/abduction_fruit/on_mob_metabolize(mob/living/L)
+	if(isabductor(L) || isxenohybrid(L))
+		..()
+		ADD_TRAIT(L, TRAIT_FASTMED, type)
+		ADD_TRAIT(L, TRAIT_QUICK_CARRY, type)
+
+/datum/reagent/consumable/ethanol/abduction_fruit/on_mob_end_metabolize(mob/living/L)
+	if(isabductor(L) || isxenohybrid(L))
+		REMOVE_TRAIT(L, TRAIT_FASTMED, type)
+		REMOVE_TRAIT(L, TRAIT_QUICK_CARRY, type)
+		..()
 
 /datum/reagent/consumable/ethanol/bug_zapper
 	name = "Bug Zapper"
 	color = "#F5882A" //(222, 250, 205)
 	description = "Copper and lemon juice. Hardly even a drink."
 	boozepwr = 5 //No booze really
-	taste_description = "copper and AC power"
+	taste_description = "a metallic tingle"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "bug_zapper"
-	glass_name = "glass of Bug Zapper"
-	glass_desc = "An odd mix of copper, lemon juice and power meant for non-human consumption."
+	glass_name = "Bug Zapper"
+	glass_desc = "Electrifying."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/bug_zapper/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/bug_zapper/on_mob_metabolize(mob/living/L)
+	if(isinsect(L) || isflyperson(L) || ismoth(L))
+		..()
+		L.add_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown)
+		ADD_TRAIT(L, TRAIT_NUMBED, src)
+		L.throw_alert("numbed", /atom/movable/screen/alert/numbed)
+
+/datum/reagent/consumable/ethanol/bug_zapper/on_mob_end_metabolize(mob/living/L)
+	if(isinsect(L) || isflyperson(L) || ismoth(L))
+		L.remove_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown)
+		REMOVE_TRAIT(L, TRAIT_NUMBED, src)
+		L.clear_alert("numbed")
+		..()
+
+/datum/reagent/consumable/ethanol/bug_zapper/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(isinsect(M) || isflyperson(M) || ismoth(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		M.set_drugginess(30 * REM * delta_time)
+		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "numb", /datum/mood_event/narcotic_medium, name)
+		return ..()
 
 /datum/reagent/consumable/ethanol/mush_crush
 	name = "Mush Crush"
 	color = "#F5882A" //(222, 250, 205)
-	description = "Soil in a glass."
+	description = "Soil in a glass, decorated with a Destroying Angel fungi."
 	boozepwr = 5 //No booze really
-	taste_description = "dirt and iron"
+	taste_description = "enriched soil"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "mush_crush"
-	glass_name = "glass of Mush Crush"
-	glass_desc = "Popular among people that want to grow their own food rather than drink the soil."
+	glass_name = "Mush Crush"
+	glass_desc = "Mushroom! We're rich!"
+	quality = RACE_DRINK
+	var/obj/effect/light_holder
+
+/datum/reagent/consumable/ethanol/mush_crush/on_mob_metabolize(mob/living/M)
+	if(ispodperson(M))
+		to_chat(M, span_notice("You feel bioluminescence spread through your body!"))
+		light_holder = new(M)
+		light_holder.set_light(4, 0.9, "#C5FFC2")
+
+/datum/reagent/consumable/ethanol/mush_crush/on_mob_end_metabolize(mob/living/M)
+	if(ispodperson(M))
+		to_chat(M, span_notice("The glow in your body fades."))
+		QDEL_NULL(light_holder)
 
 /datum/reagent/consumable/ethanol/mush_crush/on_mob_life(mob/living/carbon/M)
 	if(ispodperson(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		if(QDELETED(light_holder))
+			holder.del_reagent(type)
+		else if(light_holder.loc != M)
+			light_holder.forceMove(M)
+		return ..()
 
 /datum/reagent/consumable/ethanol/hollow_bone
 	name = "Hollow Bone"
 	color = "#FCF7D4" //(252, 247, 212)
-	description = "Shockingly none-harmful mix of toxins and milk."
+	description = "A shockingly harmless mix of bone toxins and milk."
 	boozepwr = 15
-	taste_description = "Milk and salt"
+	taste_description = "creamy marrow"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "hollow_bone"
-	glass_name = "skull of Hollow Bone"
-	glass_desc = "Mixing of milk and bone hurting juice for enjoyment for rather skinny people."
+	glass_name = "Hollow Bone"
+	glass_desc = "A bone-chilling drink sure to spook ya!"
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/hollow_bone/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/velvet_kiss/on_mob_metabolize(mob/living/M)
 	if(isplasmaman(M) || isskeleton(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		to_chat(M, span_notice("On days like these, boneheads like you should be having a good time."))
+
+/datum/reagent/consumable/ethanol/hollow_bone/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	if(isplasmaman(M) || isskeleton(M))
+		holder.remove_reagent(/datum/reagent/toxin/bonehurtingjuice, 2 * REM * delta_time)
+		M.adjustBruteLoss(-2 * REM * delta_time)
+		return ..()
 
 /datum/reagent/consumable/ethanol/jell_wyrm
 	name = "Jell Wyrm"
 	color = "#FF6200" //(255, 98, 0)
 	description = "Horrible mix of Co2, toxins and heat. Meant for slime based life."
 	boozepwr = 40
-	taste_description = "tropical sea"
+	taste_description = "a tropical sea"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "jell_wyrm"
-	glass_name = "glass of Jell Wyrm"
-	glass_desc = "A bubbly drink that is rather inviting to those that don't know who it's meant for."
+	glass_name = "Jell Wyrm"
+	glass_desc = "A bubbly drink that makes you feel like melting into a puddle."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/jell_wyrm/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/jell_wyrm/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(isjellyperson(M) || isslimeperson(M) || isluminescent(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-		M.adjustToxLoss(1, 0) //Low tox due to being carp + jell toxins.
-	return ..()
+		M.adjustBruteLoss(-0.5 * REM * delta_time, 0)
+		M.adjustFireLoss(-0.5 * REM * delta_time, 0)
+		M.adjustOxyLoss(-0.5 * REM * delta_time, 0)
+		M.adjustToxLoss(-0.5 * REM * delta_time, 0, TRUE)
+		return ..()
 
 /datum/reagent/consumable/ethanol/laval_spit //Yes Laval
 	name = "Laval Spit"
 	color = "#DE3009" //(222, 48, 9)
 	description = "Heat minerals and some mauna loa. Meant for rock based life."
 	boozepwr = 30
-	taste_description = "tropical island"
+	taste_description = "exotic minerals"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "laval_spit"
-	glass_name = "glass of Laval Spit"
-	glass_desc = "Piping hot drink for those who can stomach the heat of lava."
+	glass_name = "Laval Spit"
+	glass_desc = "A piping hot drink for those who can stomach the heat of lava."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/laval_spit/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/laval_spit/on_mob_metabolize(mob/living/L)
+	if(isgolem(L))
+		..()
+		L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/nuka_cola)
+		return ..()
+
+/datum/reagent/consumable/ethanol/laval_spit/on_mob_end_metabolize(mob/living/L)
+	if(isgolem(L))
+		L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/nuka_cola)
+		..()	
+		return ..()
+
+/datum/reagent/consumable/ethanol/laval_spit/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(isgolem(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		M.adjustBruteLoss(-2 * REM * delta_time, 0)
+		return ..()
 
 /datum/reagent/consumable/ethanol/frisky_kitty
 	name = "Frisky Kitty"
 	color = "#FCF7D4" //(252, 247, 212)
 	description = "Warm milk mixed with catnip."
 	boozepwr = 0
-	taste_description = "Warm milk and catnip"
+	taste_description = "creamy catnip"
 	glass_icon = 'modular_skyrat/master_files/icons/obj/drinks.dmi'
 	glass_icon_state = "frisky_kitty"
-	glass_name = "cup of Frisky Kitty"
-	glass_desc = "Warm milk and some catnip."
+	glass_name = "Frisky Kitty"
+	glass_desc = "A warm drink bound to awaken the predator within."
+	quality = RACE_DRINK
 
-/datum/reagent/consumable/ethanol/frisky_kitty/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/frisky_kitty/on_mob_metabolize(mob/living/L)
+	if(ismammal(L) || isfelinid(L))
+		..()
+		ADD_TRAIT(L, TRAIT_PERFECT_ATTACKER, type)
+
+/datum/reagent/consumable/ethanol/frisky_kitty/on_mob_end_metabolize(mob/living/L)
+	if(ismammal(L) || isfelinid(L))
+		REMOVE_TRAIT(L, TRAIT_PERFECT_ATTACKER, type)
+		..()
+
+/datum/reagent/consumable/ethanol/frisky_kitty/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(ismammal(M) || isfelinid(M))
-		quality = RACE_DRINK
-	else
-		M.adjust_disgust(25)
-	return ..()
+		M.adjustToxLoss(-2 * REM * delta_time, 0)
+		M.adjustBruteLoss(-2 * REM * delta_time, 0)
+		return ..() //R505 Edit End (starts at coldscales)
 
 /datum/reagent/consumable/ethanol/appletini
 	name = "Appletini"
