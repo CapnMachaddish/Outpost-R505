@@ -390,6 +390,18 @@
 	icon_state = "tongueplasma"
 	modifies_speech = FALSE
 
+/obj/item/organ/tongue/bone/sans //R505 Add Start
+	name = "funny bone \"tongue\""
+	desc = "<span class='sans'>welp. sorry, old lady. this is why i never make promises.</span>"
+	phomeme_type = "sans"
+	phomeme_types = list("sans")
+
+/obj/item/organ/tongue/bone/papyrus
+	name = "cool bone \"tongue\""
+	desc = "<span class='papyrus'>A JEALOUS TROLL HAS BESIEGED MY ONLINE PERSONA. ALWAYS SENDING ME BAD PUNS IN A GOOFY FONT...</span>"
+	phomeme_type = "papyrus"
+	phomeme_types = list("papyrus") //R505 Add End
+
 /obj/item/organ/tongue/robot
 	name = "robotic voicebox"
 	desc = "A voice synthesizer that can interface with organic lifeforms."

@@ -1,6 +1,6 @@
 /datum/augment_item/limb
 	category = AUGMENT_CATEGORY_LIMBS
-	allowed_biotypes = MOB_ORGANIC|MOB_ROBOTIC
+	allowed_biotypes = MOB_ORGANIC|MOB_ROBOTIC|MOB_UNDEAD //R505 Edit
 	///Hardcoded styles that can be chosen from and apply to limb, if it's true
 	var/uses_robotic_styles = TRUE
 

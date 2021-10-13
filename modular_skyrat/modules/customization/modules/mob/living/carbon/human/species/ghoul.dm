@@ -19,6 +19,7 @@
 		TRAIT_EASYDISMEMBER,
 		TRAIT_EASILY_WOUNDED, //theyre like fuckin skin and bones
 	)
+	inherent_biotypes = MOB_UNDEAD|MOB_HUMANOID //R505 Edit
 	offset_features = list(
 		OFFSET_UNIFORM = list(0,0),
 		OFFSET_ID = list(0,0),

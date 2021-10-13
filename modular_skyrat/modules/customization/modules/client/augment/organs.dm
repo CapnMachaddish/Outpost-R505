@@ -1,5 +1,6 @@
 /datum/augment_item/organ
 	category = AUGMENT_CATEGORY_ORGANS
+	allowed_biotypes = MOB_ORGANIC|MOB_ROBOTIC|MOB_UNDEAD //R505 Edit
 
 /datum/augment_item/organ/apply(mob/living/carbon/human/H, character_setup = FALSE, datum/preferences/prefs)
 	if(character_setup)
@@ -71,7 +72,7 @@
 /datum/augment_item/organ/eyes/highlumi
 	name = "High-luminosity eyes"
 	path = /obj/item/organ/eyes/robotic/glow
-	allowed_biotypes = MOB_ORGANIC|MOB_ROBOTIC
+	//allowed_biotypes = MOB_ORGANIC|MOB_ROBOTIC //R505 Edit
 	cost = 1
 
 //TONGUES
@@ -90,10 +91,26 @@
 	name = "Forked tongue"
 	path = /obj/item/organ/tongue/lizard
 
-/datum/augment_item/organ/tongue/bloodsucker
+/datum/augment_item/organ/tongue/bloodsucker //R505 Add Start
 	name = "Bloodsucker tongue"
 	path = /obj/item/organ/tongue/bloodsucker
 
 /datum/augment_item/organ/tongue/lizard/bloodsucker
 	name = "Forked Bloodsucker tongue"
 	path = /obj/item/organ/tongue/lizard/bloodsucker
+
+/datum/augment_item/organ/tongue/bone
+	name = "Bone \"tongue\""
+	path = /obj/item/organ/tongue/bone
+
+/datum/augment_item/organ/tongue/bone/sans
+	name = "Funny bone \"tongue\""
+	path = /obj/item/organ/tongue/bone/sans
+
+/datum/augment_item/organ/tongue/bone/papyrus
+	name = "Cool bone \"tongue\""
+	path = /obj/item/organ/tongue/bone/papyrus
+
+/datum/augment_item/organ/tongue/bone/plasmaman
+	name = "Plasma bone \"tongue\""
+	path = /obj/item/organ/tongue/bone/plasmaman //R505 Add End

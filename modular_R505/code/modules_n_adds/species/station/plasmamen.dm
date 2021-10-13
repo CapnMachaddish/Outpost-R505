@@ -4,7 +4,7 @@
 	say_mod = "rattles"
 	unambiguous_gender = FALSE
 	meat = /obj/item/stack/sheet/mineral/plasma
-	species_traits = list(NOBLOOD,NOTRANSSTING, HAS_BONE)
+	species_traits = list(NOBLOOD,NOTRANSSTING,HAS_BONE,EYECOLOR,HAIR,FACEHAIR)
 	// plasmemes get hard to wound since they only need a severe bone wound to dismember, but unlike skellies, they can't pop their bones back into place
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
@@ -16,13 +16,13 @@
 		TRAIT_HARDLY_WOUNDED,
 	)
 
-	inherent_biotypes = MOB_HUMANOID|MOB_MINERAL
+	inherent_biotypes = MOB_HUMANOID|MOB_MINERAL|MOB_UNDEAD
 	mutantlungs = /obj/item/organ/lungs/plasmaman
 	mutanttongue = /obj/item/organ/tongue/bone/plasmaman
 	mutantliver = /obj/item/organ/liver/plasmaman
 	mutantstomach = /obj/item/organ/stomach/bone/plasmaman
-	can_augment = FALSE
-	can_have_genitals = FALSE
+	can_augment = TRUE
+	can_have_genitals = TRUE
 	burnmod = 1.5
 	heatmod = 1.5
 	brutemod = 1.5
