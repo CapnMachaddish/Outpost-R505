@@ -11,7 +11,7 @@
 	///How much quirky points does it cost?
 	var/cost = 0
 	///Which biotypes are allowed to recieve the augment
-	var/allowed_biotypes = MOB_ORGANIC
+	var/allowed_biotypes = MOB_ORGANIC|MOB_ROBOTIC|MOB_ROBOTIC //R505 Edit
 
 /datum/augment_item/New()
 	if(!description && path)

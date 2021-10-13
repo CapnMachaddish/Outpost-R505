@@ -9,6 +9,7 @@
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 	)
+	inherent_biotypes = MOB_UNDEAD|MOB_HUMANOID
 	use_skintones = TRUE
 	mutantbrain = /obj/item/organ/brain/dullahan
 	mutanteyes = /obj/item/organ/eyes/dullahan

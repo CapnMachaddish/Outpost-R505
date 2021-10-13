@@ -281,6 +281,31 @@ GLOBAL_LIST_EMPTY(customizable_races)
 
 /datum/species/dullahan
 	mutant_bodyparts = list()
+	can_augment = TRUE //R505 Edit Start
+
+/datum/species/skeleton
+	mutant_bodyparts = list()
+	can_augment = TRUE
+
+/datum/species/zombie
+	mutant_bodyparts = list()
+	can_augment = TRUE
+
+/datum/species/mutant
+	mutant_bodyparts = list()
+	can_augment = TRUE
+
+/datum/species/ghoul
+	mutant_bodyparts = list()
+	can_augment = TRUE
+
+/datum/species/golem/bone
+	mutant_bodyparts = list()
+	can_augment = TRUE
+
+/datum/species/golem/cloth
+	mutant_bodyparts = list()
+	can_augment = TRUE //R505 Edit End
 
 /datum/species/human/felinid
 	mutant_bodyparts = list()
@@ -300,16 +325,17 @@ GLOBAL_LIST_EMPTY(customizable_races)
 
 /datum/species/vampire
 	mutant_bodyparts = list()
+	can_augment = TRUE //R505 Edit
 
 /datum/species/plasmaman
 	mutant_bodyparts = list()
-	can_have_genitals = FALSE
-	can_augment = FALSE
+	can_have_genitals = TRUE //R505 Edit
+	can_augment = TRUE //R505 Edit
 	learnable_languages = list(/datum/language/common, /datum/language/calcic)
 
 /datum/species/ethereal
 	mutant_bodyparts = list()
-	can_have_genitals = FALSE
+	can_have_genitals = TRUE //R505 Edit
 	can_augment = FALSE
 	learnable_languages = list(/datum/language/common, /datum/language/voltaic)
 

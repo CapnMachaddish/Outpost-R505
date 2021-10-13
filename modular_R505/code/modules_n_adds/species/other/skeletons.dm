@@ -5,7 +5,7 @@
 	say_mod = "rattles"
 	unambiguous_gender = FALSE
 	meat = /obj/item/food/meat/slab/human/mutant/skeleton
-	species_traits = list(NOBLOOD, HAS_BONE, NOEYESPRITES)
+	species_traits = list(NOBLOOD,HAS_BONE,EYECOLOR,HAIR,FACEHAIR)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
