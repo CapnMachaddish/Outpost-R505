@@ -64,7 +64,7 @@
 	id_trim = /datum/id_trim/centcom/bridge_officer
 
 /datum/id_trim/centcom/bridge_officer
-	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_LIVING, ACCESS_WEAPONS)
+	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_LIVING, ACCESS_WEAPONS, ACCESS_MAINT_TUNNELS) //R505 edit - maints access
 	assignment = "Bridge Officer"
 
 /obj/item/radio/headset/headset_cent/alt_with_Key

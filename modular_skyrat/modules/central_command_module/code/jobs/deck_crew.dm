@@ -59,7 +59,7 @@
 	id_trim = /datum/id_trim/centcom/deck_crew
 
 /datum/id_trim/centcom/deck_crew
-	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_LIVING, ACCESS_WEAPONS, ACCESS_CARGO, ACCESS_MAILSORTING)
+	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_LIVING, ACCESS_WEAPONS, ACCESS_CARGO, ACCESS_MAILSORTING, ACCESS_MAINT_TUNNELS) //R505 edit - maints access
 	assignment = "Deck Crewman"
 
 /obj/item/radio/headset/headset_cent/alt_with_Key/cargo

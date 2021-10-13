@@ -77,7 +77,7 @@
 		var/obj/item/reagent_containers/powder_keg = used_item
 		if(!(powder_keg.reagent_flags & OPENCONTAINER))
 			return ..()
-		if(istype(powder_keg, /obj/item/reagent_containers/glass/rag))
+		if(istype(powder_keg, /obj/item/reagent_containers/rag))
 			return ..()
 
 		if(!powder_keg.reagents.total_volume)

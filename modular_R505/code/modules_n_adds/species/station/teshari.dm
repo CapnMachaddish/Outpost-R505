@@ -39,14 +39,14 @@
 	legcuff_icon = 'modular_R505/icons/ported/mob/teshari/clothing/handcuffs.dmi'
 
 	offset_features = list(OFFSET_GENITALS_BREASTS = list(0,-4), OFFSET_GENITALS_VAGINA = list(0,-4))
-	
+
 	total_health = 50
 	health_hud_intensity = 6
 	speedmod = -0.70	//very fast
 	snow_movement = 2	//snow makes us half as slow as normal
 	blood_volume = 400
 	hunger_factor = HUNGER_FACTOR * 0.5
-	payday_modifier = 0.5	//work faster, slaves
+	payday_modifier = 1 //R505 Change - Equal pay
 	attack_verb = "claw"
 	attack_effect = ATTACK_EFFECT_CLAW
 	attack_sound = 'sound/weapons/slash.ogg'
@@ -84,7 +84,7 @@
 		/obj/item/clothing/suit/space,
 		/obj/item/clothing/suit/straight_jacket
 	)
-	
+
 
 /datum/species/teshari/handle_z_falling(mob/living/carbon/human/H, turf/T, levels)
 	. = FALSE
@@ -97,7 +97,7 @@
 	if(H.buckled)
 		to_chat(H, "<span class='warning'>You try to spread your wings to slow your fall, but you're buckled to \a [H.buckled]!")
 		return
-	
+
 	//Do we actually have wings?
 	if(H.dna.features["feathers"] == "None")
 		to_chat(H, "<span class='warning'>You try to spready your wings to slow your fall, but you don't have any feathers!</span>")

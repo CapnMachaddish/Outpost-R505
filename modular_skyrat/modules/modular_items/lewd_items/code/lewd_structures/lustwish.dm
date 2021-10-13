@@ -94,9 +94,7 @@
 					/obj/item/clothing/glasses/nice_goggles = 1, //easter egg, don't touch plz)
 
 					//fur niture //haha you got it
-					/obj/item/storage/box/bdsmbed_kit = 5,
 					/obj/item/storage/box/strippole_kit = 3,
-					/obj/item/storage/box/xstand_kit = 4,
 					/obj/item/storage/box/milking_kit = 2)
 
 	contraband = list(
