@@ -20356,6 +20356,14 @@
 	dir = 1
 	},
 /obj/structure/table,
+/obj/item/stamp{
+	pixel_x = 7;
+	pixel_y = 9
+	},
+/obj/item/stamp/denied{
+	pixel_x = 7;
+	pixel_y = 4
+	},
 /turf/open/floor/iron,
 /area/command/heads_quarters/hop)
 "buf" = (
