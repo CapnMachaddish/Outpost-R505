@@ -38568,7 +38568,9 @@
 /turf/open/floor/iron/smooth_large,
 /area/engineering/gravity_generator)
 "flc" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/ordnance_mixing_input,
+/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/ordnance_mixing_input{
+	dir = 1
+	},
 /turf/open/floor/engine/vacuum,
 /area/science/mixing/chamber)
 "flN" = (
@@ -40558,7 +40560,6 @@
 /area/hallway/secondary/exit)
 "hjk" = (
 /obj/effect/mapping_helpers/airlock/locked,
-/obj/machinery/embedded_controller/radio/airlock_controller/incinerator_ordmix,
 /obj/machinery/door/airlock/research/glass/incinerator/ordmix_interior,
 /turf/open/floor/engine,
 /area/science/mixing/chamber)
@@ -42282,7 +42283,9 @@
 /turf/open/pool,
 /area/commons/fitness)
 "iWA" = (
-/obj/machinery/airlock_sensor/incinerator_ordmix,
+/obj/machinery/airlock_sensor/incinerator_ordmix{
+	pixel_y = 24
+	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden{
 	dir = 4
 	},
@@ -42772,6 +42775,7 @@
 /area/security/prison)
 "jqo" = (
 /obj/machinery/computer/prisoner/management,
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/iron/showroomfloor,
 /area/security/warden)
 "jqz" = (
@@ -52469,6 +52473,9 @@
 	pixel_x = 32
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/embedded_controller/radio/airlock_controller/incinerator_ordmix{
+	pixel_y = -27
+	},
 /turf/open/floor/iron/white,
 /area/science/mixing)
 "sJf" = (
@@ -55090,7 +55097,9 @@
 /turf/open/floor/iron/freezer,
 /area/security/prison)
 "veY" = (
-/obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_ordmix,
+/obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_ordmix{
+	dir = 4
+	},
 /turf/open/floor/engine,
 /area/science/mixing/chamber)
 "vfR" = (
@@ -56856,6 +56865,10 @@
 	},
 /turf/open/floor/iron,
 /area/maintenance/disposal/incinerator)
+"wMI" = (
+/obj/machinery/firealarm/directional/west,
+/turf/open/floor/iron/dark,
+/area/security/office)
 "wNj" = (
 /obj/structure/sign/warning/securearea{
 	pixel_x = -32
@@ -89311,7 +89324,7 @@ abq
 ghe
 abo
 abq
-iVu
+wMI
 vHb
 xeM
 vHb
