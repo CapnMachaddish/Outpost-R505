@@ -394,6 +394,7 @@
 	icon_state = "coatqm"
 	inhand_icon_state = "coatqm"
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/qm
+	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/toy, /obj/item/storage/fancy/cigarettes, /obj/item/lighter, /obj/item/radio, /obj/item/gun/ballistic/rifle/boltaction/brand_new/quartermaster)
 
 /obj/item/clothing/head/hooded/winterhood/qm
 	desc = "A dark brown winter hood"

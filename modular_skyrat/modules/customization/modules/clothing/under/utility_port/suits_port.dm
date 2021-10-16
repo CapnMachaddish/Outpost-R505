@@ -67,6 +67,7 @@
 	name = "quartermaster's jacket"
 	desc = "Even if people refuse to recognize you as a head, they can recognize you as a badass."
 	icon_state = "qmjacket"
+	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/toy, /obj/item/storage/fancy/cigarettes, /obj/item/lighter, /obj/item/radio, /obj/item/gun/ballistic/rifle/boltaction/brand_new/quartermaster)
 
 /obj/item/clothing/suit/toggle/jacket/sec
 	name = "security jacket"
