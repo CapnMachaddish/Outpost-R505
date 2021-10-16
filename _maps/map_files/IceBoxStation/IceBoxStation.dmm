@@ -43219,7 +43219,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /turf/open/floor/iron,
 /area/maintenance/starboard/fore)
 "suH" = (

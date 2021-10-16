@@ -57,28 +57,6 @@
 		/obj/item/wrench = 1)
 	generate_items_inside(items_inside,src)
 
-//X-Stand
-/obj/item/storage/box/xstand_kit
-	name = "DIY X-Stand kit"
-	desc = "Contains everything you need to build your own X-stand!"
-
-/obj/item/storage/box/xstand_kit/PopulateContents()
-	var/static/items_inside = list(
-		/obj/item/x_stand_kit = 1,
-		/obj/item/wrench = 1)
-	generate_items_inside(items_inside,src)
-
-//BDSM bed
-/obj/item/storage/box/bdsmbed_kit
-	name = "DIY BDSM bed kit"
-	desc = "Contains everything you need to build your own BDSM bed!"
-
-/obj/item/storage/box/bdsmbed_kit/PopulateContents()
-	var/static/items_inside = list(
-		/obj/item/bdsm_bed_kit = 1,
-		/obj/item/wrench = 1)
-	generate_items_inside(items_inside,src)
-
 //Striptease pole
 /obj/item/storage/box/strippole_kit
 	name = "DIY stripper pole kit"

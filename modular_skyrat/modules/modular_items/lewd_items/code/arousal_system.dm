@@ -119,9 +119,7 @@
 		if("pair")
 			breasts_count = 2
 		if("quad")
-			breasts_count = 2.5
-		if("sextuple")
-			breasts_count = 3
+			breasts_count = 4
 	internal_fluids = new /datum/reagents(size * breasts_count * 60)
 
 /obj/item/organ/genital/testicles/build_from_dna(datum/dna/DNA, associated_key)

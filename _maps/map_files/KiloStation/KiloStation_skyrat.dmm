@@ -76941,7 +76941,7 @@
 	pixel_x = 8;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},

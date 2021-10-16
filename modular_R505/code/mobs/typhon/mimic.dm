@@ -1,14 +1,14 @@
 /mob/living/simple_animal/hostile/typhon/mimic
 	name = "Mimic"
 	icon = 'modular_R505/icons/mob/mimic.dmi'
-	desc = "What the fuck is that?"
+	desc = "A writhing mass of black flesh, unlikely to be happy to see you."
 	icon_state = "mimic"
 	icon_living = "mimic"
 	icon_dead = "mimic_dead"
 	gender = NEUTER
 	speak_chance = 0
-	maxHealth = 38
-	health = 38
+	maxHealth = 35
+	health = 35
 	turns_per_move = 5
 	move_to_delay = 1
 	speed = 0
@@ -24,14 +24,14 @@
 	response_harm_simple = "smack"
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	attack_verb_continuous = "glomps"
-	attack_verb_simple = "glomp"
+	attack_verb_continuous = "stings"
+	attack_verb_simple = "sting"
 	attack_sound = 'modular_R505/sound/creatures/mimic/mimic_attack.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	blood_volume = 0
 	faction = list("mimic")
 	gold_core_spawnable = NO_SPAWN
-	vision_range = 2
+	vision_range = 1
 	aggro_vision_range = 9
 	wander = TRUE
 	minbodytemp = 250 //weak to cold
@@ -42,7 +42,7 @@
 	var/knockdown_people = 1
 	var/playerTransformCD = 50
 	var/playerTfTime
-	var/static/mimic_blacklisted_transform_items = typecacheof(list( /obj/projectile, /obj/item/radio/intercom, /mob/living/simple_animal/bot))
+	var/static/mimic_blacklisted_transform_items = typecacheof(list(/obj/projectile, /obj/item/radio/intercom, /mob/living/simple_animal/bot))
 	var/playstyle_string = "<span class='boldannounce'>You are a mimic</span></b>, a tricky creature that can take the form of \
 							almost any item nearby by shift-clicking it. While morphed, you move slowly and do less damage. \
 							Finally, you can restore yourself to your original form while morphed by shift-clicking yourself. \
@@ -124,7 +124,7 @@
 	..()
 
 /mob/living/simple_animal/hostile/typhon/mimic/proc/mimicTransformList() //The list of default things to transform needs to be bigger, consider this in the future.
-	var/transformitem = rand(1,80)
+	var/transformitem = rand(1,90)
 	medhudupdate()
 	wander = FALSE
 	vision_range = initial(vision_range)
@@ -140,10 +140,10 @@
 			icon_state = "yellow"
 			desc = "These gloves will protect the wearer from electric shock."
 		if(21 to 30)
-			name = "Private Security Officer"
-			desc = "A cardboard cutout of a private security officer."
-			icon = 'icons/obj/cardboard_cutout.dmi'
-			icon_state = "cutout_ntsec"
+			name = "stunbaton"
+			desc = "A stun baton for incapacitating people with."
+			icon = 'icons/obj/items_and_weapons.dmi'
+			icon_state = "stunbaton"
 		if(31 to 40)
 			name = "pen"
 			icon = 'icons/obj/bureaucracy.dmi'
@@ -155,10 +155,10 @@
 			icon = 'icons/obj/bureaucracy.dmi'
 			icon_state = "newspaper"
 		if(51 to 60)
-			name = "toolbox"
-			desc = "Danger. Very robust."
-			icon = 'icons/obj/storage.dmi'
-			icon_state = "red"
+			name = "stechkin pistol" //greytider bait
+			desc = "A small, easily concealable 10mm handgun. Has a threaded barrel for suppressors."
+			icon = 'icons/obj/guns/ballistic.dmi'
+			icon_state = "pistol"
 		if(61 to 70)
 			name = "emergency oxygen tank"
 			desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
@@ -169,6 +169,11 @@
 			icon = 'icons/obj/drinks.dmi'
 			icon_state = "glass_empty"
 			desc = "Your standard drinking glass."
+		if(81 to 90)
+			name = "toolbox"
+			desc = "Danger. Very robust."
+			icon = 'icons/obj/storage.dmi'
+			icon_state = "red"
 		/* Don't have/need these (yet)
 		if(81 to 90)
 			name = "fleshlight"
@@ -199,8 +204,7 @@
 	med_hud_set_health()
 	med_hud_set_status()
 
-/mob/living/simple_animal/hostile/typhon/mimic/proc/restore()
-	//back to normal mimic sprite
+/mob/living/simple_animal/hostile/typhon/mimic/proc/restore() //back to normal mimic sprite
 	stealthed = FALSE
 	medhudupdate()
 	name = initial(name)
@@ -245,6 +249,48 @@
 /mob/living/simple_animal/hostile/typhon/mimic/proc/allowed(atom/movable/A)
 	return !is_type_in_typecache(A, mimic_blacklisted_transform_items) && (isitem(A) || isanimal(A))
 
+//One leader mimic spawns per mimic event spawn, they are able to consume and transform themselves into the station's dead pets. Buckle up.
+/mob/living/simple_animal/hostile/typhon/mimic/leader
+	var/mob/living/consumptionTarget = null
+	var/consuming = FALSE
+	health = 40 //They have a teeeny tiny more health.
+	maxHealth = 40
+
+/mob/living/simple_animal/hostile/typhon/mimic/leader/Life()
+	. = ..()
+	if(!consuming)
+		if(!consumptionTarget)
+			for(var/mob/living/simple_animal/pet/A in oview(5, src))
+				if(A.stat == DEAD)
+					consumptionTarget = A
+					break
+		if(!target && consumptionTarget) //Don't try to consume anything if we're currently attacking something.
+			var/target_distance = get_dist(targets_from, consumptionTarget)
+			if(target_distance > minimum_distance)
+				Goto(consumptionTarget,move_to_delay,minimum_distance)
+			else
+				tryConsume(consumptionTarget)
+
+/mob/living/simple_animal/hostile/typhon/mimic/leader/proc/tryConsume(var/mob/living/simple_animal/pet/A)
+	src.visible_message("<span class='warning'>[A] is being consumed...</span>",
+		"<span class='notice'>You start to consume the dead [A]...</span>", "You hear strange fleshy sounds.")
+	consuming = TRUE
+	if(do_after(src, 100, target = A))
+		stealthed = TRUE
+		speed = 5
+		wander = TRUE
+		name = A.name
+		desc = A.desc
+		icon = A.icon
+		icon_state = A.icon_living
+		desc += "<span class='warning'> But something about it seems wrong...</span>"
+		qdel(A)
+		consuming = FALSE
+		consumptionTarget = FALSE
+		return TRUE
+	consuming = FALSE
+	return FALSE
+
 //Player control code
 
 /mob/living/simple_animal/hostile/typhon/mimic/ShiftClickOn(atom/movable/A)
@@ -277,8 +323,8 @@
 	name = "Mimic Infestation"
 	typepath = /datum/round_event/mimic_infestation
 	weight = 5
-	max_occurrences = 1
-	min_players = 15
+	max_occurrences = 9
+	min_players = 5
 
 /datum/round_event/mimic_infestation
 	announceWhen = 200
@@ -295,6 +341,7 @@
 	/area/asteroid/nearstation,
 	/area/science/server,
 	/area/science/explab,
+	/area/science/xenobiology,
 	/area/security/processing)
 	var/spawncount = 1
 	fakeable = FALSE
@@ -310,7 +357,7 @@
 	var/list/area/stationAreas = list()
 	var/list/area/eligible_areas = list()
 	for(var/area/A in world) // Get the areas in the Z level
-		if(A.z == SSmapping.station_start)
+		if(is_station_level(A.z) == TRUE)
 			stationAreas += A
 	for(var/area/place in stationAreas) // first we check if it's a valid area
 		if(place.outdoors)
@@ -357,8 +404,12 @@
 
 	notify_ghosts("A group of mimics has spawned in [pickedArea]!", source=pickedArea, action=NOTIFY_ATTACK, flashwindow = FALSE)
 	while(spawncount > 0 && validTurfs.len)
-		var/turf/pickedTurf = pick_n_take(validTurfs)
-		var/spawn_type = /mob/living/simple_animal/hostile/typhon/mimic
-		spawn_atom_to_turf(spawn_type, pickedTurf, 1, FALSE)
 		spawncount--
+		var/turf/pickedTurf = pick_n_take(validTurfs)
+		if(spawncount != 0)
+			var/spawn_type = /mob/living/simple_animal/hostile/typhon/mimic
+			spawn_atom_to_turf(spawn_type, pickedTurf, 1, FALSE)
+		else
+			var/spawn_type = /mob/living/simple_animal/hostile/typhon/mimic/leader
+			spawn_atom_to_turf(spawn_type, pickedTurf, 1, FALSE)
 	return SUCCESSFUL_SPAWN

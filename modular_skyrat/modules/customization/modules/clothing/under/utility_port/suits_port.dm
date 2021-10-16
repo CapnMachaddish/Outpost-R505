@@ -6,7 +6,7 @@
 	desc = "A heavy jacket made from wool originally stolen from the chef's goat. This new design is made to fit the classic suit-and-tie aesthetic, but without the hypothermia."
 	icon_state = "coatbar"
 	mutant_variants = NONE
-	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/toy, /obj/item/storage/fancy/cigarettes, /obj/item/lighter, /obj/item/reagent_containers/food/drinks/shaker, /obj/item/reagent_containers/food/drinks/flask, /obj/item/reagent_containers/glass/rag)
+	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/toy, /obj/item/storage/fancy/cigarettes, /obj/item/lighter, /obj/item/reagent_containers/food/drinks/shaker, /obj/item/reagent_containers/food/drinks/flask, /obj/item/reagent_containers/rag)
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/bartender
 
 /obj/item/clothing/head/hooded/winterhood/bartender

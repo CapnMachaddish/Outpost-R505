@@ -4498,7 +4498,7 @@
 "pY" = (
 /obj/structure/table/wood,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /turf/open/floor/wood{
 	icon_state = "wood-broken3"
 	},

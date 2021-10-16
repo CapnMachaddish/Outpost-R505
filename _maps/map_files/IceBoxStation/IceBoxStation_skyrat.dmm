@@ -7983,7 +7983,6 @@
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
 "bdm" = (
-/obj/structure/disposalpipe/segment,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 10
@@ -7994,6 +7993,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
 /area/maintenance/aft)
 "bdp" = (
@@ -11711,9 +11711,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
 	},
-/obj/machinery/stasissleeper{
-	dir = 8
-	},
+/obj/machinery/stasis,
 /turf/open/floor/iron/white,
 /area/medical/medbay/central)
 "bwM" = (
@@ -14195,7 +14193,9 @@
 /turf/open/floor/iron/white,
 /area/science/xenobiology)
 "bLk" = (
-/obj/machinery/mass_driver/ordnance,
+/obj/machinery/mass_driver/ordnance{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/science/mixing)
 "bLl" = (
@@ -19384,7 +19384,7 @@
 /turf/open/floor/plating,
 /area/security/prison)
 "cKY" = (
-/obj/machinery/portable_atmospherics/canister/plasma,
+/obj/machinery/atmospherics/miner/plasma,
 /turf/open/floor/engine/plasma,
 /area/engineering/atmos)
 "cLc" = (
@@ -20866,7 +20866,7 @@
 /turf/open/floor/iron,
 /area/science/xenobiology)
 "dDh" = (
-/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/atmospherics/miner/n2o,
 /turf/open/floor/engine/n2o,
 /area/engineering/atmos)
 "dDq" = (
@@ -26689,7 +26689,9 @@
 /turf/open/floor/iron,
 /area/science/storage)
 "gJz" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/plasma_input,
+/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/plasma_input{
+	dir = 8
+	},
 /turf/open/floor/engine/plasma,
 /area/engineering/atmos)
 "gJB" = (
@@ -32559,7 +32561,7 @@
 /turf/open/floor/iron,
 /area/engineering/atmos)
 "jVr" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
+/obj/machinery/atmospherics/miner/nitrogen,
 /turf/open/floor/engine/n2,
 /area/engineering/atmos)
 "jVG" = (
@@ -37516,7 +37518,7 @@
 /turf/open/floor/iron/dark,
 /area/commons/storage/mining)
 "mwT" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/machinery/atmospherics/miner/oxygen,
 /turf/open/floor/engine/o2,
 /area/engineering/atmos)
 "mxo" = (
@@ -38220,8 +38222,8 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
-/obj/machinery/stasissleeper{
-	dir = 4
+/obj/machinery/stasis{
+	dir = 1
 	},
 /turf/open/floor/iron/white,
 /area/medical/medbay/central)
@@ -38591,7 +38593,9 @@
 /turf/closed/wall/r_wall,
 /area/engineering/supermatter)
 "mWn" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/siphon/atmos/plasma_output,
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/atmos/plasma_output{
+	dir = 8
+	},
 /turf/open/floor/engine/plasma,
 /area/engineering/atmos)
 "mWw" = (
@@ -48960,7 +48964,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/rag,
 /turf/open/floor/iron,
 /area/maintenance/starboard/fore)
 "suH" = (
@@ -54726,9 +54730,11 @@
 /turf/open/openspace,
 /area/service/kitchen)
 "vtJ" = (
-/obj/machinery/computer/atmos_control/tank/plasma_tank,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
+	},
+/obj/machinery/computer/atmos_control/tank/plasma_tank{
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/engineering/atmos)
@@ -58957,7 +58963,7 @@
 /turf/open/floor/engine/plasma,
 /area/engineering/atmos)
 "xzf" = (
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/obj/machinery/atmospherics/miner/carbon_dioxide,
 /turf/open/floor/engine/co2,
 /area/engineering/atmos)
 "xzg" = (
@@ -100027,7 +100033,7 @@ bYd
 bYY
 bZP
 bdm
-gaj
+avx
 mbf
 mbf
 hsI

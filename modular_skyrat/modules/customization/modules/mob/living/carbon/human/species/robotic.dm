@@ -14,17 +14,34 @@
 		TRAIT_STABLEHEART,
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_NO_HUSK,
-		TRAIT_OXYIMMUNE
+		TRAIT_OXYIMMUNE,
+		TRAIT_RESISTLOWPRESSURE,
+		TRAIT_NOSLIPWATER,
+		TRAIT_SLEEPIMMUNE,
+		TRAIT_NOFIRE,
+		TRAIT_RESISTCOLD,
+		TRAIT_XENO_IMMUNE,
+		TRAIT_WEAK_SOUL,
+		TRAIT_NOBLEED,
+		TRAIT_SUPERMATTER_MADNESS_IMMUNE,
+		TRAIT_SNOWSTORM_IMMUNE,
+		TRAIT_VOIDSTORM_IMMUNE,
+		TRAIT_NOFLASH,
+		TRAIT_NEVER_WOUNDED,
+		TRAIT_NOLIMBDISABLE
+
+
 	)
 	mutant_bodyparts = list()
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	reagent_flags = PROCESS_SYNTHETIC
-	burnmod = 1.5 // Every 0.1% is 10% above the base.
-	brutemod = 1.6
-	coldmod = 1.2
-	heatmod = 2
-	siemens_coeff = 1.4 //Not more because some shocks will outright crit you, which is very unfun
-	payday_modifier = 0.5 //Robots are cheep labor
+	armor = 25
+	burnmod = 1.2 // Every 0.1% is 10% above the base.
+	brutemod = 0.5
+	coldmod = 0.5
+	heatmod = 1.5
+	siemens_coeff = 1.0 //Not more because some shocks will outright crit you, which is very unfun
+	payday_modifier = 1 //R505 Change - Equal pay
 	species_language_holder = /datum/language_holder/machine
 	mutant_organs = list(/obj/item/organ/cyberimp/arm/power_cord)
 	mutantbrain = /obj/item/organ/brain/ipc_positron
@@ -47,7 +64,7 @@
 			do_sparks(3, TRUE, H)
 
 /datum/species/robotic/spec_revival(mob/living/carbon/human/H)
-	playsound(H.loc, 'sound/machines/chime.ogg', 50, 1, -1)
+	playsound(H.loc, 'modular_R505/sound/effects/tada.ogg', 50, 1, -1)
 	H.visible_message("<span class='notice'>[H]'s monitor lights up.</span>", "<span class='notice'>All systems nominal. You're back online!</span>")
 
 /datum/species/robotic/on_species_gain(mob/living/carbon/human/C)

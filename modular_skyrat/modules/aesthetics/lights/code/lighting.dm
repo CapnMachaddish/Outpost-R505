@@ -39,7 +39,7 @@
 			use_power = ACTIVE_POWER_USE
 			set_light(BR, PO, CO)
 			if(play_sound)
-				playsound(src.loc, 'modular_skyrat/modules/aesthetics/lights/sound/light_on.ogg', 65, 1)
+				playsound(src.loc, 'modular_R505/sound/machines/lightsOn.ogg', 65, 1) //R505 edit - new light on sound
 
 /obj/machinery/light/proc/start_flickering()
 	on = FALSE
@@ -47,7 +47,7 @@
 
 	constant_flickering = TRUE
 
-	flicker_timer = addtimer(CALLBACK(src, .proc/flicker_on), rand(5, 10))
+	flicker_timer = addtimer(CALLBACK(src, .proc/flicker_on), rand(8, 15)) //R505 edit - tweaked flicker timer slightly
 
 /obj/machinery/light/proc/stop_flickering()
 	constant_flickering = FALSE
@@ -57,6 +57,7 @@
 		flicker_timer = null
 
 /obj/machinery/light/proc/flicker_on()
+	playsound(src.loc, 'modular_R505/sound/machines/lightFlicker.ogg', 15, FALSE) //R505 edit - lights make a noise when flickering
 	if(!constant_flickering)
 		return
 

@@ -23,7 +23,7 @@
 	learnable_languages = list(/datum/language/common, /datum/language/moffic)
 	wings_icons = list("Megamoth", "Mothra")
 	has_innate_wings = TRUE
-	payday_modifier = 0.75
+	payday_modifier = 1 //R505 Change - Equal pay
 	family_heirlooms = list(/obj/item/flashlight/lantern/heirloom_moth)
 
 /datum/species/moth/regenerate_organs(mob/living/carbon/C,datum/species/old_species,replace_current=TRUE,list/excluded_zones)
