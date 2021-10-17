@@ -141,6 +141,14 @@
 			scrub(tile)
 	return TRUE
 
+//R505 Edit
+/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/scrubPollution(var/scrub_amount)
+	if(isopenturf(get_turf(src)))
+		var/turf/open/open_turf = get_turf(src)
+		if(open_turf.pollution)
+			open_turf.pollution.ScrubAmount(scrub_amount)
+			use_power(100)
+
 /obj/machinery/atmospherics/components/unary/vent_scrubber/proc/scrub(turf/tile)
 	if(!istype(tile))
 		return FALSE
@@ -153,6 +161,7 @@
 
 	if(scrubbing == SCRUBBING)
 		if(length(env_gases & filter_types))
+			scrubPollution(2) //R505 Edit
 			var/transfer_moles = min(1, volume_rate / environment.volume) * environment.total_moles()
 
 			//Take a gas sample
@@ -182,7 +191,14 @@
 			update_parents()
 
 	else //Just siphoning all air
-
+		scrubPollution(8) //R505 Edit
+		//R505 Edit
+		//if(isopenturf(get_turf(src)))
+			//var/turf/open/open_turf = get_turf(src)
+			//if(open_turf.pollution)
+				//open_turf.pollution.ScrubAmount(8)
+				//use_power(100)
+			//R505 Edit - End
 		var/transfer_moles = environment.total_moles() * (volume_rate / environment.volume)
 
 		var/datum/gas_mixture/removed = tile.remove_air(transfer_moles)
