@@ -157,12 +157,10 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 		if(S.volume <= 0)
 			return //No sound
 
-		var/dx = turf_source.x - T.x // Hearing from the right/left
-		S.x = dx * distance_multiplier
-		var/dz = turf_source.y - T.y // Hearing from infront/behind
-		S.z = dz * distance_multiplier
-		var/dy = (turf_source.z - T.z) * 5 * distance_multiplier // Hearing from  above / below, multiplied by 5 because we assume height is further along coords.
-		S.y = dy
+		S.x = turf_source.x - T.x // Hearing from the right/left
+		S.z = turf_source.y - T.y // Hearing from infront/behind
+		// The y value is for above your head, but there is no ceiling in 2d spessmens.
+		S.y = 1
 
 		S.falloff = max_distance || 1 //use max_distance, else just use 1 as we are a direct sound so falloff isnt relevant.
 
