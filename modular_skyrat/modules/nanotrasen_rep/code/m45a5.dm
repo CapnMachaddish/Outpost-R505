@@ -8,7 +8,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	mag_type = /obj/item/ammo_box/magazine/m45a5
 	can_suppress = FALSE
-	fire_delay = 4.25 //Originally 1.75 which was unintentionally extremely fast.
+	fire_delay = 1.75 //R505 Edit - welcome to the glory days
 	fire_sound_volume = 60
 	spread = 2
 	force = 8 //There's heavier guns that dealt less damage on melee than this so we're reducing it from the original 12

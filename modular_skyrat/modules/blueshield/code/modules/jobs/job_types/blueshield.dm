@@ -69,12 +69,13 @@
 
 
 /obj/item/storage/box/gunset/blueshield
-	name = "CFA 'Lynx' Gunset"
+	name = "M45A5 Gunset" //R505 Edit
 	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/storage/box/gunset/blueshield/PopulateContents()
 	. = ..()
-	new /obj/item/gun/ballistic/automatic/cfa_lynx/no_mag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/cfa_lynx(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/cfa_lynx(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/cfa_lynx(src)
+	new /obj/item/gun/ballistic/automatic/pistol/m45a5/nomag(src) //R505 Edit Start
+	new /obj/item/ammo_box/magazine/m45a5(src)
+	new /obj/item/ammo_box/magazine/m45a5(src)
+	new /obj/item/ammo_box/magazine/m45a5(src)
+	new /obj/item/ammo_box/magazine/m45a5(src) //R505 Edit End
