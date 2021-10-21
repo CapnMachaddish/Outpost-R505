@@ -122,6 +122,7 @@ export const Scrubber = (props, context) => {
     id_tag,
     widenet,
     filter_types,
+    pollutionscrubbing, //R505 Edit
   } = scrubber;
   return (
     <Section
@@ -155,6 +156,15 @@ export const Scrubber = (props, context) => {
               id_tag,
               val: Number(!widenet),
             })} />
+          <Button
+            icon={pollutionscrubbing ? 'expand' : 'compress'}
+            selected={pollutionscrubbing}
+            content={pollutionscrubbing ? 'Active Filtering' : 'Passive Filtering'}
+            onClick={() => act('pollutionscrubbing', {
+              id_tag,
+              val: Number(!pollutionscrubbing),
+            })}/>
+
         </LabeledList.Item>
         <LabeledList.Item label="Filters">
           {scrubbing
