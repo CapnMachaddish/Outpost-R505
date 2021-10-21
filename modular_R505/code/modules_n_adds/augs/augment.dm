@@ -96,7 +96,7 @@
 	animate(owner, alpha = 255, time = 10)
 	sleep(10)
 	owner.alpha = 255
-	owner.mouse_opacity = MOUSE_OPACITY_OPAQUE
+	owner.mouse_opacity = MOUSE_OPACITY_ICON
 
 /datum/action/item_action/engage_cloak/proc/cloak_emp(source, severity)
 	playsound(owner, get_sfx("sparks"), 25, FALSE)

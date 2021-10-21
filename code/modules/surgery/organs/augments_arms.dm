@@ -14,9 +14,9 @@
 	/// You can use this var for item path, it would be converted into an item on New().
 	var/obj/item/active_item
 	/// Sound played when extending
-	var/extend_sound = 'sound/mecha/mechmove03.ogg'
+	var/extend_sound = 'modular_R505/sound/machines/servoUp.ogg' //R505 Edit - new sounds
 	/// Sound played when retracting
-	var/retract_sound = 'sound/mecha/mechmove03.ogg'
+	var/retract_sound = 'modular_R505/sound/machines/servoDown.ogg' //R505 Edit - new sounds
 
 /obj/item/organ/cyberimp/arm/Initialize()
 	. = ..()
