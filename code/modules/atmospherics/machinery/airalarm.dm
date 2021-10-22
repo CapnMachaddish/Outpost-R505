@@ -252,6 +252,7 @@
 					"long_name" = sanitize(long_name),
 					"power" = info["power"],
 					"scrubbing" = info["scrubbing"],
+					"pollutionscrubbing" = info["pollutionscrubbing"], //R505 Edit
 					"widenet" = info["widenet"],
 					"filter_types" = info["filter_types"]
 				))
@@ -311,7 +312,7 @@
 			if(usr.has_unlimited_silicon_privilege && !wires.is_cut(WIRE_IDSCAN))
 				locked = !locked
 				. = TRUE
-		if("power", "toggle_filter", "widenet", "scrubbing", "direction")
+		if("power", "toggle_filter", "widenet", "scrubbing", "direction", "pollutionscrubbing") //R505 Edit - added: , "pollutionscrubbing"
 			send_signal(device_id, list("[action]" = params["val"]), usr)
 			. = TRUE
 		if("excheck")
