@@ -157,9 +157,9 @@ export const Scrubber = (props, context) => {
               val: Number(!widenet),
             })} />
           <Button
-            icon={pollutionscrubbing ? 'expand' : 'compress'}
-            selected={pollutionscrubbing}
-            content={pollutionscrubbing ? 'Active Filtering' : 'Passive Filtering'}
+            icon={pollutionscrubbing ? 'compress' : 'expand'}
+            selected={!pollutionscrubbing}
+            content={pollutionscrubbing ? 'Passive Filtering' : 'Active Filtering'}
             onClick={() => act('pollutionscrubbing', {
               id_tag,
               val: Number(!pollutionscrubbing),
