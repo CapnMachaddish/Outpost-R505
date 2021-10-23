@@ -72,14 +72,13 @@
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/sextoy/dildo/process(delta_time)
-	var/mob/living/carbon/human/U = loc
-	if(U.arousal < 25)
-		U.adjustArousal(0.8 * delta_time)
-		U.adjustPleasure(0.8 * delta_time)
+	if(arousal_comp.arousalloss < 25)
+		arousal_comp.adjustArousalLoss(0.8 * delta_time)
 
 /obj/item/clothing/sextoy/dildo/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -90,8 +89,7 @@
 				if(vagina)
 					if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 						message = (user == M) ? pick("rubs [M.p_their()] vagina with [src]","gently jams [M.p_their()] pussy with [src]","fucks [M.p_their()] vagina with a [src]") : pick("delicately rubs [M]'s vagina with [src]", "uses [src] to fuck [M]'s vagina","jams [M]'s pussy with [src]", "teasing [M]'s pussy with [src]")
-						M.adjustArousal(6)
-						M.adjustPleasure(8)
+						partner.adjustArousalLoss(6)
 						if(prob(40) && (M.stat != DEAD))
 							M.emote(pick("twitch_s","moan"))
 						user.visible_message(span_purple("[user] [message]!"))
@@ -111,8 +109,7 @@
 			if(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES) //Mouth only. Sorry, perverts. No eye/ear penetration for you today.
 				if(!M.is_mouth_covered())
 					message = (user == M) ? pick("licks [src] erotically","sucks on [src], slowly inserting it into [M.p_their()] throat") : pick("fucks [M]'s mouth with [src]", "inserts [src] into [M]'s throat, choking [M.p_them()]", "forces [M] to suck [src]", "inserts [src] into [M]'s throat")
-					M.adjustArousal(4)
-					M.adjustPleasure(1)
+					partner.adjustArousalLoss(4)
 					M.adjustOxyLoss(1.5)
 					if(prob(70) && (M.stat != DEAD))
 						M.emote(pick("gasp","moan"))
@@ -131,8 +128,7 @@
 			else
 				if(M.is_bottomless())
 					message = (user == M) ? pick("puts [src] into [M.p_their()] anus","slowly inserts [src] into [M.p_their()] ass") : pick("fucks [M]'s ass with [src]", "uses [src] to fuck [M]'s anus", "jams [M]'s ass with [src]", "roughly fucks [M]'s ass with [src], making [M.p_their()] eyes roll back")
-					M.adjustArousal(5)
-					M.adjustPleasure(5)
+					partner.adjustArousalLoss(5)
 					if(prob(60) && (M.stat != DEAD))
 						M.emote(pick("twitch_s","moan","shiver"))
 					user.visible_message(span_purple("[user] [message]!"))
@@ -270,20 +266,17 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/sextoy/custom_dildo/process(delta_time)
-	var/mob/living/carbon/human/U = loc
-	if(poly_size == "small" && U.arousal < 20)
-		U.adjustArousal(0.6 * delta_time)
-		U.adjustPleasure(0.6 * delta_time)
-	if(poly_size == "medium" && U.arousal < 25)
-		U.adjustArousal(0.8 * delta_time)
-		U.adjustPleasure(0.8 * delta_time)
-	if(poly_size == "big" && U.arousal < 30)
-		U.adjustArousal(1 * delta_time)
-		U.adjustPleasure(1 * delta_time)
+	if(poly_size == "small" && arousal_comp.arousalloss < 20)
+		arousal_comp.adjustArousalLoss(0.6 * delta_time)
+	if(poly_size == "medium" && arousal_comp.arousalloss < 25)
+		arousal_comp.adjustArousalLoss(0.8 * delta_time)
+	if(poly_size == "big" && arousal_comp.arousalloss < 30)
+		arousal_comp.adjustArousalLoss(1 * delta_time)
 
 /obj/item/clothing/sextoy/custom_dildo/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -295,19 +288,16 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 					if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 						message = (user == M) ? pick("rubs [M.p_their()] vagina with [src]","gently jams [M.p_their()] pussy with [src]","fucks [M.p_their()] vagina with [src]") : pick("delicately rubs [M]'s vagina with [src]", "uses [src] to fuck [M]'s vagina","jams [M]'s pussy with [src]", "teasing [M]'s pussy with [src]")
 						if(poly_size == "small")
-							M.adjustArousal(4)
-							M.adjustPleasure(5)
+							partner.adjustArousalLoss(4)
 							if(prob(20) && (M.stat != DEAD))
 								M.emote("moan")
 						if(poly_size == "medium")
-							M.adjustArousal(6)
-							M.adjustPleasure(8)
+							partner.adjustArousalLoss(6)
 							if(prob(40) && (M.stat != DEAD))
 								M.emote(pick("twitch_s","moan"))
 						if(poly_size == "big")
-							M.adjustArousal(8)
-							M.adjustPleasure(10)
-							M.adjustPain(2)
+							partner.adjustArousalLoss(8)
+							//M.adjustPain(2)
 							if(prob(60) && (M.stat != DEAD))
 								M.emote(pick("twitch_s","moan","gasp"))
 
@@ -328,8 +318,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 			if(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES) //Mouth only. Sorry, perverts. No eye/ear penetration for you today.
 				if(!M.is_mouth_covered())
 					message = (user == M) ? pick("licks [src] erotically","sucks on [src], slowly inserting it into [M.p_their()] throat") : pick("fucks [M]'s mouth with [src]", "inserts [src] into [M]'s throat, choking [M.p_them()]", "forces [M] to suck [src]", "inserts [src] into [M]'s throat")
-					M.adjustArousal(4)
-					M.adjustPleasure(1)
+					partner.adjustArousalLoss(4)
 					M.adjustOxyLoss(1.5)
 					if(prob(70) && (M.stat != DEAD))
 						M.emote(pick("gasp","moan"))
@@ -348,8 +337,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 			else
 				if(M.is_bottomless())
 					message = (user == M) ? pick("puts [src] into [M.p_their()] anus","slowly inserts [src] into [M.p_their()] ass") : pick("fucks [M]'s ass with [src]", "uses [src] to fuck [M]'s anus", "jams [M]'s ass with [src]", "roughly fucks [M]'s ass with [src], making [M.p_their()] eyes roll back")
-					M.adjustArousal(5)
-					M.adjustPleasure(5)
+					partner.adjustArousalLoss(5)
 					if(prob(60) && (M.stat != DEAD))
 						M.emote(pick("twitch_s","moan","shiver"))
 					user.visible_message(span_purple("[user] [message]!"))
@@ -499,11 +487,8 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 		in_hands = FALSE
 
 /obj/item/clothing/sextoy/double_dildo/process(delta_time)
-	var/mob/living/carbon/human/U = loc
-	//i tried using switch here, but it need static value, and u.arousal can't be it. So fuck switches. Reject it, embrace the IFs
-	if(U.arousal < 25)
-		U.adjustArousal(0.8 * delta_time)
-		U.adjustPleasure(0.8 * delta_time)
+	if(arousal_comp.arousalloss < 25)
+		arousal_comp.adjustArousalLoss(0.8 * delta_time)
 
 /obj/item/clothing/sextoy/double_dildo/dropped(mob/living/user)
 	. = ..()
@@ -524,7 +509,8 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 
 /obj/item/clothing/sextoy/double_dildo/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -535,8 +521,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 				if(vagina)
 					if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 						message = (user == M) ? pick("rubs [M.p_their()] vagina with [src]","gently jams [M.p_their()] pussy with [src]","fucks [M.p_their()] vagina with [src]") : pick("delicately rubs [M]'s vagina with [src]", "uses [src] to fuck [M]'s vagina","jams [M]'s pussy with [src]", "teases [M]'s pussy with [src]")
-						M.adjustArousal(6)
-						M.adjustPleasure(8)
+						partner.adjustArousalLoss(6)
 						if(prob(40) && (M.stat != DEAD))
 							M.emote(pick("twitch_s","moan"))
 						user.visible_message(span_purple("[user] [message]!"))
@@ -556,8 +541,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 			if(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES) //Mouth only. Sorry, perverts. No eye/ear penetration for you today.
 				if(!M.is_mouth_covered())
 					message = (user == M) ? pick("licks [src] erotically","sucks on [src], slowly inserting it into [M.p_their()] throat") : pick("fucks [M]'s mouth with [src]", "inserts [src] into [M]'s throat, choking [M.p_them()]", "forces [M] to suck [src]", "inserts [src] into [M]'s throat")
-					M.adjustArousal(4)
-					M.adjustPleasure(1)
+					partner.adjustArousalLoss(4)
 					M.adjustOxyLoss(1.5)
 					if(prob(70) && (M.stat != DEAD))
 						M.emote(pick("gasp","moan"))
@@ -576,8 +560,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 			else
 				if(M.is_bottomless())
 					message = (user == M) ? pick("puts [src] into [M.p_their()] anus","slowly inserts [src] into [M.p_their()] ass") : pick("fucks [M]'s ass with [src]", "uses [src] to fuck [M]'s anus", "jams [M]'s ass with [src]", "roughly fucks [M]'s ass with [src], making [M.p_their()] eyes roll back")
-					M.adjustArousal(5)
-					M.adjustPleasure(5)
+					partner.adjustArousalLoss(5)
 					if(prob(60) && (M.stat != DEAD))
 						M.emote(pick("twitch_s","moan","shiver"))
 					user.visible_message(span_purple("[user] [message]!"))
@@ -612,7 +595,8 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 
 /obj/item/clothing/sextoy/dildo_side/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -623,10 +607,8 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 				if(vagina)
 					if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 						message = (user == M) ? pick("rubs [M.p_their()] vagina with the [src]","gently jams [M.p_their()] pussy with [src]","fucks [M.p_their()] vagina with a [src]") : pick("delicately rubs [M]'s vagina with [src]", "uses [src] to fuck [M]'s vagina","jams [M]'s pussy with [src]", "teasing [M]'s pussy with [src]")
-						M.adjustArousal(6)
-						M.adjustPleasure(8)
-						user.adjustArousal(6)
-						user.adjustPleasure(8)
+						partner.adjustArousalLoss(6)
+						arousal_comp.adjustArousalLoss(6)
 						if(prob(40) && (M.stat != DEAD))
 							M.emote(pick("twitch_s","moan"))
 						user.visible_message(span_purple("[user] [message]!"))
@@ -646,11 +628,9 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 			if(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES) //Mouth only. Sorry, perverts. No eye/ear penetration for you today.
 				if(!M.is_mouth_covered())
 					message = (user == M) ? pick("licks [src] erotically","sucks on [src], slowly inserting it into [M.p_their()] throat") : pick("fucks [M]'s mouth with [src]", "inserts [src] into [M]'s throat, choking [M.p_them()]", "forces [M] to suck [src]", "inserts [src] into [M]'s throat")
-					M.adjustArousal(4)
-					M.adjustPleasure(1)
+					partner.adjustArousalLoss(4)
 					M.adjustOxyLoss(1.5)
-					user.adjustArousal(6)
-					user.adjustPleasure(8)
+					arousal_comp.adjustArousalLoss(6)
 					if(prob(70) && (M.stat != DEAD))
 						M.emote(pick("gasp","moan"))
 					user.visible_message(span_purple("[user] [message]!"))
@@ -668,10 +648,8 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 			else
 				if(M.is_bottomless())
 					message = (user == M) ? pick("puts [src] into [M.p_their()] anus","slowly inserts [src] into [M.p_their()] ass") : pick("fucks [M]'s ass with [src]", "uses [src] to fuck [M]'s anus", "jams [M]'s ass with [src]", "roughly fucks [M]'s ass with [src], making [M.p_their()] eyes roll back")
-					M.adjustArousal(5)
-					M.adjustPleasure(5)
-					user.adjustArousal(6)
-					user.adjustPleasure(8)
+					partner.adjustArousalLoss(5)
+					arousal_comp.adjustArousalLoss(6)
 					if(prob(60) && (M.stat != DEAD))
 						M.emote(pick("twitch_s","moan","shiver"))
 					user.visible_message(span_purple("[user] [message]!"))

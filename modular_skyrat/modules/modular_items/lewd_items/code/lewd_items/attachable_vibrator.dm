@@ -125,17 +125,13 @@
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/sextoy/eggvib/process(delta_time)
-	var/mob/living/carbon/human/U = loc
 	if(toy_on == TRUE)
 		if(vibration_mode == "low")
-			U.adjustArousal(0.5 * delta_time)
-			U.adjustPleasure(0.5 * delta_time)
+			arousal_comp.adjustArousalLoss(0.5 * delta_time)
 		if(vibration_mode == "medium")
-			U.adjustArousal(0.6 * delta_time)
-			U.adjustPleasure(0.6 * delta_time)
+			arousal_comp.adjustArousalLoss(0.6 * delta_time)
 		if(vibration_mode == "high")
-			U.adjustArousal(0.7 * delta_time)
-			U.adjustPleasure(0.7 * delta_time)
+			arousal_comp.adjustArousalLoss(0.7 * delta_time)
 
 //////////////////////////
 ///Signal vibrating egg///
@@ -412,14 +408,10 @@
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/sextoy/signalvib/process(delta_time)
-	var/mob/living/carbon/human/U = loc
 	if(toy_on == TRUE)
 		if(vibration_mode == "low")
-			U.adjustArousal(0.5 * delta_time)
-			U.adjustPleasure(0.5 * delta_time)
+			arousal_comp.adjustArousalLoss(0.5 * delta_time)
 		if(vibration_mode == "medium")
-			U.adjustArousal(0.6 * delta_time)
-			U.adjustPleasure(0.6 * delta_time)
+			arousal_comp.adjustArousalLoss(0.6 * delta_time)
 		if(vibration_mode == "high")
-			U.adjustArousal(0.7 * delta_time)
-			U.adjustPleasure(0.7 * delta_time)
+			arousal_comp.adjustArousalLoss(0.7 * delta_time)

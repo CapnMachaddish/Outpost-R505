@@ -58,7 +58,8 @@
 
 /obj/item/clothing/sextoy/fleshlight/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -71,8 +72,7 @@
 						message = (user == M) ? pick("moans in ecstasy as [M.p_they()] use the [src]","slowly moves [src] up and down on [M]'s penis, causing [M.p_them()] to bend in pleasure","slightly shivers in pleasure as [M.p_they()] use [src].") : pick("uses [src] on [M]'s penis","fucks [M] with [src]","masturbates [M] with [src], causing [M.p_them()] to moan in ecstasy")
 						if(prob(40) && (M.stat != DEAD))
 							M.emote(pick("twitch_s","moan","blush"))
-						M.adjustArousal(6)
-						M.adjustPleasure(9)
+						partner.adjustArousalLoss(6)
 						user.visible_message(span_purple("[user] [message]!"))
 						playsound(loc, pick('modular_skyrat/modules/modular_items/lewd_items/sounds/bang1.ogg',
 											'modular_skyrat/modules/modular_items/lewd_items/sounds/bang2.ogg',

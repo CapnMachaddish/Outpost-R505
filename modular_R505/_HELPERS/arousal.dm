@@ -86,8 +86,8 @@
 		return FALSE
 	return TRUE
 
-/obj/item/organ/genital/proc/return_fluid(remove_fluid=FALSE)
-	var/amount_to_take = round(fluid_amount * productivity)
+/obj/item/organ/genital/proc/return_fluid(remove_fluid=FALSE, multiplier=1)
+	var/amount_to_take = min(round(fluid_amount * productivity) * multiplier, max_fluid_amount)
 	var/datum/reagents/R = new(10000)
 	for(var/X in fluid_type)
 		R.add_reagent(X, amount_to_take * fluid_type[X], reagtemp=DEFAULT_REAGENT_TEMPERATURE+15)

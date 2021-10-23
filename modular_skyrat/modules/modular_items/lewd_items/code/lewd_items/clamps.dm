@@ -72,12 +72,10 @@
 	. = ..()
 	var/mob/living/carbon/human/U = loc
 	var/obj/item/organ/genital/breasts/B = U.getorganslot(ORGAN_SLOT_BREASTS)
-	U.adjustArousal(1 * delta_time)
-	if(U.pain < 27.5) //To prevent maxing pain by just pair of clamps.
-		U.adjustPain(1 * delta_time)
+	arousal_comp.adjustArousalLoss(1 * delta_time)
 
-	if(U.arousal < 15)
-		U.adjustArousal(1 * delta_time)
+	if(arousal_comp.arousalloss < 15)
+		arousal_comp.adjustArousalLoss(1 * delta_time)
 
 	if(B.aroused != AROUSAL_CANT)
 		B.aroused = AROUSAL_FULL //Clamps keeping nipples aroused

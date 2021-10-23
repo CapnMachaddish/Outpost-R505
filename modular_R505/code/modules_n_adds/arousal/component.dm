@@ -7,11 +7,11 @@
 	var/arousalloss = 0
 	//The minimum amount of arousal possible. Dunno why this is a var, really
 	var/minimum_arousal = AROUSAL_MINIMUM
-	//The maximum amount of arousal possible. Affects how quickly it takes to get to maximum
+	//The highest amount of arousal possible. Affects how quickly it takes to get to maximum
 	var/maximum_arousal = AROUSAL_MAXIMUM
 	//The chance per tick to send a random message to the client, but it does not send twice in a row
 	var/aroused_messages_chance = AROUSED_MESSAGE_CHANCE
-	//Random messages to send to the player when they're erect
+	//Random messages to send to the player when they're erect	//UNUSED
 	var/list/arousal_messages = AROUSED_MESSAGES
 	//If the mob has genitals, then this is when the sprites will become erect
 	var/erect_threshold = AROUSAL_ERECT
@@ -19,6 +19,8 @@
 	var/chub_threshold = AROUSAL_CHUB
 	//When the mob is able to use certain lewd actions
 	var/can_climax_after = AROUSAL_CLIMAX
+	//Multiplier for how much one can coom
+	var/productivity_multiplier = 1
 	//The rate of which the mob's arousal increases.
 	var/arousal_rate = AROUSAL_RATE
 	//The rate of which the mob's arousal decreases.
@@ -49,7 +51,7 @@
 	var/datum/dna/dna_type	//AAA!
 	var/atom/movable/screen/arousal/arousal_hud = new
 
-/datum/component/arousal/Initialize(min_arousal=AROUSAL_MINIMUM,max_arousal=AROUSAL_MAXIMUM,gain_rate=AROUSAL_RATE,loss_rate=AROUSAL_RATE,erect=AROUSAL_ERECT,chub=AROUSAL_CHUB,climax_when=AROUSAL_CLIMAX,climax_cooldown=CLIMAX_COOLDOWN,message_chance=AROUSED_MESSAGE_CHANCE,update_rate=AROUSAL_TICKRATE)
+/datum/component/arousal/Initialize(min_arousal=AROUSAL_MINIMUM,max_arousal=AROUSAL_MAXIMUM,gain_rate=AROUSAL_RATE,loss_rate=AROUSAL_RATE,erect=AROUSAL_ERECT,chub=AROUSAL_CHUB,climax_when=AROUSAL_CLIMAX,climax_cooldown=CLIMAX_COOLDOWN,message_chance=AROUSED_MESSAGE_CHANCE,update_rate=AROUSAL_TICKRATE,productivity=1)
 	if(!ismob(parent))
 		return COMPONENT_INCOMPATIBLE
 	holder = parent
@@ -70,6 +72,7 @@
 	chub_threshold = chub
 	can_climax_after = climax_when
 	aroused_messages_chance = message_chance
+	productivity_multiplier = productivity
 
 	defined_hud = holder.hud_used
 	add_arousal_hud()
@@ -156,12 +159,6 @@
 	if(!(world.time % (tickrate * deltatime)) && can_be_aroused)
 		process_arousal(FALSE)
 		updatearousal()
-	else if(!can_be_aroused)
-		if(defined_hud.arousal)
-			remove_arousal_hud()
-		else
-			add_arousal_hud()
-
 
 //You always gain a steady arousal rate, but it changes if you have exposed genitals
 /datum/component/arousal/proc/process_arousal(update=TRUE)
@@ -189,10 +186,9 @@
 	update_arousal_hud()
 	update_genital_arousal()
 
-
 /datum/component/arousal/proc/adjustArousalLoss(amount, updating=TRUE, species_multiplier=TRUE)
 	ASSERT(can_be_aroused)
-	if(holder.status_flags & GODMODE)
+	if(holder.status_flags & GODMODE)	//What do you mean this isn't damage?
 		return FALSE
 	. = arousalloss = clamp(arousalloss + (amount * (species_multiplier && dna_type ? dna_type.species.arousal_rate : 1)), minimum_arousal, maximum_arousal)
 	if(updating)
@@ -205,7 +201,6 @@
 	. = arousalloss = clamp(amount, minimum_arousal, maximum_arousal)
 	if(updating)
 		updatearousal()
-
 
 /datum/component/arousal/proc/update_genital_arousal()
 	if((!is_carbon || !can_be_aroused) && !IsAdminAdvancedProcCall())
@@ -247,21 +242,21 @@
 	if(!silent)
 		if(!is_groin_exposed(holder) && (get_organ_visibility(ORGAN_SLOT_PENIS) || get_organ_visibility(ORGAN_SLOT_VAGINA)))
 			holder.visible_message(\
-			"<span class='love'>[holder] shudders and squints, bringing [holder.p_their()] legs together.</span>",
-			"<span class='userlove'>Your pleasure couldn't be held back, and you climax underneath your clothes.</span>")
+			span_love("[holder] shudders, bringing [holder.p_their()] legs together."),
+			span_userlove("Your pleasure couldn't be held back; you climax underneath your clothes."))
 			if(is_carbon)
 				switch(mode)
 					if(CLIMAX_PENIS)
 						var/obj/item/organ/genital/testicles/testicles = get_owner_organ(ORGAN_SLOT_TESTICLES)
 						var/obj/item/organ/genital/penis/penis = get_owner_organ(ORGAN_SLOT_PENIS)
 						if(istype(testicles))
-							testicles.return_fluid(TRUE)
+							testicles.return_fluid(TRUE, productivity_multiplier)
 						if(istype(penis))
-							penis.return_fluid(TRUE)
+							penis.return_fluid(TRUE, productivity_multiplier)
 					if(CLIMAX_VAGINA)
 						var/obj/item/organ/genital/vagina/vagina = get_owner_organ(ORGAN_SLOT_VAGINA)
 						if(istype(vagina))
-							vagina.return_fluid(TRUE)
+							vagina.return_fluid(TRUE, productivity_multiplier)
 			setArousalLoss(arousalloss * 0.12)
 			SEND_SIGNAL(usr, COMSIG_ADD_MOOD_EVENT, AROUSAL, /datum/mood_event/pleasure_climax)
 			return
@@ -269,12 +264,12 @@
 			if(CLIMAX_PENIS)
 				if(is_chest_exposed(holder))
 					holder.visible_message(\
-					"<span class='love'>[holder] shudders, and climaxes all over [holder.p_them()]self.</span>",
-					"<span class='userlove'>Your pleasure couldn't be held back, and you climax all over yourself.</span>")
+					span_love("[holder] shudders, and climaxes all over [holder.p_them()]self."),
+					span_userlove("Your pleasure couldn't be held back, and you climax all over yourself."))
 				else
 					holder.visible_message(\
-					"<span class='love'>[holder] shudders, and climaxes all over [holder.p_their()] clothes.</span>",
-					"<span class='userlove'>Your pleasure couldn't be held back, you climax all over yourself.</span>")
+					span_love("[holder] shudders, and climaxes all over [holder.p_their()] clothes."),
+					span_userlove("Your pleasure couldn't be held back, you climax all over yourself."))
 				var/hasbits = FALSE
 				if(is_carbon)
 					hasbits = TRUE
@@ -289,7 +284,7 @@
 						
 					if(istype(penis))
 						hasbits=TRUE
-						R = penis.return_fluid(TRUE)
+						R = penis.return_fluid(TRUE, productivity_multiplier)
 						R.expose(holder.loc, show_message=FALSE)
 					else if(penis ==TRUE)
 						hasbits = FALSE
@@ -303,15 +298,15 @@
 
 			if(CLIMAX_VAGINA)
 				holder.visible_message(\
-				"<span class='love'>[holder] shudders, moaning as [holder.p_their()] legs flex and squeeze together.</span>",
-				"<span class='userlove'>Your pleasure couldn't be held back, you can't help but moan as you climax.</span>")
+				span_love("[holder] shudders, moaning as [holder.p_their()] legs flex and squeeze together."),
+				span_userlove("Your pleasure couldn't be held back, you can't help but moan as you climax."))
 				var/hasbits = FALSE
 				if(is_carbon)
 					hasbits=TRUE
 					var/obj/item/organ/genital/vagina/vagina = get_owner_organ(ORGAN_SLOT_VAGINA)
 					var/datum/reagents/R = new(1000)
 					if(istype(vagina))
-						R = vagina.return_fluid(TRUE)
+						R = vagina.return_fluid(TRUE, productivity_multiplier)
 						R.expose(holder.loc, show_message=FALSE)
 					else if(vagina == TRUE)
 						hasbits=FALSE
@@ -337,21 +332,21 @@
 	if(!silent)
 		switch(mode)
 			if(PARTNER_INTERACT_PENIS_PENIS)
-				holder.visible_message("<span class='love'>[holder] climaxes with [partner], spreading seed onto themselves.</span>", ignored_mobs=list(holder, partner))
-				to_chat(holder, "<span class='userlove'>You climax with [partner], ejaculating onto [partner.p_them()].</span>")
-				to_chat(partner, "<span class='userlove'>You climax with [holder], ejaculating onto [holder.p_them()].</span>")
+				holder.visible_message(span_love("[holder] climaxes with [partner], spreading seed onto themselves."), ignored_mobs=list(holder, partner))
+				to_chat(holder, span_userlove("You climax with [partner], ejaculating onto [partner.p_them()]."))
+				to_chat(partner, span_userlove("You climax with [holder], ejaculating onto [holder.p_them()]."))
 			if(PARTNER_INTERACT_PENIS_VAGINA)
-				holder.visible_message("<span class='love'>[holder] climaxes with [partner], ejaculating into [partner.p_them()].</span>", ignored_mobs=list(holder, partner))
-				to_chat(holder, "<span class='userlove'>You climax with [partner], ejaculating into [partner.p_them()].</span>")
-				to_chat(partner, "<span class='userlove'>You climax with [holder], letting pleasure rush through your body.</span>")
+				holder.visible_message(span_love("[holder] climaxes with [partner], ejaculating into [partner.p_them()]."), ignored_mobs=list(holder, partner))
+				to_chat(holder, span_userlove("You climax with [partner], ejaculating into [partner.p_them()]."))
+				to_chat(partner, span_userlove("You climax with [holder], letting pleasure rush through your body."))
 			if(PARTNER_INTERACT_VAGINA_PENIS)
-				holder.visible_message("<span class='love'>[holder] climaxes with [partner] as [holder.p_they()] get[holder.p_s()] pounded by [partner.p_them()].</span>", ignored_mobs=list(holder, partner))
-				to_chat(holder, "<span class='userlove'>You climax with [partner], letting pleasure rush through your body.</span>")
-				to_chat(partner, "<span class='userlove'>You climax with [holder], ejaculating into [holder.p_them()].</span>")
+				holder.visible_message(span_love("[holder] climaxes with [partner] as [holder.p_they()] get[holder.p_s()] pounded by [partner.p_them()]."), ignored_mobs=list(holder, partner))
+				to_chat(holder, span_userlove("You climax with [partner], letting pleasure rush through your body."))
+				to_chat(partner, span_userlove("You climax with [holder], ejaculating into [holder.p_them()]."))
 			if(PARTNER_INTERACT_VAGINA_VAGINA)
-				holder.visible_message("<span class='love'>[holder] climaxes with [partner] as they rub against eachother's vaginas.</span>", ignored_mobs=list(holder, partner))
-				to_chat(holder, "<span class='userlove'>You climax with [partner], letting pleasure rush through your body.</span>")
-				to_chat(partner, "<span class='userlove'>You climax with [holder], letting pleasure rush through your body.</span>")
+				holder.visible_message(span_love("[holder] climaxes with [partner] as they rub against eachother's vaginas."), ignored_mobs=list(holder, partner))
+				to_chat(holder, span_userlove("You climax with [partner], letting pleasure rush through your body."))
+				to_chat(partner, span_userlove("You climax with [holder], letting pleasure rush through your body."))
 	switch(mode)
 		if(PARTNER_INTERACT_PENIS_PENIS)
 			climax(CLIMAX_PENIS, TRUE, forced)
@@ -382,61 +377,61 @@
 			if(!penis)
 				return
 			if(testicles)
-				R = testicles.return_fluid(TRUE)
+				R = testicles.return_fluid(TRUE, productivity_multiplier)
 			else
-				R = penis.return_fluid(TRUE)
+				R = penis.return_fluid(TRUE, productivity_multiplier)
 
 			if(R.total_volume > volume_till_full)
 				if(R.total_volume > volume_till_full * 2)
 					holder.visible_message(\
-					"<span class='love'>[holder] climaxes into [I], overflowing it with semen.</span>",
-					"<span class='userlove'>You climax into [I] and overflow it with cum, and then some.</span>")
+					span_love("[holder] climaxes into [I], overflowing it with semen."),
+					span_userlove("You climax into [I] and overflow it with cum, and then some."))
 					I.AddComponent(/datum/component/cleanable, 'modular_R505/icons/ported/obj/cumoverlay.dmi', "cum_obj", TRUE)
 				else
 					holder.visible_message(\
-					"<span class='love'>[holder] climaxes into [I], filling it to the brim with semen.</span>",
-					"<span class='userlove'>You climax into [I], filling it completely with semen.</span>")
+					span_love("[holder] climaxes into [I], filling it to the brim with semen."),
+					span_userlove("You climax into [I], filling it completely with semen."))
 			else
 				holder.visible_message(\
-				"<span class='love'>[holder] climaxes into [I], filling it with cum.</span>",
-				"<span class='userlove'>You climax into [I], filling it up with cum.</span>")
+				span_love("[holder] climaxes into [I], filling it with cum."),
+				span_userlove("You climax into [I], filling it up with cum."))
 		if(INTERACT_TESTICLES)
 			var/obj/item/organ/genital/penis/penis = get_owner_organ(ORGAN_SLOT_PENIS)
 			var/obj/item/organ/genital/testicles/testicles = get_owner_organ(ORGAN_SLOT_TESTICLES)
 			if(!penis)
 				return
-			R = penis.return_fluid(TRUE)
+			R = penis.return_fluid(TRUE, productivity_multiplier)
 			if(testicles)	//How did we get here if we don't have testicles? Oh well, check anyways!
-				var/datum/reagents/R2 = testicles.return_fluid(TRUE)
+				var/datum/reagents/R2 = testicles.return_fluid(TRUE, productivity_multiplier)
 				R2.trans_to(R, R2.total_volume)
 			if(R.total_volume > volume_till_full * 3)	//damn hypers squeezing their balls
 				holder.visible_message(\
-				"<span class='love'>[holder] gently squeezes [holder.p_their()] testicles and overflows [I] with semen!</span>",
-				"<span class='userlove'>You gently press against your testicles and overflow [I] with semen.</span>")
+				span_love("[holder] gently squeezes [holder.p_their()] testicles and over-fills [I] with semen!"),
+				span_userlove("You gently press against your testicles and overflow [I] with semen."))
 				I.AddComponent(/datum/component/cleanable, 'modular_R505/icons/ported/obj/cumoverlay.dmi', "cum_obj", TRUE)
 			else
 				holder.visible_message(\
-				"<span class='love'>[holder] massages [holder.p_their()] testicles until they leak semen into [I].</span>",
-				"<span class='userlove'>You play with your testicles until you start leaking cum into [I].</span>")
+				span_love("[holder] massages [holder.p_their()] testicles until they leak semen into [I]."),
+				span_userlove("You play with your testicles until you start leaking cum into [I]."))
 		if(INTERACT_BREASTS)
 			var/obj/item/organ/genital/breasts/breasts = get_owner_organ(ORGAN_SLOT_BREASTS)
 			if(!breasts)
 				return
-			R = breasts.return_fluid(TRUE)
+			R = breasts.return_fluid(TRUE, productivity_multiplier)
 			if(R.total_volume > volume_till_full)
 				if(R.total_volume > volume_till_full * 2)
 					holder.visible_message(\
-					"<span class='love'>[holder] squeezes and massages [holder.p_their()] breasts over [I], overfilling it with milk!</span>",
-					"<span class='userlove'>You squeeze and carress your breasts and leak milk into [I], overfilling it!</span>")
-					//No overlay (yet)
+					span_love("[holder] squeezes and massages [holder.p_their()] breasts over [I], overfilling it with milk!"),
+					span_userlove("You squeeze and carress your breasts and leak milk into [I], overfilling it!"))
+					//TODO: No overlay yet
 				else
 					holder.visible_message(\
-					"<span class='love'>[holder] squeezes and massages [holder.p_their()] breasts over [I], filling it to the brim with milk.</span>",
-					"<span class='userlove'>You squeeze your nipples and leak your milk into [I], filling it to the brim with milk.</span>")
+					span_love("[holder] squeezes and massages [holder.p_their()] breasts over [I], filling it to the brim with milk."),
+					span_userlove("You squeeze your nipples and leak your milk into [I], filling it to the brim with milk."))
 			else
 				holder.visible_message(\
-				"<span class='love'>[holder] squeezes [holder.p_their()] breasts over [I], filling it up with [holder.p_their()] milk.</span>",
-				"<span class='userlove'>You squeeze your nipples over [I], leaking milk into the container.</span>")
+				span_love("[holder] squeezes [holder.p_their()] breasts over [I], filling it up with [holder.p_their()] milk."),
+				span_userlove("You squeeze your nipples over [I], leaking milk into the container."))
 	R.trans_to(I, R.maximum_volume)
 	setArousalLoss(arousalloss * 0.05)
 	SEND_SIGNAL(holder, COMSIG_ADD_MOOD_EVENT, AROUSAL, /datum/mood_event/pleasure_climax)

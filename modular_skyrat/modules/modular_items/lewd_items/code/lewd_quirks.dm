@@ -135,14 +135,6 @@
 		if(stress <= 100)
 			stress +=1
 
-	if(in_company() && owner.has_status_effect(/datum/status_effect/climax))
-		stress = 0
-		satisfaction = 1000
-
-	if(!(in_company()) && owner.has_status_effect(/datum/status_effect/climax) && satisfaction <= 500)
-		stress = 0
-		satisfaction = 500
-
 /datum/brain_trauma/special/nymphomania/proc/in_company()
 	if(HAS_TRAIT(owner, TRAIT_BLIND))
 		return FALSE
@@ -241,12 +233,7 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 
 	if(satisfaction <= 0.20)
 		if(stress <= 100)
-			stress +=1
-
-	if(get_dist(get_turf(owner), get_turf(obsession)) < 2)
-		if(obsession.pleasure >= 20 && owner.has_status_effect(/datum/status_effect/climax))
-			satisfaction = 100
-			stress = 0
+			stress += 1
 
 	if(!obsession || obsession.stat == DEAD) //being aroused by corpses is kind of sin. It was my opportunity to check if target is dead.
 		viewing = FALSE
@@ -261,7 +248,8 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	else
 		viewing = FALSE
 	if(viewing)
-		H.adjustArousal(3) //Nymph looking at their target and get aroused. Everything logical.
+		var/datum/component/arousal/a = H.GetComponent(/datum/component/arousal)
+		a?.adjustArousalLoss(3) //Nymph looking at their target and get aroused. Everything logical.
 
 /datum/brain_trauma/special/sexual_obsession/proc/stare(datum/source, mob/living/examining_mob, triggering_examiner)
 	SIGNAL_HANDLER
@@ -315,10 +303,8 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	if(satisfaction > 1)
 		satisfaction -=1
 
-	H.adjustArousal(10)
-
-	if(H.pleasure < 80)
-		H.adjustPleasure(5)
+	var/datum/component/arousal/a = H.GetComponent(/datum/component/arousal)
+	a?.adjustArousalLoss(10)
 
 	if(satisfaction <= 0)
 		if(prob(10))
@@ -383,14 +369,6 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 		if(stress <= 100)
 			stress +=1
 
-	if(in_company() && owner.has_status_effect(/datum/status_effect/climax))
-		stress = 0
-		satisfaction = 1000
-
-	if(!(in_company()) && owner.has_status_effect(/datum/status_effect/climax) && satisfaction <= 500)
-		stress = 0
-		satisfaction = 500
-
 /datum/brain_trauma/special/bimbo/proc/in_company()
 	if(HAS_TRAIT(owner, TRAIT_BLIND))
 		return FALSE
@@ -447,13 +425,11 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	. = ..()
 	var/mob/living/carbon/human/H = quirk_holder
 	ADD_TRAIT(H,TRAIT_MASOCHISM, LEWDQUIRK_TRAIT)
-	H.pain_limit = 60
 
 /datum/quirk/masochism/remove()
 	. = ..()
 	var/mob/living/carbon/human/H = quirk_holder
 	REMOVE_TRAIT(H,TRAIT_MASOCHISM, LEWDQUIRK_TRAIT)
-	H.pain_limit = 0
 
 ////////////////
 ///NEVERBONER///
@@ -512,7 +488,8 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 /datum/brain_trauma/special/sadism/on_life(delta_time, times_fired)
 	var/mob/living/carbon/human/H = owner
 	if(someone_suffering() && H.client?.prefs.erp_pref == "Yes")
-		H.adjustArousal(2)
+		var/datum/component/arousal/a = H.GetComponent(/datum/component/arousal)
+		a?.adjustArousalLoss(2)
 		SEND_SIGNAL(owner, COMSIG_ADD_MOOD_EVENT, "sadistic", /datum/mood_event/sadistic)
 	else
 		SEND_SIGNAL(owner, COMSIG_CLEAR_MOOD_EVENT, "sadistic", /datum/mood_event/sadistic)
@@ -523,8 +500,8 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	for(var/mob/living/carbon/human/M in oview(owner, 4))
 		if(!isliving(M)) //ghosts ain't people
 			continue
-		if(istype(M) && M.pain >= 10)
-			return TRUE
+		//if(istype(M) && M.pain >= 10)
+		//	return TRUE
 	return FALSE
 
 //Mood boost
@@ -542,16 +519,17 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	if(stat != DEAD && !HAS_TRAIT(src, TRAIT_FAKEDEATH) && src != U)
 		if(src != user)
 			if(HAS_TRAIT(U, TRAIT_EMPATH))
-				switch(arousal)
+				var/datum/component/arousal/a = src.GetComponent(/datum/component/arousal)
+				switch(a.arousalloss)
 					if(11 to 21)
 						. += span_purple("[p_they()] [p_are()] excited.") + "\n"
-					if(21.01 to 41)
+					if(21 to 41)
 						. += span_purple("[p_they()] [p_are()] slightly blushed.") + "\n"
-					if(41.01 to 51)
+					if(41 to 51)
 						. += span_purple("[p_they()] [p_are()] quite aroused and seems to be stirring up lewd thoughts in [p_their()] head.") + "\n"
-					if(51.01 to 61)
+					if(51 to 61)
 						. += span_purple("[p_they()] [p_are()] very aroused and [p_their()] movements are seducing.") + "\n"
-					if(61.01 to 91)
+					if(61 to 91)
 						. += span_purple("[p_they()] [p_are()] aroused as hell.") + "\n"
-					if(91.01 to INFINITY)
+					if(91 to INFINITY)
 						. += span_purple("[p_they()] [p_are()] extremely excited, exhausting from entolerable desire.") + "\n"

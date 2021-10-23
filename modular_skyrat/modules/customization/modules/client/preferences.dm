@@ -1204,22 +1204,10 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<b>Darkened Flashes:</b> (replaces flashes with a black screen) <a href='?_src_=prefs;preference=darkened_flash'>[darkened_flash ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
 
-			//R505 CHANGE - Accept Arousal
+			//R505 CHANGE - Arousal
 			dat += "<b>Toggle Arousal:</b> <a href='?_src_=prefs;preference=toggle_arousal'>[r_preferences & R_PREF_AROUSAL ? "Enabled":"Disabled"]</a><br>"
-			//R505 CHANGE - Also exhibitionist
 			dat += "<b>Exhibitionist Preference:</b> <a href='?_src_=prefs;preference=toggle_exhibition'>[r_preferences & R_PREF_EXHIBITIONIST ? "Enabled":"Disabled"]</a><br>"
-			//aphrodisiac pref
-			dat += "<b>Be Affected by Aphrodisiacs:</b> <a href='?_src_=prefs;preference=aphrodisiacs_pref'>[(skyrat_toggles & APHRO_PREF) ? "Enabled":"Disabled"]</a><br>"
-			//cumface pref
-			dat += "<b>Be Able To Get Covered In \"Reproductive Reagent\":</b> <a href='?_src_=prefs;preference=cumfaced_pref'>[(skyrat_toggles & CUMFACE_PREF) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<br>"
-
-			//erp update prefs here
-			dat += "<b>Bimbofication:</b> <a href='?_src_=prefs;preference=bimbo_pref'>[(skyrat_toggles & BIMBO_PREF) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Breast enlargement chemicals:</b> <a href='?_src_=prefs;preference=b_enlargement_pref'>[(skyrat_toggles & BREAST_ENLARGEMENT) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Penis enlargement chemicals:</b> <a href='?_src_=prefs;preference=p_enlargement_pref'>[(skyrat_toggles & PENIS_ENLARGEMENT) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Forced masculinity:</b> <a href='?_src_=prefs;preference=forced_m_pref'>[(skyrat_toggles & FORCED_MALE) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Forced femininity:</b> <a href='?_src_=prefs;preference=forced_fem_pref'>[(skyrat_toggles & FORCED_FEM) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Lewd Chemistry:</b> <a href='?_src_=prefs;preference=toggle_lewd_chem_effects'>[r_preferences & R_PREF_LEWDCHEM ? "":""]</a><br>"
 			dat += "<br>"
 
 			if(user.client)
@@ -2952,28 +2940,10 @@ GLOBAL_LIST_INIT(food, list(
 					r_preferences ^= R_PREF_AROUSAL
 				if("toggle_exhibition")
 					r_preferences ^= R_PREF_EXHIBITIONIST
+				if("toggle_lewd_chem_effects")
+					r_preferences ^= R_PREF_LEWDCHEM
 				//End R505 Edit
 				//
-
-				//cumface pref
-				if("cumfaced_pref")
-					skyrat_toggles ^= CUMFACE_PREF
-
-				//erp update prefs coming riiight here
-				if("bimbo_pref")
-					skyrat_toggles ^= BIMBO_PREF
-
-				if("b_enlargement_pref")
-					skyrat_toggles ^= BREAST_ENLARGEMENT
-
-				if("p_enlargement_pref")
-					skyrat_toggles ^= PENIS_ENLARGEMENT
-
-				if("forced_m_pref")
-					skyrat_toggles ^= FORCED_MALE
-
-				if("forced_fem_pref")
-					skyrat_toggles ^= FORCED_FEM
 
 				if("parallaxup")
 					parallax = WRAP(parallax + 1, PARALLAX_INSANE, PARALLAX_DISABLE + 1)

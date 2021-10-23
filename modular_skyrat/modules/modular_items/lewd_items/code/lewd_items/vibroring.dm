@@ -91,7 +91,6 @@
 		return PROCESS_KILL
 	var/obj/item/organ/genital/testicles/P = U.getorganslot(ORGAN_SLOT_PENIS)
 	if(toy_on == TRUE)
-		U.adjustArousal(1 * delta_time)
-		U.adjustPleasure(1 * delta_time)
+		arousal_comp.adjustArousalLoss(1 * delta_time)
 		if(P.aroused != AROUSAL_CANT)
 			P.aroused = AROUSAL_FULL //Vibroring keep penis erected.
