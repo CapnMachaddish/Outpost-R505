@@ -150,7 +150,7 @@
 	mutant_variants = NONE
 
 ///////////////////////////////////////////////////////////////////////TURTLENECKS
-obj/item/clothing/under/syndicate/interdyne
+//obj/item/clothing/under/syndicate/interdyne
 	//worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/uniform.dmi'
 	//icon = 'modular_skyrat/master_files/icons/obj/clothing/uniforms.dmi'
 //R505 Edit - these will become their own item.
