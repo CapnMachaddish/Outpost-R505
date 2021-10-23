@@ -97,13 +97,13 @@ GENE SCANNER
 	var/scanmode = SCANMODE_HEALTH
 	var/advanced = FALSE
 	custom_price = PAYCHECK_HARD
-
+/*( //R505 Edit
 //SKYRAT EDIT ADDITION BEGIN
 /obj/item/healthanalyzer/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/cell)
 //SKYRAT EDIT END
-
+*/ //R505 Edit - End
 /obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] begins to analyze [user.p_them()]self with [src]! The display shows that [user.p_theyre()] dead!"))
 	return BRUTELOSS
@@ -117,10 +117,12 @@ GENE SCANNER
 			to_chat(user, span_notice("You switch the health analyzer to report extra info on wounds."))
 
 /obj/item/healthanalyzer/attack(mob/living/M, mob/living/carbon/human/user)
+	/* //R505 Edit
 	//SKYRAT EDIT ADDITION
 	if(!(item_use_power(power_use_amount, user, FALSE) & COMPONENT_POWER_SUCCESS))
 		return
 	//SKYRAT EDIT END
+	*/ //R505 Edit - End
 	flick("[icon_state]-scan", src) //makes it so that it plays the scan animation upon scanning, including clumsy scanning
 
 	// Clumsiness/brain damage check
@@ -149,10 +151,12 @@ GENE SCANNER
 	add_fingerprint(user)
 
 /obj/item/healthanalyzer/attack_secondary(mob/living/victim, mob/living/user, params)
+	/* //R505 Edit
 	//SKYRAT EDIT ADDITION
 	if(!(item_use_power(power_use_amount, user) & COMPONENT_POWER_SUCCESS))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	//SKYRAT EDIT END
+	*/ //R505 Edit - End
 	chemscan(user, victim)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
@@ -494,7 +498,7 @@ GENE SCANNER
 	icon_state = "health_adv"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject with high accuracy."
 	advanced = TRUE
-	power_use_amount = POWER_CELL_USE_HIGH //SKYRAT EDIT ADDITION CHANGE
+	//power_use_amount = POWER_CELL_USE_HIGH //SKYRAT EDIT ADDITION CHANGE //R505 Edit - No
 
 /// Displays wounds with extended information on their status vs medscanners
 /proc/woundscan(mob/user, mob/living/carbon/patient, obj/item/healthanalyzer/wound/scanner)
@@ -584,12 +588,13 @@ GENE SCANNER
 	var/cooldown_time = 250
 	var/accuracy // 0 is the best accuracy.
 
+/* //R505 Edit
 //SKYRAT EDIT ADDITION BEGIN
 /obj/item/analyzer/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/cell)
 //SKYRAT EDIT END
-
+*/ //R505 Edit - End
 /obj/item/analyzer/examine(mob/user)
 	. = ..()
 	. += span_notice("Alt-click [src] to activate the barometer function.")
@@ -603,11 +608,12 @@ GENE SCANNER
 
 	if (user.stat || user.is_blind())
 		return
-
+	/* //R505 Edit
 	//SKYRAT EDIT ADDITION
 	if(!(item_use_power(power_use_amount, user) & COMPONENT_POWER_SUCCESS))
 		return
 	//SKYRAT EDIT END
+	*/ //R505 Edit - End
 
 	var/turf/location = user.loc
 	if(!istype(location))
@@ -651,10 +657,12 @@ GENE SCANNER
 		if(cooldown)
 			to_chat(user, span_warning("[src]'s barometer function is preparing itself."))
 			return
+		/* //R505 Edit
 		//SKYRAT EDIT ADDITION
 		if(!(item_use_power(power_use_amount, user) & COMPONENT_POWER_SUCCESS))
 			return
 		//SKYRAT EDIT END
+		*/ //R505 Edit - End
 
 		var/turf/T = get_turf(user)
 		if(!T)
@@ -770,6 +778,7 @@ GENE SCANNER
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=30, /datum/material/glass=20)
 
+/* //R505 Edit
 	//SKYRAT EDIT ADDITION BEGIN
 	power_use_amount = POWER_CELL_USE_LOW
 
@@ -777,17 +786,19 @@ GENE SCANNER
 	. = ..()
 	AddComponent(/datum/component/cell)
 	//SKYRAT EDIT END
-
+*/ //R505 Edit - End
 /obj/item/slime_scanner/attack(mob/living/M, mob/living/user)
 	if(user.stat || user.is_blind())
 		return
 	if (!isslime(M))
 		to_chat(user, span_warning("This device can only scan slimes!"))
 		return
+	/* //R505 Edit
 	//SKYRAT EDIT ADDITION
 	if(!(item_use_power(power_use_amount, user) & COMPONENT_POWER_SUCCESS))
 		return
 	//SKYRAT EDIT END
+	*/ //R505 Edit - End
 	var/mob/living/simple_animal/slime/T = M
 	slime_scan(T, user)
 
@@ -844,21 +855,25 @@ GENE SCANNER
 	var/ready = TRUE
 	var/cooldown = 200
 
+	/* //R505 Edit
 	//SKYRAT EDIT ADDITION BEGIN
 	power_use_amount = POWER_CELL_USE_VERY_LOW
+
 
 /obj/item/sequence_scanner/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/cell)
 	//SKYRAT EDIT END
-
+*/ //R505 Edit - End
 /obj/item/sequence_scanner/attack(mob/living/M, mob/living/carbon/human/user)
 	add_fingerprint(user)
 	if (!HAS_TRAIT(M, TRAIT_GENELESS) && !HAS_TRAIT(M, TRAIT_BADDNA)) //no scanning if its a husk or DNA-less Species
+		/* //R505 Edit
 		//SKYRAT EDIT ADDITION
 		if(!(item_use_power(power_use_amount, user) & COMPONENT_POWER_SUCCESS))
 			return
 		//SKYRAT EDIT END
+		*/ //R505 Edit - End
 		user.visible_message(span_notice("[user] analyzes [M]'s genetic sequence."), \
 							span_notice("You analyze [M]'s genetic sequence."))
 		gene_scan(M, user)
