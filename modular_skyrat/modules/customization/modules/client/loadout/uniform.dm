@@ -542,7 +542,7 @@
 	subcategory = LOADOUT_SUBCATEGORY_UNIFORM_SWEATERS
 
 /datum/loadout_item/uniform/sweater/turtleneck
-	name = "Tactitool Turtleneck"
+	name = "Tacticool Turtleneck" //R505 Edit - learn to spell
 	path = /obj/item/clothing/under/syndicate/tacticool/sensors
 
 /datum/loadout_item/uniform/sweater/tactical1
@@ -554,7 +554,7 @@
 	path = /obj/item/clothing/under/uvf
 
 /datum/loadout_item/uniform/sweater/turtleneck/skirt
-	name = "Tactitool Skirtleneck"
+	name = "Tacticool Skirtleneck" //R505 Edit - learn to spell
 	path = /obj/item/clothing/under/syndicate/tacticool/skirt/sensors
 
 /datum/loadout_item/uniform/sweater/creamsweater

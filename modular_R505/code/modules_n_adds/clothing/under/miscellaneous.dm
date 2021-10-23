@@ -6,6 +6,8 @@
 	can_adjust = FALSE
 	armor = list(MELEE = 10, LASER = 10, FIRE = 40, ACID = 10, BOMB = 5)
 	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/suit/cygvest
 	name = "marauder vest"
