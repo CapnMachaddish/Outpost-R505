@@ -1,6 +1,6 @@
 /obj/item/flashlight
 	/// Does this flashlight utilize batteries?
-	var/uses_battery = TRUE
+	var/uses_battery = FALSE
 	/// Does this flashlight have a cell override?
 	var/cell_override
 	/// How much power(per process) does this flashlight use? If any.
