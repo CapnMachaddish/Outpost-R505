@@ -2,7 +2,10 @@
 ///////////////////////////////////////////////////////////////////////SHOES
 ///////////////////////////////////////////////////////////////////////UNIFORMS
 
-/obj/item/clothing/under/rank/civilian/chef/skirt
+//This is Vladin speaking. VladinXXV, of Github and Discord. Vladin Heir of spess. I am here to tell you the following: go fuck yourself.
+//(R505 Edit, this stuff sucks. Except the RD labcoat.)
+
+/*/obj/item/clothing/under/rank/civilian/chef/skirt
 	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/uniform.dmi'
 	icon = 'modular_skyrat/master_files/icons/obj/clothing/uniforms.dmi'
 
@@ -134,7 +137,7 @@
 	worn_icon = 'modular_skyrat/modules/aesthetics/clothing/head.dmi'
 
 /obj/item/clothing/head/bio_hood/virology
-	worn_icon = 'modular_skyrat/modules/aesthetics/clothing/head.dmi'
+	worn_icon = 'modular_skyrat/modules/aesthetics/clothing/head.dmi'*/
 
 /obj/item/clothing/suit/toggle/labcoat/rd
 	name = "research directors labcoat"
@@ -147,6 +150,7 @@
 	mutant_variants = NONE
 
 ///////////////////////////////////////////////////////////////////////TURTLENECKS
-/obj/item/clothing/under/syndicate
-	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/uniform.dmi'
-	icon = 'modular_skyrat/master_files/icons/obj/clothing/uniforms.dmi'
+//obj/item/clothing/under/syndicate/interdyne
+	//worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/uniform.dmi'
+	//icon = 'modular_skyrat/master_files/icons/obj/clothing/uniforms.dmi'
+//R505 Edit - these will become their own item.

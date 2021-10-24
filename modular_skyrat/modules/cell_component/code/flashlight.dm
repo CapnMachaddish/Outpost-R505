@@ -1,6 +1,6 @@
 /obj/item/flashlight
 	/// Does this flashlight utilize batteries?
-	var/uses_battery = TRUE
+	var/uses_battery = FALSE //R505 Edit - originally true
 	/// Does this flashlight have a cell override?
 	var/cell_override
 	/// How much power(per process) does this flashlight use? If any.
@@ -8,7 +8,7 @@
 	/// Flashlight mode, 0 = low, 1 = med, 2 = high
 	var/flashlight_mode = 0
 	///Does this flashlight have modes?
-	var/has_modes = TRUE
+	var/has_modes = FALSE //R505 Edit - originally true
 
 /obj/item/flashlight/Initialize()
 	. = ..()
@@ -93,7 +93,7 @@
 		icon_state = "[initial(icon_state)]-on"
 	else
 		icon_state = initial(icon_state)
-
+/* //R505 Edit
 /obj/item/flashlight/seclite
 	cell_override = /obj/item/stock_parts/cell/upgraded
 
@@ -122,3 +122,4 @@
 /obj/item/flashlight/pen
 	cell_override = /obj/item/stock_parts/cell/potato
 	has_modes = FALSE
+*/ //R505 Edit - End+

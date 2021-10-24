@@ -1,6 +1,7 @@
 /obj/item/clothing/under/misc
 	icon = 'icons/obj/clothing/under/misc.dmi'
 	worn_icon = 'icons/mob/clothing/under/misc.dmi'
+	dying_key = DYE_REGISTRY_UNDER //R505 Edit - gives under/misc the dye registry for under
 
 /obj/item/clothing/under/misc/pj
 	name = "\improper PJs"
