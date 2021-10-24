@@ -31,9 +31,9 @@
 #define AROUSAL_CLIMAX		30	//When you can begin to do some lewd actions like coom
 #define AROUSAL		"arousal"
 
-#define AROUSED_MESSAGE_CHANCE	2	//The chance per tick the mob will make a random message when fully erect
-#define AROUSED_MESSAGES list("You feel frisky...", "Try and hold back your urges...", "You find it difficult to hide your urges...")
-#define AROUSED_MAX_MESSAGE_LENGTH	128
+#define AROUSED_MESSAGE_CHANCE	5	//The chance per tick the mob will make a random message when fully erect
+#define AROUSED_MESSAGES list("You feel a bit hot.", "You feel strong sexual urges.", "You feel in the mood.", "You're ready to go down on someone.")
+#define AROUSED_MAX_MESSAGE_LENGTH	128	//todo
 
 #define MINIMUM_CLIMAX_DECAL_VOLUME		3
 

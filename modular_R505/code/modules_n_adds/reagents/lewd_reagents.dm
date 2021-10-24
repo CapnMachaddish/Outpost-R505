@@ -102,15 +102,15 @@
 	taste_description = "strawberries"
 	color = "#FFADFF"
 
-/datum/reagent/drug/crocin/on_mob_life(mob/living/carbon/M)
-	if(M.client && (M.client.prefs.skyrat_toggles & APHRO_PREF))
-		if((prob(min(current_cycle/2,5))))
-			M.emote(pick("moan","blush"))
-		if(prob(min(current_cycle/4,10)))
-			var/aroused_message = pick("You feel frisky.", "You're having trouble suppressing your urges.", "You feel in the mood.")
-			to_chat(M, span_notice("[aroused_message]"))
-		M.GetComponent(/datum/component/arousal)?.adjustArousalLoss(1)
+/datum/reagent/drug/crocin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	..()
+	if(M.client && (M.client.prefs.r_preferences & R_PREF_LEWDCHEM))
+		var/datum/component/arousal/arousal = M.GetComponent(/datum/component/arousal)
+		if(DT_PROB(min(current_cycle/2,5), delta_time))
+			M.emote(pick("moan","blush"))
+		if(DT_PROB(min(current_cycle/4,10), delta_time))
+			to_chat(M, span_notice("[pick(arousal.arousal_messages)]"))
+		arousal.adjustArousalLoss(1)
 
 /datum/reagent/drug/hexacrocin
 	name = "Hexacrocin"
@@ -120,22 +120,23 @@
 	color = "#FF2BFF"//dark pink
 	overdose_threshold = 28 //Heavy consequences. Supposed to be big value.
 
-/datum/reagent/drug/hexacrocin/on_mob_life(mob/living/carbon/M)
-	if(M.client && (M.client.prefs.skyrat_toggles & APHRO_PREF))
-		if(prob(5))
+/datum/reagent/drug/hexacrocin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	..()
+	if(M.client && (M.client.prefs.r_preferences & R_PREF_LEWDCHEM))
+		var/datum/component/arousal/arousal = M.GetComponent(/datum/component/arousal)
+		if(DT_PROB(5, delta_time))
 			if(prob(current_cycle))
 				M.say(pick("Hnnnnngghh...", "Ohh...", "Mmnnn...","Ghhmph..."))
 			else
 				M.emote(pick("moan","blush"))
-		if(prob(5))
+		if(DT_PROB(arousal.aroused_messages_chance, delta_time))
 			var/aroused_message
 			if(current_cycle>25)
 				aroused_message = pick("You need to fuck someone!", "You're bursting with sexual tension!", "You can't get sex off your mind!")
 			else
-				aroused_message = pick("You feel a bit hot.", "You feel strong sexual urges.", "You feel in the mood.", "You're ready to go down on someone.")
+				aroused_message = pick(AROUSED_MESSAGES)
 			to_chat(M, span_purple("[aroused_message]"))
-		M.GetComponent(/datum/component/arousal)?.adjustArousalLoss(2)
-	..()
+		arousal.adjustArousalLoss(2)
 
 /datum/reagent/drug/hexacrocin/overdose_process(mob/living/carbon/M)
 	if(M.client && (M.client.prefs.r_preferences & R_PREF_LEWDCHEM))
@@ -143,14 +144,10 @@
 			to_chat(M, span_purple("Your libido is going haywire!..."))
 			M.gain_trauma(/datum/brain_trauma/special/bimbo, TRAUMA_RESILIENCE_BASIC) //what am i doing with my life.
 			ADD_TRAIT(M, TRAIT_BIMBO, LEWDCHEM_TRAIT)
-	..()
 
 ////////////////////
 ///ANAPHRODISIACS///
 ////////////////////
-
-//Camphor. Used to reduce libido.
-
 /datum/reagent/drug/camphor
 	name = "Camphor"
 	description = "Naturally found in some species of evergreen trees, camphor is a waxy substance. When ingested by most animals, it acts as an anaphrodisiac\
@@ -161,9 +158,9 @@
 	reagent_state = SOLID
 
 /datum/reagent/drug/camphor/on_mob_life(mob/living/carbon/M)
-	if(M.client && (M.client.prefs.skyrat_toggles & APHRO_PREF))
-		M.GetComponent(/datum/component/arousal)?.adjustArousalLoss(-12)
 	..()
+	if(M.client && (M.client.prefs.r_preferences & R_PREF_LEWDCHEM))
+		M.GetComponent(/datum/component/arousal)?.adjustArousalLoss(-12)
 
 /datum/reagent/drug/pentacamphor
 	name = "Pentacamphor"
@@ -174,30 +171,27 @@
 	overdose_threshold = 20
 
 /datum/reagent/drug/pentacamphor/on_mob_life(mob/living/carbon/human/M)
-	if(M.client && (M.client.prefs.skyrat_toggles & APHRO_PREF))
+	..()
+	if(M.client && (M.client.prefs.r_preferences & R_PREF_LEWDCHEM))
 		M.GetComponent(/datum/component/arousal)?.adjustArousalLoss(-18)
 
-		if(M.reagents.has_reagent(/datum/reagent/drug/crocin))
-			M.reagents.remove_reagent(/datum/reagent/drug/crocin, 20)
-		if(M.reagents.has_reagent(/datum/reagent/drug/hexacrocin))
-			M.reagents.remove_reagent(/datum/reagent/drug/hexacrocin, 20)
-	..()
+		M.reagents.remove_reagent(/datum/reagent/drug/crocin, 20)
+		M.reagents.remove_reagent(/datum/reagent/drug/hexacrocin, 20)
 
-/datum/reagent/drug/pentacamphor/overdose_process(mob/living/carbon/human/M)
-	if(M.client && (M.client.prefs.skyrat_toggles & APHRO_PREF))
+/datum/reagent/drug/pentacamphor/overdose_process(mob/living/carbon/human/M, delta_time, times_fired)
+	if(M.client && (M.client.prefs.r_preferences & R_PREF_LEWDCHEM))
 		if(!HAS_TRAIT(M, TRAIT_BIMBO) && !HAS_TRAIT(M, TRAIT_NEVERBONER))
 			to_chat(M, span_notice("You feel like you'll never feel aroused again...")) //Go to horny jail *bonk*
 			ADD_TRAIT(M,TRAIT_NEVERBONER, LEWDCHEM_TRAIT)
 
 		if(HAS_TRAIT(M, TRAIT_BIMBO))
-			if(prob(30))
+			if(DT_PROB(30, delta_time))
 				M.cure_trauma_type(/datum/brain_trauma/special/bimbo, TRAUMA_RESILIENCE_BASIC)
 				to_chat(M, span_notice("Your mind is free from purple liquid substance. Your thoughts are pure and innocent again."))
 				REMOVE_TRAIT(M, TRAIT_BIMBO, LEWDCHEM_TRAIT)
-	..()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//										BREAST ENLARGE											  //
+//										ENLARGE CHEMS											  //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /datum/reagent/breast_enlarger
 	name = "Succubus milk"
@@ -205,7 +199,7 @@
 	color = "#E60584" // rgb: 96, 0, 255
 	taste_description = "ice cream"
 	overdose_threshold = 17
-	metabolization_rate = REAGENTS_METABOLISM * 0.5
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/breast_enlarger/on_mob_metabolize(mob/living/M)
 	. = ..()
@@ -234,11 +228,12 @@
 
 	if(!B)
 		B = new(H)
-		B.build_from_dna(H.dna, "breasts")
+		B.build_from_dna(H.dna, "breasts", TRUE)
+		B.genital_size = 1
 		B.Insert(H)
+		B.update_genital_icon_state()
 
-	B.genital_size += 0.1 * purity
-	B.update_sprite_suffix()
+	B.set_size(B.genital_size + (0.07 * purity))
 	H.update_body()
 
 /datum/reagent/breast_enlarger/overdose_process(mob/living/carbon/human/H)
@@ -251,15 +246,15 @@
 	var/obj/item/organ/genital/testicles/T = H.getorganslot(ORGAN_SLOT_TESTICLES)
 
 	if(P)
-		P.genital_size -= 0.05 / purity
+		P.set_size(P.genital_size - (0.2 / purity))
 		if(P.genital_size < 2)
 			P.Remove(H)
 			qdel(P)
 			if(prob(1) && prob(20))	//i gotta
 				to_chat(H, span_warning("Your penis turns into a penwas!"))
 	if(T)
-		T.genital_size -= 0.05 / purity
-		if(T.genital_size < 2)
+		P.set_size(T.genital_size - (0.2 / purity))
+		if(T.genital_size < 1)
 			T.Remove(H)
 			qdel(T)
 		
@@ -268,7 +263,8 @@
 		H.body_type = FEMALE
 		H.update_body()
 		H.update_mutations_overlay()
-		to_chat(H, span_warning("You feel a newfound sensitivity on your chest that you never felt before."))
+		if(!H.reagents.has_reagent(/datum/reagent/penis_enlarger))	//Spam prevention
+			to_chat(H, span_warning("You feel a newfound sensitivity on your chest that you never felt before."))
 		return
 	H.update_body()
 
@@ -278,7 +274,7 @@
 	color = "#c49898" //pinkish/greyish
 	taste_description = "chinese dragon powder"
 	overdose_threshold = 17 //ODing makes you male and removes female genitals
-	metabolization_rate = REAGENTS_METABOLISM * 0.5
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/penis_enlarger/on_mob_metabolize(mob/living/M)
 	. = ..()
@@ -307,13 +303,14 @@
 
 	if(!P)
 		P = new(H)
-		P.build_from_dna(H.dna, "penis")
+		P.build_from_dna(H.dna, "penis", TRUE)
+		P.genital_size = 1
 		P.Insert(H)
+		P.update_genital_icon_state()
 	
-	var/increase = 0.1 * purity
-	P.genital_size += increase
+	var/increase = 0.7 * purity
 	P.girth += increase * 0.3
-	P.update_sprite_suffix()
+	P.set_size(P.genital_size + increase)
 	H.update_body()
 
 /datum/reagent/penis_enlarger/overdose_process(mob/living/carbon/human/H) //Turns you into a male if female and ODing, doesn't touch nonbinary and object genders.
@@ -325,7 +322,7 @@
 	var/obj/item/organ/genital/breasts/B = H.getorganslot(ORGAN_SLOT_BREASTS)
 
 	if(B)
-		B.genital_size -= 0.05 / purity
+		B.genital_size -= 0.2 / purity
 		if(B.genital_size < 2)
 			B.Remove(H)
 			qdel(B)
@@ -344,25 +341,26 @@
 			qdel(W)
 		if(!T)	//Only give 'em a new pair if they didn't have any before
 			T = new(H)
-			T.build_from_dna(H.dna, "testicles")
-			T.set_size(1)
+			T.build_from_dna(H.dna, "testicles", TRUE)
+			T.set_size(1.3)
 			T.Insert(H)
 
 		H.set_gender(MALE)
 		H.body_type = MALE
 		H.update_body()
 		H.update_mutations_overlay()
-		to_chat(H, span_warning("You feel a newfound sensitivity on your groin that you never felt before."))
+		if(!H.reagents.has_reagent(/datum/reagent/breast_enlarger))	//Spam prevention
+			to_chat(H, span_warning("You feel a newfound sensitivity on your groin that you never felt before."))
 		return
 	H.update_body()
 
 /datum/reagent/testicle_enlarger
 	name = "Incubus Expedite"
-	description = "Changeme"
+	description = "A volatile collodial mixture derived from zinc that encourages a larger coin pouch via a potent mix."
 	color = "#c7f7ef"	//light blue
 	taste_description = "shellfish"
 	overdose_threshold = 17 //ODing makes you hungry as hell
-	metabolization_rate = REAGENTS_METABOLISM * 0.5
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/testicle_enlarger/on_mob_life(mob/living/carbon/human/H)
 	..()
@@ -375,11 +373,11 @@
 
 	if(!T)
 		T = new(H)
-		T.build_from_dna(H.dna, "testicles")
+		T.build_from_dna(H.dna, "testicles", TRUE)
 		T.Insert(H)
+		T.update_genital_icon_state()
 
-	T.genital_size += 0.025 * purity
-	T.update_sprite_suffix()
+	T.set_size(T.genital_size + (0.008 * purity))	//Takes about 30 units to increase one size (in one "gulp"), it should stay like this
 	H.update_body()
 
 /datum/reagent/testicle_enlarger/overdose_process(mob/living/carbon/human/H, delta_time, times_fired)
@@ -393,7 +391,7 @@
 	if(H.nutrition <= NUTRITION_LEVEL_STARVING)
 		H.adjustToxLoss((times_fired / T.genital_size) * REM * delta_time, 0)
 	H.adjust_nutrition((T.genital_size*-0.5) * REM * delta_time)
-	T.genital_size += 0.015	//If you really wanna get huge
+	T.genital_size += 0.032	//If you really wanna get huge
 
 /datum/reagent/production_enhancer
 	name = "Production Enhancer"
@@ -406,7 +404,7 @@
 
 /datum/reagent/production_enhancer/on_mob_add(mob/living/L, amount)
 	..()
-	//sleep(10)	//Oops! All errors!
+	//sleep(10)	//Oops! All errors! Add this if possible
 	L.emote("gag")
 
 	if(!(L.client?.prefs.r_preferences & R_PREF_LEWDCHEM))
@@ -437,7 +435,7 @@
 				to_chat(C, span_warning("You feel cold."))
 			C.reagents.add_reagent(/datum/reagent/exotic_damage/type_4, metabolization_rate)
 		if(SPECIES_SKELETON)
-			if(current_cycle > 10)
+			if(current_cycle == 2)
 				C.emote("scream")	//meme because why would a skeleton drink this
 				C.reagents.del_reagent(type)
 		else
@@ -461,7 +459,7 @@
 
 /obj/item/reagent_containers/glass/bottle/dopamine //this one is hard to obtain.
 	name = "dopamine bottle"
-	desc = "Pure pleasure and happines in a bottle."
+	desc = "Pleasure and happines, in its purest form."
 	list_reagents = list(/datum/reagent/drug/dopamine = 30)
 
 /obj/item/reagent_containers/glass/bottle/camphor

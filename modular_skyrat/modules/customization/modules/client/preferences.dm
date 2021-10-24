@@ -71,6 +71,7 @@ GLOBAL_LIST_INIT(food, list(
 	var/db_flags
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
 	var/skyrat_toggles = TOGGLES_DEFAULT_SKYRAT
+	var/r_preferences = R_PREF_AROUSAL|R_PREF_LEWDCHEM
 	var/ghost_form = "ghost"
 	var/ghost_orbit = GHOST_ORBIT_CIRCLE
 	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION
@@ -81,10 +82,6 @@ GLOBAL_LIST_INIT(food, list(
 	var/preferred_map = null
 	var/pda_style = MONO
 	var/pda_color = "#808000"
-
-	//aphrodisiac preference
-	var/aphrodisiacs_pref = 1
-	var/cumfaced_pref = 0
 
 	var/uses_glasses_colour = 0
 
@@ -254,8 +251,6 @@ GLOBAL_LIST_INIT(food, list(
 	var/faction_more_info = FALSE
 	//Associative list, keyed by language typepath, pointing to LANGUAGE_UNDERSTOOD, or LANGUAGE_SPOKEN, for whether we understand or speak the language
 	var/list/languages = list()
-
-	var/r_preferences = R_PREF_AROUSAL //R505 Edit
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -2929,10 +2924,6 @@ GLOBAL_LIST_INIT(food, list(
 
 				if("allow_midround_antag")
 					toggles ^= MIDROUND_ANTAG
-
-				//aphro pref
-				if("aphrodisiacs_pref")
-					skyrat_toggles ^= APHRO_PREF
 
 				//
 				//R505 PREFERENCES

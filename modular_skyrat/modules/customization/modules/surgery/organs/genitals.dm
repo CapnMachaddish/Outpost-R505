@@ -42,9 +42,15 @@
 	. = ..()
 	update_genital_icon_state()
 
-/obj/item/organ/genital/build_from_dna(datum/dna/DNA, associated_key)
+/obj/item/organ/genital/build_from_dna(datum/dna/DNA, associated_key, is_new)
 	..()
 	var/datum/sprite_accessory/genital/SA = GLOB.sprite_accessories[associated_key][DNA.mutant_bodyparts[associated_key][MUTANT_INDEX_NAME]]
+	if(!SA.factual && is_new)	//Attempt to get a random genital because we're trying to add one without the proper DNA
+		var/attempt = find_random_genital_accessory(associated_key)
+		if(attempt)	//If we got an accessory then we don't care about anything else
+			SA = new attempt	//I'm also realizing how fucking hacky/snowflakey all this stuff is
+			mutantpart_info[MUTANT_INDEX_NAME] = SA.name
+			DNA.mutant_bodyparts[associated_key] = DNA.species.mutant_bodyparts[associated_key] = mutantpart_info.Copy()
 	genital_name = SA.name
 	genital_type = SA.icon_state
 	if(DNA.features["uses_skintones"])
@@ -266,7 +272,7 @@
 		passed_string += "-s"
 	return passed_string
 
-/obj/item/organ/genital/breasts/build_from_dna(datum/dna/DNA, associated_key)
+/obj/item/organ/genital/breasts/build_from_dna(datum/dna/DNA, associated_key, is_new)
 	..()
 	lactates = DNA.features["breasts_lactation"]
 	set_size(DNA.features["breasts_size"])

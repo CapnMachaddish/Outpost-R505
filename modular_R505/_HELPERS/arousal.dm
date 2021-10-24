@@ -14,6 +14,18 @@
 /datum/component/arousal/proc/can_use_activity()
 	return world.time > mb_cooldown + cooldown_for_mb
 
+/proc/find_random_genital_accessory(key)	//I never want to work with genitals and their sprite accessories ever again
+	switch(key)
+		if("breasts")
+			return /datum/sprite_accessory/genital/breasts/pair
+		if("penis")
+			return pick(/datum/sprite_accessory/genital/penis/human,
+						/datum/sprite_accessory/genital/penis/knotted,
+						/datum/sprite_accessory/genital/penis/flared,
+						/datum/sprite_accessory/genital/penis/thick)
+		if("testicles")
+			return /datum/sprite_accessory/genital/testicles/pair
+
 /proc/is_chest_exposed(mob/M)
 	if(!ismob(M))
 		return FALSE

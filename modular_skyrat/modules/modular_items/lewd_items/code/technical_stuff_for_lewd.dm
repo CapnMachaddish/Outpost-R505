@@ -495,16 +495,11 @@
 ///////////////////////////////////////////////////////////////
 
 /mob/living/proc/set_gender(ngender = NEUTER, silent = FALSE, update_icon = TRUE, forced = FALSE)
-	if(forced || !ckey)
-		gender = ngender
-		return TRUE
-	return FALSE
+	gender = ngender
 
 /mob/living/carbon/set_gender(ngender = NEUTER, silent = FALSE, update_icon = TRUE, forced = FALSE)
 	var/bender = !(gender == ngender)
-	. = ..()
-	if(!.)
-		return
+	..()
 	if(dna && bender)
 		if(ngender == MALE || ngender == FEMALE)
 			dna.features["body_model"] = ngender
