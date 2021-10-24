@@ -39,6 +39,17 @@
 /datum/chemical_reaction/breast_enlarger
 	results = list(/datum/reagent/breast_enlarger = 8)
 	required_reagents = list(/datum/reagent/medicine/salglu_solution = 1, /datum/reagent/consumable/milk = 1, /datum/reagent/medicine/c2/synthflesh = 2, /datum/reagent/silicon = 3, /datum/reagent/drug/crocin = 3)
+	required_temp = 200
+	optimal_temp = 800
+	overheat_temp = 900
+	optimal_ph_min = 6
+	optimal_ph_max = 10
+	determin_ph_range = 3
+	ph_exponent_factor = 1
+	thermic_constant = 1
+	H_ion_release = -0.1
+	rate_up_lim = 5
+	purity_min = 0.1
 	mix_message = "the reaction gives off a white mist."
 	reaction_tags = REACTION_TAG_OTHER
 	pollutant_type = /datum/pollutant/breast_enlarger
@@ -47,6 +58,16 @@
 /datum/chemical_reaction/penis_enlarger
 	results = list(/datum/reagent/penis_enlarger = 8)
 	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/medicine/c2/synthflesh = 2, /datum/reagent/carbon = 2, /datum/reagent/drug/crocin = 2, /datum/reagent/medicine/salglu_solution = 1)
+	required_temp = 200
+	optimal_temp = 800
+	overheat_temp = 900
+	optimal_ph_min = 2
+	optimal_ph_max = 6
+	determin_ph_range = 3
+	thermic_constant = 1
+	H_ion_release = 0.1
+	rate_up_lim = 5
+	purity_min = 0.1
 	mix_message = "the reaction gives off a spicy scent."
 	reaction_tags = REACTION_TAG_OTHER
 	pollutant_type = /datum/pollutant/penis_enlarger

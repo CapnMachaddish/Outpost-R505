@@ -13,9 +13,9 @@
 
 /datum/pollutant/toxic/sulfur
 	name = "Sulfur"
-	reagent_breathing = /datum/reagent/sulfur
 	color = "#BF8C00"
 	scent = "rotten eggs"
+	reagent_breathing = /datum/reagent/sulfur
 
 /datum/pollutant/toxic/sulfur/BreatheAct(mob/living/carbon/victim, amount)
 	..()
