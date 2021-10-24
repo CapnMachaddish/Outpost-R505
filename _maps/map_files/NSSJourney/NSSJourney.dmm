@@ -8356,6 +8356,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 9
 	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/iron,
 /area/service/hydroponics)
 "aJC" = (
@@ -37021,7 +37022,7 @@
 "dCG" = (
 /obj/item/bedsheet/purple,
 /obj/structure/bed,
-/obj/effect/decal/cleanable/cum,
+/obj/effect/decal/cleanable/ejaculate/semen,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
@@ -38385,7 +38386,6 @@
 /obj/structure/sign/poster/official/no_erp{
 	pixel_y = 32
 	},
-/obj/structure/reagent_dispensers/keg/cum,
 /obj/item/clothing/under/syndicate/tacticool{
 	pixel_y = 5
 	},
