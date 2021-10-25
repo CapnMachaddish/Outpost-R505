@@ -654,12 +654,13 @@ This is here to make the tiles around the station mininuke change when it's arme
 	if(!fake)
 		SSpoints_of_interest.make_point_of_interest(src)
 		last_disk_move = world.time
-		START_PROCESSING(SSobj, src)
+		//START_PROCESSING(SSobj, src) //R505 Edit
 
 /obj/item/disk/nuclear/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/stationloving, !fake)
 
+/* //R505 Edit - Temporary Edit, Haddish Approved; will remain until we figure out what the fuck to do with diskie.
 /obj/item/disk/nuclear/process()
 	if(fake)
 		STOP_PROCESSING(SSobj, src)
@@ -694,6 +695,7 @@ This is here to make the tiles around the station mininuke change when it's arme
 			if(loneop.weight % 5 == 0 && SSticker.totalPlayers > 1)
 				message_admins("[src] is on the move (currently in [ADMIN_VERBOSEJMP(newturf)]). The weight of Lone Operative is now [loneop.weight].")
 			log_game("[src] being on the move has reduced the weight of the Lone Operative event to [loneop.weight].")
+*/ //R505 Edit - End
 
 /obj/item/disk/nuclear/examine(mob/user)
 	. = ..()
