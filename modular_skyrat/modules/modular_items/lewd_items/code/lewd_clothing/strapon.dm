@@ -203,7 +203,7 @@
 	var/message = ""
 	var/obj/item/organ/genital/vagina = M.getorganslot(ORGAN_SLOT_VAGINA)
 	if(M.client?.prefs.sextoys_pref == "Yes")
-		var/datum/component/arousal/arousal = M.GetComponent(/datum/component/arousal)
+		AROUSAL_VAR(arousal, M)
 		switch(user.zone_selected) //to let code know what part of body we gonna fuck
 			if(BODY_ZONE_PRECISE_GROIN)
 				if(vagina)

@@ -91,7 +91,7 @@
 		return FALSE
 	if(!lactates)
 		return FALSE
-	var/datum/component/arousal/A = owner.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(A, owner)
 	if(A)
 		if(A.get_arousal_level() >= AROUSAL_PARTIAL)
 			return TRUE

@@ -1201,8 +1201,8 @@ GLOBAL_LIST_INIT(food, list(
 
 			//R505 CHANGE - Arousal
 			dat += "<b>Toggle Arousal:</b> <a href='?_src_=prefs;preference=toggle_arousal'>[r_preferences & R_PREF_AROUSAL ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Lewd Chemistry:</b> <a href='?_src_=prefs;preference=toggle_lewd_chem_effects'>[r_preferences & R_PREF_LEWDCHEM ? "Enabled":"Disabled"]</a><br>"
 			dat += "<b>Exhibitionist Preference:</b> <a href='?_src_=prefs;preference=toggle_exhibition'>[r_preferences & R_PREF_EXHIBITIONIST ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Lewd Chemistry:</b> <a href='?_src_=prefs;preference=toggle_lewd_chem_effects'>[r_preferences & R_PREF_LEWDCHEM ? "":""]</a><br>"
 			dat += "<br>"
 
 			if(user.client)

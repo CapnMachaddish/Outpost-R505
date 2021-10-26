@@ -77,7 +77,7 @@
 
 /obj/item/clothing/sextoy/dildo/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(partner, M)
 	if(!partner)
 		return
 
@@ -275,7 +275,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 
 /obj/item/clothing/sextoy/custom_dildo/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(partner, M)
 	if(!partner)
 		return
 
@@ -509,7 +509,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 
 /obj/item/clothing/sextoy/double_dildo/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(partner, M)
 	if(!partner)
 		return
 
@@ -595,7 +595,7 @@ GLOBAL_LIST_INIT(dildo_colors, list(//mostly neon colors
 
 /obj/item/clothing/sextoy/dildo_side/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(partner, M)
 	if(!partner)
 		return
 

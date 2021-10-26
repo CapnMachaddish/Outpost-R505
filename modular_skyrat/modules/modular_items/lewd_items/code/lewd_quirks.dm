@@ -248,7 +248,7 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	else
 		viewing = FALSE
 	if(viewing)
-		var/datum/component/arousal/a = H.GetComponent(/datum/component/arousal)
+		AROUSAL_VAR(a, H)
 		a?.adjustArousalLoss(3) //Nymph looking at their target and get aroused. Everything logical.
 
 /datum/brain_trauma/special/sexual_obsession/proc/stare(datum/source, mob/living/examining_mob, triggering_examiner)
@@ -303,7 +303,7 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	if(satisfaction > 1)
 		satisfaction -=1
 
-	var/datum/component/arousal/a = H.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(a, H)
 	a?.adjustArousalLoss(10)
 
 	if(satisfaction <= 0)
@@ -488,7 +488,7 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 /datum/brain_trauma/special/sadism/on_life(delta_time, times_fired)
 	var/mob/living/carbon/human/H = owner
 	if(someone_suffering() && H.client?.prefs.erp_pref == "Yes")
-		var/datum/component/arousal/a = H.GetComponent(/datum/component/arousal)
+		AROUSAL_VAR(a, H)
 		a?.adjustArousalLoss(2)
 		SEND_SIGNAL(owner, COMSIG_ADD_MOOD_EVENT, "sadistic", /datum/mood_event/sadistic)
 	else
@@ -519,7 +519,7 @@ But i keeped it as unobtainable breain trauma, so admins can add it through VV *
 	if(stat != DEAD && !HAS_TRAIT(src, TRAIT_FAKEDEATH) && src != U)
 		if(src != user)
 			if(HAS_TRAIT(U, TRAIT_EMPATH))
-				var/datum/component/arousal/a = src.GetComponent(/datum/component/arousal)
+				AROUSAL_VAR(a, src)
 				switch(a.arousalloss)
 					if(11 to 21)
 						. += span_purple("[p_they()] [p_are()] excited.") + "\n"

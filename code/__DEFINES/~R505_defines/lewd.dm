@@ -48,3 +48,6 @@
 #define LEWDCHEM_TRAIT		"lewdchem"			///traits gained by chemicals, you get the idea
 
 #define STRAPON_TRAIT 		"strapon"
+
+//This is just for less typing, haddish
+#define AROUSAL_VAR(varname, from)	var/datum/component/arousal/##varname = from.GetComponent(/datum/component/arousal)

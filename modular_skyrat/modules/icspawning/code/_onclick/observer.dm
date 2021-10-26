@@ -57,6 +57,9 @@
 			user.mind.transfer_to(spawned_player, 1) // second argument to force key move to new mob
 		else
 			spawned_player.ckey = user.key
+		
+		if((spawned_player.client?.prefs.r_preferences & R_PREF_AROUSAL))	//R505 edit
+			spawned_player.AddComponent(/datum/component/arousal)
 
 		if(give_return != "No")
 			spawned_player.mind.AddSpell(new /obj/effect/proc_holder/spell/self/return_back, FALSE)

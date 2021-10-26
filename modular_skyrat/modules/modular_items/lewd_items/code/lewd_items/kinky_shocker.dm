@@ -99,7 +99,7 @@
 
 /obj/item/kinky_shocker/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	var/datum/component/arousal/partner = M.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(partner, M)
 	if(!partner)
 		return
 
