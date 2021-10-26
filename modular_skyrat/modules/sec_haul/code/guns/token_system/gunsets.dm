@@ -62,9 +62,9 @@
 /obj/item/storage/box/gunset/glock17/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/g17/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/g17(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/g17(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/g17(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/g17/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/g17/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/g17/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/g17(src)
 
 //LADON
@@ -77,9 +77,9 @@
 /obj/item/storage/box/gunset/ladon/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/ladon/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/ladon(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/ladon(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/ladon(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/ladon/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/ladon/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/ladon/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/ladon(src)
 
 //DOZER
@@ -92,8 +92,9 @@
 /obj/item/storage/box/gunset/dozer/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/dozer/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/dozer(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/dozer(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/dozer/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/dozer/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/dozer/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/dozer(src)
 
 //PDH
@@ -107,9 +108,9 @@
 /obj/item/storage/box/gunset/pdh_peacekeeper/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/pdh/peacekeeper/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pdh_peacekeeper(src)
 
 // MK-58
@@ -122,9 +123,9 @@
 /obj/item/storage/box/gunset/mk58/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/mk58/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/mk58(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/mk58(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/mk58(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/mk58/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/mk58/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/mk58/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/mk58(src)
 
 //CROON
@@ -138,25 +139,27 @@
 /obj/item/storage/box/gunset/croon/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/croon/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/croon(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/croon(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/croon(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/croon/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/croon/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/croon/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/croon(src)
 
 //MAKAROV
 /obj/item/storage/box/gunset/makarov
 	name = "makarov supply box"
 
+/obj/item/gun/ballistic/automatic/pistol/makarov/nomag //R505 Edit
+	spawnwithmagazine = FALSE
 
 /obj/item/ammo_box/magazine/multi_sprite/makarov/empty
 	start_empty = TRUE
 
 /obj/item/storage/box/gunset/makarov/PopulateContents()
 	. = ..()
-	new /obj/item/gun/ballistic/automatic/pistol/makarov(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/makarov(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/makarov(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/makarov(src)
+	new /obj/item/gun/ballistic/automatic/pistol/makarov/nomag(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/makarov/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/makarov/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/makarov/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/makarov(src)
 
 //ZETA
@@ -199,9 +202,9 @@
 /obj/item/storage/box/gunset/pcr/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pcr/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pcr(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pcr(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pcr(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pcr/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/pcr/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pcr/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pcr(src)
 
 ////M112
@@ -216,9 +219,9 @@
 /obj/item/storage/box/gunset/norwind/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/norwind/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/norwind(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/norwind(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/norwind(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/norwind/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/norwind/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/norwind/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/norwind(src)
 
 //////DTR-6
@@ -233,9 +236,9 @@
 /obj/item/storage/box/gunset/ostwind/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/ostwind/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/ostwind(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/ostwind(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/ostwind(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/ostwind/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/ostwind/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/ostwind/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/ostwind(src)
 
 ////////PITBULL
@@ -250,9 +253,9 @@
 /obj/item/storage/box/gunset/pitbull/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pitbull/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pitbull(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pitbull(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pitbull(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pitbull/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/pitbull/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pitbull/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pitbull(src)
 
 /////////////////
@@ -270,9 +273,9 @@
 /obj/item/storage/box/gunset/pdh_captain/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/pdh/alt/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
 
 //HOS
@@ -286,9 +289,9 @@
 /obj/item/storage/box/gunset/glock18_hos/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/g18/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/g18(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/g18(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/g18(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/g18/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/g18/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/g18/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/g18(src)
 
 //HOP
@@ -301,9 +304,9 @@
 /obj/item/storage/box/gunset/pdh_hop/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/pdh/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pdh(src)
 
 //CORPO
@@ -347,9 +350,9 @@
 /obj/item/storage/box/gunset/security_medic/PopulateContents()
 	. = ..()
 	new /obj/item/gun/ballistic/automatic/pistol/firefly/nomag(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/firefly(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/firefly(src)
-	new /obj/item/ammo_box/magazine/multi_sprite/firefly(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/firefly/rubber(src) //R505 Edit - rubbers
+	new /obj/item/ammo_box/magazine/multi_sprite/firefly/rubber(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/firefly/rubber(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/firefly(src)
 
 //LASER
