@@ -4,7 +4,7 @@
 	see_in_dark = 4
 	mob_biotypes = MOB_ORGANIC
 	gold_core_spawnable = NO_SPAWN
-	icon = 'hrzn/modules/mold/icons/blob_mobs.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/blob_mobs.dmi'
 	vision_range = 5
 	aggro_vision_range = 8
 	move_to_delay = 6
@@ -12,7 +12,7 @@
 
 /mob/living/simple_animal/hostile/mold/oil_shambler
 	name = "oil shambler"
-	desc = "Humanoid figure covered in oil, or maybe they're just oil? They seem to be perpetually on fire."
+	desc = "A humanoid figure covered in oil, or maybe they're just made of oil? They seem to be perpetually on fire."
 	icon_state = "oil_shambler"
 	icon_living = "oil_shambler"
 	icon_dead = "oil_shambler"
