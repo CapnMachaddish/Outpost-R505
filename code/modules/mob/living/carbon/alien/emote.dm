@@ -7,7 +7,7 @@
 	message = "gnarls and shows its teeth..."
 
 /datum/emote/living/alien/hiss
-	key = "hiss"
+	key = "xhiss" //R505 Edit - causing problems with the other hiss emote
 	key_third_person = "hisses"
 	message_alien = "hisses."
 	message_larva = "hisses softly."

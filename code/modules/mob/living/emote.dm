@@ -505,7 +505,7 @@
 	return message
 
 /datum/emote/living/beep
-	key = "beep"
+	key = "beeps" //R505 Edit - Sorry silicons, but we have more synths.
 	key_third_person = "beeps"
 	message = "beeps."
 	message_param = "beeps at %t."

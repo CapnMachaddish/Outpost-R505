@@ -56,12 +56,12 @@
 	emote_type = EMOTE_AUDIBLE
 	sound = 'sound/machines/warning-buzzer.ogg'
 
-/datum/emote/silicon/beep
+/* /datum/emote/silicon/beep //R505 Edit - We don't like this one.
 	key = "beep"
 	key_third_person = "beeps"
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
-	sound = 'modular_skyrat/modules/emotes/sound/emotes/twobeep.ogg'
+	sound = 'modular_skyrat/modules/emotes/sound/emotes/twobeep.ogg'*/ //R505 Edit - End
 
 /datum/emote/silicon/slowclap
 	key = "slowclap"
