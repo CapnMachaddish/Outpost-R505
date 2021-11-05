@@ -1,21 +1,21 @@
-/obj/structure/biohazard_blob
+/obj/structure/mold
 	anchored = TRUE
-	var/datum/biohazard_blob_controller/our_controller
+	var/datum/mold_controller/our_controller
 	var/blob_type
 
-/obj/structure/biohazard_blob/Destroy()
+/obj/structure/mold/Destroy()
 	our_controller = null
 	playsound(src.loc, 'sound/effects/splat.ogg', 30, TRUE)
 	return ..()
 
-/obj/structure/biohazard_blob/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
+/obj/structure/mold/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
 			playsound(loc, 'sound/effects/attackblob.ogg', 100, TRUE)
 		if(BURN)
 			playsound(loc, 'sound/items/welder.ogg', 100, TRUE)
 
-/obj/structure/biohazard_blob/Initialize(mapload, passed_blob_type)
+/obj/structure/mold/Initialize(mapload, passed_blob_type)
 	. = ..()
 	if(passed_blob_type)
 		blob_type = passed_blob_type
@@ -34,7 +34,7 @@
 			color = "#80ff00"
 			resistance_flags = ACID_PROOF | FIRE_PROOF //Shit's gonna get hot
 
-/obj/structure/biohazard_blob/structure
+/obj/structure/mold/structure
 	density = TRUE
 
 /datum/looping_sound/core_heartbeat
@@ -44,7 +44,7 @@
 
 #define CORE_RETALIATION_COOLDOWN 5 SECONDS
 
-/obj/structure/biohazard_blob/structure/core
+/obj/structure/mold/structure/core
 	name = "glowing core"
 	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_core.dmi'
 	icon_state = "blob_core"
@@ -56,37 +56,37 @@
 	var/datum/looping_sound/core_heartbeat/soundloop
 	var/next_retaliation = 0
 
-/obj/structure/biohazard_blob/structure/core/fungus
+/obj/structure/mold/structure/core/fungus
 	blob_type = BIO_BLOB_TYPE_FUNGUS
 
-/obj/structure/biohazard_blob/structure/core/fire
+/obj/structure/mold/structure/core/fire
 	blob_type = BIO_BLOB_TYPE_FIRE
 
-/obj/structure/biohazard_blob/structure/core/emp
+/obj/structure/mold/structure/core/emp
 	blob_type = BIO_BLOB_TYPE_EMP
 
-/obj/structure/biohazard_blob/structure/core/toxic
+/obj/structure/mold/structure/core/toxic
 	blob_type = BIO_BLOB_TYPE_TOXIC
 
-/obj/structure/biohazard_blob/structure/core/radioactive
+/obj/structure/mold/structure/core/radioactive
 	blob_type = BIO_BLOB_TYPE_RADIOACTIVE
 
-/obj/structure/biohazard_blob/structure/core/Initialize()
+/obj/structure/mold/structure/core/Initialize()
 	if(!blob_type)
 		blob_type = pick(ALL_BIO_BLOB_TYPES)
 	. = ..()
-	new /datum/biohazard_blob_controller(src, blob_type)
+	new /datum/mold_controller(src, blob_type)
 	soundloop = new(list(src),  TRUE)
 	update_overlays()
 
-/obj/structure/biohazard_blob/structure/core/Destroy()
+/obj/structure/mold/structure/core/Destroy()
 	if(our_controller)
 		our_controller.our_core = null
 	soundloop.stop()
 	QDEL_NULL(soundloop)
 	return ..()
 
-/obj/structure/biohazard_blob/structure/core/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir)
+/obj/structure/mold/structure/core/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir)
 	if(damage_amount > 10 && world.time > next_retaliation && prob(40))
 		if(our_controller)
 			our_controller.CoreRetaliated()
@@ -138,7 +138,7 @@
 				foam.start()
 	return ..()
 
-/obj/structure/biohazard_blob/structure/core/update_overlays()
+/obj/structure/mold/structure/core/update_overlays()
 	. = ..()
 	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
 	SSvis_overlays.add_vis_overlay(src, icon, "blob_core_overlay", layer, plane, dir, alpha)
@@ -150,7 +150,7 @@
 
 #undef CORE_RETALIATION_COOLDOWN
 
-/obj/structure/biohazard_blob/resin
+/obj/structure/mold/resin
 	name = "mold"
 	desc = "It looks like mold, but it seems alive."
 	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_resin.dmi'
@@ -163,7 +163,7 @@
 	//Are we a floor resin? If not then we're a wall resin
 	var/floor = TRUE
 
-/obj/structure/biohazard_blob/resin/Initialize(mapload, passed_blob_type)
+/obj/structure/mold/resin/Initialize(mapload, passed_blob_type)
 	. = ..()
 	switch(blob_type)
 		if(BIO_BLOB_TYPE_FUNGUS)
@@ -177,7 +177,7 @@
 		if(BIO_BLOB_TYPE_RADIOACTIVE)
 			desc += " It glows softly."
 
-/obj/structure/biohazard_blob/resin/update_overlays()
+/obj/structure/mold/resin/update_overlays()
 	. = ..()
 	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
 	if(blooming)
@@ -188,7 +188,7 @@
 		overlay1.appearance_flags = PIXEL_SCALE | TILE_BOUND | RESET_COLOR
 		overlay2.appearance_flags = PIXEL_SCALE | TILE_BOUND | RESET_COLOR
 
-/obj/structure/biohazard_blob/resin/proc/CalcDir()
+/obj/structure/mold/resin/proc/CalcDir()
 	var/direction = 16
 	var/turf/location = loc
 	for(var/wallDir in GLOB.cardinals)
@@ -196,7 +196,7 @@
 		if(newTurf && newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/structure/biohazard_blob/resin/tomato in location)
+	for(var/obj/structure/mold/resin/tomato in location)
 		if(tomato == src)
 			continue
 		if(tomato.floor) //special
@@ -235,7 +235,7 @@
 		set_light(2, 1, LIGHT_COLOR_LAVA)
 		update_overlays()
 
-/obj/structure/biohazard_blob/resin/Destroy()
+/obj/structure/mold/resin/Destroy()
 	if(our_controller)
 		our_controller.ActivateAdjacentResin(get_turf(src))
 		our_controller.all_resin -= src
@@ -244,7 +244,7 @@
 
 #define BLOB_BULB_ALPHA 100
 
-/obj/structure/biohazard_blob/structure/bulb
+/obj/structure/mold/structure/bulb
 	name = "empty bulb"
 	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_bulb.dmi'
 	icon_state = "blob_bulb_empty"
@@ -257,14 +257,14 @@
 	var/list/registered_turfs = list()
 	max_integrity = 100
 
-/obj/structure/biohazard_blob/structure/bulb/Initialize()
+/obj/structure/mold/structure/bulb/Initialize()
 	. = ..()
 	make_full()
 	for(var/t in get_adjacent_open_turfs(src))
 		registered_turfs += t
 		RegisterSignal(t, COMSIG_ATOM_ENTERED, .proc/proximity_trigger)
 
-/obj/structure/biohazard_blob/structure/bulb/proc/proximity_trigger(datum/source, atom/movable/AM)
+/obj/structure/mold/structure/bulb/proc/proximity_trigger(datum/source, atom/movable/AM)
 	SIGNAL_HANDLER
 	if(!isliving(AM))
 		return
@@ -272,7 +272,7 @@
 	if(!(MOLD_FACTION in L.faction))
 		INVOKE_ASYNC(src, .proc/discharge)
 
-/obj/structure/biohazard_blob/structure/bulb/proc/make_full()
+/obj/structure/mold/structure/bulb/proc/make_full()
 	//Called by a timer, check if we exist
 	if(QDELETED(src))
 		return
@@ -283,7 +283,7 @@
 	density = TRUE
 	update_overlays()
 
-/obj/structure/biohazard_blob/structure/bulb/proc/discharge()
+/obj/structure/mold/structure/bulb/proc/discharge()
 	if(!is_full)
 		return
 	var/turf/T = get_turf(src)
@@ -335,19 +335,19 @@
 	density = FALSE
 	addtimer(CALLBACK(src, .proc/make_full), 1 MINUTES, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
 
-/obj/structure/biohazard_blob/structure/bulb/attack_generic(mob/user, damage_amount, damage_type, damage_flag, sound_effect, armor_penetration)
+/obj/structure/mold/structure/bulb/attack_generic(mob/user, damage_amount, damage_type, damage_flag, sound_effect, armor_penetration)
 	if(MOLD_FACTION in user.faction)
 		return ..()
 	discharge()
 	. = ..()
 
-/obj/structure/biohazard_blob/structure/bulb/bullet_act(obj/projectile/P)
+/obj/structure/mold/structure/bulb/bullet_act(obj/projectile/P)
 	if(istype(P, /obj/projectile/energy/nuclear_particle))
 		return ..()
 	discharge()
 	. = ..()
 
-/obj/structure/biohazard_blob/structure/bulb/Destroy()
+/obj/structure/mold/structure/bulb/Destroy()
 	if(our_controller)
 		our_controller.other_structures -= src
 	for(var/t in registered_turfs)
@@ -355,7 +355,7 @@
 	registered_turfs = null
 	return ..()
 
-/obj/structure/biohazard_blob/structure/bulb/update_overlays()
+/obj/structure/mold/structure/bulb/update_overlays()
 	. = ..()
 	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
 	if(is_full)
@@ -369,7 +369,7 @@
 #undef BLOB_BULB_ALPHA
 
 
-/obj/structure/biohazard_blob/structure/wall
+/obj/structure/mold/structure/wall
 	name = "mold wall"
 	desc = "Looks like some kind of thick resin."
 	icon = 'icons/obj/smooth_structures/alien/resin_wall.dmi'
@@ -382,13 +382,13 @@
 	max_integrity = 200
 	CanAtmosPass = ATMOS_PASS_DENSITY
 
-/obj/structure/biohazard_blob/wall/Destroy()
+/obj/structure/mold/wall/Destroy()
 	if(our_controller)
 		our_controller.ActivateAdjacentResin(get_turf(src))
 		our_controller.other_structures -= src
 	return ..()
 
-/obj/structure/biohazard_blob/structure/conditioner
+/obj/structure/mold/structure/conditioner
 	name = "pulsating vent"
 	desc = "An unsightly vent, it appears to be puffing something out."
 	density = FALSE
@@ -402,13 +402,13 @@
 	var/puff_cooldown = 15 SECONDS
 	var/puff_delay = 0
 
-/obj/structure/biohazard_blob/structure/conditioner/Destroy()
+/obj/structure/mold/structure/conditioner/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(our_controller)
 		our_controller.other_structures -= src
 	return ..()
 
-/obj/structure/biohazard_blob/structure/conditioner/Initialize()
+/obj/structure/mold/structure/conditioner/Initialize()
 	. = ..()
 	switch(blob_type)
 		if(BIO_BLOB_TYPE_FUNGUS)
@@ -424,7 +424,7 @@
 
 	START_PROCESSING(SSobj, src)
 
-/obj/structure/biohazard_blob/structure/conditioner/process(delta_time)
+/obj/structure/mold/structure/conditioner/process(delta_time)
 	if(!happy_atmos)
 		return
 	if(puff_delay > world.time)
@@ -435,7 +435,7 @@
 	if(blob_type == BIO_BLOB_TYPE_RADIOACTIVE)
 		fire_nuclear_particle()
 
-/obj/structure/biohazard_blob/structure/spawner
+/obj/structure/mold/structure/spawner
 	name = "hatchery"
 	density = FALSE
 	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_spawner.dmi'
@@ -447,12 +447,12 @@
 	var/max_spawns = 1
 	var/spawn_cooldown = 1200 //In deciseconds
 
-/obj/structure/biohazard_blob/structure/spawner/Destroy()
+/obj/structure/mold/structure/spawner/Destroy()
 	if(our_controller)
 		our_controller.other_structures -= src
 	return ..()
 
-/obj/structure/biohazard_blob/structure/spawner/Initialize()
+/obj/structure/mold/structure/spawner/Initialize()
 	. = ..()
 	switch(blob_type)
 		if(BIO_BLOB_TYPE_FUNGUS)

@@ -8,15 +8,15 @@
 /datum/round_event/mold
 	fakeable = FALSE
 	var/list/available_molds_t1 = list(
-		/obj/structure/biohazard_blob/structure/core/fire,
-		/obj/structure/biohazard_blob/structure/core/toxic
+		/obj/structure/mold/structure/core/fire,
+		/obj/structure/mold/structure/core/toxic
 	)
 	var/list/available_molds_t2 = list(
-		/obj/structure/biohazard_blob/structure/core/fire,
-		/obj/structure/biohazard_blob/structure/core/toxic,
-		/obj/structure/biohazard_blob/structure/core/radioactive,
-		/obj/structure/biohazard_blob/structure/core/emp,
-		/obj/structure/biohazard_blob/structure/core/fungus
+		/obj/structure/mold/structure/core/fire,
+		/obj/structure/mold/structure/core/toxic,
+		/obj/structure/mold/structure/core/radioactive,
+		/obj/structure/mold/structure/core/emp,
+		/obj/structure/mold/structure/core/fungus
 	)
 
 /datum/round_event/mold/start()
@@ -27,7 +27,7 @@
 	else
 		molds2spawn = rand(1,2)
 
-	var/obj/structure/biohazard_blob/resin/resintest = new()
+	var/obj/structure/mold/resin/resintest = new()
 
 	var/list/possible_spawn_areas = typecacheof(typesof(/area/maintenance, /area/security/prison, /area/construction))
 
@@ -54,10 +54,10 @@
 		shuffle(turfs)
 		var/turf/picked_turf = pick(turfs)
 		if(turfs.len) //Pick a turf to spawn at if we can
-			if(locate(/obj/structure/biohazard_blob/structure/core) in range(20, picked_turf))
+			if(locate(/obj/structure/mold/structure/core) in range(20, picked_turf))
 				turfs -= picked_turf
 				continue
-			var/obj/structure/biohazard_blob/boob = new picked_mold(picked_turf)
+			var/obj/structure/mold/boob = new picked_mold(picked_turf)
 			announce_to_ghosts(boob)
 			turfs -= picked_turf
 			i++

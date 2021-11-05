@@ -103,7 +103,7 @@
 	//Not designed to be spawned without a turf.
 	ignore += typesof(/obj/effect/abstract/liquid_turf)
 	//Not designed to be spawned individually.
-	ignore += typesof(/obj/structure/biohazard_blob)
+	ignore += typesof(/obj/structure/mold)
 	//Unused - not supposed to be spawned without SSliquids
 	ignore += typesof(/turf/open/openspace/ocean)
 	//SKYRAT EDIT END

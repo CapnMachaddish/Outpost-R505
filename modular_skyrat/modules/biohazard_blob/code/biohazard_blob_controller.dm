@@ -9,10 +9,10 @@
 #define RESIN_DID_SPREAD 1
 #define RESIN_ATTACKED_DOOR 2
 
-/datum/biohazard_blob_controller
+/datum/mold_controller
 	var/list/active_resin = list()
 	var/list/all_resin = list()
-	var/obj/structure/biohazard_blob/structure/core/our_core
+	var/obj/structure/mold/structure/core/our_core
 	var/list/other_structures = list()
 	var/progress_to_spread = 0
 	var/structure_progression = STRUCTURE_PROGRESSION_START
@@ -20,7 +20,7 @@
 	var/blob_type
 	var/spread_delay = SPREAD_PROCESS
 
-/datum/biohazard_blob_controller/New(obj/structure/biohazard_blob/structure/core/the_core, passedtype)
+/datum/mold_controller/New(obj/structure/mold/structure/core/the_core, passedtype)
 	if(!the_core)
 		qdel(src)
 		return
@@ -31,7 +31,7 @@
 	START_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/biohazard_blob_controller/proc/SpawnExpansion()
+/datum/mold_controller/proc/SpawnExpansion()
 	var/list/turfs = list()
 	var/hatcheries_to_spawn = 3
 	var/bulbs_to_spawn = rand(3, 5)
@@ -59,15 +59,15 @@
 			conditioners_to_spawn--
 			SpawnStructureLoc(3, T)
 
-/datum/biohazard_blob_controller/proc/SpawnStructureLoc(index, location)
+/datum/mold_controller/proc/SpawnStructureLoc(index, location)
 	var/spawn_type
 	switch(index)
 		if(1)
-			spawn_type = /obj/structure/biohazard_blob/structure/bulb
+			spawn_type = /obj/structure/mold/structure/bulb
 		if(2)
-			spawn_type = /obj/structure/biohazard_blob/structure/spawner
+			spawn_type = /obj/structure/mold/structure/spawner
 		if(3)
-			spawn_type = /obj/structure/biohazard_blob/structure/conditioner
+			spawn_type = /obj/structure/mold/structure/conditioner
 
 	var/struct = new spawn_type(location, blob_type)
 	other_structures[struct] = TRUE
@@ -75,7 +75,7 @@
 	our_core.repair_damage(10)
 	return struct
 
-/datum/biohazard_blob_controller/Destroy()
+/datum/mold_controller/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	all_resin = null
 	active_resin = null
@@ -83,18 +83,18 @@
 	other_structures = null
 	return ..()
 
-/datum/biohazard_blob_controller/proc/CoreRetaliated()
+/datum/mold_controller/proc/CoreRetaliated()
 	structure_progression += PROGRESSION_RETALIATED
 	active_resin.Cut()
 	ActivateAdjacentResinRecursive(get_turf(our_core), 4)
 
-/datum/biohazard_blob_controller/proc/TrySpreadResin(obj/structure/biohazard_blob/resin/spreaded_resin)
+/datum/mold_controller/proc/TrySpreadResin(obj/structure/mold/resin/spreaded_resin)
 	. = RESIN_CANT_SPREAD
 	var/turf/ownturf = get_turf(spreaded_resin)
 	if(structure_progression > PROGRESSION_FOR_STRUCTURE)
 		var/forbidden = FALSE
 		for(var/obj/O in ownturf)
-			if(istype(O, /obj/structure/biohazard_blob/structure))
+			if(istype(O, /obj/structure/mold/structure))
 				forbidden = TRUE
 				break
 		if(!forbidden)
@@ -119,8 +119,8 @@
 	for(var/T in ownturf.GetAtmosAdjacentTurfs())
 		//We encounter a space turf? Make a thick wall to block of that nasty vacuum
 		if(isspaceturf(T))
-			if(!locate(/obj/structure/biohazard_blob/structure/wall, ownturf))
-				var/the_wall = new /obj/structure/biohazard_blob/structure/wall(ownturf, blob_type)
+			if(!locate(/obj/structure/mold/structure/wall, ownturf))
+				var/the_wall = new /obj/structure/mold/structure/wall(ownturf, blob_type)
 				other_structures[the_wall] = TRUE
 				CALCULATE_ADJACENT_TURFS(T, NORMAL_TURF)
 		else
@@ -130,7 +130,7 @@
 		var/turf/iterated_turf = T
 		var/resinCount = 0
 		var/placeCount = 1
-		for(var/obj/structure/biohazard_blob/resin/potato in iterated_turf)
+		for(var/obj/structure/mold/resin/potato in iterated_turf)
 			resinCount++
 		for(var/wallDir in GLOB.cardinals)
 			var/turf/isWall = get_step(iterated_turf,wallDir)
@@ -144,14 +144,14 @@
 	active_resin -= spreaded_resin
 	return RESIN_CANT_SPREAD
 
-/datum/biohazard_blob_controller/proc/SpawnResin(loc)
+/datum/mold_controller/proc/SpawnResin(loc)
 	//Each spawned resin gives us progression for a structure
 	structure_progression++
 	//On spawning effects
 	for(var/obj/machinery/light/potato in loc)
 		potato.break_light_tube()
 	//Spawn the resin
-	var/obj/structure/biohazard_blob/resin/new_resin = new /obj/structure/biohazard_blob/resin(loc, blob_type)
+	var/obj/structure/mold/resin/new_resin = new /obj/structure/mold/resin(loc, blob_type)
 	new_resin.our_controller = src
 	all_resin[new_resin] = TRUE
 	active_resin[new_resin] = TRUE
@@ -160,7 +160,7 @@
 	our_core.repair_damage(2)
 	return new_resin
 
-/datum/biohazard_blob_controller/proc/ActivateAdjacentResinRecursive(turf/centrum_turf, iterations = 1)
+/datum/mold_controller/proc/ActivateAdjacentResinRecursive(turf/centrum_turf, iterations = 1)
 	var/list/turfs = list()
 	turfs[centrum_turf] = TRUE
 	for(var/i in 1 to iterations)
@@ -170,12 +170,12 @@
 				turfs[atmoadj] = TRUE
 	for(var/t in turfs)
 		var/turf/ite_turf = t
-		for(var/obj/structure/biohazard_blob/resin/potato in ite_turf)
+		for(var/obj/structure/mold/resin/potato in ite_turf)
 			if(potato && potato.our_controller && potato.our_controller == src)
 				active_resin[potato] = TRUE
 				return
 
-/datum/biohazard_blob_controller/proc/ActivateAdjacentResin(turf/centrum_turf)
+/datum/mold_controller/proc/ActivateAdjacentResin(turf/centrum_turf)
 	if(!our_core)
 		//We're dead, no point in doing this
 		return
@@ -184,12 +184,12 @@
 		turfs += t
 	for(var/t in turfs)
 		var/turf/ite_turf = t
-		for(var/obj/structure/biohazard_blob/resin/potato in ite_turf)
+		for(var/obj/structure/mold/resin/potato in ite_turf)
 			if(potato && potato.our_controller && potato.our_controller == src)
 				active_resin[potato] = TRUE
 				return
 
-/datum/biohazard_blob_controller/process(delta_time)
+/datum/mold_controller/process(delta_time)
 	progress_to_spread++
 	if(stalled && progress_to_spread < SPREAD_STALLED_PROCESS)
 		return
@@ -200,7 +200,7 @@
 
 	if(!our_core)
 		if(length(all_resin))
-			var/obj/structure/biohazard_blob/resin/iterated_resin = pick(all_resin)
+			var/obj/structure/mold/resin/iterated_resin = pick(all_resin)
 			qdel(iterated_resin)
 			return
 		//No structures, no core, no resin
@@ -214,7 +214,7 @@
 	if(!length(active_resin))
 		var/did_anything = FALSE
 		for(var/t in all_resin)
-			var/obj/structure/biohazard_blob/resin/iterated_resin = t
+			var/obj/structure/mold/resin/iterated_resin = t
 			var/attempt = TrySpreadResin(iterated_resin)
 			switch(attempt)
 				if(RESIN_DID_SPREAD, RESIN_ATTACKED_DOOR)
@@ -227,7 +227,7 @@
 		return
 
 	for(var/t in active_resin)
-		var/obj/structure/biohazard_blob/resin/active_resin = t
+		var/obj/structure/mold/resin/active_resin = t
 		var/attempt = TrySpreadResin(active_resin)
 		switch(attempt)
 			if(RESIN_DID_SPREAD)
