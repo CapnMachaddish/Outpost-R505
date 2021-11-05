@@ -3905,7 +3905,6 @@
 #include "modular_R505\code\modules_n_adds\clothing\under\explorerfix.dm"
 #include "modular_R505\code\modules_n_adds\clothing\under\miscellaneous.dm"
 #include "modular_R505\code\modules_n_adds\emotes\emotes.dm"
-#include "modular_R505\code\modules_n_adds\events\moss.dm"
 #include "modular_R505\code\modules_n_adds\flavortext\mood_events\pleasure.dm"
 #include "modular_R505\code\modules_n_adds\flavortext\pollutants\lewd.dm"
 #include "modular_R505\code\modules_n_adds\flavortext\pollutants\toxins.dm"
