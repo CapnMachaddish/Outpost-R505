@@ -1,3 +1,4 @@
+#define CIBUILDING
 // DM Environment file for tgstation.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
 // New source code should be placed in .dm files: choose File/New --> Code File.
@@ -4173,6 +4174,12 @@
 #include "modular_skyrat\modules\barsigns\code\game\objects\structures\barsigns.dm"
 #include "modular_skyrat\modules\berets\code\datums\greyscale\config_types\greyscale_configs.dm"
 #include "modular_skyrat\modules\berets\code\modules\clothing\head\jobs.dm"
+#include "modular_skyrat\modules\biohazard_blob\code\_biohazard_blob_defines.dm"
+#include "modular_skyrat\modules\biohazard_blob\code\biohazard_blob_controller.dm"
+#include "modular_skyrat\modules\biohazard_blob\code\biohazard_blob_disease.dm"
+#include "modular_skyrat\modules\biohazard_blob\code\biohazard_blob_mobs.dm"
+#include "modular_skyrat\modules\biohazard_blob\code\biohazard_blob_structures.dm"
+#include "modular_skyrat\modules\biohazard_blob\code\mold_event.dm"
 #include "modular_skyrat\modules\blueshield\code\game\area\Space_Station_13_areas.dm"
 #include "modular_skyrat\modules\blueshield\code\game\objects\effects\landmarks.dm"
 #include "modular_skyrat\modules\blueshield\code\game\objects\items\devices\radio\encryptionkey.dm"
@@ -4694,12 +4701,6 @@
 #include "modular_skyrat\modules\modular_weapons\code\modules\projectiles\projectile\bullets\modular_projectiles.dm"
 #include "modular_skyrat\modules\modular_weapons\code\modules\research\designs\autolathe_designs.dm"
 #include "modular_skyrat\modules\modular_weapons\code\modules\research\designs\mediguns.dm"
-#include "modular_skyrat\modules\mold\code\mold_controller.dm"
-#include "modular_skyrat\modules\mold\code\mold_defines.dm"
-#include "modular_skyrat\modules\mold\code\mold_disease.dm"
-#include "modular_skyrat\modules\mold\code\mold_event.dm"
-#include "modular_skyrat\modules\mold\code\mold_mobs.dm"
-#include "modular_skyrat\modules\mold\code\mold_structures.dm"
 #include "modular_skyrat\modules\morenarcotics\chemistry\reagents\cocaine.dm"
 #include "modular_skyrat\modules\morenarcotics\chemistry\reagents\opium.dm"
 #include "modular_skyrat\modules\morenarcotics\chemistry\reagents\pcp.dm"

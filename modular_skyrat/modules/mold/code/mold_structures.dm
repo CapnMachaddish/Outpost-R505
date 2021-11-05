@@ -46,7 +46,7 @@
 
 /obj/structure/mold/structure/core
 	name = "glowing core"
-	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_core.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/mold_core.dmi'
 	icon_state = "blob_core"
 	layer = TABLE_LAYER
 	light_range = 2
@@ -153,7 +153,7 @@
 /obj/structure/mold/resin
 	name = "mold"
 	desc = "It looks like mold, but it seems alive."
-	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_resin.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/mold_resin.dmi'
 	icon_state = "blob_floor"
 	density = FALSE
 	plane = FLOOR_PLANE
@@ -246,7 +246,7 @@
 
 /obj/structure/mold/structure/bulb
 	name = "empty bulb"
-	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_bulb.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/mold_bulb.dmi'
 	icon_state = "blob_bulb_empty"
 	density = FALSE
 	layer = TABLE_LAYER
@@ -392,7 +392,7 @@
 	name = "pulsating vent"
 	desc = "An unsightly vent, it appears to be puffing something out."
 	density = FALSE
-	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_spawner.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/mold_spawner.dmi'
 	icon_state = "blob_vent"
 	density = FALSE
 	layer = LOW_OBJ_LAYER
@@ -438,7 +438,7 @@
 /obj/structure/mold/structure/spawner
 	name = "hatchery"
 	density = FALSE
-	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_spawner.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/mold_spawner.dmi'
 	icon_state = "blob_spawner"
 	density = FALSE
 	layer = LOW_OBJ_LAYER
@@ -456,17 +456,17 @@
 	. = ..()
 	switch(blob_type)
 		if(BIO_BLOB_TYPE_FUNGUS)
-			monster_types = list(/mob/living/simple_animal/hostile/biohazard_blob/diseased_rat)
+			monster_types = list(/mob/living/simple_animal/hostile/mold/diseased_rat)
 			spawn_cooldown = 500
 		if(BIO_BLOB_TYPE_FIRE)
-			monster_types = list(/mob/living/simple_animal/hostile/biohazard_blob/oil_shambler)
+			monster_types = list(/mob/living/simple_animal/hostile/mold/oil_shambler)
 		if(BIO_BLOB_TYPE_EMP)
-			monster_types = list(/mob/living/simple_animal/hostile/biohazard_blob/electric_mosquito)
+			monster_types = list(/mob/living/simple_animal/hostile/mold/electric_mosquito)
 			spawn_cooldown = 500
 		if(BIO_BLOB_TYPE_TOXIC)
 			monster_types = list(/mob/living/simple_animal/hostile/giant_spider)
 		if(BIO_BLOB_TYPE_RADIOACTIVE)
-			monster_types = list(/mob/living/simple_animal/hostile/biohazard_blob/centaur)
+			monster_types = list(/mob/living/simple_animal/hostile/mold/centaur)
 	AddComponent(/datum/component/spawner, monster_types, spawn_cooldown, list(MOLD_FACTION), "emerges from", max_spawns)
 
 	/datum/component/spawner

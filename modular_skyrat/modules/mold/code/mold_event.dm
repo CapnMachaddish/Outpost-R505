@@ -1,5 +1,5 @@
 /datum/round_event_control/mold
-	name = "Moldies"
+	name = "Mold Outbreak"
 	typepath = /datum/round_event/mold
 	weight = 5
 	max_occurrences = 1

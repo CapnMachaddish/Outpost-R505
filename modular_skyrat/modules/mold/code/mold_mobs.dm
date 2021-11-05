@@ -1,16 +1,16 @@
-/mob/living/simple_animal/hostile/biohazard_blob
+/mob/living/simple_animal/hostile/mold
 	gold_core_spawnable = HOSTILE_SPAWN
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	see_in_dark = 4
 	mob_biotypes = MOB_ORGANIC
 	gold_core_spawnable = NO_SPAWN
-	icon = 'modular_skyrat/modules/biohazard_blob/icons/blob_mobs.dmi'
+	icon = 'modular_skyrat/modules/mold/icons/mold_mobs.dmi'
 	vision_range = 5
 	aggro_vision_range = 8
 	move_to_delay = 6
 
 
-/mob/living/simple_animal/hostile/biohazard_blob/oil_shambler
+/mob/living/simple_animal/hostile/mold/oil_shambler
 	name = "oil shambler"
 	desc = "Humanoid figure covered in oil, or maybe they're just oil? They seem to be perpetually on fire."
 	icon_state = "oil_shambler"
@@ -40,21 +40,21 @@
 	maxbodytemp = INFINITY
 	gender = MALE
 
-/mob/living/simple_animal/hostile/biohazard_blob/oil_shambler/Initialize()
+/mob/living/simple_animal/hostile/mold/oil_shambler/Initialize()
 	. = ..()
 	update_overlays()
 
-/mob/living/simple_animal/hostile/biohazard_blob/oil_shambler/Destroy()
+/mob/living/simple_animal/hostile/mold/oil_shambler/Destroy()
 	visible_message(span_warning("The [src] evaporates!"))
 	return ..()
 
-/mob/living/simple_animal/hostile/biohazard_blob/oil_shambler/update_overlays()
+/mob/living/simple_animal/hostile/mold/oil_shambler/update_overlays()
 	. = ..()
 	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
 	SSvis_overlays.add_vis_overlay(src, icon, "oil_shambler_overlay", layer, plane, dir, alpha)
 	SSvis_overlays.add_vis_overlay(src, icon, "oil_shambler_overlay", 0, EMISSIVE_PLANE, dir, alpha)
 
-/mob/living/simple_animal/hostile/biohazard_blob/oil_shambler/AttackingTarget()
+/mob/living/simple_animal/hostile/mold/oil_shambler/AttackingTarget()
 	. = ..()
 	if(isliving(target))
 		var/mob/living/L = target
@@ -63,7 +63,7 @@
 		if(L.fire_stacks)
 			L.IgniteMob()
 
-/mob/living/simple_animal/hostile/biohazard_blob/diseased_rat
+/mob/living/simple_animal/hostile/mold/diseased_rat
 	name = "diseased rat"
 	desc = "An incredibly large, rabid looking rat. There's shrooms growing out of it"
 	icon_state = "diseased_rat"
@@ -87,7 +87,7 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	melee_damage_type = BRUTE
 
-/mob/living/simple_animal/hostile/biohazard_blob/diseased_rat/AttackingTarget()
+/mob/living/simple_animal/hostile/mold/diseased_rat/AttackingTarget()
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
@@ -95,7 +95,7 @@
 			to_chat(C, span_danger("[src] manages to penetrate your clothing with it's teeth!"))
 			C.ForceContractDisease(new /datum/disease/cordyceps(), FALSE, TRUE)
 
-/mob/living/simple_animal/hostile/biohazard_blob/electric_mosquito
+/mob/living/simple_animal/hostile/mold/electric_mosquito
 	name = "electric mosquito"
 	desc = "An ovesized mosquito, with what it seems like electricity inside its body."
 	icon_state = "electric_mosquito"
@@ -121,13 +121,13 @@
 	minbodytemp = 0
 	maxbodytemp = INFINITY
 
-/mob/living/simple_animal/hostile/biohazard_blob/electric_mosquito/AttackingTarget()
+/mob/living/simple_animal/hostile/mold/electric_mosquito/AttackingTarget()
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 		C.reagents.add_reagent(/datum/reagent/teslium, 2)
 
-/mob/living/simple_animal/hostile/biohazard_blob/centaur
+/mob/living/simple_animal/hostile/mold/centaur
 	name = "centaur"
 	desc = "A horrific combination of bone and flesh with multiple sets of legs and feet."
 	icon_state = "centaur"
@@ -157,11 +157,11 @@
 	minbodytemp = 0
 	maxbodytemp = INFINITY
 
-/mob/living/simple_animal/hostile/biohazard_blob/centaur/Initialize()
+/mob/living/simple_animal/hostile/mold/centaur/Initialize()
 	. = ..()
 	update_overlays()
 
-/mob/living/simple_animal/hostile/biohazard_blob/centaur/death(gibbed)
+/mob/living/simple_animal/hostile/mold/centaur/death(gibbed)
 	visible_message(span_warning("The [src] ruptures!"))
 	var/datum/reagents/R = new/datum/reagents(300)
 	R.my_atom = src
@@ -170,7 +170,7 @@
 	playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
 	return ..()
 
-/mob/living/simple_animal/hostile/biohazard_blob/centaur/AttackingTarget()
+/mob/living/simple_animal/hostile/mold/centaur/AttackingTarget()
 	. = ..()
 	if(isliving(target))
 		var/mob/living/L = target

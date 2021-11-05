@@ -155,7 +155,7 @@
 	//icon = 'modular_skyrat/master_files/icons/obj/clothing/uniforms.dmi'
 //R505 Edit - these will become their own item.
 
-obj/item/clothing/under/syndicate/tacticool
+/obj/item/clothing/under/syndicate/tacticool
 	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/uniform.dmi'
 	icon = 'modular_skyrat/master_files/icons/obj/clothing/uniforms.dmi'
 //R505 Edit - Forgot this was a subtype, this one can stay because the new one is better plus it has a toggle.

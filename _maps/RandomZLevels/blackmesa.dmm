@@ -586,7 +586,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "fY" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur,
+/mob/living/simple_animal/hostile/mold/centaur,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "fZ" = (
@@ -2678,7 +2678,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa)
 "BU" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur,
+/mob/living/simple_animal/hostile/mold/centaur,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "Cc" = (
