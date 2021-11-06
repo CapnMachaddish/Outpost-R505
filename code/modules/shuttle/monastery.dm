@@ -5,3 +5,4 @@
 	shuttleId = "pod"
 	possible_destinations = "monastery_shuttle_asteroid;monastery_shuttle_station;lavaland_common_away;landing_zone_dock;mining_public"
 	no_destination_swap = TRUE
+	uses_overmap = FALSE

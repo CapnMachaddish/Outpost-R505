@@ -149,7 +149,7 @@
 	light_color = LIGHT_COLOR_CYAN
 	shuttleId = "snowdin_mining"
 	possible_destinations = "snowdin_mining_top;snowdin_mining_down"
-
+	uses_overmap = FALSE
 
 //liquid plasma!!!!!!//
 
