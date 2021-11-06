@@ -126,7 +126,7 @@
 
 	owner.transferItemToLoc(active_item, src, TRUE)
 	active_item = null
-	playsound(get_turf(owner), retract_sound, 50, TRUE)
+	playsound(get_turf(owner), retract_sound, 50, FALSE)
 
 /obj/item/organ/cyberimp/arm/proc/Extend(obj/item/augment)
 	if(!(augment in src))
@@ -162,7 +162,7 @@
 	owner.visible_message(span_notice("[owner] extends [active_item] from [owner.p_their()] [zone == BODY_ZONE_R_ARM ? "right" : "left"] arm."),
 		span_notice("You extend [active_item] from your [zone == BODY_ZONE_R_ARM ? "right" : "left"] arm."),
 		span_hear("You hear a short mechanical noise."))
-	playsound(get_turf(owner), extend_sound, 50, TRUE)
+	playsound(get_turf(owner), extend_sound, 50, FALSE)
 
 /obj/item/organ/cyberimp/arm/ui_action_click()
 	if((organ_flags & ORGAN_FAILING) || (!active_item && !contents.len))

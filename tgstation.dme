@@ -3960,6 +3960,7 @@
 #include "modular_R505\code\modules_n_adds\spells\spell_types\centcomspells.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\ears.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\frills.dm"
+#include "modular_R505\code\modules_n_adds\sprite_accessories\noodle.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\synthliz.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\tails.dm"
 #include "modular_R505\code\modules_n_adds\sprite_accessories\teshari.dm"
