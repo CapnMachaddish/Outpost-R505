@@ -39,8 +39,6 @@
 	else
 		M.name = src.name
 		M.real_name = src.real_name
-	if((M.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
-		M.AddComponent(/datum/component/arousal)
 
 	if(has_dna() && M.has_dna())
 		var/mob/living/carbon/C = src
@@ -56,6 +54,9 @@
 		mind.transfer_to(M, 1) // second argument to force key move to new mob
 	else
 		M.key = key
+
+	if((M.client.prefs.r_preferences & R_PREF_AROUSAL)) //R505 Edit
+		M.AddComponent(/datum/component/arousal)
 
 	if(delete_old_mob)
 		QDEL_IN(src, 1)
