@@ -86,3 +86,6 @@
 
 /obj/effect/abstract/overmap/shuttle/planet/icebox
 	color = COLOR_TEAL
+
+/obj/effect/abstract/overmap/shuttle/planet/kilo_ocean
+	color = COLOR_MODERATE_BLUE

@@ -3,7 +3,7 @@
 	map_path = "map_files/IceBoxStation"
 	map_file = list("IcemoonUnderground_Below.dmm",
 					"IcemoonUnderground_Above_skyrat.dmm",
-					"IceBoxStation.dmm")
+					"IceBoxStation_skyrat.dmm")
 
 	traits = list(list("Up" = 1,
 						"Mining" = TRUE,
@@ -32,7 +32,6 @@
 
 	minetype = "none"
 
-	allow_custom_shuttles = TRUE
 	shuttles = list(
 		"cargo" = "cargo_skyrat",
 		"ferry" = "ferry_fancy",

@@ -4263,6 +4263,7 @@
 "aji" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/turf_decal/sand/plating,
+/obj/structure/cable,
 /turf/open/floor/plating/ocean_plating,
 /area/ocean)
 "ajj" = (
@@ -27095,6 +27096,11 @@
 	},
 /turf/open/floor/iron/dark,
 /area/security/courtroom)
+"boe" = (
+/obj/machinery/power/apc/auto_name/west,
+/obj/structure/cable,
+/turf/open/floor/plating/airless,
+/area/maintenance/external)
 "boi" = (
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 4;
@@ -30330,6 +30336,9 @@
 	dir = 8
 	},
 /area/hallway/primary/port)
+"bCM" = (
+/turf/closed/wall,
+/area/maintenance/external)
 "bCY" = (
 /obj/machinery/computer/crew{
 	dir = 8
@@ -55179,6 +55188,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/security/office)
+"emM" = (
+/obj/machinery/door/airlock/external,
+/obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/maintenance/external)
 "emY" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
@@ -69986,6 +70003,13 @@
 /obj/effect/landmark/start/hangover,
 /turf/open/floor/iron/showroomfloor,
 /area/service/bar/atrium)
+"lZR" = (
+/obj/effect/turf_decal/sand/plating,
+/obj/structure/marker_beacon/burgundy{
+	name = "landing marker"
+	},
+/turf/open/floor/plating/airless,
+/area/ocean)
 "maq" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -77711,6 +77735,13 @@
 	},
 /turf/open/floor/plating/rust,
 /area/security/prison)
+"qgM" = (
+/obj/docking_port/stationary/medium{
+	name = "Kilo Shuttle Dock";
+	roundstart_template = /datum/map_template/shuttle/crow
+	},
+/turf/open/floor/plating/ocean,
+/area/ocean/generated)
 "qgQ" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable,
@@ -84894,6 +84925,11 @@
 /obj/effect/landmark/start/hangover,
 /turf/open/floor/carpet/green,
 /area/service/library)
+"tZU" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/turf/open/floor/plating/airless,
+/area/maintenance/external)
 "uaG" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/orange/visible{
 	dir = 4
@@ -128451,8 +128487,8 @@ aaa
 aaa
 aUz
 cry
-aeu
-aeu
+cry
+cna
 alB
 alB
 alB
@@ -128705,11 +128741,11 @@ aaa
 aaa
 aaa
 aaa
-aeu
-aeu
-aeu
-aeu
-aeu
+cry
+cry
+cry
+cry
+cna
 bwe
 bbx
 apt
@@ -128961,12 +128997,12 @@ aaa
 aaa
 cry
 cry
-aeu
-aeu
-aeu
-aeu
-aeu
-aeu
+cry
+cry
+cry
+cry
+cry
+cna
 alB
 aWJ
 ayv
@@ -129217,13 +129253,13 @@ aaa
 aaa
 cry
 cry
-aeu
-aeu
-aeu
-aeu
-aeu
-aeu
-aeu
+cry
+cna
+cna
+cna
+cna
+cna
+cna
 alB
 bfq
 aWJ
@@ -129473,9 +129509,9 @@ aaa
 aaa
 aaa
 aUz
-aeu
-aeu
-aeu
+lZR
+cry
+cna
 alB
 alB
 alB
@@ -129727,12 +129763,12 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
+bCM
+bCM
+bCM
 cry
-aeu
-aeu
-aeu
+cry
+cna
 alB
 bbx
 aax
@@ -129983,13 +130019,13 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aeu
-aeu
-aeu
-aeu
+qgM
+tZU
+boe
+emM
+cna
+cna
+cna
 bwe
 bgD
 bfo
@@ -130241,12 +130277,12 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aeu
-aeu
-aeu
-aeu
+bCM
+bCM
+bCM
+cry
+cry
+cry
 alB
 aWJ
 bfU
@@ -130501,9 +130537,9 @@ aaa
 aaa
 aaa
 aaa
-aeu
-aeu
-aeu
+lZR
+cry
+cry
 bwe
 bfY
 bdD

@@ -804,6 +804,10 @@
 	name = "Ice Planet"
 	visual_type = /obj/effect/abstract/overmap/shuttle/planet/icebox
 
+/datum/overmap_object/shuttle/planet/kilo_ocean
+	name = "Ocean Planet"
+	visual_type = /obj/effect/abstract/overmap/shuttle/planet/kilo_ocean
+
 /datum/overmap_object/shuttle/ess_crow
 	name = "ESS Crow"
 	speed_divisor_from_mass = 4

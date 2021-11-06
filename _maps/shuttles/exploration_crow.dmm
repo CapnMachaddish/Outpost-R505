@@ -45,7 +45,6 @@
 "ec" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /turf/open/floor/pod,
 /area/shuttle/crow/helm)
@@ -58,6 +57,7 @@
 /area/shuttle/crow/cargo)
 "fw" = (
 /obj/structure/closet,
+/obj/effect/spawner/lootdrop/maintenance/two,
 /turf/open/floor/pod,
 /area/shuttle/crow)
 "fJ" = (
@@ -73,11 +73,6 @@
 	dir = 8
 	},
 /turf/closed/wall/mineral/titanium,
-/area/shuttle/crow/cargo)
-"gD" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/firealarm/directional/east,
-/turf/open/floor/iron,
 /area/shuttle/crow/cargo)
 "gR" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
@@ -119,7 +114,6 @@
 /obj/machinery/light/small/directional/west,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
-/obj/machinery/firealarm/directional/west,
 /obj/item/storage/toolbox/emergency,
 /obj/machinery/light_switch/directional/north,
 /obj/machinery/atmospherics/components/unary/vent_pump/on,
@@ -182,7 +176,6 @@
 "ne" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /turf/open/floor/iron,
 /area/shuttle/crow/cargo)
@@ -352,7 +345,6 @@
 /area/shuttle/crow)
 "Cc" = (
 /obj/machinery/door/airlock,
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron,
 /area/shuttle/crow/cargo)
@@ -442,10 +434,10 @@
 	id = "crow";
 	launch_status = 0;
 	name = "ESS Crow";
+	overmap_shuttle_type = /datum/overmap_object/shuttle/ess_crow;
 	port_direction = 8;
 	preferred_direction = 4;
-	width = 15;
-	overmap_shuttle_type = /datum/overmap_object/shuttle/ess_crow
+	width = 15
 	},
 /turf/open/floor/plating,
 /area/shuttle/crow)
@@ -548,7 +540,6 @@
 "Rs" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /turf/open/floor/pod,
 /area/shuttle/crow)
@@ -581,7 +572,7 @@
 /turf/open/floor/iron,
 /area/shuttle/crow/cargo)
 "SL" = (
-/obj/machinery/atmospherics/components/unary/tank/air{
+/obj/machinery/atmospherics/components/tank/air{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -589,7 +580,6 @@
 /area/shuttle/crow/engineering)
 "Vc" = (
 /obj/machinery/door/airlock/external/glass,
-/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/shuttle/crow)
 "VB" = (
@@ -622,7 +612,6 @@
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
-/obj/machinery/firealarm/directional/west,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/pod,
 /area/shuttle/crow)
@@ -710,7 +699,7 @@ Zo
 Zo
 uY
 Dy
-gD
+iP
 WN
 eb
 Zo
