@@ -83,7 +83,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/service/kitchen/diner)
 "bE" = (
-/obj/machinery/portable_atmospherics/canister/toxins,
+/obj/machinery/portable_atmospherics/canister/plasma,
 /turf/open/floor/iron/dark,
 /area/engineering/atmos)
 "bL" = (
