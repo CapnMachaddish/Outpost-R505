@@ -462,6 +462,32 @@
 	vary = TRUE
 	sound = 'modular_skyrat/modules/emotes/sound/voice/goose_honk.ogg'
 
+//R505 addition - I'm sorry
+/datum/emote/living/baranyuu
+	key = "baranyuu"
+	key_third_person = "meows..?"
+	message = "meows...?"
+	emote_type = EMOTE_AUDIBLE
+	vary = TRUE
+	sound = 'modular_R505/sound/creatures/necoarc/baranyuu.ogg'
+
+//R505 addition - meow!!
+/datum/emote/living/marmeow
+	key = "marmeow"
+	key_third_person = "meows!"
+	message = "meows!"
+	emote_type = EMOTE_AUDIBLE
+	vary = TRUE
+	sound = 'modular_R505/sound/voice/marmeow.ogg'
+
+//datum/emote/living/merowr
+	key = "merowr"
+	key_third_person = "merowrs!"
+	message = "merowrs!"
+	emote_type = EMOTE_AUDIBLE
+	vary = TRUE
+	sound = 'modular_R505/sound/voice/merowr.ogg'
+
 //R505 addition - MANDATORY EMOTE FOR ALL AVALI
 /datum/emote/living/chirp
 	key = "chirp"
