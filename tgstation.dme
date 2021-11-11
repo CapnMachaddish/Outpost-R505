@@ -3973,6 +3973,7 @@
 #include "modular_R505\code\objects\doors\blastdoor.dm"
 #include "modular_R505\code\objects\doors\windowdoor.dm"
 #include "modular_R505\code\objects\items\towel.dm"
+#include "modular_R505\code\objects\items\organs\pacemaker.dm"
 #include "modular_R505\code\objects\items\stacks\tile_stone.dm"
 #include "modular_R505\code\turfs\stone_floor.dm"
 #include "modular_skyrat\master_files\code\__DEFINES\chat.dm"
