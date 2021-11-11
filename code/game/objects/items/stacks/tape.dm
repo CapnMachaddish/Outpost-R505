@@ -22,7 +22,7 @@
 
 	if(!istype(target))
 		return
-
+/* //R505 Edit
 	//SKYRAT EDIT ADDITION
 	if(istype(target, /obj/item/clothing/shoes/combat/peacekeeper))
 		var/obj/item/clothing/shoes/combat/peacekeeper/boot = target
@@ -39,7 +39,7 @@
 				to_chat(user, "<span class='notice'>[src] does not have enough tape in it!</span>")
 				return
 	//SKYRAT EDIT END
-
+*/ //R505 Edit - End
 	if(target.embedding && target.embedding == conferred_embed)
 		to_chat(user, span_warning("[target] is already coated in [src]!"))
 		return

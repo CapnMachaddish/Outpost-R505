@@ -300,11 +300,11 @@
 	inhand_icon_state = "jackboots"
 	worn_icon_state = "peacekeeper"
 	armor = list(MELEE = 15, BULLET = 20, LASER = 20, ENERGY = 20, BOMB = 20, BIO = 10, RAD = 0, FIRE = 60, ACID = 35)
-
+/* //R505 Edit
 /obj/item/clothing/shoes/combat/peacekeeper/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/squeak, list('modular_skyrat/master_files/sound/effects/suitstep1.ogg'=1,'modular_skyrat/master_files/sound/effects/suitstep2.ogg'=1), 40, falloff_exponent = SOUND_FALLOFF_EXPONENT)
-
+*/  //R505 Edit - End
 /obj/item/clothing/suit/armor/riot/peacekeeper
 	name = "peacekeeper riotsuit"
 	icon = 'modular_skyrat/master_files/icons/obj/clothing/suits.dmi'
