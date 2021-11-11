@@ -71,6 +71,9 @@
 /obj/item/clothing/sextoy/nipple_clamps/process(delta_time)
 	. = ..()
 	var/mob/living/carbon/human/U = loc
+	if(!HAS_TRAIT(U, TRAIT_MASOCHISM))
+		return
+
 	var/obj/item/organ/genital/breasts/B = U.getorganslot(ORGAN_SLOT_BREASTS)
 	arousal_comp.adjustArousalLoss(1 * delta_time)
 

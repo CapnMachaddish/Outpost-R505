@@ -23,13 +23,13 @@
 
 #define AROUSAL_MINIMUM 	0
 #define AROUSAL_MAXIMUM 	100
-#define AROUSAL_RATE		2
+#define AROUSAL_RATE		1	//Default rate of which the mob's arousal increases.
 #define CLIMAX_COOLDOWN		4 SECONDS	//AKA cock clock
-#define AROUSAL_TICKRATE	1625//Lower numbers will update arousal quicker
+#define AROUSAL_TICKRATE	3000//Lower numbers will update arousal quicker
 #define AROUSAL_ERECT		66	//The amount of arousalloss before genitals are defined as erect
 #define AROUSAL_CHUB		40	//The amount genitals are defined as half-erect
 #define AROUSAL_CLIMAX		30	//When you can begin to do some lewd actions like coom
-#define AROUSAL		"arousal"
+#define AROUSAL	"arousal"
 
 #define AROUSED_MESSAGE_CHANCE	5	//The chance per tick the mob will make a random message when fully erect
 #define AROUSED_MESSAGES list("You feel a bit hot.", "You feel strong sexual urges.", "You feel in the mood.", "You're ready to go down on someone.")
@@ -49,5 +49,5 @@
 
 #define STRAPON_TRAIT 		"strapon"
 
-//This is just for less typing, haddish
+//This is just for less typing
 #define AROUSAL_VAR(varname, from)	var/datum/component/arousal/##varname = from.GetComponent(/datum/component/arousal)
