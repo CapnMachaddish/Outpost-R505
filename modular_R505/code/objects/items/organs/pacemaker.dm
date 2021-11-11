@@ -9,7 +9,7 @@
 	slot = ORGAN_SLOT_HEART_AID
 	organ_flags = ORGAN_SYNTHETIC
 	w_class = WEIGHT_CLASS_TINY
-	maxHealth = 50
+	maxHealth = 35
 
 	healing_factor = 0
 	decay_factor = 0
@@ -57,10 +57,21 @@
 	REMOVE_TRAIT(M, TRAIT_STABLEHEART, type)
 	REMOVE_TRAIT(M, TRAIT_NOCRITDAMAGE, type)
 
+/obj/item/organ/pacemaker/horrible
+	name = "coin with wires attached"
+	desc = "What could this be used for?"
+	used_name = "rusted coin"
+	used_desc = "It smells like chicken."
+	icon_state = "coin"
+	maxHealth = 10
+
+/obj/item/organ/pacemaker/weak
+	maxHealth = 15
+
 /obj/item/organ/pacemaker/t2
 	name = "upgraded pacemaker"
 	desc = "Lasts longer than its predecessor."
 	used_name = "burnt-out pacemaker"
 	used_name = "Lasted longer than its predecessor."
 	icon_state = "pacemaker_2"
-	maxHealth = 75
+	maxHealth = 50

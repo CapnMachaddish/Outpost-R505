@@ -15,6 +15,11 @@
 /datum/augment_item/implant/chest
 	slot = AUGMENT_SLOT_CHEST_IMPLANT
 
+/datum/augment_item/implant/chest/pacemaker
+	name = "Pacemaker"
+	cost = 1
+	path = /obj/item/organ/pacemaker/weak
+
 //LEFT ARM IMPLANTS
 /datum/augment_item/implant/l_arm
 	slot = AUGMENT_SLOT_LEFT_ARM_IMPLANT
