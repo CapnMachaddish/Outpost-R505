@@ -9,6 +9,7 @@
 	slot = ORGAN_SLOT_HEART_AID
 	organ_flags = ORGAN_SYNTHETIC
 	w_class = WEIGHT_CLASS_TINY
+	maxHealth = 50
 
 	healing_factor = 0
 	decay_factor = 0
@@ -55,3 +56,11 @@
 	desc = used_desc
 	REMOVE_TRAIT(M, TRAIT_STABLEHEART, type)
 	REMOVE_TRAIT(M, TRAIT_NOCRITDAMAGE, type)
+
+/obj/item/organ/pacemaker/t2
+	name = "upgraded pacemaker"
+	desc = "Lasts longer than its predecessor."
+	used_name = "burnt-out pacemaker"
+	used_name = "Lasted longer than its predecessor."
+	icon_state = "pacemaker_2"
+	maxHealth = 75
