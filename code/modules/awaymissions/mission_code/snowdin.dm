@@ -4,7 +4,7 @@
 	name = "Snowdin"
 	icon_state = "awaycontent1"
 	requires_power = FALSE
-	static_lighting = FALSE
+	static_lighting = TRUE
 
 /area/awaymission/snowdin/outside
 	name = "Snowdin Tundra Plains"
