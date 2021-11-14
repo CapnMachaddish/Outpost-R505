@@ -480,7 +480,7 @@
 	vary = TRUE
 	sound = 'modular_R505/sound/voice/marmeow.ogg'
 
-//datum/emote/living/merowr
+/datum/emote/living/merowr
 	key = "merowr"
 	key_third_person = "merowrs!"
 	message = "merowrs!"
