@@ -282,17 +282,17 @@
 	. = list()
 	if(!bloodtype)
 		return
-
+	//R505 edit - hopefully makes Universal blood actually universal
 	var/static/list/bloodtypes_safe = list(
-		"A-" = list("A-", "O-"),
-		"A+" = list("A-", "A+", "O-", "O+"),
-		"B-" = list("B-", "O-"),
-		"B+" = list("B-", "B+", "O-", "O+"),
-		"AB-" = list("A-", "B-", "O-", "AB-"),
-		"AB+" = list("A-", "A+", "B-", "B+", "O-", "O+", "AB-", "AB+"),
-		"O-" = list("O-"),
-		"O+" = list("O-", "O+"),
-		"L" = list("L"),
+		"A-" = list("A-", "O-", "U"),
+		"A+" = list("A-", "A+", "O-", "O+", "U"),
+		"B-" = list("B-", "O-", "U"),
+		"B+" = list("B-", "B+", "O-", "O+", "U"),
+		"AB-" = list("A-", "B-", "O-", "AB-", "U"),
+		"AB+" = list("A-", "A+", "B-", "B+", "O-", "O+", "AB-", "AB+", "U"),
+		"O-" = list("O-", "U"),
+		"O+" = list("O-", "O+", "U"),
+		"L" = list("L", "U"),
 		"U" = list("A-", "A+", "B-", "B+", "O-", "O+", "AB-", "AB+", "L", "U")
 	)
 

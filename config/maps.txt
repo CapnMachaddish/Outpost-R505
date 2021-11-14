@@ -29,6 +29,11 @@ map kilostation
 	votable
 endmap
 
+map tradership
+	maxplayers 15
+	votable
+endmap
+
 map icebox
 	minplayers 25
 	votable

@@ -58,11 +58,12 @@
 
 /obj/item/spanking_pad/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	AROUSAL_VAR(partner, M)
+	if(!partner)
 		return
 
 	var/message = ""
-	if(M.client?.prefs.sextoys_pref == "Yes")
+	if(M.client?.prefs.sextoys_pref == "Yes" && HAS_TRAIT(M, TRAIT_MASOCHISM))
 		switch(user.zone_selected) //to let code know what part of body we gonna spank.
 			if(BODY_ZONE_PRECISE_GROIN)
 				if(M.is_bottomless())
@@ -70,8 +71,8 @@
 					if(M.client?.prefs.sextoys_pref == "Yes")
 						if(prob(40) && (M.stat != DEAD))
 							M.emote(pick("twitch_s","moan","blush","gasp"))
-						M.adjustArousal(2)
-						M.adjustPain(4)
+						partner.adjustArousalLoss(2)
+						//M.adjustPain(4)
 						M.apply_status_effect(/datum/status_effect/spanked)
 						if(HAS_TRAIT(M, TRAIT_MASOCHISM || TRAIT_NYMPHOMANIA || TRAIT_BIMBO))
 							SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "pervert spanked", /datum/mood_event/perv_spanked)

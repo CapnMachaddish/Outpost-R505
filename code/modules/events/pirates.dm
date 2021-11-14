@@ -236,6 +236,7 @@
 	icon_keyboard = "syndie_key"
 	light_color = COLOR_SOFT_RED
 	possible_destinations = "pirateship_away;pirateship_home;pirateship_custom;whiteship_home" //SKYRAT EDIT CHANGE
+	uses_overmap = FALSE
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate/pirate
 	name = "pirate shuttle navigation computer"

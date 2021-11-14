@@ -25,6 +25,7 @@
 	possible_destinations = "syndicate_ne;syndicate_nw;syndicate_n;syndicate_se;syndicate_sw;syndicate_s"
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	flags_1 = NODECONSTRUCT_1
+	uses_overmap = FALSE
 
 /datum/map_template/shuttle/slaver_ship
 	port_id = "slaver ship"

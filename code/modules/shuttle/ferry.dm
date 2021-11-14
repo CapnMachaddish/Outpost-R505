@@ -7,6 +7,7 @@
 	req_access = list(ACCESS_CENT_GENERAL)
 	var/allow_silicons = FALSE
 	var/allow_emag = FALSE
+	uses_overmap = FALSE	//Can't return at the moment if this is sent off
 
 /obj/machinery/computer/shuttle/ferry/emag_act(mob/user)
 	if(!allow_emag)

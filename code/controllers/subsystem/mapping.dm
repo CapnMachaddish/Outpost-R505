@@ -13,6 +13,8 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/map_templates = list()
 
+	var/list/planet_templates = list()
+
 	var/list/ruins_templates = list()
 	var/list/space_ruins_templates = list()
 	var/list/lava_ruins_templates = list()
@@ -70,20 +72,13 @@ SUBSYSTEM_DEF(mapping)
 			to_chat(world, span_boldannounce("Unable to load next or default map config, defaulting to Meta Station"))
 			config = old_config
 	initialize_biomes()
+	preloadTemplates()
 	loadWorld()
 	repopulate_sorted_areas()
 	process_teleport_locs() //Sets up the wizard teleport locations
-	preloadTemplates()
 
 #ifndef LOWMEMORYMODE
-	// Create space ruin levels
-	while (space_levels_so_far < config.space_ruin_levels)
-		++space_levels_so_far
-		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-	// and one level with no ruins
-	for (var/i in 1 to config.space_empty_levels)
-		++space_levels_so_far
-		empty_space = add_new_zlevel("Empty Area [space_levels_so_far]", list(ZTRAIT_LINKAGE = CROSSLINKED))
+	empty_space = add_new_zlevel("Empty Area [space_levels_so_far]", list(ZTRAIT_LINKAGE = UNAFFECTED))
 
 	// Pick a random away mission.
 	if(CONFIG_GET(flag/roundstart_away))
@@ -97,11 +92,6 @@ SUBSYSTEM_DEF(mapping)
 
 	// Generate mining ruins
 	loading_ruins = TRUE
-	var/list/lava_ruins = levels_by_trait(ZTRAIT_LAVA_RUINS)
-	if (lava_ruins.len)
-		seedRuins(lava_ruins, CONFIG_GET(number/lavaland_budget), list(/area/lavaland/surface/outdoors/unexplored), lava_ruins_templates)
-		for (var/lava_z in lava_ruins)
-			spawn_rivers(lava_z)
 
 	//SKYRAT EDIT ADDITION
 	//Ocean ruins
@@ -242,7 +232,7 @@ Used by the AI doomsday and the self-destruct nuke.
 	z_list = SSmapping.z_list
 
 #define INIT_ANNOUNCE(X) to_chat(world, span_boldannounce("[X]")); log_world(X)
-/datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, list/traits, list/default_traits, silent = FALSE)
+/datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, list/traits, list/default_traits, silent = FALSE, datum/overmap_object/ov_obj = null)
 	. = list()
 	var/start_time = REALTIMEOFDAY
 
@@ -276,7 +266,7 @@ Used by the AI doomsday and the self-destruct nuke.
 	var/start_z = world.maxz + 1
 	var/i = 0
 	for (var/level in traits)
-		add_new_zlevel("[name][i ? " [i + 1]" : ""]", level)
+		add_new_zlevel("[name][i ? " [i + 1]" : ""]", level, null, overmap_obj = ov_obj)
 		++i
 
 	// load the maps
@@ -295,10 +285,13 @@ Used by the AI doomsday and the self-destruct nuke.
 	// ensure we have space_level datums for compiled-in maps
 	InitializeDefaultZLevels()
 
+	//Load overmap
+	SSovermap.MappingInit()
+
 	// load the station
 	station_start = world.maxz + 1
 	INIT_ANNOUNCE("Loading [config.map_name]...")
-	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_STATION)
+	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_STATION, ov_obj = new config.overmap_object_type(SSovermap.main_system, rand(3,10), rand(3,10)))
 
 	if(SSdbcore.Connect())
 		var/datum/db_query/query_round_map_name = SSdbcore.NewQuery({"
@@ -309,10 +302,10 @@ Used by the AI doomsday and the self-destruct nuke.
 
 #ifndef LOWMEMORYMODE
 	// TODO: remove this when the DB is prepared for the z-levels getting reordered
-	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
+	while (world.maxz < 5 && space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
-		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-
+		add_new_zlevel("Ruins Area [space_levels_so_far]", ZTRAITS_SPACE, overmap_obj = new /datum/overmap_object/ruins(SSovermap.main_system, rand(1,SSovermap.main_system.maxx), rand(1,SSovermap.main_system.maxy)))
+	//Load planets
 	//SKYRAT EDIT CHANGE BEGIN
 	var/mining_map_to_load = SSrandommining.chosen_map
 	var/mining_traits_to_load = GLOB.mining_traits[SSrandommining.traits]
@@ -326,11 +319,11 @@ Used by the AI doomsday and the self-destruct nuke.
 		if(!mining_map_to_load)
 			INIT_ANNOUNCE("MINING MAP ERROR: No loadable map z-levels detected, reverting to backup mining system!")
 			if(config.minetype == "lavaland")
-				LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
+				var/datum/planet_template/lavaland_template = planet_templates[/datum/planet_template/lavaland]
+				lavaland_template.LoadTemplate(SSovermap.main_system, rand(5,20), rand(5,20))
 			else if (!isnull(config.minetype) && config.minetype != "none")
 				INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
 	//SKYRAT EDIT END
-
 #endif
 
 	if(LAZYLEN(FailedZs)) //but seriously, unless the server's filesystem is messed up this will never happen
@@ -447,10 +440,15 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 		var/datum/map_template/T = new(path = "[path][map]", rename = "[map]")
 		map_templates[T.name] = T
 
+	preloadPlanetTemplates()
 	preloadRuinTemplates()
 	preloadShuttleTemplates()
 	preloadShelterTemplates()
 	preloadHolodeckTemplates()
+
+/datum/controller/subsystem/mapping/proc/preloadPlanetTemplates()
+	for(var/path in subtypesof(/datum/planet_template))
+		planet_templates[path] = new path()
 
 /datum/controller/subsystem/mapping/proc/preloadRuinTemplates()
 	// Still supporting bans by filename

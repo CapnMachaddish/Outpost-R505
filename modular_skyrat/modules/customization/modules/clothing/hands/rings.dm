@@ -20,7 +20,7 @@
 
 /obj/item/clothing/gloves/ring/diamond
 	name = "diamond ring"
-	desc = "An expensive ring, studded with a diamond. Cultures have used these rings in courtship for a millenia."
+	desc = "An expensive ring, studded with a diamond. Cultures have used these rings in courtship for millenia."
 	icon_state = "ringdiamond"
 	inhand_icon_state = "dring"
 	worn_icon_state = "dring"

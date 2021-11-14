@@ -100,7 +100,9 @@ SUBSYSTEM_DEF(job)
 	JobDebug("Overflow role set to : [new_overflow.type]")
 
 
-/datum/controller/subsystem/job/proc/SetupOccupations()
+/datum/controller/subsystem/job/proc/SetupOccupations(faction)
+	if(!faction)
+		faction = SSmapping.config.job_faction
 	name_occupations = list()
 	type_occupations = list()
 

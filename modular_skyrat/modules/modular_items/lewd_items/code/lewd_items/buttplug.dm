@@ -107,16 +107,10 @@
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/sextoy/buttplug/process(delta_time)
-	var/mob/living/carbon/human/U = loc
 	//i tried using switch here, but it need static value, and u.arousal can't be it. So fuck switches. Reject it, embrace the IFs
-	if(current_size == "small" && U.arousal < 30)
-		U.adjustArousal(0.6 * delta_time)
-		U.adjustPleasure(0.7 * delta_time)
-	if(current_size == "medium" && U.arousal < 40)
-		U.adjustArousal(0.8 * delta_time)
-		U.adjustPleasure(0.8 * delta_time)
-	if(current_size == "big" && U.arousal < 50)
-		U.adjustArousal(1 * delta_time)
-		U.adjustPleasure(1 * delta_time)
-	if(current_size == "big" && U.pain < 22.5) //yeah, this will cause pain. No buttplug gib intended, sry
-		U.adjustPain (1*delta_time)
+	if(current_size == "small" && arousal_comp.arousalloss < 30)
+		arousal_comp.adjustArousalLoss(0.6 * delta_time)
+	if(current_size == "medium" && arousal_comp.arousalloss < 40)
+		arousal_comp.adjustArousalLoss(0.8 * delta_time)
+	if(current_size == "big" && arousal_comp.arousalloss < 50)
+		arousal_comp.adjustArousalLoss(1 * delta_time)

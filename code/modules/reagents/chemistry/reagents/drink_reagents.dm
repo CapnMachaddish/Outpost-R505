@@ -238,6 +238,19 @@
 		holder.remove_reagent(/datum/reagent/consumable/capsaicin, 1 * delta_time)
 	..()
 
+/datum/reagent/consumable/milk/expose_turf(turf/exposed_turf, reac_volume)
+	. = ..()
+	if(reac_volume < MINIMUM_CLIMAX_DECAL_VOLUME)
+		return
+	if(!isopenturf(exposed_turf))
+		return
+	if(isspaceturf(exposed_turf))
+		return
+	var/obj/effect/decal/cleanable/ejaculate/milk/liquid = locate() in exposed_turf
+	if(!liquid)
+		liquid = new(exposed_turf)
+	liquid.reagents.add_reagent(/datum/reagent/consumable/milk, reac_volume)
+
 /datum/reagent/consumable/soymilk
 	name = "Soy Milk"
 	description = "An opaque white liquid made from soybeans."
@@ -254,6 +267,20 @@
 		. = TRUE
 	..()
 
+//Just regular milk decal. Make a new decal soon that has a different color
+/datum/reagent/consumable/soymilk/expose_turf(turf/exposed_turf, reac_volume)
+	. = ..()
+	if(reac_volume < MINIMUM_CLIMAX_DECAL_VOLUME)
+		return
+	if(!isopenturf(exposed_turf))
+		return
+	if(isspaceturf(exposed_turf))
+		return
+	var/obj/effect/decal/cleanable/ejaculate/milk/liquid = locate() in exposed_turf
+	if(!liquid)
+		liquid = new(exposed_turf)
+	liquid.reagents.add_reagent(/datum/reagent/consumable/milk, reac_volume)
+
 /datum/reagent/consumable/cream
 	name = "Cream"
 	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
@@ -269,6 +296,20 @@
 		M.heal_bodypart_damage(1, 0, 0)
 		. = TRUE
 	..()
+
+//Same as above, this is just like milk
+/datum/reagent/consumable/cream/expose_turf(turf/exposed_turf, reac_volume)
+	. = ..()
+	if(reac_volume < MINIMUM_CLIMAX_DECAL_VOLUME)
+		return
+	if(!isopenturf(exposed_turf))
+		return
+	if(isspaceturf(exposed_turf))
+		return
+	var/obj/effect/decal/cleanable/ejaculate/milk/liquid = locate() in exposed_turf
+	if(!liquid)
+		liquid = new(exposed_turf)
+	liquid.reagents.add_reagent(/datum/reagent/consumable/milk, reac_volume)
 
 /datum/reagent/consumable/coffee
 	name = "Coffee"

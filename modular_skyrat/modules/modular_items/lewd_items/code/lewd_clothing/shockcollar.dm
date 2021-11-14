@@ -49,7 +49,7 @@
 		s.start()
 
 		L.Paralyze(30)
-		L.adjustPain(10)
+		//L.adjustPain(10)
 		L.stuttering += 60
 
 	if(master)

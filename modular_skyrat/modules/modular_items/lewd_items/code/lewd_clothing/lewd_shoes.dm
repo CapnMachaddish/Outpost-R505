@@ -57,11 +57,11 @@
 		slowdown = 4
 
 	//Pain effect
-	if(discomfort >= 80 && U.body_position != LYING_DOWN)
-		U.adjustPain(1)
+	//if(discomfort >= 80 && U.body_position != LYING_DOWN)
+		//U.adjustPain(1)
 
 	if(discomfort >=100 && U.body_position != LYING_DOWN)
-		U.adjustPain(4)
+		//U.adjustPain(4)
 		slowdown = 6
 		if(prob(10))
 			U.Knockdown(1)

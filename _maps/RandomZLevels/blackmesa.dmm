@@ -115,12 +115,6 @@
 	dir = 8
 	},
 /area/awaymission/black_mesa)
-"aX" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "frontwallbottom"
-	},
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "ba" = (
 /turf/open/floor/plating/cobblestone,
 /area/awaymission/black_mesa)
@@ -592,7 +586,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
 "fY" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur,
+/mob/living/simple_animal/hostile/mold/centaur,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
 "fZ" = (
@@ -676,10 +670,6 @@
 /obj/effect/turf_decal/stripes,
 /obj/effect/mob_spawn/human/scientist,
 /turf/open/floor/plating/ice,
-/area/awaymission/black_mesa)
-"gM" = (
-/obj/effect/mob_spawn/human/black_mesa/hecu,
-/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "gN" = (
 /obj/structure/closet/crate/large,
@@ -1608,10 +1598,6 @@
 /obj/structure/chair/sofa/bench/left,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"oQ" = (
-/obj/structure/fluff/bus/dense,
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
 "oV" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 1
@@ -1619,12 +1605,6 @@
 /obj/structure/chair/sofa/bench,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
-"oZ" = (
-/obj/structure/fluff/bus/passable{
-	icon_state = "wheredahoodat"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
 "pe" = (
 /obj/structure/railing{
 	dir = 4
@@ -1691,13 +1671,6 @@
 /obj/structure/chair/sofa/bench,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"qi" = (
-/obj/structure/fluff/bus/passable/seat,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/dark/airless{
-	icon_state = "bus"
-	},
-/area/awaymission/black_mesa/outside)
 "qk" = (
 /obj/structure/rack/shelf,
 /turf/open/floor/iron/smooth,
@@ -1713,13 +1686,6 @@
 	},
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
-"qn" = (
-/obj/structure/fluff/bus/passable/seat,
-/obj/item/food/meatball,
-/turf/open/floor/iron/dark/airless{
-	icon_state = "bus"
-	},
-/area/awaymission/black_mesa/outside)
 "qp" = (
 /turf/open/floor/iron/dark/side{
 	dir = 8
@@ -1730,28 +1696,10 @@
 	dir = 4
 	},
 /area/awaymission/black_mesa)
-"qt" = (
-/obj/structure/fluff/bus/passable/seat,
-/obj/effect/decal/cleanable/dirt,
-/obj/item/toy/plush/awakenedplushie,
-/turf/open/floor/iron/dark/airless{
-	icon_state = "bus"
-	},
-/area/awaymission/black_mesa/outside)
-"qy" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "qA" = (
 /obj/structure/lattice/catwalk,
 /turf/open/floor/circuit/red,
 /area/awaymission/black_mesa)
-"qB" = (
-/obj/structure/fluff/bus/passable/seat{
-	pixel_y = 15
-	},
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "qC" = (
 /obj/structure/chair/stool,
 /turf/open/floor/iron/smooth,
@@ -1761,12 +1709,6 @@
 	dir = 1
 	},
 /area/awaymission/black_mesa)
-"qM" = (
-/obj/structure/fluff/bus/passable/seat,
-/obj/item/food/meatball,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "qN" = (
 /obj/structure/chair/office{
 	dir = 8
@@ -1814,21 +1756,10 @@
 /obj/item/statuebust/hippocratic,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"rg" = (
-/obj/structure/fluff/bus/passable/seat,
-/obj/item/food/grown/cherry_bomb,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "rh" = (
 /obj/structure/fence/door,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"ri" = (
-/obj/structure/fluff/bus/passable/seat/driver,
-/obj/effect/decal/cleanable/dirt,
-/obj/item/food/grown/citrus/orange,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "rl" = (
 /obj/structure/railing,
 /obj/effect/random_mob_placer/xen,
@@ -1848,29 +1779,9 @@
 	},
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"rv" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "hoodtop"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
-"rw" = (
-/obj/structure/fluff/bus/passable,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/dark/airless{
-	icon_state = "bus"
-	},
-/area/awaymission/black_mesa/outside)
 "rz" = (
 /turf/open/space/basic,
 /area/space)
-"rB" = (
-/obj/structure/fluff/bus/passable,
-/obj/item/storage/firstaid/regular,
-/turf/open/floor/iron/dark/airless{
-	icon_state = "bus"
-	},
-/area/awaymission/black_mesa/outside)
 "rD" = (
 /obj/effect/turf_decal/trimline/darkblue/filled/corner{
 	dir = 4
@@ -1907,12 +1818,6 @@
 /obj/effect/mob_spawn/human/scientist,
 /turf/open/floor/iron/green,
 /area/awaymission/black_mesa)
-"rT" = (
-/obj/structure/fluff/bus/passable,
-/turf/open/floor/iron/dark/airless{
-	icon_state = "bus"
-	},
-/area/awaymission/black_mesa/outside)
 "rW" = (
 /obj/machinery/suit_storage_unit{
 	icon_state = "open"
@@ -1922,14 +1827,6 @@
 /obj/structure/window/plasma/reinforced/spawner,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
-"rZ" = (
-/obj/structure/fluff/bus/passable,
-/obj/structure/closet/crate/freezer,
-/obj/item/food/meatball,
-/obj/item/food/meatball,
-/obj/item/food/meatball,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "sa" = (
 /obj/structure/closet/crate/bin,
 /turf/open/floor/iron/green/corner{
@@ -1951,17 +1848,6 @@
 	},
 /turf/open/chasm,
 /area/awaymission/black_mesa)
-"sm" = (
-/obj/structure/fluff/bus/passable,
-/obj/effect/mine/sound/bwoink,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
-"sp" = (
-/obj/structure/fluff/bus/passable,
-/obj/item/reagent_containers/food/condiment/saltshaker,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "ss" = (
 /obj/structure/chair/office{
 	dir = 8
@@ -1995,18 +1881,6 @@
 	},
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"sL" = (
-/obj/structure/fluff/bus/passable,
-/obj/item/food/meatball,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
-"sM" = (
-/obj/structure/fluff/bus/passable{
-	icon_state = "topdoor"
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "sR" = (
 /obj/machinery/computer{
 	dir = 1
@@ -2019,12 +1893,6 @@
 	},
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
-"sV" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "hoodbottom"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
 "sY" = (
 /obj/structure/rack/shelf,
 /obj/item/gun_maintenance_supplies,
@@ -2033,10 +1901,6 @@
 /obj/item/storage/firstaid/regular,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"tg" = (
-/obj/structure/fluff/bus/dense,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "ti" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/locked,
@@ -2139,12 +2003,6 @@
 	},
 /turf/open/chasm,
 /area/awaymission/black_mesa)
-"tZ" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "frontwallbottomrear"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
 "uf" = (
 /obj/machinery/light/cold{
 	dir = 1
@@ -2154,29 +2012,10 @@
 	},
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
-"ug" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "frontwallbottom"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
-"uk" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "reartire"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
 "ul" = (
 /obj/machinery/smoke_machine,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa)
-"uo" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "frontwallbottom"
-	},
-/obj/effect/decal/cleanable/oil,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "up" = (
 /obj/machinery/modular_computer/console/preset/civilian{
 	dir = 1
@@ -2193,13 +2032,6 @@
 /obj/structure/fence/door,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa)
-"uv" = (
-/obj/structure/fluff/bus/passable{
-	icon_state = "bottomdoor";
-	layer = 3
-	},
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "uy" = (
 /obj/effect/turf_decal/stripes{
 	dir = 8
@@ -2211,12 +2043,6 @@
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/mineral/titanium/blue,
 /area/awaymission/black_mesa)
-"uB" = (
-/obj/structure/fluff/bus/dense{
-	icon_state = "fronttire"
-	},
-/turf/open/floor/plating/beach/sand,
-/area/awaymission/black_mesa/outside)
 "uD" = (
 /obj/machinery/door/airlock/science/glass,
 /turf/open/floor/iron/smooth_large,
@@ -2460,11 +2286,6 @@
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
-"xo" = (
-/obj/structure/fluff/bus/passable,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "xp" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 1
@@ -2804,10 +2625,6 @@
 /obj/item/surgicaldrill/alien,
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa)
-"Bn" = (
-/obj/effect/decal/hammerandsickle,
-/turf/open/floor/bluespace,
-/area/awaymission/black_mesa)
 "Bv" = (
 /obj/item/food/urinalcake,
 /turf/open/floor/iron/smooth_large,
@@ -2861,7 +2678,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa)
 "BU" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur,
+/mob/living/simple_animal/hostile/mold/centaur,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa)
 "Cc" = (
@@ -3543,11 +3360,6 @@
 	},
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa)
-"Iw" = (
-/obj/structure/fluff/bus/passable/seat,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/cobblestone,
-/area/awaymission/black_mesa/outside)
 "IA" = (
 /obj/structure/barricade/wooden,
 /turf/open/floor/plating/beach/sand,
@@ -4451,7 +4263,7 @@
 /obj/structure/chair/office{
 	dir = 8
 	},
-/obj/effect/mob_spawn/human/black_mesa/hecu,
+/mob/living/simple_animal/hostile/blackmesa/hecu/ranged/smg,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa)
 "QR" = (
@@ -17139,7 +16951,6 @@ MI
 Nz
 Nz
 Nz
-Bn
 Nz
 Nz
 Nz
@@ -17150,7 +16961,8 @@ Nz
 Nz
 Nz
 Nz
-Bn
+Nz
+Nz
 Nz
 Nz
 Nz
@@ -38958,10 +38770,10 @@ rz
 rz
 Cc
 yG
-oQ
-qi
-rw
-tZ
+yG
+yG
+yG
+yG
 yG
 yG
 yG
@@ -39215,10 +39027,10 @@ rz
 rz
 Cc
 yG
-oQ
-qn
-rB
-ug
+yG
+yG
+yG
+yG
 yG
 yG
 yG
@@ -39472,10 +39284,10 @@ rz
 Cc
 Cc
 yG
-oQ
-qt
-rT
-uk
+yG
+yG
+yG
+yG
 yG
 yG
 yG
@@ -39729,10 +39541,10 @@ rz
 Cc
 vp
 vp
-tg
-qy
-rZ
-aX
+vp
+vp
+vp
+vp
 vp
 vp
 vp
@@ -39986,10 +39798,10 @@ rz
 Cc
 vp
 vp
-tg
-qB
-sm
-aX
+vp
+vp
+vp
+vp
 vp
 vp
 vp
@@ -40243,10 +40055,10 @@ rz
 Cc
 vp
 vp
-tg
-qM
-sp
-uo
+vp
+vp
+vp
+vp
 vp
 vp
 vp
@@ -40500,10 +40312,10 @@ rz
 Cc
 vp
 vp
-tg
-rg
-xo
-aX
+vp
+vp
+vp
+vp
 vp
 vp
 FL
@@ -40757,10 +40569,10 @@ rz
 Cc
 vp
 vp
-tg
-Iw
-sL
-aX
+vp
+vp
+vp
+vp
 vp
 vp
 vp
@@ -41014,10 +40826,10 @@ rz
 Cc
 vp
 vp
-tg
-ri
-sM
-uv
+vp
+vp
+vp
+vp
 vp
 vp
 vp
@@ -41271,10 +41083,10 @@ rz
 Cc
 Cc
 yG
-oZ
-rv
-sV
-uB
+yG
+yG
+yG
+yG
 vp
 JC
 vp
@@ -44112,7 +43924,7 @@ Az
 QQ
 XH
 Ve
-gM
+Qe
 Az
 mq
 UL
@@ -44374,7 +44186,7 @@ Ef
 LI
 UL
 UL
-oq
+UL
 kN
 Yr
 No
@@ -44876,14 +44688,14 @@ ts
 vz
 kN
 UL
-oq
+UL
 UL
 mq
 Az
-gM
+Qe
 Ve
 Ve
-gM
+Qe
 Az
 Az
 UL
@@ -45648,7 +45460,7 @@ Yr
 jO
 kN
 UL
-oq
+UL
 UL
 UL
 UL
@@ -45909,7 +45721,7 @@ UL
 UL
 UL
 UL
-oq
+UL
 UL
 UL
 UL

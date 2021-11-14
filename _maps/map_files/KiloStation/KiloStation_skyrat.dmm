@@ -2925,6 +2925,7 @@
 "aji" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/turf_decal/sand/plating,
+/obj/structure/cable,
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "ajj" = (
@@ -48799,6 +48800,9 @@
 	},
 /turf/open/floor/circuit/telecomms,
 /area/science/xenobiology)
+"gFF" = (
+/turf/closed/wall,
+/area/maintenance/external)
 "gGl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 9
@@ -64885,6 +64889,13 @@
 	},
 /turf/closed/wall,
 /area/engineering/atmos)
+"nHG" = (
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/west,
+/turf/open/floor/plating{
+	icon_state = "platingdmg3"
+	},
+/area/maintenance/external)
 "nHL" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/structure/chair/office{
@@ -66239,8 +66250,6 @@
 /turf/open/floor/iron/dark,
 /area/security/detectives_office)
 "okq" = (
-/obj/structure/table,
-/obj/machinery/recharger,
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -66249,6 +66258,9 @@
 	dir = 4
 	},
 /obj/machinery/status_display/ai/directional/east,
+/obj/machinery/computer/overmap_console{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/command/bridge)
 "okQ" = (
@@ -70098,6 +70110,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/cargo/sorting)
+"pKF" = (
+/obj/docking_port/stationary/medium{
+	name = "Kilo Shuttle Dock";
+	roundstart_template = /datum/map_template/shuttle/crow
+	},
+/turf/open/space/basic,
+/area/space)
 "pLk" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -81959,6 +81978,12 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/iron/dark,
 /area/hallway/primary/aft)
+"uTh" = (
+/obj/machinery/camera{
+	c_tag = "ESS Docking External"
+	},
+/turf/open/floor/plating/asteroid/airless,
+/area/space/nearstation)
 "uTl" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -82891,6 +82916,11 @@
 	},
 /turf/open/floor/plating,
 /area/command/heads_quarters/rd)
+"vmb" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/turf/open/floor/plating,
+/area/maintenance/external)
 "vmf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral{
@@ -83393,6 +83423,13 @@
 /obj/effect/turf_decal/box,
 /turf/open/floor/iron/dark,
 /area/engineering/supermatter/room)
+"vxP" = (
+/obj/structure/marker_beacon/burgundy{
+	name = "landing marker"
+	},
+/obj/effect/turf_decal/sand/plating,
+/turf/open/floor/plating/airless,
+/area/space/nearstation)
 "vxT" = (
 /obj/structure/table,
 /obj/effect/turf_decal/stripes/corner{
@@ -85848,6 +85885,15 @@
 /obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron/dark,
 /area/medical/surgery/room_b)
+"wAr" = (
+/obj/effect/turf_decal/sand/plating,
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/structure/cable,
+/turf/open/floor/plating/airless,
+/area/maintenance/external)
 "wAO" = (
 /turf/closed/wall,
 /area/service/bar)
@@ -125448,8 +125494,8 @@ aaa
 aaa
 aUz
 aeU
-aeu
-aeu
+aeU
+cna
 alB
 alB
 alB
@@ -125702,11 +125748,11 @@ aaa
 aaa
 aaa
 aaa
-aeu
-aeu
-aeu
-aeu
-aeu
+aeU
+aeU
+aeU
+aeU
+cna
 bwe
 bbx
 qyy
@@ -125958,12 +126004,12 @@ aaa
 aaa
 aeU
 aeU
-aeu
-aeu
-aeu
-aeu
-aeu
-aeu
+aeU
+aeU
+aeU
+aeU
+aeU
+cna
 alB
 aWJ
 ayv
@@ -126214,13 +126260,13 @@ aaa
 aaa
 aeU
 aeU
-aeu
-aeu
-aeu
-aeu
-aeu
-aeu
-aeu
+coy
+cna
+cna
+cna
+cna
+cna
+cna
 alB
 bfq
 aWJ
@@ -126470,9 +126516,9 @@ aaa
 aaa
 aaa
 aUz
-aeu
-aeu
-aeu
+vxP
+aeU
+cna
 alB
 alB
 alB
@@ -126724,12 +126770,12 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
+gFF
+gFF
+gFF
+uTh
 aeU
-aeu
-aeu
-aeu
+cna
 alB
 bbx
 aax
@@ -126980,13 +127026,13 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aeu
-aeu
-aeu
-aeu
+pKF
+vmb
+nHG
+wAr
+cna
+cna
+cna
 bwe
 kvc
 bfo
@@ -127238,12 +127284,12 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aeu
-aeu
-aeu
-aeu
+gFF
+gFF
+gFF
+aeU
+aeU
+aeU
 alB
 aWJ
 bfU
@@ -127496,11 +127542,11 @@ aaa
 aaa
 aaa
 aaa
+cmJ
 aaa
-aaa
-aeu
-aeu
-aeu
+vxP
+aeU
+aeU
 bwe
 bfY
 bdD
@@ -127754,7 +127800,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+cmJ
 aeU
 aeu
 aeu

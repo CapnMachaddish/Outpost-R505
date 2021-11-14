@@ -1,6 +1,7 @@
 #define SIPHONING 0
 #define SCRUBBING 1
-
+#define AGGFILTER 0
+#define REGFILTER 1
 /obj/machinery/atmospherics/components/unary/vent_scrubber
 	icon_state = "scrub_map-3"
 
@@ -16,6 +17,7 @@
 	shift_underlay_only = FALSE
 
 	var/scrubbing = SCRUBBING //0 = siphoning, 1 = scrubbing
+	var/pollutionscrubbing = REGFILTER //R505 Edit. 0 = active filter, 1 = passive
 
 	var/filter_types = list(/datum/gas/carbon_dioxide)
 	var/volume_rate = 200
@@ -97,7 +99,8 @@
 		"scrubbing" = scrubbing,
 		"widenet" = widenet,
 		"filter_types" = f_types,
-		"sigtype" = "status"
+		"sigtype" = "status",
+		"pollutionscrubbing" = pollutionscrubbing //R505 Edit
 	))
 
 	var/area/scrub_area = get_area(src)
@@ -141,6 +144,15 @@
 			scrub(tile)
 	return TRUE
 
+//R505 Edit
+/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/scrubPollution(var/scrub_amount, var/reqPower)
+	if(isopenturf(get_turf(src)))
+		var/turf/open/open_turf = get_turf(src)
+		if(open_turf.pollution)
+			open_turf.pollution.ScrubAmount(scrub_amount)
+			if(reqPower)
+				use_power((50 * scrub_amount)-100)
+//R505 Edit - End
 /obj/machinery/atmospherics/components/unary/vent_scrubber/proc/scrub(turf/tile)
 	if(!istype(tile))
 		return FALSE
@@ -153,6 +165,10 @@
 
 	if(scrubbing == SCRUBBING)
 		if(length(env_gases & filter_types))
+			if(pollutionscrubbing)
+				scrubPollution(2, TRUE) //R505 Edit
+			else
+				scrubPollution(8, TRUE) //R505 Edit
 			var/transfer_moles = min(1, volume_rate / environment.volume) * environment.total_moles()
 
 			//Take a gas sample
@@ -182,7 +198,7 @@
 			update_parents()
 
 	else //Just siphoning all air
-
+		scrubPollution(12, FALSE) //R505 Edit
 		var/transfer_moles = environment.total_moles() * (volume_rate / environment.volume)
 
 		var/datum/gas_mixture/removed = tile.remove_air(transfer_moles)
@@ -231,6 +247,13 @@
 		scrubbing = !scrubbing
 	if(scrubbing != old_scrubbing)
 		investigate_log(" was toggled to [scrubbing ? "scrubbing" : "siphon"] mode by [key_name(signal_sender)]",INVESTIGATE_ATMOS)
+
+//R505 Edit
+	if("pollutionscrubbing" in signal.data)
+		pollutionscrubbing = text2num(signal.data["pollutionscrubbing"])
+	if("toggle_pollutionscrubbing" in signal.data)
+		pollutionscrubbing = !pollutionscrubbing
+//R505 Edit - End
 
 	if("toggle_filter" in signal.data)
 		filter_types ^= gas_id2path(signal.data["toggle_filter"])
@@ -337,3 +360,5 @@
 
 #undef SIPHONING
 #undef SCRUBBING
+#undef AGGFILTER
+#undef REGFILTER

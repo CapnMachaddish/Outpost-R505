@@ -57,6 +57,8 @@
 	if(!length(strapon_types))
 		populate_strapon_types()
 
+//TODO: Integrate with arousal component
+
 //shitcode here, please improve if you can. Genitals overlapping with strapon, doesn't cool!
 
 /obj/item/clothing/strapon/equipped(mob/user, slot)
@@ -201,13 +203,13 @@
 	var/message = ""
 	var/obj/item/organ/genital/vagina = M.getorganslot(ORGAN_SLOT_VAGINA)
 	if(M.client?.prefs.sextoys_pref == "Yes")
+		AROUSAL_VAR(arousal, M)
 		switch(user.zone_selected) //to let code know what part of body we gonna fuck
 			if(BODY_ZONE_PRECISE_GROIN)
 				if(vagina)
 					if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 						message = pick("delicately rubs [M]'s vagina with [src]", "uses [src] to fuck [M]'s vagina","jams [M]'s pussy with [src]", "teases [M]'s pussy with [src]")
-						M.adjustArousal(6)
-						M.adjustPleasure(8)
+						arousal?.adjustArousalLoss(6)
 						if(prob(40))
 							M.emote(pick("twitch_s","moan"))
 						user.visible_message(span_purple("[user] [message]!"))
@@ -227,8 +229,7 @@
 			if(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES) //Mouth only. Sorry, perverts. No eye/ear penetration for you today.
 				if(!M.is_mouth_covered())
 					message = pick("fucks [M]'s mouth with [src]", "chokes [M] by inserting [src] into [M.p_their()] throat", "forces [M] to suck [src]", "inserts [src] into [M]'s throat")
-					M.adjustArousal(4)
-					M.adjustPleasure(1)
+					arousal?.adjustArousalLoss(4)
 					M.adjustOxyLoss(1.5)
 					if(prob(70))
 						M.emote(pick("gasp","moan"))
@@ -247,8 +248,7 @@
 			else
 				if(M.is_bottomless())
 					message = pick("fucks [M]'s ass with [src]", "uses [src] to fuck [M]'s anus", "jams [M]'s ass with [src]", "roughly fucks [M]'s ass with [src], causing their eyes to roll back")
-					M.adjustArousal(5)
-					M.adjustPleasure(5)
+					arousal?.adjustArousalLoss(5)
 					if(prob(60))
 						M.emote(pick("twitch_s","moan","shiver"))
 					user.visible_message(span_purple("[user] [message]!"))

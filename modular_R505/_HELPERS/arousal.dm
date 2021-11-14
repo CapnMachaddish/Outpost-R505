@@ -14,6 +14,18 @@
 /datum/component/arousal/proc/can_use_activity()
 	return world.time > mb_cooldown + cooldown_for_mb
 
+/proc/find_random_genital_accessory(key)	//I never want to work with genitals and their sprite accessories ever again
+	switch(key)
+		if("breasts")
+			return /datum/sprite_accessory/genital/breasts/pair
+		if("penis")
+			return pick(/datum/sprite_accessory/genital/penis/human,
+						/datum/sprite_accessory/genital/penis/knotted,
+						/datum/sprite_accessory/genital/penis/flared,
+						/datum/sprite_accessory/genital/penis/thick)
+		if("testicles")
+			return /datum/sprite_accessory/genital/testicles/pair
+
 /proc/is_chest_exposed(mob/M)
 	if(!ismob(M))
 		return FALSE
@@ -79,15 +91,15 @@
 		return FALSE
 	if(!lactates)
 		return FALSE
-	var/datum/component/arousal/A = owner.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(A, owner)
 	if(A)
 		if(A.get_arousal_level() >= AROUSAL_PARTIAL)
 			return TRUE
 		return FALSE
 	return TRUE
 
-/obj/item/organ/genital/proc/return_fluid(remove_fluid=FALSE)
-	var/amount_to_take = round(fluid_amount * productivity)
+/obj/item/organ/genital/proc/return_fluid(remove_fluid=FALSE, multiplier=1)
+	var/amount_to_take = min(round(fluid_amount * productivity) * multiplier, max_fluid_amount)
 	var/datum/reagents/R = new(10000)
 	for(var/X in fluid_type)
 		R.add_reagent(X, amount_to_take * fluid_type[X], reagtemp=DEFAULT_REAGENT_TEMPERATURE+15)

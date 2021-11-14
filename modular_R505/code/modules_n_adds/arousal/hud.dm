@@ -80,7 +80,7 @@
 					to_chat(usr, "<span class='warning'>You can't do that right now.</span>")
 					return
 		#endif
-			var/datum/component/arousal/partner_arousal = partner.GetComponent(/datum/component/arousal)
+			AROUSAL_VAR(partner_arousal, partner)
 			if(!partner_arousal)
 				to_chat(usr, "<span class='warning'>[partner] cannot climax.</span>")
 				to_chat(partner, "<span class='warning'>[usr] tried to climax with you, but you do not have arousal.</span>")
@@ -233,7 +233,7 @@
 		_arousal.adjustArousalLoss(_arousal.maximum_arousal/_arousal.arousalloss+1)
 
 /atom/movable/screen/arousal/proc/climax_with(mode, mob/partner)
-	var/datum/component/arousal/partner_arousal = partner.GetComponent(/datum/component/arousal)
+	AROUSAL_VAR(partner_arousal, partner)
 	if(!_arousal.can_use_activity() || !partner_arousal.can_use_activity())
 		to_chat(usr, "<span class='warning'>You need to wait to use this action again.</span>")
 		return

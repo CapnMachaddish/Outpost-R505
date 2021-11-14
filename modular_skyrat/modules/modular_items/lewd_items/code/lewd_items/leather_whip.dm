@@ -153,12 +153,13 @@
 //safely discipline someone without damage
 /obj/item/clothing/mask/leatherwhip/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	AROUSAL_VAR(partner, M)
+	if(!partner)
 		return
 
 	var/message = ""
 //and there is code for successful check, so we are whipping someone
-	if(M.client?.prefs.sextoys_pref == "Yes")
+	if(M.client?.prefs.sextoys_pref == "Yes" && HAS_TRAIT(M, TRAIT_MASOCHISM))
 		switch(user.zone_selected) //to let code know what part of body we gonna whip
 			if(BODY_ZONE_L_LEG)
 				if(M.has_feet())
@@ -170,7 +171,6 @@
 							if(prob(10))
 								M.apply_status_effect(/datum/status_effect/subspace)
 						M.Paralyze(1)//don't touch it. It's domination tool, it should have ability to put someone on kneels. I already inserted check for PREF YOU CAN'T ABUSE THIS ITEM
-						M.adjustPain(5)
 						user.visible_message(span_purple("[user] [message]!"))
 						playsound(loc, 'sound/weapons/whip.ogg', 100)
 
@@ -182,7 +182,7 @@
 							if(prob(10))
 								M.apply_status_effect(/datum/status_effect/subspace)
 						M.Paralyze(1)
-						M.adjustPain(3)
+						//M.adjustPain(3)
 						user.visible_message(span_purple("[user] [message]!"))
 						playsound(loc, 'sound/weapons/whip.ogg', 60)
 				else
@@ -199,7 +199,7 @@
 							if(prob(10))
 								M.apply_status_effect(/datum/status_effect/subspace)
 						M.Paralyze(1)//don't touch it. It's domination tool, it should have ability to put someone on kneels. I already inserted check for PREF YOU CAN'T ABUSE THIS ITEM
-						M.adjustPain(5)
+						//M.adjustPain(5)
 						user.visible_message(span_purple("[user] [message]!"))
 						playsound(loc, 'sound/weapons/whip.ogg', 100)
 
@@ -211,7 +211,7 @@
 							if(prob(10))
 								M.apply_status_effect(/datum/status_effect/subspace)
 						M.Paralyze(1)
-						M.adjustPain(3)
+						//M.adjustPain(3)
 						user.visible_message(span_purple("[user] [message]!"))
 						playsound(loc, 'sound/weapons/whip.ogg', 60)
 				else
@@ -222,8 +222,8 @@
 				message = (user == M) ? pick("wraps [src] around [M.p_their()] neck, choking [M.p_them()]self", "chokes [M.p_them()]self with [src]") : pick("chokes [M] with [src]", "twines [src] around [M]'s neck!")
 				if(prob(70) && (M.stat != DEAD))
 					M.emote(pick("gasp","choke", "moan"))
-				M.adjustArousal(3)
-				M.adjustPain(5)
+				partner.adjustArousalLoss(3)
+				//M.adjustPain(5)
 				M.adjustOxyLoss(2)//DON'T TOUCH THIS TOO, IT DEALS REALLY LOW DAMAGE. I DARE YOU!
 				user.visible_message(span_purple("[user] [message]!"))
 				playsound(loc, 'modular_skyrat/modules/modular_items/lewd_items/sounds/latex.ogg', 80)
@@ -237,8 +237,8 @@
 								M.emote(pick("moan","twitch"))
 							if(prob(10))
 								M.apply_status_effect(/datum/status_effect/subspace)
-						M.adjustArousal(5)
-						M.adjustPain(5)
+						partner.adjustArousalLoss(5)
+						//M.adjustPain(5)
 						M.apply_status_effect(/datum/status_effect/spanked)
 						if(HAS_TRAIT(M, TRAIT_MASOCHISM || TRAIT_NYMPHOMANIA || TRAIT_BIMBO))
 							SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "pervert spanked", /datum/mood_event/perv_spanked)
@@ -252,8 +252,8 @@
 								M.emote(pick("moan","twitch","twitch_s","scream"))
 							if(prob(10))
 								M.apply_status_effect(/datum/status_effect/subspace)
-						M.adjustArousal(3)
-						M.adjustPain(8)
+						partner.adjustArousalLoss(3)
+						//M.adjustPain(8)
 						M.apply_status_effect(/datum/status_effect/spanked)
 						if(HAS_TRAIT(M, TRAIT_MASOCHISM || TRAIT_NYMPHOMANIA || TRAIT_BIMBO))
 							SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "pervert spanked", /datum/mood_event/perv_spanked)
@@ -274,7 +274,7 @@
 						if(prob(10))
 							M.apply_status_effect(/datum/status_effect/subspace)
 						M.do_jitter_animation()
-					M.adjustPain(7)
+					//M.adjustPain(7)
 					user.visible_message(span_purple("[user] [message]!"))
 					playsound(loc, 'sound/weapons/whip.ogg', 100)
 
@@ -286,8 +286,8 @@
 						if(prob(10))
 							M.apply_status_effect(/datum/status_effect/subspace)
 						M.do_jitter_animation()
-					M.adjustPain(4)
-					M.adjustArousal(5)
+					//M.adjustPain(4)
+					partner.adjustArousalLoss(5)
 					user.visible_message(span_purple("[user] [message]!"))
 					playsound(loc, 'sound/weapons/whip.ogg', 60)
 				else

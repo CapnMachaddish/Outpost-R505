@@ -5,6 +5,7 @@
 	shuttleId = "laborcamp"
 	possible_destinations = "laborcamp_home;laborcamp_away"
 	req_access = list(ACCESS_BRIG)
+	uses_overmap = FALSE
 
 /obj/machinery/computer/shuttle/labor/one_way
 	name = "prisoner shuttle console"

@@ -409,7 +409,7 @@
 
 /mob/living/simple_animal/hostile/blackmesa/sec
 	name = "Security Guard"
-	desc = "About that beer I owe'd ya!"
+	desc = "About that beer I owed ya!"
 	icon = 'modular_skyrat/master_files/icons/mob/blackmesa.dmi'
 	icon_state = "security_guard_melee"
 	icon_living = "security_guard_melee"
@@ -571,6 +571,7 @@
 	trim_state = "trim_securityofficer"
 	access = list(ACCESS_SEC_DOORS, ACCESS_SECURITY, ACCESS_AWAY_SEC)
 
+/*
 /obj/effect/mob_spawn/human/black_mesa/hecu
 	name = "HECU"
 	outfit = /datum/outfit/hecu
@@ -610,3 +611,4 @@
 	assignment = "HECU Soldier"
 	trim_state = "trim_securityofficer"
 	access = list(ACCESS_SEC_DOORS, ACCESS_SECURITY, ACCESS_AWAY_SEC)
+*/

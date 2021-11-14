@@ -28,6 +28,7 @@
 	toolspeed = 0.3
 
 /obj/machinery/computer/shuttle/caravan
+	uses_overmap = FALSE
 
 /obj/item/circuitboard/computer/caravan
 	build_path = /obj/machinery/computer/shuttle/caravan

@@ -118,7 +118,8 @@
 
 /obj/item/bdsm_candle/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	AROUSAL_VAR(partner, M)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -137,7 +138,7 @@
 															"drips hot wax from the [src] onto [M]'s genitalia, causing [M.p_them()] to shiver",
 															"tilts [src], dripping wax right onto [M]'s genitals, causing [M.p_them()] to moan",
 															"drips some wax onto [M]'s genitals, making [M.p_them()] moan in pleasure")
-								M.adjustPain(9)
+								//M.adjustPain(9)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -152,7 +153,7 @@
 															"drips wax right on [M]'s penis. It slightly itches.",
 															"drips hot wax from the [src] on the [M]'s penis, he slightly shivers.",
 															"tilts the candle. Drops of wax, dripping right from [src] right on the [M]'s penis, made him moan.")
-								M.adjustPain(9)
+								//M.adjustPain(9)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -163,7 +164,7 @@
 
 							else if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 								message = (user == M) ? pick("drips some wax on themselves, letting it reach his vagina. He moans in pleasure.","drips some wax on the [M]'s pussy, he moans in pleasure") : pick("drips some wax on the [M]'s vagina, he moans in pleasure","tilts the candle. Wax slowly goes down, reaching the [M]'s vagina.","tilts the candle. Drops of wax, dripping right from [src] right on the [M]'s pussy, made him moan.")
-								M.adjustPain(9)
+								//M.adjustPain(9)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -179,7 +180,7 @@
 						else if(penis)
 							if(M.is_bottomless() || penis.visibility_preference == GENITAL_ALWAYS_SHOW)
 								message = (user == M) ? pick("drips some wax on the their penis, he moans in pleasure","drips some wax on themselves, letting it reach his penis. he moans in pleasure.") : pick("drips wax right on [M]'s penis. It slightly itches.","drips hot wax from the [src] on the [M]'s penis, he slightly shivers.","tilts the candle. Drops of wax, dripping right from [src] right on the [M]'s penis, made him moan.")
-								M.adjustPain(9)
+								//M.adjustPain(9)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -194,7 +195,7 @@
 						else if(vagina)
 							if(M.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW)
 								message = (user == M) ? pick("drips some wax on themselves, letting it reach his vagina. He moans in pleasure.","drips some wax on the [M]'s pussy, he moans in pleasure") : pick("drips some wax on the [M]'s vagina, he moans in pleasure","tilts the candle. Wax slowly goes down, reaching the [M]'s vagina.","tilts the candle. Drops of wax, dripping right from [src] right on the [M]'s pussy, made him moan.")
-								M.adjustPain(9)
+								//M.adjustPain(9)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -209,7 +210,7 @@
 						else
 							if(M.is_bottomless())
 								message = (user == M) ? pick("drips some wax on themselves, letting it reach his belly. He moans in pleasure.","drips some wax on the [M]'s tummy, he moans in pleasure") : pick("drips some wax on the [M]'s belly, he moans in pleasure","tilts the candle. Wax slowly goes down, reaching the [M]'s tummy.","tilts the candle. Drops of wax, dripping right from [src] right on the [M]'s groin, made him moan.")
-								M.adjustPain(9)
+								//M.adjustPain(9)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -227,7 +228,7 @@
 						if(breasts)
 							if(M.is_topless() || breasts.visibility_preference == GENITAL_ALWAYS_SHOW)
 								message = (user == M) ? pick("drips some wax on his breasts, releasing all his lustness","drips some wax right on his tits, made him become faint.") : pick("pours the wax that is slowly dripping from the [src] on the [M]'s breasts, he shows pure enjoyment.","tilts the candle. Right in the moment when wax drips on [M]'s breasts, he shivers","tilts the candle. Just when hot drops of wax fell on the [M]'s breasts, he quietly moans in pleasure")
-								M.adjustPain(6)
+								//M.adjustPain(6)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -241,7 +242,7 @@
 						else
 							if(M.is_topless())
 								message = (user == M) ? pick("drips some wax on his nipples, releasing all his lustness","drips some wax right on his chest, made him become faint.") : pick("drips wax from [src], that falls right on the [M]'s chest, he all shivers in pleasure.","tilts the candle. Right in the moment when wax drips on [M]'s nipples, he shivers","tilts the candle. Just when hot drops of wax fell on the [M]'s chest, he quietly moans in pleasure")
-								M.adjustPain(4)
+								//M.adjustPain(4)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -257,7 +258,7 @@
 						if(breasts)
 							if(M.is_topless() || breasts.visibility_preference == GENITAL_ALWAYS_SHOW)
 								message = (user == M) ? pick("drips some wax on her breasts, releasing all her lustness","drips some wax right on her tits, made her become faint.") : pick("pours the wax that is slowly dripping from the [src] on the [M]'s breasts, she shows pure enjoyment.","tilts the candle. Right in the moment when wax drips on [M]'s breasts, she shivers","tilts the candle. Just when hot drops of wax fell on the [M]'s breasts, she quietly moans in pleasure")
-								M.adjustPain(6)
+								//M.adjustPain(6)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -271,7 +272,7 @@
 						else
 							if(M.is_topless())
 								message = (user == M) ? pick("drips some wax on her nipples, releasing all her lustness","drips some wax right on her chest, made her become faint.") : pick("drips wax from [src], that falls right on the [M]'s chest, she all shivers in pleasure.","tilts the candle. Right in the moment when wax drips on [M]'s nipples, she shivers", "tilts the candle. Just when hot drops of wax fell on the [M]'s chest, she quietly moans in pleasure")
-								M.adjustPain(4)
+								//M.adjustPain(4)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -286,7 +287,7 @@
 						if(breasts)
 							if(M.is_topless() || breasts.visibility_preference == GENITAL_ALWAYS_SHOW)
 								message = (user == M) ? pick("drips some wax on it's breasts, releasing all it's lustness","drips some wax right on it's tits, made it become faint.") : pick("pours the wax that is slowly dripping from the [src] on the [M]'s breasts, it shows pure enjoyment.","tilts the candle. Right in the moment when wax drips on [M]'s breasts, it shivers","tilts the candle. Just when hot drops of wax fell on the [M]'s breasts, it quietly moans in pleasure")
-								M.adjustPain(6)
+								//M.adjustPain(6)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))
@@ -300,7 +301,7 @@
 						else
 							if(M.is_topless())
 								message = (user == M) ? pick("drips some wax on it's nipples, releasing all it's lustness","drips some wax right on it's chest, made it become faint.") : pick("drips wax from [src], that falls right on the [M]'s chest, it all shivers in pleasure.","tilts the candle. Right in the moment when wax drips on [M]'s nipples, it shivers", "tilts the candle. Just when hot drops of wax fell on the [M]'s chest, it quietly moans in pleasure")
-								M.adjustPain(4)
+								//M.adjustPain(4)
 								if(M.stat != DEAD)
 									M.do_jitter_animation()
 									if(prob(50))

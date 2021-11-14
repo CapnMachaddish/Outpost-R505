@@ -22,8 +22,6 @@ require only minor tweaks.
 
 // helpers for modifying jobs, used in various job_changes.dm files
 
-#define MAP_CURRENT_VERSION 1
-
 #define SPACERUIN_MAP_EDGE_PAD 15
 
 // traits
@@ -69,14 +67,18 @@ require only minor tweaks.
 
 // default trait definitions, used by SSmapping
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
-#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
-#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
+#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = UNAFFECTED, ZTRAIT_STATION = TRUE)
+#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = UNAFFECTED, ZTRAIT_SPACE_RUINS = TRUE)
 #define ZTRAITS_LAVALAND list(\
 	ZTRAIT_MINING = TRUE, \
 	ZTRAIT_ASHSTORM = TRUE, \
 	ZTRAIT_LAVA_RUINS = TRUE, \
 	ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
 	ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface)
+
+#define ZTRAITS_JUNGLE_PLANET list(\
+	ZTRAIT_MINING = TRUE, \
+	ZTRAIT_BASETURF = /turf/open/floor/plating/dirt/jungle/wasteland)
 
 #define DL_NAME "name"
 #define DL_TRAITS "traits"

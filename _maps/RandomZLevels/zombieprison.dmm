@@ -4619,7 +4619,7 @@
 /turf/open/floor/iron,
 /area/awaymission/prison)
 "wO" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur{
+/mob/living/simple_animal/hostile/mold/centaur{
 	faction = list("hostile")
 	},
 /turf/open/floor/iron/showroomfloor,
@@ -6987,7 +6987,7 @@
 /turf/open/floor/iron,
 /area/awaymission/prison/start)
 "Jq" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur{
+/mob/living/simple_animal/hostile/mold/centaur{
 	faction = list("hostile")
 	},
 /turf/open/floor/iron/dark/textured,
@@ -7129,7 +7129,7 @@
 /turf/open/floor/wood,
 /area/awaymission/prison/cella)
 "JZ" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur{
+/mob/living/simple_animal/hostile/mold/centaur{
 	faction = list("hostile")
 	},
 /turf/open/floor/iron,
@@ -9675,7 +9675,7 @@
 /turf/open/floor/iron/dark/textured,
 /area/awaymission/prison/cellb)
 "XW" = (
-/mob/living/simple_animal/hostile/biohazard_blob/centaur{
+/mob/living/simple_animal/hostile/mold/centaur{
 	faction = list("hostile")
 	},
 /turf/open/floor/iron,

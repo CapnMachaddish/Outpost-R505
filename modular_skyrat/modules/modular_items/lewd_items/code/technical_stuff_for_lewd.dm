@@ -43,20 +43,6 @@
 //Boxes for vending machine, to spawn stuff with important cheap tools in pack//
 ////////////////////////////////////////////////////////////////////////////////
 
-//milking machine
-/obj/item/storage/box/milking_kit
-	name = "DIY Milking machine kit"
-	desc = "Contains everything you need to build your own milking machine!"
-
-/obj/item/storage/box/milking_kit/PopulateContents()
-	var/static/items_inside = list(
-		/obj/item/milking_machine/constructionkit = 1,
-		/obj/item/reagent_containers/glass/beaker = 1,
-		/obj/item/stock_parts/cell/upgraded = 1, //please, let it be. 1 lvl Cell makes machine almost useless, charge lasts only for 2 minutes.
-		/obj/item/screwdriver = 1,
-		/obj/item/wrench = 1)
-	generate_items_inside(items_inside,src)
-
 //Striptease pole
 /obj/item/storage/box/strippole_kit
 	name = "DIY stripper pole kit"
@@ -509,16 +495,11 @@
 ///////////////////////////////////////////////////////////////
 
 /mob/living/proc/set_gender(ngender = NEUTER, silent = FALSE, update_icon = TRUE, forced = FALSE)
-	if(forced || (!ckey || client?.prefs.skyrat_toggles & (ngender == FEMALE ? FORCED_FEM : FORCED_MALE)))
-		gender = ngender
-		return TRUE
-	return FALSE
+	gender = ngender
 
 /mob/living/carbon/set_gender(ngender = NEUTER, silent = FALSE, update_icon = TRUE, forced = FALSE)
 	var/bender = !(gender == ngender)
-	. = ..()
-	if(!.)
-		return
+	..()
 	if(dna && bender)
 		if(ngender == MALE || ngender == FEMALE)
 			dna.features["body_model"] = ngender
@@ -656,9 +637,15 @@
 	pickup_sound =  'sound/items/handling/cloth_pickup.ogg'
 	slot_flags = ITEM_SLOT_VAGINA | ITEM_SLOT_ANUS | ITEM_SLOT_PENIS | ITEM_SLOT_NIPPLES
 	var/mutantrace_variation = NO_MUTANTRACE_VARIATION //Are there special sprites for specific situations? Don't use this unless you need to.
+	var/datum/component/arousal/arousal_comp
+
+/obj/item/clothing/sextoy/equipped(mob/user, slot)
+	..()
+	arousal_comp = user.GetComponent(/datum/component/arousal)
 
 /obj/item/clothing/sextoy/dropped(mob/user)
 	..()
+	arousal_comp = null
 
 	update_appearance()
 	if(!ishuman(loc))

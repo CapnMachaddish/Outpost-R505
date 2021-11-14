@@ -99,7 +99,8 @@
 
 /obj/item/kinky_shocker/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	AROUSAL_VAR(partner, M)
+	if(!partner)
 		return
 
 	if(shocker_on == TRUE)
@@ -126,7 +127,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -141,7 +142,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -156,7 +157,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -175,7 +176,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -194,7 +195,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -213,7 +214,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -235,7 +236,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -254,7 +255,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -274,7 +275,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -297,7 +298,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(3)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -319,7 +320,7 @@
 								M.emote(pick("twitch","twitch_s","shiver","scream"))
 							M.do_jitter_animation()
 						M.adjustStaminaLoss(2)
-						M.adjustPain(9)
+						//M.adjustPain(9)
 						M.stuttering += 20
 						user.visible_message(span_purple("[user] [message]!"))
 						playsound(loc,'sound/weapons/taserhit.ogg')
@@ -339,7 +340,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(2)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')
@@ -362,7 +363,7 @@
 									M.emote(pick("twitch","twitch_s","shiver","scream"))
 								M.do_jitter_animation()
 							M.adjustStaminaLoss(2)
-							M.adjustPain(9)
+							//M.adjustPain(9)
 							M.stuttering += 20
 							user.visible_message(span_purple("[user] [message]!"))
 							playsound(loc,'sound/weapons/taserhit.ogg')

@@ -10,7 +10,8 @@
 
 /obj/item/tickle_feather/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = ..()
-	if(!istype(M, /mob/living/carbon/human))
+	AROUSAL_VAR(partner, M)
+	if(!partner)
 		return
 
 	var/message = ""
@@ -25,7 +26,7 @@
 					M.do_jitter_animation()
 				M.adjustStaminaLoss(4)
 				SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "tickled", /datum/mood_event/tickled)
-				M.adjustArousal(3)
+				partner.adjustArousalLoss(3)
 				user.visible_message(span_purple("[user] [message]!"))
 				playsound(loc, pick('sound/items/handling/cloth_drop.ogg', 					//i duplicate this part of code because im useless shitcoder that can't make it work properly without tons of repeating code blocks
             			            'sound/items/handling/cloth_pickup.ogg',				//if you can make it better - go ahead, modify it, please.
@@ -44,7 +45,7 @@
 					M.do_jitter_animation()
 				M.adjustStaminaLoss(4)
 				SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "tickled", /datum/mood_event/tickled)
-				M.adjustArousal(3)
+				partner.adjustArousalLoss(3)
 				user.visible_message(span_purple("[user] [message]!"))
 				playsound(loc, pick('sound/items/handling/cloth_drop.ogg',
             			            'sound/items/handling/cloth_pickup.ogg',
@@ -63,7 +64,7 @@
 						M.do_jitter_animation()
 					M.adjustStaminaLoss(4)
 					SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "tickled", /datum/mood_event/tickled)
-					M.adjustArousal(3)
+					partner.adjustArousalLoss(3)
 					user.visible_message(span_purple("[user] [message]!"))
 					playsound(loc, pick('sound/items/handling/cloth_drop.ogg',
             				            'sound/items/handling/cloth_pickup.ogg',
@@ -85,7 +86,7 @@
 						M.do_jitter_animation()
 					M.adjustStaminaLoss(4)
 					SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "tickled", /datum/mood_event/tickled)
-					M.adjustArousal(3)
+					partner.adjustArousalLoss(3)
 					user.visible_message(span_purple("[user] [message]!"))
 					playsound(loc, pick('sound/items/handling/cloth_drop.ogg',
             				            'sound/items/handling/cloth_pickup.ogg',
@@ -107,7 +108,7 @@
 					M.do_jitter_animation()
 				M.adjustStaminaLoss(4)
 				SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "tickled", /datum/mood_event/tickled)
-				M.adjustArousal(3)
+				partner.adjustArousalLoss(3)
 				user.visible_message(span_purple("[user] [message]!"))
 				playsound(loc, pick('sound/items/handling/cloth_drop.ogg',
            				            'sound/items/handling/cloth_pickup.ogg',
@@ -126,7 +127,7 @@
 					M.do_jitter_animation()
 				M.adjustStaminaLoss(4)
 				SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "tickled", /datum/mood_event/tickled)
-				M.adjustArousal(3)
+				partner.adjustArousalLoss(3)
 				user.visible_message(span_purple("[user] [message]!"))
 				playsound(loc, pick('sound/items/handling/cloth_drop.ogg',
            				            'sound/items/handling/cloth_pickup.ogg',
