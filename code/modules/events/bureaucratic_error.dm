@@ -12,6 +12,7 @@
 
 /datum/round_event/bureaucratic_error/start()
 	var/list/jobs = SSjob.joinable_occupations.Copy()
+	/* //R505 Edit
 	if(prob(33)) // Only allows latejoining as a single role. Add latejoin AI bluespace pods for fun later.
 		var/datum/job/overflow = pick_n_take(jobs)
 		overflow.spawn_positions = -1
@@ -22,8 +23,9 @@
 				continue
 			current.total_positions = 0
 	else // Adds/removes a random amount of job slots from all jobs.
-		for(var/datum/job/current as anything in jobs)
-			if(!current.allow_bureaucratic_error)
-				continue
-			var/ran = rand(-2,4)
-			current.total_positions = max(current.total_positions + ran, 0)
+	*/ //R505 Edit - End
+	for(var/datum/job/current as anything in jobs)
+		if(!current.allow_bureaucratic_error)
+			continue
+		var/ran = rand(-2,4)
+		current.total_positions = max(current.total_positions + ran, 0)
