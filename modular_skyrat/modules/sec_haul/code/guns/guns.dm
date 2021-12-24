@@ -175,7 +175,7 @@
 	icon = 'modular_skyrat/modules/sec_haul/icons/guns/mags.dmi'
 	icon_state = "pdh"
 	ammo_type = /obj/item/ammo_casing/a357
-	caliber = "357"
+	caliber = CALIBER_357
 	max_ammo = 14
 	multiple_sprites = AMMO_BOX_FULL_EMPTY_BASIC
 	possible_types = list("lethal" = AMMO_TYPE_LETHAL)
